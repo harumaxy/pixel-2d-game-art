@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { buildSd15, SD15_CONTROLNET_OPENPOSE } from "./sd15";
+import { buildSd15, SD15_CONTROLNET_DEPTH, SD15_CONTROLNET_OPENPOSE } from "./sd15";
 
 const base = {
   ckpt: "aziibpixelmix_v10.safetensors",
@@ -47,8 +47,11 @@ describe("buildSd15", () => {
     expect(loras[0]!.inputs.strength_clip).toBe(0.8);
   });
 
-  test("control wires openpose without a preprocessor", () => {
-    const wf = buildSd15({ ...base, control: { image: "walk_down_0.png", strength: 0.65 } });
+  test("one control wires openpose without a preprocessor", () => {
+    const wf = buildSd15({
+      ...base,
+      controls: [{ model: SD15_CONTROLNET_OPENPOSE, image: "walk_down_0.png", strength: 0.65 }],
+    });
     expect(byType(wf, "ControlNetLoader")[0]!.inputs.control_net_name).toBe(
       SD15_CONTROLNET_OPENPOSE,
     );
@@ -57,6 +60,38 @@ describe("buildSd15", () => {
     expect(apply.inputs.end_percent).toBe(0.85);
     expect(nodes(wf).some((n) => n.class_type.includes("Preprocessor"))).toBe(false);
     expect(byType(wf, "LoadImage")[0]!.inputs.image).toBe("walk_down_0.png");
+  });
+
+  test("two controls chain: the second apply consumes the first's conditioning", () => {
+    const wf = buildSd15({
+      ...base,
+      controls: [
+        { model: SD15_CONTROLNET_OPENPOSE, image: "walk_down_0.png", strength: 0.6 },
+        { model: SD15_CONTROLNET_DEPTH, image: "walk_down_0.depth.png", strength: 0.5 },
+      ],
+    });
+    const prompt = wf.prompt as Record<
+      string,
+      { class_type: string; inputs: Record<string, unknown> }
+    >;
+    const applies = Object.entries(prompt).filter(
+      ([, n]) => n.class_type === "ControlNetApplyAdvanced",
+    );
+    expect(applies).toHaveLength(2);
+    const [[firstId, first], [, second]] = applies as [
+      string,
+      { inputs: Record<string, unknown> },
+    ][];
+    expect(first.inputs.strength).toBe(0.6);
+    expect(second.inputs.strength).toBe(0.5);
+    // second.positive is a link [nodeId, outputIndex] into the first apply
+    expect((second.inputs.positive as [string, number])[0]).toBe(firstId);
+    expect(byType(wf, "ControlNetLoader").map((n) => n.inputs.control_net_name)).toEqual([
+      SD15_CONTROLNET_OPENPOSE,
+      SD15_CONTROLNET_DEPTH,
+    ]);
+    const ks = byType(wf, "KSampler")[0]!;
+    expect((ks.inputs.positive as [string, number])[0]).toBe(applies[1]![0]);
   });
 
   test("save prefix and batch size", () => {

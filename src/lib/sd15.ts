@@ -1,18 +1,32 @@
 /**
  * SD1.5 as a graph builder: one checkpoint, optional LoRA chain, optional
- * openpose ControlNet. Used by concept (plain) and sprites (LoRA + CN).
+ * ControlNet chain. Used by concept (plain) and sprites (LoRA + openpose + depth).
  */
 
 import {
   WorkflowBuilder,
   type CheckpointLoaderSimpleInputs,
   type ControlNetLoaderInputs,
+  type KSamplerInputs,
   type LoadImageInputs,
   type LoraLoaderInputs,
 } from "../types/nodes";
 import type { Lora } from "./comfy";
 
 export const SD15_CONTROLNET_OPENPOSE = "control_v11p_sd15_openpose_fp16.safetensors";
+export const SD15_CONTROLNET_DEPTH = "control_v11f1p_sd15_depth_fp16.safetensors";
+
+export interface Control {
+  /** ControlNet filename as ControlNetLoader wants it. */
+  model: string;
+  /**
+   * Hint image already in the model's input form (openpose stick figure, depth
+   * map) and already in ComfyUI's input/ dir. No preprocessor.
+   */
+  image: string;
+  strength: number;
+  endPercent?: number;
+}
 
 export interface Sd15Opts {
   ckpt: string;
@@ -27,11 +41,8 @@ export interface Sd15Opts {
   steps?: number;
   cfg?: number;
   loras?: Lora[];
-  /**
-   * Pose hint already in openpose form and already in ComfyUI's input/ dir.
-   * No preprocessor: running a detector over a stick figure finds no body.
-   */
-  control?: { image: string; strength: number; endPercent?: number };
+  /** Applied in order; each one conditions on the previous one's output. */
+  controls?: Control[];
 }
 
 export function buildSd15(o: Sd15Opts): ReturnType<WorkflowBuilder["build"]> {
@@ -57,31 +68,37 @@ export function buildSd15(o: Sd15Opts): ReturnType<WorkflowBuilder["build"]> {
     clip = loaded.CLIP;
   }
 
-  const positive = w.CLIPTextEncode({ clip, text: o.positive });
-  const negative = w.CLIPTextEncode({ clip, text: o.negative });
-
-  const guided = o.control
-    ? w.ControlNetApplyAdvanced({
-        positive: positive.CONDITIONING,
-        negative: negative.CONDITIONING,
-        control_net: w.ControlNetLoader({
-          control_net_name: SD15_CONTROLNET_OPENPOSE as ControlNetLoaderInputs["control_net_name"],
-        }).CONTROL_NET,
-        image: w.LoadImage({ image: o.control.image as LoadImageInputs["image"] }).IMAGE,
-        strength: o.control.strength,
-        start_percent: 0,
-        // Releasing before the end lets the last steps clean up anatomy the
-        // skeleton was forcing; holding to 1 keeps the pose but stiffens it.
-        end_percent: o.control.endPercent ?? 0.85,
-      })
-    : undefined;
+  const encoded = {
+    positive: w.CLIPTextEncode({ clip, text: o.positive }),
+    negative: w.CLIPTextEncode({ clip, text: o.negative }),
+  };
+  let cond: Pick<KSamplerInputs, "positive" | "negative"> = {
+    positive: encoded.positive.CONDITIONING,
+    negative: encoded.negative.CONDITIONING,
+  };
+  for (const c of o.controls ?? []) {
+    const applied = w.ControlNetApplyAdvanced({
+      positive: cond.positive,
+      negative: cond.negative,
+      control_net: w.ControlNetLoader({
+        control_net_name: c.model as ControlNetLoaderInputs["control_net_name"],
+      }).CONTROL_NET,
+      image: w.LoadImage({ image: c.image as LoadImageInputs["image"] }).IMAGE,
+      strength: c.strength,
+      start_percent: 0,
+      // Releasing before the end lets the last steps clean up anatomy the
+      // hint was forcing; holding to 1 keeps the pose but stiffens it.
+      end_percent: c.endPercent ?? 0.85,
+    });
+    cond = { positive: applied.positive, negative: applied.negative };
+  }
 
   const latent = w.EmptyLatentImage({ width: o.width, height: o.height, batch_size: o.count });
 
   const sampled = w.KSampler({
     model,
-    positive: guided?.positive ?? positive.CONDITIONING,
-    negative: guided?.negative ?? negative.CONDITIONING,
+    positive: cond.positive,
+    negative: cond.negative,
     latent_image: latent.LATENT,
     seed: o.seed,
     steps: o.steps ?? 25,
