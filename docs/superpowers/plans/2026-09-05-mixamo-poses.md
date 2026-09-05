@@ -13,8 +13,8 @@ Spec: `docs/superpowers/specs/2026-09-05-mixamo-poses-design.md`
 ## Global Constraints
 
 - `src/` を触ったら `bun run check`（format → lint → typecheck）と `bun test` を通す。`src/types/nodes.ts` は手で編集しない。
-- Blender は MS Store 版。`blender.exe` は ACL で直接起動不可、`blender-launcher.exe`（`%LOCALAPPDATA%\Microsoft\WindowsApps\` の App Execution Alias）だけ使える。Bun は alias を直接 spawn できない（ENOENT）ので **win32 では必ず `cmd.exe /c` を挟む**。launcher は stdout を転送しない（終了コードは伝わる）ので、**Python 側はログをファイルに書き、TS がそれを表示する**。
-- Blender で未捕捉例外が出ても終了コードは 0。**Python の `main()` は try/except で包み、失敗時は `sys.exit(1)`**。
+- Blender は通常インストール版 5.2.1（`C:\Program Files\Blender Foundation\Blender 5.2\blender.exe`、PATH には無い）。Bun から直接 spawn でき、stdout / stderr も取れる（検証済）。**MS Store 版は使わない**（`blender.exe` が ACL で起動不可、launcher は stdout を返さない）。
+- Blender で未捕捉例外が出ても終了コードは 0（検証済）。**Python の `main()` は try/except で包み、失敗時は `sys.exit(1)`**。
 - Blender 5.x API: compositor は `scene.compositing_node_group`（`scene.node_tree` は無い）、出力ノードは `NodeGroupOutput` + `interface.new_socket`、Map Range は `ShaderNodeMapRange`（`CompositorNodeMapRange` は無い、clamp 属性は `.clamp`）。`read_factory_settings` は使わない（FBX importer の context が壊れる）。既定シーンのオブジェクトを全部消して使う。
 - Mixamo 座標（Blender import 後）: キャラの正面は **-Y**、右腕は -X、左腕は +X、上は +Z。armature の scale は 0.01 なので、ボーン行列から取る方向ベクトルは必ず正規化する。Head ボーンのローカル軸は **Y = 上、Z = 前**。
 - 方位（camera azimuth、度）: `down 0, downright 315, right 270, upright 225, up 180, upleft 135, left 90, downleft 45`。カメラ位置 = 注視点 + `(sin az · cos el, −cos az · cos el, sin el) × 10`。**az=90 はキャラが画面左向きになる**ので `right` は 270。
@@ -24,7 +24,7 @@ Spec: `docs/superpowers/specs/2026-09-05-mixamo-poses-design.md`
 
 - Depth は `Normalize` ではなく `ShaderNodeMapRange`（From = カメラ距離 ±0.8 m、To = 1→0、clamp）。フレーム間で絶対深度が揃う。背景は 0（黒）。
 - `frameTimes` の TS 複製は作らない。Python 側に `frame_times()` と起動時の `assert` 自己チェックを置く。
-- Blender の stdout は取れないので `out/poses/mixamo_poses.log` を Python が書き、`px poses` が終了後に表示する。
+- Blender の探索順: `--blender <exe>` → 環境変数 `BLENDER` → PATH の `blender` → win32 なら `C:\Program Files\Blender Foundation\Blender */blender.exe`（新しい版を優先）。
 
 ---
 
@@ -575,7 +575,7 @@ git commit -m "feat: sd15 の ControlNet を配列で chain、depth 定数追加
 
 **Interfaces:**
 - Consumes: 起動引数 `-- --out <dir> --motions <json> --fbx-dir <dir> --size 512 --elev 25`。`--motions` の JSON は `[{ "id": "walk", "fbx": "walking.fbx", "frames": 8, "loop": true }, ...]`
-- Produces: `<out>/<id>/<dir8>/<k>.json`（`{ "<joint>": { "x", "y", "visible" } }` × 18）、`<out>/<id>/<dir8>/<k>.depth.png`（`size`² グレースケール）、`<out>/mixamo_poses.log`。失敗時は終了コード 1 とログの `ERROR` 行。
+- Produces: `<out>/<id>/<dir8>/<k>.json`（`{ "<joint>": { "x", "y", "visible" } }` × 18）、`<out>/<id>/<dir8>/<k>.depth.png`（`size`² グレースケール）。進捗は stdout、失敗時は stderr に traceback と終了コード 1。
 
 - [ ] **Step 1: FBX を配置して ignore**
 
@@ -611,10 +611,9 @@ Mixamo FBX clips. Runs inside Blender:
   blender --background --python scripts/mixamo_poses.py -- \
       --out out/poses --motions out/poses/motions.json --fbx-dir mixamo --size 512 --elev 25
 
-Writes <out>/<id>/<dir>/<k>.json, <k>.depth.png and <out>/mixamo_poses.log.
-Blender's launcher on Windows does not forward stdout, so the log file is the
-only channel back to `px poses`; an uncaught exception would exit 0, so main()
-is wrapped and exits 1 on failure.
+Writes <out>/<id>/<dir>/<k>.json and <k>.depth.png. Progress goes to stdout.
+Blender exits 0 even on an uncaught exception, so main() is wrapped and exits
+1 on failure.
 """
 
 import json
@@ -652,12 +651,9 @@ HEAD_OFFSETS = {
 }
 EAR_HIDE_DOT = 0.8  # |head.x · camera| above this = profile view, far ear hidden
 
-LOG = None
-
 
 def log(msg):
-    LOG.write(msg + "\n")
-    LOG.flush()
+    print("[mixamo_poses] " + msg, flush=True)
 
 
 def frame_times(start, end, n, loop):
@@ -795,13 +791,11 @@ def pose_json(scene, cam, rig, cam_dir):
 
 
 def main():
-    global LOG
     self_check()
     opts = parse_args()
     out_dir, fbx_dir = os.path.abspath(opts["out"]), os.path.abspath(opts["fbx-dir"])
     size, elev = int(opts["size"]), float(opts["elev"])
     os.makedirs(out_dir, exist_ok=True)
-    LOG = open(os.path.join(out_dir, "mixamo_poses.log"), "w", encoding="utf-8")
     with open(opts["motions"], encoding="utf-8") as f:
         motions = json.load(f)
 
@@ -810,7 +804,7 @@ def main():
     if not os.path.exists(ybot):
         missing.append("Y Bot.fbx")
     if missing:
-        log("ERROR missing in " + fbx_dir + ": " + ", ".join(missing))
+        sys.stderr.write("missing in " + fbx_dir + ": " + ", ".join(missing) + "\n")
         sys.exit(1)
 
     scene = bpy.context.scene
@@ -854,10 +848,7 @@ try:
 except SystemExit:
     raise
 except Exception:
-    if LOG:
-        log("ERROR " + traceback.format_exc())
-    else:
-        sys.stderr.write(traceback.format_exc())
+    sys.stderr.write(traceback.format_exc())
     sys.exit(1)
 ```
 
@@ -868,13 +859,12 @@ except Exception:
 ```powershell
 New-Item -ItemType Directory -Force out\poses | Out-Null
 Set-Content out\poses\motions.json '[{"id":"walk","fbx":"walking.fbx","frames":4,"loop":true}]'
-cmd /c "blender-launcher.exe --background --python scripts\mixamo_poses.py -- --out out\poses --motions out\poses\motions.json --fbx-dir mixamo --size 512 --elev 25"
+& "C:\Program Files\Blender Foundation\Blender 5.2\blender.exe" --background --python scripts\mixamo_poses.py -- --out out\poses --motions out\poses\motions.json --fbx-dir mixamo --size 512 --elev 25
 "exit=$LASTEXITCODE"
-Get-Content out\poses\mixamo_poses.log
 ls out\poses\walk\right
 ```
 
-Expected: exit 0、ログに `walk: walking.fbx frames 1..32 -> [1.0, 8.8, 16.5, 24.2]` と `done: 32 frames`、`out/poses/walk/right/` に `0.json .. 3.json` と `0.depth.png .. 3.depth.png`。
+Expected: exit 0、stdout に `[mixamo_poses] walk: walking.fbx frames 1..32 -> [1.0, 8.8, 16.5, 24.2]` と `[mixamo_poses] done: 32 frames`、`out/poses/walk/right/` に `0.json .. 3.json` と `0.depth.png .. 3.depth.png`。
 
 `0.json` を開き、`rank.x > lank.x` か `rank.x < lank.x` のどちらかで足が前後に開いていること、`nose.visible` が `right` で true、`up` で false であることを見る。`0.depth.png` を画像ビューアで開き、白っぽい人型が中央、背景が黒、**画面右を向いている**ことを見る（左向きなら AZIMUTH の 90/270 が逆）。
 
@@ -895,7 +885,7 @@ git commit -m "feat: Blender で Mixamo クリップから openpose 関節 JSON 
 
 **Interfaces:**
 - Consumes: `renderPose`, `poseFromJson` (Task 2)、`MOTIONS`, `DIRS8`, `Dir8` (Task 1)、`ensureDir`, `flag` from `../lib/comfy`、`OUT_DIR`, `REPO_ROOT` from `../lib/paths`
-- Produces: `posePath(motion: string, dir: Dir8, frame: number): string`（`out/poses/<motion>/<dir>/<frame>.png`）、`depthPath(motion, dir, frame)`（`.depth.png`）、`blenderArgv(exe: string, args: string[], platform: string): string[]`
+- Produces: `posePath(motion: string, dir: Dir8, frame: number): string`（`out/poses/<motion>/<dir>/<frame>.png`）、`depthPath(motion, dir, frame)`（`.depth.png`）、`findBlender(explicit: string | undefined): Promise<string | undefined>`
 
 - [ ] **Step 1: テストを書く**
 
@@ -903,30 +893,23 @@ git commit -m "feat: Blender で Mixamo クリップから openpose 関節 JSON 
 
 ```ts
 import { expect, test } from "bun:test";
-import { blenderArgv, depthPath, posePath } from "./poses";
-
-test("win32 goes through cmd.exe so the Store launcher alias resolves", () => {
-  expect(blenderArgv("blender-launcher.exe", ["--background"], "win32")).toEqual([
-    "cmd.exe",
-    "/c",
-    "blender-launcher.exe",
-    "--background",
-  ]);
-});
-
-test("other platforms spawn blender directly", () => {
-  expect(blenderArgv("blender", ["--background"], "linux")).toEqual(["blender", "--background"]);
-});
+import { depthPath, findBlender, posePath } from "./poses";
 
 test("depthPath sits next to posePath", () => {
-  expect(depthPath("walk", "right", 3)).toBe(posePath("walk", "right", 3).replace(/\.png$/, ".depth.png"));
+  expect(depthPath("walk", "right", 3)).toBe(
+    posePath("walk", "right", 3).replace(/\.png$/, ".depth.png"),
+  );
+});
+
+test("an explicit exe wins without being checked", async () => {
+  expect(await findBlender("C:\\nowhere\\blender.exe")).toBe("C:\\nowhere\\blender.exe");
 });
 ```
 
 - [ ] **Step 2: 失敗を確認**
 
 Run: `bun test src/stages/poses.test.ts`
-Expected: FAIL（`blenderArgv` / `depthPath` が無い）
+Expected: FAIL（`findBlender` / `depthPath` が無い）
 
 - [ ] **Step 3: 実装**
 
@@ -960,15 +943,20 @@ const jsonPath = (motion: string, dir: Dir8, frame: number): string =>
   join(POSES_DIR, motion, dir, `${frame}.json`);
 
 /**
- * The Microsoft Store Blender is only reachable through an App Execution Alias,
- * which Bun cannot spawn directly (ENOENT); cmd.exe resolves it. Harmless for a
- * normal install too.
+ * `--blender` > $BLENDER > PATH > the Windows installer's default location
+ * (newest version first). The Microsoft Store build is not usable: its exe is
+ * ACL-locked and its launcher alias swallows stdout.
  */
-export const blenderArgv = (exe: string, args: string[], platform: string): string[] =>
-  platform === "win32" ? ["cmd.exe", "/c", exe, ...args] : [exe, ...args];
-
-const defaultBlender = () =>
-  process.env.BLENDER ?? (process.platform === "win32" ? "blender-launcher.exe" : "blender");
+export async function findBlender(explicit: string | undefined): Promise<string | undefined> {
+  if (explicit) return explicit;
+  if (process.env.BLENDER) return process.env.BLENDER;
+  const onPath = Bun.which("blender");
+  if (onPath) return onPath;
+  if (process.platform !== "win32") return undefined;
+  const root = "C:\\Program Files\\Blender Foundation";
+  const hits = await Array.fromAsync(new Bun.Glob("Blender */blender.exe").scan({ cwd: root }));
+  return hits.length ? join(root, hits.sort().at(-1)!) : undefined;
+}
 
 export async function run(argv: string[]): Promise<void> {
   const size = Number(flag(argv, "size") ?? 512);
@@ -992,22 +980,20 @@ export async function run(argv: string[]): Promise<void> {
       motionsJson,
       JSON.stringify(selected.map(({ id, fbx, frames, loop }) => ({ id, fbx, frames, loop }))),
     );
-    const exe = flag(argv, "blender") ?? defaultBlender();
-    const cmd = blenderArgv(
-      exe,
-      ["--background", "--python", SCRIPT, "--", "--out", POSES_DIR, "--motions", motionsJson,
-        "--fbx-dir", FBX_DIR, "--size", String(size), "--elev", String(elev)],
-      process.platform,
-    );
+    const exe = await findBlender(flag(argv, "blender"));
+    if (!exe) {
+      console.error(`blender not found — install it, pass --blender <exe>, or set BLENDER`);
+      process.exit(1);
+    }
     console.log(`[poses] ${selected.map((m) => m.id).join(", ")} via ${exe} ...`);
-    const proc = Bun.spawn(cmd, { stdout: "inherit", stderr: "inherit" });
+    const proc = Bun.spawn(
+      [exe, "--background", "--python", SCRIPT, "--", "--out", POSES_DIR, "--motions", motionsJson,
+        "--fbx-dir", FBX_DIR, "--size", String(size), "--elev", String(elev)],
+      { stdout: "inherit", stderr: "inherit" },
+    );
     const code = await proc.exited;
-    const logFile = Bun.file(join(POSES_DIR, "mixamo_poses.log"));
-    if (await logFile.exists()) console.log((await logFile.text()).trimEnd());
     if (code !== 0) {
-      console.error(
-        `[poses] blender exited ${code}. Not installed? Pass --blender <exe> or set BLENDER.`,
-      );
+      console.error(`[poses] blender exited ${code}`);
       process.exit(1);
     }
   }
@@ -1030,7 +1016,7 @@ export async function run(argv: string[]): Promise<void> {
       }
   console.log(`${n} poses -> out/poses/`);
   if (missing) {
-    console.error(`${missing} frames have no JSON — check out/poses/mixamo_poses.log`);
+    console.error(`${missing} frames have no JSON — see blender output above`);
     process.exitCode = 1;
   }
 }
@@ -1039,10 +1025,10 @@ export async function run(argv: string[]): Promise<void> {
 - [ ] **Step 4: テスト + 実機**
 
 Run: `bun test src/stages/poses.test.ts`
-Expected: PASS（3 tests）
+Expected: PASS（2 tests）
 
 Run: `bun run px poses --only walk`
-Expected: Blender が数十秒走り、ログの `done: 64 frames`、続けて `64 poses -> out/poses/`。`out/poses/walk/right/0.png` を開いて棒人間が右向きで depth と重なる位置にあること（depth の頭・手・足と骨格の nose / wri / ank が一致）を目視。ずれていたら Blender 側の投影（`world_to_camera_view`）か `1 - v.y` を疑う。
+Expected: `via C:\Program Files\Blender Foundation\Blender 5.2\blender.exe` と出て Blender が数十秒走り、`[mixamo_poses] done: 64 frames`、続けて `64 poses -> out/poses/`。`out/poses/walk/right/0.png` を開いて棒人間が右向きで depth と重なる位置にあること（depth の頭・手・足と骨格の nose / wri / ank が一致）を目視。ずれていたら Blender 側の投影（`world_to_camera_view`）か `1 - v.y` を疑う。
 
 Run: `bun run px poses --only walk --skip-blender`
 Expected: Blender を起動せず `64 poses -> out/poses/`。
@@ -1372,7 +1358,7 @@ Expected: 40 枚（8 frames × 5 dirs）が `out/gen/sprites/scavenger/walk/` �
 `README.md` の該当箇所:
 
 - 冒頭の説明: 「SD1.5 + openpose ControlNet」→「SD1.5 + openpose / depth ControlNet（Mixamo の骨格を Blender で書き出し）」
-- 必要なもの: `control_v11f1p_sd15_depth_fp16` を追加、`Blender 4.2 以上（MS Store 版可。`px poses` が `blender-launcher.exe` を起動。別の場所なら `--blender <exe>` か環境変数 `BLENDER`）`、`mixamo/ に Y Bot と Action Adventure Pack の FBX（mixamo/README.md 参照）`
+- 必要なもの: `control_v11f1p_sd15_depth_fp16` を追加、`Blender 4.2 以上の通常インストール版（MS Store 版は不可。PATH か C:\Program Files\Blender Foundation\ から自動で見つける。別の場所なら --blender <exe> か環境変数 BLENDER）`、`mixamo/ に Y Bot と Action Adventure Pack の FBX（mixamo/README.md 参照）`
 - 使い方の `px poses` 行: `bun run px poses     [--only walk,run] [--size 512] [--elev 25] [--blender exe] [--skip-blender]  # Blender で骨格 + depth (1 回)`
 - `px sprites` 行: `[--strength 0.6] [--depth-strength 0.5]`
 - 「モーションは `src/motions/`」→「モーションは `src/motions/index.ts` の `MOTIONS`（Mixamo の FBX 名とフレーム数）」
@@ -1381,7 +1367,7 @@ Expected: 40 枚（8 frames × 5 dirs）が `out/gen/sprites/scavenger/walk/` �
 spec の「既知の制約・後回し」に追記:
 
 ```markdown
-- 実装時の変更: depth は `Normalize` ではなく Map Range（カメラ距離 ±0.8 m 固定、clamp）。`frameTimes` の TS 複製は作らず Python 側の assert 自己チェックのみ。Blender launcher は stdout を返さないので `out/poses/mixamo_poses.log` 経由。
+- 実装時の変更: depth は `Normalize` ではなく Map Range（カメラ距離 ±0.8 m 固定、clamp）。`frameTimes` の TS 複製は作らず Python 側の assert 自己チェックのみ。Blender は通常インストール版のみ対応（MS Store 版は exe が起動不可・launcher が stdout を返さない）。
 ```
 
 - [ ] **Step 4: Commit**
@@ -1397,4 +1383,4 @@ git commit -m "docs: Mixamo 骨格生成の使い方と Blender 要件"
 
 - **Spec coverage**: 決定事項（体型 / 方向 / カメラ / フレーム / 実装 / depth CN / モーション）→ Task 1, 4, 5, 6。ファイル一覧 → Task 1〜7。Blender スクリプト手順 1〜4 → Task 4。`px poses` の `--blender` / `BLENDER` / `--skip-blender` / ログ表示 → Task 5。`renderPose` visible → Task 2。sprites の CN 2 段 / `--depth-strength` / SUFFIX / `from behind` / GEN_DIRS → Task 6。pixelate / sheet → Task 7。テスト節の各項目: frameTimes → Python assert（Task 4）、renderPose visible → Task 2、poseFromJson → Task 2、MOTIONS 整合 → Task 1、buildSd15 2 段 → Task 3。開発手順の MCP 対話確認は headless probe で代替済み。
 - **Placeholder**: なし。
-- **Type consistency**: `Control` / `controls` (Task 3 ↔ 6)、`posePath` / `depthPath` (Task 5 ↔ 6)、`GenDir` / `GEN_DIRS` (Task 1 ↔ 6, 7)、`poseFromJson(raw, label)` (Task 2 ↔ 5)、`spritePrompt(char, motionPrompt, dir)` (Task 6 内)。
+- **Type consistency**: `Control` / `controls` (Task 3 ↔ 6)、`posePath` / `depthPath` / `findBlender` (Task 5)、`GenDir` / `GEN_DIRS` (Task 1 ↔ 6, 7)、`poseFromJson(raw, label)` (Task 2 ↔ 5)、`spritePrompt(char, motionPrompt, dir)` (Task 6 内)。
