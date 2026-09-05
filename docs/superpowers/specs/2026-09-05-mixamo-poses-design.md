@@ -175,3 +175,4 @@ export const FLIP: Record<GenDir, [Dir8, Dir8?]> = {
 - 反転で作る左向きは、左右非対称モーション（sneak 等）では厳密には鏡像になる。許容。
 - Depth の Normalize はフレーム毎。絶対深度が必要になったら Map Range に変える。
 - Blender は通常インストール版 5.2.1（`C:\Program Files\Blender Foundation\Blender 5.2\blender.exe`）。`px poses` は `--blender` → `BLENDER` → PATH → `C:\Program Files\Blender Foundation\Blender *` の順で探す。MS Store 版は exe が ACL で起動できず launcher も stdout を返さないので非対応。
+- 実装時の変更: depth は `Normalize` ではなく Map Range（カメラ距離 ±0.8 m 固定、clamp）。`frameTimes` の TS 複製は作らず Python 側の assert 自己チェックのみ。Blender は通常インストール版のみ対応（MS Store 版は exe が起動不可・launcher が stdout を返さない）。

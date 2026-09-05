@@ -1,7 +1,7 @@
 # pixel-2d-game-art
 
 ComfyUI + bun/TypeScript で、トップダウン 2D アクションゲーム向けのキャラクタースプライトシートを生成する。
-SD1.5 + openpose ControlNet + キャラ LoRA で 512px のフレームを出し、TS 側で 64px に落として 8 方向のシートに組む。
+SD1.5 + openpose / depth ControlNet（Mixamo の骨格を Blender で書き出し）+ キャラ LoRA で 512px のフレームを出し、TS 側で 64px に落として 8 方向のシートに組む。
 
 設計: `docs/superpowers/specs/2026-09-05-pixel-sprite-pipeline-design.md`
 
@@ -9,8 +9,10 @@ SD1.5 + openpose ControlNet + キャラ LoRA で 512px のフレームを出し�
 
 - Bun（`mise install`）
 - ComfyUI 起動中（既定 `http://127.0.0.1:8188`、`COMFY_URL` で変更）
-- モデル: `SD1.5\dreamshaper_8`, `aziibpixelmix_v10`, `control_v11p_sd15_openpose_fp16`, Qwen-Image-Edit 2511 (GGUF Q5) + Lightning LoRA
+- モデル: `SD1.5\dreamshaper_8`, `aziibpixelmix_v10`, `control_v11p_sd15_openpose_fp16`, `control_v11f1p_sd15_depth_fp16`, Qwen-Image-Edit 2511 (GGUF Q5) + Lightning LoRA
 - LoRA 学習用に ai-toolkit（別途 checkout。`px dataset` が出力する `train.yaml` を `python run.py` に渡す）
+- Blender 4.2 以上の通常インストール版（MS Store 版は不可。PATH か `C:\Program Files\Blender Foundation\` から自動で見つける。別の場所なら `--blender <exe>` か環境変数 `BLENDER`）
+- `mixamo/` に Y Bot と Action Adventure Pack の FBX（`mixamo/README.md` 参照）
 
 ## セットアップ
 
@@ -28,8 +30,8 @@ bun run px dataset  scavenger --hero out/gen/concept/scavenger/scavenger_00002_.
                                                      # -> out/gen/dataset/scavenger/ + train.yaml
 # 目視で不良画像を削除 -> ai-toolkit で学習 -> safetensors を ComfyUI の loras/ へ
 #   -> chars/scavenger.yaml に lora: scavenger を追記
-bun run px poses     [--only walk,run] [--size 512]  # 骨格 PNG (1 回)
-bun run px sprites  scavenger [--motion walk] [--dir down] [--seed n] [--strength 0.65]
+bun run px poses     [--only walk,run] [--size 512] [--elev 25] [--blender exe] [--skip-blender]  # Blender で骨格 + depth (1 回)
+bun run px sprites  scavenger [--motion walk] [--dir down] [--seed n] [--strength 0.6] [--depth-strength 0.5]
 bun run px pixelate scavenger [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb]
 bun run px sheet    scavenger                              # -> out/sheets/scavenger.png + .json
 bun run px clean    [scavenger] [--all] [--dataset] [--dry]  # 生成物の削除。引数無しなら一覧表示のみ
@@ -42,7 +44,7 @@ ComfyUI を使う concept / dataset / sprites は `--dry` でグラフ JSON だ�
 
 sprites は 1 キャラ 1 モーションで seed を固定し、フレーム間では骨格だけを変える。生成結果はアニメ間でサイズが揃うよう、pixelate が全モーション横断で 1 つのスケールを使う。
 
-キャラ定義は `chars/<name>.yaml`。モーションは `src/motions/`、パレットは `palettes/`。
+キャラ定義は `chars/<name>.yaml`。モーションは `src/motions/index.ts` の `MOTIONS`（Mixamo の FBX 名とフレーム数）、パレットは `palettes/`。
 
 ## ComfyUI 出力との共有（junction）
 
@@ -55,4 +57,4 @@ New-Item -ItemType Junction -Path out\gen -Target $px
 ```
 
 junction が無い環境では、各ステージが HTTP で同じパスにコピーするので動作は変わらない。
-`out/poses` `out/px` `out/sheets` は TS 側の生成物で、junction の外にそのまま置く。
+`out/poses` `out/px` `out/sheets` は TS 側の生成物で、junction の外にそのまま置く。`out/poses` は Blender の出力（JSON + depth + openpose PNG）。
