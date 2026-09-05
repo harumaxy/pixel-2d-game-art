@@ -79,7 +79,14 @@ export const MOTIONS: Motion[] = [
   { id: "walk", fbx: "walking.fbx", frames: 8, loop: true, fps: 8, prompt: "walking" },
   { id: "run", fbx: "running.fbx", frames: 8, loop: true, fps: 10, prompt: "running" },
   { id: "jump", fbx: "jumping up.fbx", frames: 6, loop: false, fps: 8, prompt: "jumping up" },
-  { id: "fall", fbx: "falling idle.fbx", frames: 4, loop: true, fps: 6, prompt: "falling in the air" },
+  {
+    id: "fall",
+    fbx: "falling idle.fbx",
+    frames: 4,
+    loop: true,
+    fps: 6,
+    prompt: "falling in the air",
+  },
   {
     id: "land",
     fbx: "hard landing.fbx",
