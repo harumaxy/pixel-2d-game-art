@@ -37,6 +37,48 @@ export interface AddLabelOutputs {
   IMAGE: NodeRef<"IMAGE">;
 }
 
+export interface AddLayerInputs {
+  image: NodeRef<"IMAGE">;
+  layers?: NodeRef<"LAYERS">;
+  mask?: NodeRef<"MASK">;
+  name?: string;
+  x?: number;
+  y?: number;
+  opacity?: number;
+  blend_mode?: "normal" | "multiply" | "screen" | "overlay" | "darken" | "lighten" | "color-dodge" | "color-burn" | "hard-light" | "soft-light" | "difference" | "exclusion" | "linear-dodge" | "linear-burn" | "vivid-light" | "pin-light" | "linear-light" | "hard-mix" | "subtract" | "divide" | "grain-extract" | "grain-merge" | "hue" | "saturation" | "color" | "luminosity";
+  rotation?: number;
+  width?: number;
+  height?: number;
+  z_index?: number;
+  flip_h?: boolean;
+  flip_v?: boolean;
+}
+
+export interface AddLayerInputPaths {
+  image: string;
+  layers: string;
+  mask: string;
+  name: string;
+  x: string;
+  y: string;
+  opacity: string;
+  blend_mode: string;
+  rotation: string;
+  width: string;
+  height: string;
+  z_index: string;
+  flip_h: string;
+  flip_v: string;
+}
+
+export interface AddLayerResult extends ComfyNodeOutput {
+  LAYERS?: ComfyOutputValue<"LAYERS">;
+}
+
+export interface AddLayerOutputs {
+  LAYERS: NodeRef<"LAYERS">;
+}
+
 export interface AddNoiseInputs {
   model: NodeRef<"MODEL">;
   noise: NodeRef<"NOISE">;
@@ -119,6 +161,3578 @@ export interface AddTextSuffixResult extends ComfyNodeOutput {
 
 export interface AddTextSuffixOutputs {
   texts: NodeRef<"STRING">;
+}
+
+export interface ADE_ADBlockComboInputs {
+  effect?: NodeRef<"MULTIVAL">;
+  scale?: NodeRef<"MULTIVAL">;
+}
+
+export interface ADE_ADBlockComboInputPaths {
+  effect: string;
+  scale: string;
+}
+
+export interface ADE_ADBlockComboResult extends ComfyNodeOutput {
+  AD_BLOCK?: ComfyOutputValue<"AD_BLOCK">;
+}
+
+export interface ADE_ADBlockComboOutputs {
+  AD_BLOCK: NodeRef<"AD_BLOCK">;
+}
+
+export interface ADE_ADBlockIndivInputs {
+  effect?: NodeRef<"MULTIVAL">;
+  scale_0?: NodeRef<"MULTIVAL">;
+  scale_1?: NodeRef<"MULTIVAL">;
+}
+
+export interface ADE_ADBlockIndivInputPaths {
+  effect: string;
+  scale_0: string;
+  scale_1: string;
+}
+
+export interface ADE_ADBlockIndivResult extends ComfyNodeOutput {
+  AD_BLOCK?: ComfyOutputValue<"AD_BLOCK">;
+}
+
+export interface ADE_ADBlockIndivOutputs {
+  AD_BLOCK: NodeRef<"AD_BLOCK">;
+}
+
+export interface ADE_AdjustPEFullStretchInputs {
+  pe_stretch: number;
+  print_adjustment: boolean;
+  prev_pe_adjust?: NodeRef<"PE_ADJUST">;
+}
+
+export interface ADE_AdjustPEFullStretchInputPaths {
+  pe_stretch: string;
+  print_adjustment: string;
+  prev_pe_adjust: string;
+}
+
+export interface ADE_AdjustPEFullStretchResult extends ComfyNodeOutput {
+  PE_ADJUST?: ComfyOutputValue<"PE_ADJUST">;
+}
+
+export interface ADE_AdjustPEFullStretchOutputs {
+  PE_ADJUST: NodeRef<"PE_ADJUST">;
+}
+
+export interface ADE_AdjustPEManualInputs {
+  cap_initial_pe_length: number;
+  interpolate_pe_to_length: number;
+  initial_pe_idx_offset: number;
+  final_pe_idx_offset: number;
+  print_adjustment: boolean;
+  prev_pe_adjust?: NodeRef<"PE_ADJUST">;
+}
+
+export interface ADE_AdjustPEManualInputPaths {
+  cap_initial_pe_length: string;
+  interpolate_pe_to_length: string;
+  initial_pe_idx_offset: string;
+  final_pe_idx_offset: string;
+  print_adjustment: string;
+  prev_pe_adjust: string;
+}
+
+export interface ADE_AdjustPEManualResult extends ComfyNodeOutput {
+  PE_ADJUST?: ComfyOutputValue<"PE_ADJUST">;
+}
+
+export interface ADE_AdjustPEManualOutputs {
+  PE_ADJUST: NodeRef<"PE_ADJUST">;
+}
+
+export interface ADE_AdjustPESweetspotStretchInputs {
+  sweetspot: number;
+  new_sweetspot: number;
+  print_adjustment: boolean;
+  prev_pe_adjust?: NodeRef<"PE_ADJUST">;
+}
+
+export interface ADE_AdjustPESweetspotStretchInputPaths {
+  sweetspot: string;
+  new_sweetspot: string;
+  print_adjustment: string;
+  prev_pe_adjust: string;
+}
+
+export interface ADE_AdjustPESweetspotStretchResult extends ComfyNodeOutput {
+  PE_ADJUST?: ComfyOutputValue<"PE_ADJUST">;
+}
+
+export interface ADE_AdjustPESweetspotStretchOutputs {
+  PE_ADJUST: NodeRef<"PE_ADJUST">;
+}
+
+export interface ADE_AdjustWeightAllAddInputs {
+  all_ADD: number;
+  print_adjustment: boolean;
+  prev_weight_adjust?: NodeRef<"WEIGHT_ADJUST">;
+}
+
+export interface ADE_AdjustWeightAllAddInputPaths {
+  all_ADD: string;
+  print_adjustment: string;
+  prev_weight_adjust: string;
+}
+
+export interface ADE_AdjustWeightAllAddResult extends ComfyNodeOutput {
+  WEIGHT_ADJUST?: ComfyOutputValue<"WEIGHT_ADJUST">;
+}
+
+export interface ADE_AdjustWeightAllAddOutputs {
+  WEIGHT_ADJUST: NodeRef<"WEIGHT_ADJUST">;
+}
+
+export interface ADE_AdjustWeightAllMultInputs {
+  all_MULT: number;
+  print_adjustment: boolean;
+  prev_weight_adjust?: NodeRef<"WEIGHT_ADJUST">;
+}
+
+export interface ADE_AdjustWeightAllMultInputPaths {
+  all_MULT: string;
+  print_adjustment: string;
+  prev_weight_adjust: string;
+}
+
+export interface ADE_AdjustWeightAllMultResult extends ComfyNodeOutput {
+  WEIGHT_ADJUST?: ComfyOutputValue<"WEIGHT_ADJUST">;
+}
+
+export interface ADE_AdjustWeightAllMultOutputs {
+  WEIGHT_ADJUST: NodeRef<"WEIGHT_ADJUST">;
+}
+
+export interface ADE_AdjustWeightIndivAddInputs {
+  pe_ADD: number;
+  attn_ADD: number;
+  other_ADD: number;
+  print_adjustment: boolean;
+  prev_weight_adjust?: NodeRef<"WEIGHT_ADJUST">;
+}
+
+export interface ADE_AdjustWeightIndivAddInputPaths {
+  pe_ADD: string;
+  attn_ADD: string;
+  other_ADD: string;
+  print_adjustment: string;
+  prev_weight_adjust: string;
+}
+
+export interface ADE_AdjustWeightIndivAddResult extends ComfyNodeOutput {
+  WEIGHT_ADJUST?: ComfyOutputValue<"WEIGHT_ADJUST">;
+}
+
+export interface ADE_AdjustWeightIndivAddOutputs {
+  WEIGHT_ADJUST: NodeRef<"WEIGHT_ADJUST">;
+}
+
+export interface ADE_AdjustWeightIndivAttnAddInputs {
+  pe_ADD: number;
+  attn_ADD: number;
+  attn_q_ADD: number;
+  attn_k_ADD: number;
+  attn_v_ADD: number;
+  attn_out_weight_ADD: number;
+  attn_out_bias_ADD: number;
+  other_ADD: number;
+  print_adjustment: boolean;
+  prev_weight_adjust?: NodeRef<"WEIGHT_ADJUST">;
+}
+
+export interface ADE_AdjustWeightIndivAttnAddInputPaths {
+  pe_ADD: string;
+  attn_ADD: string;
+  attn_q_ADD: string;
+  attn_k_ADD: string;
+  attn_v_ADD: string;
+  attn_out_weight_ADD: string;
+  attn_out_bias_ADD: string;
+  other_ADD: string;
+  print_adjustment: string;
+  prev_weight_adjust: string;
+}
+
+export interface ADE_AdjustWeightIndivAttnAddResult extends ComfyNodeOutput {
+  WEIGHT_ADJUST?: ComfyOutputValue<"WEIGHT_ADJUST">;
+}
+
+export interface ADE_AdjustWeightIndivAttnAddOutputs {
+  WEIGHT_ADJUST: NodeRef<"WEIGHT_ADJUST">;
+}
+
+export interface ADE_AdjustWeightIndivAttnMultInputs {
+  pe_MULT: number;
+  attn_MULT: number;
+  attn_q_MULT: number;
+  attn_k_MULT: number;
+  attn_v_MULT: number;
+  attn_out_weight_MULT: number;
+  attn_out_bias_MULT: number;
+  other_MULT: number;
+  print_adjustment: boolean;
+  prev_weight_adjust?: NodeRef<"WEIGHT_ADJUST">;
+}
+
+export interface ADE_AdjustWeightIndivAttnMultInputPaths {
+  pe_MULT: string;
+  attn_MULT: string;
+  attn_q_MULT: string;
+  attn_k_MULT: string;
+  attn_v_MULT: string;
+  attn_out_weight_MULT: string;
+  attn_out_bias_MULT: string;
+  other_MULT: string;
+  print_adjustment: string;
+  prev_weight_adjust: string;
+}
+
+export interface ADE_AdjustWeightIndivAttnMultResult extends ComfyNodeOutput {
+  WEIGHT_ADJUST?: ComfyOutputValue<"WEIGHT_ADJUST">;
+}
+
+export interface ADE_AdjustWeightIndivAttnMultOutputs {
+  WEIGHT_ADJUST: NodeRef<"WEIGHT_ADJUST">;
+}
+
+export interface ADE_AdjustWeightIndivMultInputs {
+  pe_MULT: number;
+  attn_MULT: number;
+  other_MULT: number;
+  print_adjustment: boolean;
+  prev_weight_adjust?: NodeRef<"WEIGHT_ADJUST">;
+}
+
+export interface ADE_AdjustWeightIndivMultInputPaths {
+  pe_MULT: string;
+  attn_MULT: string;
+  other_MULT: string;
+  print_adjustment: string;
+  prev_weight_adjust: string;
+}
+
+export interface ADE_AdjustWeightIndivMultResult extends ComfyNodeOutput {
+  WEIGHT_ADJUST?: ComfyOutputValue<"WEIGHT_ADJUST">;
+}
+
+export interface ADE_AdjustWeightIndivMultOutputs {
+  WEIGHT_ADJUST: NodeRef<"WEIGHT_ADJUST">;
+}
+
+export interface ADE_AncestralOptionsInputs {
+  noise_type: "default" | "constant";
+  seed_offset: number;
+  seed_override?: number;
+}
+
+export interface ADE_AncestralOptionsInputPaths {
+  noise_type: string;
+  seed_offset: string;
+  seed_override: string;
+}
+
+export interface ADE_AncestralOptionsResult extends ComfyNodeOutput {
+  ANCESTRAL_OPTS?: ComfyOutputValue<"ANCESTRAL_OPTS">;
+}
+
+export interface ADE_AncestralOptionsOutputs {
+  ANCESTRAL_OPTS: NodeRef<"ANCESTRAL_OPTS">;
+}
+
+export interface ADE_AnimateDiffCombineInputs {
+  images: NodeRef<"IMAGE">;
+  frame_rate: number;
+  loop_count: number;
+  filename_prefix: string;
+  format: "image/gif" | "image/webp";
+  pingpong: boolean;
+  save_image: boolean;
+}
+
+export interface ADE_AnimateDiffCombineInputPaths {
+  images: string;
+  frame_rate: string;
+  loop_count: string;
+  filename_prefix: string;
+  format: string;
+  pingpong: string;
+  save_image: string;
+}
+
+export interface ADE_AnimateDiffCombineResult extends ComfyNodeOutput {
+  GIF?: ComfyOutputValue<"GIF">;
+}
+
+export interface ADE_AnimateDiffCombineOutputs {
+  GIF: NodeRef<"GIF">;
+}
+
+export interface ADE_AnimateDiffKeyframeInputs {
+  start_percent: number;
+  prev_ad_keyframes?: NodeRef<"AD_KEYFRAMES">;
+  scale_multival?: NodeRef<"MULTIVAL">;
+  effect_multival?: NodeRef<"MULTIVAL">;
+  per_block_replace?: NodeRef<"PER_BLOCK">;
+  inherit_missing?: boolean;
+  guarantee_steps?: number;
+}
+
+export interface ADE_AnimateDiffKeyframeInputPaths {
+  start_percent: string;
+  prev_ad_keyframes: string;
+  scale_multival: string;
+  effect_multival: string;
+  per_block_replace: string;
+  inherit_missing: string;
+  guarantee_steps: string;
+}
+
+export interface ADE_AnimateDiffKeyframeResult extends ComfyNodeOutput {
+  AD_KEYFRAMES?: ComfyOutputValue<"AD_KEYFRAMES">;
+}
+
+export interface ADE_AnimateDiffKeyframeOutputs {
+  AD_KEYFRAMES: NodeRef<"AD_KEYFRAMES">;
+}
+
+export interface ADE_AnimateDiffLoaderGen1Inputs {
+  model: NodeRef<"MODEL">;
+  model_name: "mm_sd_v15_v2.ckpt";
+  beta_schedule: "autoselect" | "use existing" | "sqrt_linear (AnimateDiff)" | "linear (AnimateDiff-SDXL)" | "linear (HotshotXL/default)" | "avg(sqrt_linear,linear)" | "lcm avg(sqrt_linear,linear)" | "lcm" | "lcm[100_ots]" | "lcm >> sqrt_linear" | "sqrt" | "cosine" | "squaredcos_cap_v2";
+  context_options?: NodeRef<"CONTEXT_OPTIONS">;
+  motion_lora?: NodeRef<"MOTION_LORA">;
+  ad_settings?: NodeRef<"AD_SETTINGS">;
+  ad_keyframes?: NodeRef<"AD_KEYFRAMES">;
+  sample_settings?: NodeRef<"SAMPLE_SETTINGS">;
+  scale_multival?: NodeRef<"MULTIVAL">;
+  effect_multival?: NodeRef<"MULTIVAL">;
+  per_block?: NodeRef<"PER_BLOCK">;
+}
+
+export interface ADE_AnimateDiffLoaderGen1InputPaths {
+  model: string;
+  model_name: string;
+  beta_schedule: string;
+  context_options: string;
+  motion_lora: string;
+  ad_settings: string;
+  ad_keyframes: string;
+  sample_settings: string;
+  scale_multival: string;
+  effect_multival: string;
+  per_block: string;
+}
+
+export interface ADE_AnimateDiffLoaderGen1Result extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+}
+
+export interface ADE_AnimateDiffLoaderGen1Outputs {
+  MODEL: NodeRef<"MODEL">;
+}
+
+export interface ADE_AnimateDiffLoaderV1AdvancedInputs {
+  model: NodeRef<"MODEL">;
+  latents: NodeRef<"LATENT">;
+  model_name: "mm_sd_v15_v2.ckpt";
+  unlimited_area_hack: boolean;
+  context_length: number;
+  context_stride: number;
+  context_overlap: number;
+  context_schedule: "uniform";
+  closed_loop: boolean;
+  beta_schedule: "sqrt_linear (AnimateDiff)" | "use existing" | "autoselect" | "linear (AnimateDiff-SDXL)" | "linear (HotshotXL/default)" | "avg(sqrt_linear,linear)" | "lcm avg(sqrt_linear,linear)" | "lcm" | "lcm[100_ots]" | "lcm >> sqrt_linear" | "sqrt" | "cosine" | "squaredcos_cap_v2";
+}
+
+export interface ADE_AnimateDiffLoaderV1AdvancedInputPaths {
+  model: string;
+  latents: string;
+  model_name: string;
+  unlimited_area_hack: string;
+  context_length: string;
+  context_stride: string;
+  context_overlap: string;
+  context_schedule: string;
+  closed_loop: string;
+  beta_schedule: string;
+}
+
+export interface ADE_AnimateDiffLoaderV1AdvancedResult extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+  LATENT?: ComfyOutputValue<"LATENT">;
+}
+
+export interface ADE_AnimateDiffLoaderV1AdvancedOutputs {
+  MODEL: NodeRef<"MODEL">;
+  LATENT: NodeRef<"LATENT">;
+}
+
+export interface ADE_AnimateDiffLoaderWithContextInputs {
+  model: NodeRef<"MODEL">;
+  model_name: "mm_sd_v15_v2.ckpt";
+  beta_schedule: "autoselect" | "use existing" | "sqrt_linear (AnimateDiff)" | "linear (AnimateDiff-SDXL)" | "linear (HotshotXL/default)" | "avg(sqrt_linear,linear)" | "lcm avg(sqrt_linear,linear)" | "lcm" | "lcm[100_ots]" | "lcm >> sqrt_linear" | "sqrt" | "cosine" | "squaredcos_cap_v2";
+  context_options?: NodeRef<"CONTEXT_OPTIONS">;
+  motion_lora?: NodeRef<"MOTION_LORA">;
+  ad_settings?: NodeRef<"AD_SETTINGS">;
+  sample_settings?: NodeRef<"SAMPLE_SETTINGS">;
+  motion_scale?: number;
+  apply_v2_models_properly?: boolean;
+  ad_keyframes?: NodeRef<"AD_KEYFRAMES">;
+}
+
+export interface ADE_AnimateDiffLoaderWithContextInputPaths {
+  model: string;
+  model_name: string;
+  beta_schedule: string;
+  context_options: string;
+  motion_lora: string;
+  ad_settings: string;
+  sample_settings: string;
+  motion_scale: string;
+  apply_v2_models_properly: string;
+  ad_keyframes: string;
+}
+
+export interface ADE_AnimateDiffLoaderWithContextResult extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+}
+
+export interface ADE_AnimateDiffLoaderWithContextOutputs {
+  MODEL: NodeRef<"MODEL">;
+}
+
+export interface ADE_AnimateDiffLoRALoaderInputs {
+  name: string;
+  strength: number;
+  prev_motion_lora?: NodeRef<"MOTION_LORA">;
+}
+
+export interface ADE_AnimateDiffLoRALoaderInputPaths {
+  name: string;
+  strength: string;
+  prev_motion_lora: string;
+}
+
+export interface ADE_AnimateDiffLoRALoaderResult extends ComfyNodeOutput {
+  MOTION_LORA?: ComfyOutputValue<"MOTION_LORA">;
+}
+
+export interface ADE_AnimateDiffLoRALoaderOutputs {
+  MOTION_LORA: NodeRef<"MOTION_LORA">;
+}
+
+export interface ADE_AnimateDiffModelSettingsInputs {
+  pe_strength: number;
+  attn_strength: number;
+  other_strength: number;
+  motion_pe_stretch: number;
+  cap_initial_pe_length: number;
+  interpolate_pe_to_length: number;
+  initial_pe_idx_offset: number;
+  final_pe_idx_offset: number;
+  mask_motion_scale?: NodeRef<"MASK">;
+  min_motion_scale?: number;
+  max_motion_scale?: number;
+}
+
+export interface ADE_AnimateDiffModelSettingsInputPaths {
+  pe_strength: string;
+  attn_strength: string;
+  other_strength: string;
+  motion_pe_stretch: string;
+  cap_initial_pe_length: string;
+  interpolate_pe_to_length: string;
+  initial_pe_idx_offset: string;
+  final_pe_idx_offset: string;
+  mask_motion_scale: string;
+  min_motion_scale: string;
+  max_motion_scale: string;
+}
+
+export interface ADE_AnimateDiffModelSettingsResult extends ComfyNodeOutput {
+  AD_SETTINGS?: ComfyOutputValue<"AD_SETTINGS">;
+}
+
+export interface ADE_AnimateDiffModelSettingsOutputs {
+  AD_SETTINGS: NodeRef<"AD_SETTINGS">;
+}
+
+export interface ADE_AnimateDiffModelSettings_ReleaseInputs {
+  min_motion_scale: number;
+  max_motion_scale: number;
+  mask_motion_scale?: NodeRef<"MASK">;
+}
+
+export interface ADE_AnimateDiffModelSettings_ReleaseInputPaths {
+  min_motion_scale: string;
+  max_motion_scale: string;
+  mask_motion_scale: string;
+}
+
+export interface ADE_AnimateDiffModelSettings_ReleaseResult extends ComfyNodeOutput {
+  AD_SETTINGS?: ComfyOutputValue<"AD_SETTINGS">;
+}
+
+export interface ADE_AnimateDiffModelSettings_ReleaseOutputs {
+  AD_SETTINGS: NodeRef<"AD_SETTINGS">;
+}
+
+export interface ADE_AnimateDiffModelSettingsAdvancedAttnStrengthsInputs {
+  pe_strength: number;
+  attn_strength: number;
+  attn_q_strength: number;
+  attn_k_strength: number;
+  attn_v_strength: number;
+  attn_out_weight_strength: number;
+  attn_out_bias_strength: number;
+  other_strength: number;
+  motion_pe_stretch: number;
+  cap_initial_pe_length: number;
+  interpolate_pe_to_length: number;
+  initial_pe_idx_offset: number;
+  final_pe_idx_offset: number;
+  mask_motion_scale?: NodeRef<"MASK">;
+  min_motion_scale?: number;
+  max_motion_scale?: number;
+}
+
+export interface ADE_AnimateDiffModelSettingsAdvancedAttnStrengthsInputPaths {
+  pe_strength: string;
+  attn_strength: string;
+  attn_q_strength: string;
+  attn_k_strength: string;
+  attn_v_strength: string;
+  attn_out_weight_strength: string;
+  attn_out_bias_strength: string;
+  other_strength: string;
+  motion_pe_stretch: string;
+  cap_initial_pe_length: string;
+  interpolate_pe_to_length: string;
+  initial_pe_idx_offset: string;
+  final_pe_idx_offset: string;
+  mask_motion_scale: string;
+  min_motion_scale: string;
+  max_motion_scale: string;
+}
+
+export interface ADE_AnimateDiffModelSettingsAdvancedAttnStrengthsResult extends ComfyNodeOutput {
+  AD_SETTINGS?: ComfyOutputValue<"AD_SETTINGS">;
+}
+
+export interface ADE_AnimateDiffModelSettingsAdvancedAttnStrengthsOutputs {
+  AD_SETTINGS: NodeRef<"AD_SETTINGS">;
+}
+
+export interface ADE_AnimateDiffModelSettingsSimpleInputs {
+  motion_pe_stretch: number;
+  mask_motion_scale?: NodeRef<"MASK">;
+  min_motion_scale?: number;
+  max_motion_scale?: number;
+}
+
+export interface ADE_AnimateDiffModelSettingsSimpleInputPaths {
+  motion_pe_stretch: string;
+  mask_motion_scale: string;
+  min_motion_scale: string;
+  max_motion_scale: string;
+}
+
+export interface ADE_AnimateDiffModelSettingsSimpleResult extends ComfyNodeOutput {
+  AD_SETTINGS?: ComfyOutputValue<"AD_SETTINGS">;
+}
+
+export interface ADE_AnimateDiffModelSettingsSimpleOutputs {
+  AD_SETTINGS: NodeRef<"AD_SETTINGS">;
+}
+
+export interface ADE_AnimateDiffSamplingSettingsInputs {
+  batch_offset: number;
+  noise_type: "default" | "constant" | "empty" | "repeated_context" | "FreeNoise";
+  seed_gen: "comfy" | "comfy [gpu]" | "auto1111" | "auto1111 [gpu]";
+  seed_offset: number;
+  noise_layers?: NodeRef<"NOISE_LAYERS">;
+  iteration_opts?: NodeRef<"ITERATION_OPTS">;
+  seed_override?: number;
+  adapt_denoise_steps?: boolean;
+  custom_cfg?: NodeRef<"CUSTOM_CFG">;
+  sigma_schedule?: NodeRef<"SIGMA_SCHEDULE">;
+  image_inject?: NodeRef<"IMAGE_INJECT">;
+  ancestral_opts?: NodeRef<"ANCESTRAL_OPTS">;
+}
+
+export interface ADE_AnimateDiffSamplingSettingsInputPaths {
+  batch_offset: string;
+  noise_type: string;
+  seed_gen: string;
+  seed_offset: string;
+  noise_layers: string;
+  iteration_opts: string;
+  seed_override: string;
+  adapt_denoise_steps: string;
+  custom_cfg: string;
+  sigma_schedule: string;
+  image_inject: string;
+  ancestral_opts: string;
+}
+
+export interface ADE_AnimateDiffSamplingSettingsResult extends ComfyNodeOutput {
+  settings?: ComfyOutputValue<"SAMPLE_SETTINGS">;
+}
+
+export interface ADE_AnimateDiffSamplingSettingsOutputs {
+  settings: NodeRef<"SAMPLE_SETTINGS">;
+}
+
+export interface ADE_AnimateDiffSettingsInputs {
+  pe_adjust?: NodeRef<"PE_ADJUST">;
+  weight_adjust?: NodeRef<"WEIGHT_ADJUST">;
+}
+
+export interface ADE_AnimateDiffSettingsInputPaths {
+  pe_adjust: string;
+  weight_adjust: string;
+}
+
+export interface ADE_AnimateDiffSettingsResult extends ComfyNodeOutput {
+  AD_SETTINGS?: ComfyOutputValue<"AD_SETTINGS">;
+}
+
+export interface ADE_AnimateDiffSettingsOutputs {
+  AD_SETTINGS: NodeRef<"AD_SETTINGS">;
+}
+
+export interface ADE_AnimateDiffUniformContextOptionsInputs {
+  context_length: number;
+  context_stride: number;
+  context_overlap: number;
+  context_schedule: "uniform";
+  closed_loop: boolean;
+  fuse_method?: "pyramid" | "flat" | "overlap-linear" | "🔬delayed reverse sawtooth" | "🔬pyramid-sigma" | "🔬pyramid-sigma inverse" | "🔬gauss-sigma" | "🔬gauss-sigma inverse" | "🔬random";
+  use_on_equal_length?: boolean;
+  start_percent?: number;
+  guarantee_steps?: number;
+  prev_context?: NodeRef<"CONTEXT_OPTIONS">;
+  view_opts?: NodeRef<"VIEW_OPTS">;
+}
+
+export interface ADE_AnimateDiffUniformContextOptionsInputPaths {
+  context_length: string;
+  context_stride: string;
+  context_overlap: string;
+  context_schedule: string;
+  closed_loop: string;
+  fuse_method: string;
+  use_on_equal_length: string;
+  start_percent: string;
+  guarantee_steps: string;
+  prev_context: string;
+  view_opts: string;
+}
+
+export interface ADE_AnimateDiffUniformContextOptionsResult extends ComfyNodeOutput {
+  CONTEXT_OPTS?: ComfyOutputValue<"CONTEXT_OPTIONS">;
+}
+
+export interface ADE_AnimateDiffUniformContextOptionsOutputs {
+  CONTEXT_OPTS: NodeRef<"CONTEXT_OPTIONS">;
+}
+
+export interface ADE_AnimateDiffUnloadInputs {
+  model: NodeRef<"MODEL">;
+}
+
+export interface ADE_AnimateDiffUnloadInputPaths {
+  model: string;
+}
+
+export interface ADE_AnimateDiffUnloadResult extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+}
+
+export interface ADE_AnimateDiffUnloadOutputs {
+  MODEL: NodeRef<"MODEL">;
+}
+
+export interface ADE_ApplyAnimateDiffModelInputs {
+  motion_model: NodeRef<"MOTION_MODEL_ADE">;
+  start_percent: number;
+  end_percent: number;
+  motion_lora?: NodeRef<"MOTION_LORA">;
+  scale_multival?: NodeRef<"MULTIVAL">;
+  effect_multival?: NodeRef<"MULTIVAL">;
+  ad_keyframes?: NodeRef<"AD_KEYFRAMES">;
+  prev_m_models?: NodeRef<"M_MODELS">;
+  per_block?: NodeRef<"PER_BLOCK">;
+}
+
+export interface ADE_ApplyAnimateDiffModelInputPaths {
+  motion_model: string;
+  start_percent: string;
+  end_percent: string;
+  motion_lora: string;
+  scale_multival: string;
+  effect_multival: string;
+  ad_keyframes: string;
+  prev_m_models: string;
+  per_block: string;
+}
+
+export interface ADE_ApplyAnimateDiffModelResult extends ComfyNodeOutput {
+  M_MODELS?: ComfyOutputValue<"M_MODELS">;
+}
+
+export interface ADE_ApplyAnimateDiffModelOutputs {
+  M_MODELS: NodeRef<"M_MODELS">;
+}
+
+export interface ADE_ApplyAnimateDiffModelSimpleInputs {
+  motion_model: NodeRef<"MOTION_MODEL_ADE">;
+  motion_lora?: NodeRef<"MOTION_LORA">;
+  scale_multival?: NodeRef<"MULTIVAL">;
+  effect_multival?: NodeRef<"MULTIVAL">;
+  ad_keyframes?: NodeRef<"AD_KEYFRAMES">;
+  per_block?: NodeRef<"PER_BLOCK">;
+}
+
+export interface ADE_ApplyAnimateDiffModelSimpleInputPaths {
+  motion_model: string;
+  motion_lora: string;
+  scale_multival: string;
+  effect_multival: string;
+  ad_keyframes: string;
+  per_block: string;
+}
+
+export interface ADE_ApplyAnimateDiffModelSimpleResult extends ComfyNodeOutput {
+  M_MODELS?: ComfyOutputValue<"M_MODELS">;
+}
+
+export interface ADE_ApplyAnimateDiffModelSimpleOutputs {
+  M_MODELS: NodeRef<"M_MODELS">;
+}
+
+export interface ADE_ApplyAnimateDiffModelWithCameraCtrlInputs {
+  motion_model: NodeRef<"MOTION_MODEL_ADE">;
+  cameractrl_poses: NodeRef<"CAMERACTRL_POSES">;
+  start_percent: number;
+  end_percent: number;
+  motion_lora?: NodeRef<"MOTION_LORA">;
+  scale_multival?: NodeRef<"MULTIVAL">;
+  effect_multival?: NodeRef<"MULTIVAL">;
+  cameractrl_multival?: NodeRef<"MULTIVAL">;
+  ad_keyframes?: NodeRef<"AD_KEYFRAMES">;
+  prev_m_models?: NodeRef<"M_MODELS">;
+  per_block?: NodeRef<"PER_BLOCK">;
+}
+
+export interface ADE_ApplyAnimateDiffModelWithCameraCtrlInputPaths {
+  motion_model: string;
+  cameractrl_poses: string;
+  start_percent: string;
+  end_percent: string;
+  motion_lora: string;
+  scale_multival: string;
+  effect_multival: string;
+  cameractrl_multival: string;
+  ad_keyframes: string;
+  prev_m_models: string;
+  per_block: string;
+}
+
+export interface ADE_ApplyAnimateDiffModelWithCameraCtrlResult extends ComfyNodeOutput {
+  M_MODELS?: ComfyOutputValue<"M_MODELS">;
+}
+
+export interface ADE_ApplyAnimateDiffModelWithCameraCtrlOutputs {
+  M_MODELS: NodeRef<"M_MODELS">;
+}
+
+export interface ADE_ApplyAnimateDiffModelWithPIAInputs {
+  motion_model: NodeRef<"MOTION_MODEL_ADE">;
+  image: NodeRef<"IMAGE">;
+  vae: NodeRef<"VAE">;
+  start_percent: number;
+  end_percent: number;
+  pia_input?: NodeRef<"PIA_INPUT">;
+  motion_lora?: NodeRef<"MOTION_LORA">;
+  scale_multival?: NodeRef<"MULTIVAL">;
+  effect_multival?: NodeRef<"MULTIVAL">;
+  ad_keyframes?: NodeRef<"AD_KEYFRAMES">;
+  prev_m_models?: NodeRef<"M_MODELS">;
+  per_block?: NodeRef<"PER_BLOCK">;
+}
+
+export interface ADE_ApplyAnimateDiffModelWithPIAInputPaths {
+  motion_model: string;
+  image: string;
+  vae: string;
+  start_percent: string;
+  end_percent: string;
+  pia_input: string;
+  motion_lora: string;
+  scale_multival: string;
+  effect_multival: string;
+  ad_keyframes: string;
+  prev_m_models: string;
+  per_block: string;
+}
+
+export interface ADE_ApplyAnimateDiffModelWithPIAResult extends ComfyNodeOutput {
+  M_MODELS?: ComfyOutputValue<"M_MODELS">;
+}
+
+export interface ADE_ApplyAnimateDiffModelWithPIAOutputs {
+  M_MODELS: NodeRef<"M_MODELS">;
+}
+
+export interface ADE_ApplyAnimateLCMI2VModelInputs {
+  motion_model: NodeRef<"MOTION_MODEL_ADE">;
+  ref_latent: NodeRef<"LATENT">;
+  ref_drift: number;
+  apply_ref_when_disabled: boolean;
+  start_percent: number;
+  end_percent: number;
+  motion_lora?: NodeRef<"MOTION_LORA">;
+  scale_multival?: NodeRef<"MULTIVAL">;
+  effect_multival?: NodeRef<"MULTIVAL">;
+  ad_keyframes?: NodeRef<"AD_KEYFRAMES">;
+  prev_m_models?: NodeRef<"M_MODELS">;
+  per_block?: NodeRef<"PER_BLOCK">;
+}
+
+export interface ADE_ApplyAnimateLCMI2VModelInputPaths {
+  motion_model: string;
+  ref_latent: string;
+  ref_drift: string;
+  apply_ref_when_disabled: string;
+  start_percent: string;
+  end_percent: string;
+  motion_lora: string;
+  scale_multival: string;
+  effect_multival: string;
+  ad_keyframes: string;
+  prev_m_models: string;
+  per_block: string;
+}
+
+export interface ADE_ApplyAnimateLCMI2VModelResult extends ComfyNodeOutput {
+  M_MODELS?: ComfyOutputValue<"M_MODELS">;
+}
+
+export interface ADE_ApplyAnimateLCMI2VModelOutputs {
+  M_MODELS: NodeRef<"M_MODELS">;
+}
+
+export interface ADE_AttachLoraHookToCLIPInputs {
+  clip: NodeRef<"CLIP">;
+  lora_hook: NodeRef<"HOOKS">;
+}
+
+export interface ADE_AttachLoraHookToCLIPInputPaths {
+  clip: string;
+  lora_hook: string;
+}
+
+export interface ADE_AttachLoraHookToCLIPResult extends ComfyNodeOutput {
+  hook_CLIP?: ComfyOutputValue<"CLIP">;
+}
+
+export interface ADE_AttachLoraHookToCLIPOutputs {
+  hook_CLIP: NodeRef<"CLIP">;
+}
+
+export interface ADE_AttachLoraHookToConditioningInputs {
+  conditioning: NodeRef<"CONDITIONING">;
+  lora_hook: NodeRef<"HOOKS">;
+}
+
+export interface ADE_AttachLoraHookToConditioningInputPaths {
+  conditioning: string;
+  lora_hook: string;
+}
+
+export interface ADE_AttachLoraHookToConditioningResult extends ComfyNodeOutput {
+  CONDITIONING?: ComfyOutputValue<"CONDITIONING">;
+}
+
+export interface ADE_AttachLoraHookToConditioningOutputs {
+  CONDITIONING: NodeRef<"CONDITIONING">;
+}
+
+export interface ADE_BatchedContextOptionsInputs {
+  context_length: number;
+  start_percent?: number;
+  guarantee_steps?: number;
+  prev_context?: NodeRef<"CONTEXT_OPTIONS">;
+}
+
+export interface ADE_BatchedContextOptionsInputPaths {
+  context_length: string;
+  start_percent: string;
+  guarantee_steps: string;
+  prev_context: string;
+}
+
+export interface ADE_BatchedContextOptionsResult extends ComfyNodeOutput {
+  CONTEXT_OPTS?: ComfyOutputValue<"CONTEXT_OPTIONS">;
+}
+
+export interface ADE_BatchedContextOptionsOutputs {
+  CONTEXT_OPTS: NodeRef<"CONTEXT_OPTIONS">;
+}
+
+export interface ADE_CameraCtrlAnimateDiffKeyframeInputs {
+  start_percent: number;
+  prev_ad_keyframes?: NodeRef<"AD_KEYFRAMES">;
+  scale_multival?: NodeRef<"MULTIVAL">;
+  effect_multival?: NodeRef<"MULTIVAL">;
+  cameractrl_multival?: NodeRef<"MULTIVAL">;
+  inherit_missing?: boolean;
+  guarantee_steps?: number;
+}
+
+export interface ADE_CameraCtrlAnimateDiffKeyframeInputPaths {
+  start_percent: string;
+  prev_ad_keyframes: string;
+  scale_multival: string;
+  effect_multival: string;
+  cameractrl_multival: string;
+  inherit_missing: string;
+  guarantee_steps: string;
+}
+
+export interface ADE_CameraCtrlAnimateDiffKeyframeResult extends ComfyNodeOutput {
+  AD_KEYFRAMES?: ComfyOutputValue<"AD_KEYFRAMES">;
+}
+
+export interface ADE_CameraCtrlAnimateDiffKeyframeOutputs {
+  AD_KEYFRAMES: NodeRef<"AD_KEYFRAMES">;
+}
+
+export interface ADE_CameraManualPoseAppendInputs {
+  poses_first: NodeRef<"CAMERACTRL_POSES">;
+  poses_last: NodeRef<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_CameraManualPoseAppendInputPaths {
+  poses_first: string;
+  poses_last: string;
+}
+
+export interface ADE_CameraManualPoseAppendResult extends ComfyNodeOutput {
+  CAMERACTRL_POSES?: ComfyOutputValue<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_CameraManualPoseAppendOutputs {
+  CAMERACTRL_POSES: NodeRef<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_CameraPoseAdvancedInputs {
+  motion_type1: "Static" | "Pan Up" | "Pan Down" | "Pan Left" | "Pan Right" | "Zoom In" | "Zoom Out" | "Roll Clockwise" | "Roll Anticlockwise" | "Tilt Down" | "Tilt Up" | "Tilt Left" | "Tilt Right";
+  strength1: number;
+  motion_type2: "Static" | "Pan Up" | "Pan Down" | "Pan Left" | "Pan Right" | "Zoom In" | "Zoom Out" | "Roll Clockwise" | "Roll Anticlockwise" | "Tilt Down" | "Tilt Up" | "Tilt Left" | "Tilt Right";
+  strength2: number;
+  motion_type3: "Static" | "Pan Up" | "Pan Down" | "Pan Left" | "Pan Right" | "Zoom In" | "Zoom Out" | "Roll Clockwise" | "Roll Anticlockwise" | "Tilt Down" | "Tilt Up" | "Tilt Left" | "Tilt Right";
+  strength3: number;
+  motion_type4: "Static" | "Pan Up" | "Pan Down" | "Pan Left" | "Pan Right" | "Zoom In" | "Zoom Out" | "Roll Clockwise" | "Roll Anticlockwise" | "Tilt Down" | "Tilt Up" | "Tilt Left" | "Tilt Right";
+  strength4: number;
+  motion_type5: "Static" | "Pan Up" | "Pan Down" | "Pan Left" | "Pan Right" | "Zoom In" | "Zoom Out" | "Roll Clockwise" | "Roll Anticlockwise" | "Tilt Down" | "Tilt Up" | "Tilt Left" | "Tilt Right";
+  strength5: number;
+  motion_type6: "Static" | "Pan Up" | "Pan Down" | "Pan Left" | "Pan Right" | "Zoom In" | "Zoom Out" | "Roll Clockwise" | "Roll Anticlockwise" | "Tilt Down" | "Tilt Up" | "Tilt Left" | "Tilt Right";
+  strength6: number;
+  speed: number;
+  frame_length: number;
+  prev_poses?: NodeRef<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_CameraPoseAdvancedInputPaths {
+  motion_type1: string;
+  strength1: string;
+  motion_type2: string;
+  strength2: string;
+  motion_type3: string;
+  strength3: string;
+  motion_type4: string;
+  strength4: string;
+  motion_type5: string;
+  strength5: string;
+  motion_type6: string;
+  strength6: string;
+  speed: string;
+  frame_length: string;
+  prev_poses: string;
+}
+
+export interface ADE_CameraPoseAdvancedResult extends ComfyNodeOutput {
+  CAMERACTRL_POSES?: ComfyOutputValue<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_CameraPoseAdvancedOutputs {
+  CAMERACTRL_POSES: NodeRef<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_CameraPoseBasicInputs {
+  motion_type: "Static" | "Pan Up" | "Pan Down" | "Pan Left" | "Pan Right" | "Zoom In" | "Zoom Out" | "Roll Clockwise" | "Roll Anticlockwise" | "Tilt Down" | "Tilt Up" | "Tilt Left" | "Tilt Right";
+  speed: number;
+  frame_length: number;
+  prev_poses?: NodeRef<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_CameraPoseBasicInputPaths {
+  motion_type: string;
+  speed: string;
+  frame_length: string;
+  prev_poses: string;
+}
+
+export interface ADE_CameraPoseBasicResult extends ComfyNodeOutput {
+  CAMERACTRL_POSES?: ComfyOutputValue<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_CameraPoseBasicOutputs {
+  CAMERACTRL_POSES: NodeRef<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_CameraPoseComboInputs {
+  motion_type1: "Static" | "Pan Up" | "Pan Down" | "Pan Left" | "Pan Right" | "Zoom In" | "Zoom Out" | "Roll Clockwise" | "Roll Anticlockwise" | "Tilt Down" | "Tilt Up" | "Tilt Left" | "Tilt Right";
+  motion_type2: "Static" | "Pan Up" | "Pan Down" | "Pan Left" | "Pan Right" | "Zoom In" | "Zoom Out" | "Roll Clockwise" | "Roll Anticlockwise" | "Tilt Down" | "Tilt Up" | "Tilt Left" | "Tilt Right";
+  motion_type3: "Static" | "Pan Up" | "Pan Down" | "Pan Left" | "Pan Right" | "Zoom In" | "Zoom Out" | "Roll Clockwise" | "Roll Anticlockwise" | "Tilt Down" | "Tilt Up" | "Tilt Left" | "Tilt Right";
+  motion_type4: "Static" | "Pan Up" | "Pan Down" | "Pan Left" | "Pan Right" | "Zoom In" | "Zoom Out" | "Roll Clockwise" | "Roll Anticlockwise" | "Tilt Down" | "Tilt Up" | "Tilt Left" | "Tilt Right";
+  motion_type5: "Static" | "Pan Up" | "Pan Down" | "Pan Left" | "Pan Right" | "Zoom In" | "Zoom Out" | "Roll Clockwise" | "Roll Anticlockwise" | "Tilt Down" | "Tilt Up" | "Tilt Left" | "Tilt Right";
+  motion_type6: "Static" | "Pan Up" | "Pan Down" | "Pan Left" | "Pan Right" | "Zoom In" | "Zoom Out" | "Roll Clockwise" | "Roll Anticlockwise" | "Tilt Down" | "Tilt Up" | "Tilt Left" | "Tilt Right";
+  speed: number;
+  frame_length: number;
+  prev_poses?: NodeRef<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_CameraPoseComboInputPaths {
+  motion_type1: string;
+  motion_type2: string;
+  motion_type3: string;
+  motion_type4: string;
+  motion_type5: string;
+  motion_type6: string;
+  speed: string;
+  frame_length: string;
+  prev_poses: string;
+}
+
+export interface ADE_CameraPoseComboResult extends ComfyNodeOutput {
+  CAMERACTRL_POSES?: ComfyOutputValue<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_CameraPoseComboOutputs {
+  CAMERACTRL_POSES: NodeRef<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_CFGExtrasPAGInputs {
+  scale_multival: NodeRef<"MULTIVAL">;
+  prev_extras?: NodeRef<"CFG_EXTRAS">;
+}
+
+export interface ADE_CFGExtrasPAGInputPaths {
+  scale_multival: string;
+  prev_extras: string;
+}
+
+export interface ADE_CFGExtrasPAGResult extends ComfyNodeOutput {
+  CFG_EXTRAS?: ComfyOutputValue<"CFG_EXTRAS">;
+}
+
+export interface ADE_CFGExtrasPAGOutputs {
+  CFG_EXTRAS: NodeRef<"CFG_EXTRAS">;
+}
+
+export interface ADE_CFGExtrasPAGSimpleInputs {
+  scale: number;
+  prev_extras?: NodeRef<"CFG_EXTRAS">;
+}
+
+export interface ADE_CFGExtrasPAGSimpleInputPaths {
+  scale: string;
+  prev_extras: string;
+}
+
+export interface ADE_CFGExtrasPAGSimpleResult extends ComfyNodeOutput {
+  CFG_EXTRAS?: ComfyOutputValue<"CFG_EXTRAS">;
+}
+
+export interface ADE_CFGExtrasPAGSimpleOutputs {
+  CFG_EXTRAS: NodeRef<"CFG_EXTRAS">;
+}
+
+export interface ADE_CFGExtrasRescaleCFGInputs {
+  mult_multival: NodeRef<"MULTIVAL">;
+  prev_extras?: NodeRef<"CFG_EXTRAS">;
+}
+
+export interface ADE_CFGExtrasRescaleCFGInputPaths {
+  mult_multival: string;
+  prev_extras: string;
+}
+
+export interface ADE_CFGExtrasRescaleCFGResult extends ComfyNodeOutput {
+  CFG_EXTRAS?: ComfyOutputValue<"CFG_EXTRAS">;
+}
+
+export interface ADE_CFGExtrasRescaleCFGOutputs {
+  CFG_EXTRAS: NodeRef<"CFG_EXTRAS">;
+}
+
+export interface ADE_CFGExtrasRescaleCFGSimpleInputs {
+  multiplier: number;
+  prev_extras?: NodeRef<"CFG_EXTRAS">;
+}
+
+export interface ADE_CFGExtrasRescaleCFGSimpleInputPaths {
+  multiplier: string;
+  prev_extras: string;
+}
+
+export interface ADE_CFGExtrasRescaleCFGSimpleResult extends ComfyNodeOutput {
+  CFG_EXTRAS?: ComfyOutputValue<"CFG_EXTRAS">;
+}
+
+export interface ADE_CFGExtrasRescaleCFGSimpleOutputs {
+  CFG_EXTRAS: NodeRef<"CFG_EXTRAS">;
+}
+
+export interface ADE_CombineLoraHooksInputs {
+  lora_hook_A?: NodeRef<"HOOKS">;
+  lora_hook_B?: NodeRef<"HOOKS">;
+}
+
+export interface ADE_CombineLoraHooksInputPaths {
+  lora_hook_A: string;
+  lora_hook_B: string;
+}
+
+export interface ADE_CombineLoraHooksResult extends ComfyNodeOutput {
+  HOOKS?: ComfyOutputValue<"HOOKS">;
+}
+
+export interface ADE_CombineLoraHooksOutputs {
+  HOOKS: NodeRef<"HOOKS">;
+}
+
+export interface ADE_CombineLoraHooksEightInputs {
+  lora_hook_A?: NodeRef<"HOOKS">;
+  lora_hook_B?: NodeRef<"HOOKS">;
+  lora_hook_C?: NodeRef<"HOOKS">;
+  lora_hook_D?: NodeRef<"HOOKS">;
+  lora_hook_E?: NodeRef<"HOOKS">;
+  lora_hook_F?: NodeRef<"HOOKS">;
+  lora_hook_G?: NodeRef<"HOOKS">;
+  lora_hook_H?: NodeRef<"HOOKS">;
+}
+
+export interface ADE_CombineLoraHooksEightInputPaths {
+  lora_hook_A: string;
+  lora_hook_B: string;
+  lora_hook_C: string;
+  lora_hook_D: string;
+  lora_hook_E: string;
+  lora_hook_F: string;
+  lora_hook_G: string;
+  lora_hook_H: string;
+}
+
+export interface ADE_CombineLoraHooksEightResult extends ComfyNodeOutput {
+  HOOKS?: ComfyOutputValue<"HOOKS">;
+}
+
+export interface ADE_CombineLoraHooksEightOutputs {
+  HOOKS: NodeRef<"HOOKS">;
+}
+
+export interface ADE_CombineLoraHooksFourInputs {
+  lora_hook_A?: NodeRef<"HOOKS">;
+  lora_hook_B?: NodeRef<"HOOKS">;
+  lora_hook_C?: NodeRef<"HOOKS">;
+  lora_hook_D?: NodeRef<"HOOKS">;
+}
+
+export interface ADE_CombineLoraHooksFourInputPaths {
+  lora_hook_A: string;
+  lora_hook_B: string;
+  lora_hook_C: string;
+  lora_hook_D: string;
+}
+
+export interface ADE_CombineLoraHooksFourResult extends ComfyNodeOutput {
+  HOOKS?: ComfyOutputValue<"HOOKS">;
+}
+
+export interface ADE_CombineLoraHooksFourOutputs {
+  HOOKS: NodeRef<"HOOKS">;
+}
+
+export interface ADE_ConditionExtractionInputs {
+  conditioning: NodeRef<"CONDITIONING">;
+  index: number;
+}
+
+export interface ADE_ConditionExtractionInputPaths {
+  conditioning: string;
+  index: string;
+}
+
+export interface ADE_ConditionExtractionResult extends ComfyNodeOutput {
+  CONDITIONING?: ComfyOutputValue<"CONDITIONING">;
+}
+
+export interface ADE_ConditionExtractionOutputs {
+  CONDITIONING: NodeRef<"CONDITIONING">;
+}
+
+export interface ADE_ConditioningCombineInputs {
+  cond_A: NodeRef<"CONDITIONING">;
+  cond_B: NodeRef<"CONDITIONING">;
+}
+
+export interface ADE_ConditioningCombineInputPaths {
+  cond_A: string;
+  cond_B: string;
+}
+
+export interface ADE_ConditioningCombineResult extends ComfyNodeOutput {
+  CONDITIONING?: ComfyOutputValue<"CONDITIONING">;
+}
+
+export interface ADE_ConditioningCombineOutputs {
+  CONDITIONING: NodeRef<"CONDITIONING">;
+}
+
+export interface ADE_ConditioningSetMaskInputs {
+  cond_ADD: NodeRef<"CONDITIONING">;
+  strength: number;
+  set_cond_area: "default" | "mask bounds";
+  opt_mask?: NodeRef<"MASK">;
+  opt_lora_hook?: NodeRef<"HOOKS">;
+  opt_timesteps?: NodeRef<"TIMESTEPS_RANGE">;
+}
+
+export interface ADE_ConditioningSetMaskInputPaths {
+  cond_ADD: string;
+  strength: string;
+  set_cond_area: string;
+  opt_mask: string;
+  opt_lora_hook: string;
+  opt_timesteps: string;
+}
+
+export interface ADE_ConditioningSetMaskResult extends ComfyNodeOutput {
+  CONDITIONING?: ComfyOutputValue<"CONDITIONING">;
+}
+
+export interface ADE_ConditioningSetMaskOutputs {
+  CONDITIONING: NodeRef<"CONDITIONING">;
+}
+
+export interface ADE_ConditioningSetMaskAndCombineInputs {
+  cond: NodeRef<"CONDITIONING">;
+  cond_ADD: NodeRef<"CONDITIONING">;
+  strength: number;
+  set_cond_area: "default" | "mask bounds";
+  opt_mask?: NodeRef<"MASK">;
+  opt_lora_hook?: NodeRef<"HOOKS">;
+  opt_timesteps?: NodeRef<"TIMESTEPS_RANGE">;
+}
+
+export interface ADE_ConditioningSetMaskAndCombineInputPaths {
+  cond: string;
+  cond_ADD: string;
+  strength: string;
+  set_cond_area: string;
+  opt_mask: string;
+  opt_lora_hook: string;
+  opt_timesteps: string;
+}
+
+export interface ADE_ConditioningSetMaskAndCombineResult extends ComfyNodeOutput {
+  CONDITIONING?: ComfyOutputValue<"CONDITIONING">;
+}
+
+export interface ADE_ConditioningSetMaskAndCombineOutputs {
+  CONDITIONING: NodeRef<"CONDITIONING">;
+}
+
+export interface ADE_ConditioningSetUnmaskedAndCombineInputs {
+  cond: NodeRef<"CONDITIONING">;
+  cond_DEFAULT: NodeRef<"CONDITIONING">;
+  opt_lora_hook?: NodeRef<"HOOKS">;
+}
+
+export interface ADE_ConditioningSetUnmaskedAndCombineInputPaths {
+  cond: string;
+  cond_DEFAULT: string;
+  opt_lora_hook: string;
+}
+
+export interface ADE_ConditioningSetUnmaskedAndCombineResult extends ComfyNodeOutput {
+  CONDITIONING?: ComfyOutputValue<"CONDITIONING">;
+}
+
+export interface ADE_ConditioningSetUnmaskedAndCombineOutputs {
+  CONDITIONING: NodeRef<"CONDITIONING">;
+}
+
+export interface ADE_ContextExtras_ContextRefInputs {
+  prev_extras?: NodeRef<"CONTEXT_EXTRAS">;
+  strength_multival?: NodeRef<"MULTIVAL">;
+  contextref_mode?: NodeRef<"CONTEXTREF_MODE">;
+  contextref_tune?: NodeRef<"CONTEXTREF_TUNE">;
+  contextref_kf?: NodeRef<"CONTEXTREF_KEYFRAME">;
+  start_percent?: number;
+  end_percent?: number;
+}
+
+export interface ADE_ContextExtras_ContextRefInputPaths {
+  prev_extras: string;
+  strength_multival: string;
+  contextref_mode: string;
+  contextref_tune: string;
+  contextref_kf: string;
+  start_percent: string;
+  end_percent: string;
+}
+
+export interface ADE_ContextExtras_ContextRefResult extends ComfyNodeOutput {
+  CONTEXT_EXTRAS?: ComfyOutputValue<"CONTEXT_EXTRAS">;
+}
+
+export interface ADE_ContextExtras_ContextRefOutputs {
+  CONTEXT_EXTRAS: NodeRef<"CONTEXT_EXTRAS">;
+}
+
+export interface ADE_ContextExtras_ContextRef_KeyframeInputs {
+  prev_kf?: NodeRef<"CONTEXTREF_KEYFRAME">;
+  mult_multival?: NodeRef<"MULTIVAL">;
+  mode_replace?: NodeRef<"CONTEXTREF_MODE">;
+  tune_replace?: NodeRef<"CONTEXTREF_TUNE">;
+  mult?: number;
+  start_percent?: number;
+  guarantee_steps?: number;
+  inherit_missing?: boolean;
+}
+
+export interface ADE_ContextExtras_ContextRef_KeyframeInputPaths {
+  prev_kf: string;
+  mult_multival: string;
+  mode_replace: string;
+  tune_replace: string;
+  mult: string;
+  start_percent: string;
+  guarantee_steps: string;
+  inherit_missing: string;
+}
+
+export interface ADE_ContextExtras_ContextRef_KeyframeResult extends ComfyNodeOutput {
+  CONTEXTREF_KF?: ComfyOutputValue<"CONTEXTREF_KEYFRAME">;
+}
+
+export interface ADE_ContextExtras_ContextRef_KeyframeOutputs {
+  CONTEXTREF_KF: NodeRef<"CONTEXTREF_KEYFRAME">;
+}
+
+export interface ADE_ContextExtras_ContextRef_KeyframeFromListInputs {
+  mults_float: number;
+  start_percent: number;
+  end_percent: number;
+  inherit_missing: boolean;
+  print_keyframes: boolean;
+  prev_kf?: NodeRef<"CONTEXTREF_KEYFRAME">;
+  mult_multival?: NodeRef<"MULTIVAL">;
+  mode_replace?: NodeRef<"CONTEXTREF_MODE">;
+  tune_replace?: NodeRef<"CONTEXTREF_TUNE">;
+}
+
+export interface ADE_ContextExtras_ContextRef_KeyframeFromListInputPaths {
+  mults_float: string;
+  start_percent: string;
+  end_percent: string;
+  inherit_missing: string;
+  print_keyframes: string;
+  prev_kf: string;
+  mult_multival: string;
+  mode_replace: string;
+  tune_replace: string;
+}
+
+export interface ADE_ContextExtras_ContextRef_KeyframeFromListResult extends ComfyNodeOutput {
+  CONTEXTREF_KF?: ComfyOutputValue<"CONTEXTREF_KEYFRAME">;
+}
+
+export interface ADE_ContextExtras_ContextRef_KeyframeFromListOutputs {
+  CONTEXTREF_KF: NodeRef<"CONTEXTREF_KEYFRAME">;
+}
+
+export interface ADE_ContextExtras_ContextRef_KeyframeInterpolationInputs {
+  start_percent: number;
+  end_percent: number;
+  mult_start: number;
+  mult_end: number;
+  interpolation: "linear" | "ease_in" | "ease_out" | "ease_in_out";
+  intervals: number;
+  inherit_missing: boolean;
+  print_keyframes: boolean;
+  prev_kf?: NodeRef<"CONTEXTREF_KEYFRAME">;
+  mult_multival?: NodeRef<"MULTIVAL">;
+  mode_replace?: NodeRef<"CONTEXTREF_MODE">;
+  tune_replace?: NodeRef<"CONTEXTREF_TUNE">;
+}
+
+export interface ADE_ContextExtras_ContextRef_KeyframeInterpolationInputPaths {
+  start_percent: string;
+  end_percent: string;
+  mult_start: string;
+  mult_end: string;
+  interpolation: string;
+  intervals: string;
+  inherit_missing: string;
+  print_keyframes: string;
+  prev_kf: string;
+  mult_multival: string;
+  mode_replace: string;
+  tune_replace: string;
+}
+
+export interface ADE_ContextExtras_ContextRef_KeyframeInterpolationResult extends ComfyNodeOutput {
+  CONTEXTREF_KF?: ComfyOutputValue<"CONTEXTREF_KEYFRAME">;
+}
+
+export interface ADE_ContextExtras_ContextRef_KeyframeInterpolationOutputs {
+  CONTEXTREF_KF: NodeRef<"CONTEXTREF_KEYFRAME">;
+}
+
+export interface ADE_ContextExtras_ContextRef_ModeFirstInputs {
+}
+
+export interface ADE_ContextExtras_ContextRef_ModeFirstInputPaths {
+}
+
+export interface ADE_ContextExtras_ContextRef_ModeFirstResult extends ComfyNodeOutput {
+  CONTEXTREF_MODE?: ComfyOutputValue<"CONTEXTREF_MODE">;
+}
+
+export interface ADE_ContextExtras_ContextRef_ModeFirstOutputs {
+  CONTEXTREF_MODE: NodeRef<"CONTEXTREF_MODE">;
+}
+
+export interface ADE_ContextExtras_ContextRef_ModeIndexesInputs {
+  switch_on_idxs?: string;
+  always_include_0?: boolean;
+}
+
+export interface ADE_ContextExtras_ContextRef_ModeIndexesInputPaths {
+  switch_on_idxs: string;
+  always_include_0: string;
+}
+
+export interface ADE_ContextExtras_ContextRef_ModeIndexesResult extends ComfyNodeOutput {
+  CONTEXTREF_MODE?: ComfyOutputValue<"CONTEXTREF_MODE">;
+}
+
+export interface ADE_ContextExtras_ContextRef_ModeIndexesOutputs {
+  CONTEXTREF_MODE: NodeRef<"CONTEXTREF_MODE">;
+}
+
+export interface ADE_ContextExtras_ContextRef_ModeSlidingInputs {
+  sliding_width?: number;
+}
+
+export interface ADE_ContextExtras_ContextRef_ModeSlidingInputPaths {
+  sliding_width: string;
+}
+
+export interface ADE_ContextExtras_ContextRef_ModeSlidingResult extends ComfyNodeOutput {
+  CONTEXTREF_MODE?: ComfyOutputValue<"CONTEXTREF_MODE">;
+}
+
+export interface ADE_ContextExtras_ContextRef_ModeSlidingOutputs {
+  CONTEXTREF_MODE: NodeRef<"CONTEXTREF_MODE">;
+}
+
+export interface ADE_ContextExtras_ContextRef_TuneAttnInputs {
+  attn_style_fidelity?: number;
+  attn_ref_weight?: number;
+  attn_strength?: number;
+}
+
+export interface ADE_ContextExtras_ContextRef_TuneAttnInputPaths {
+  attn_style_fidelity: string;
+  attn_ref_weight: string;
+  attn_strength: string;
+}
+
+export interface ADE_ContextExtras_ContextRef_TuneAttnResult extends ComfyNodeOutput {
+  CONTEXTREF_TUNE?: ComfyOutputValue<"CONTEXTREF_TUNE">;
+}
+
+export interface ADE_ContextExtras_ContextRef_TuneAttnOutputs {
+  CONTEXTREF_TUNE: NodeRef<"CONTEXTREF_TUNE">;
+}
+
+export interface ADE_ContextExtras_ContextRef_TuneAttnAdainInputs {
+  attn_style_fidelity?: number;
+  attn_ref_weight?: number;
+  attn_strength?: number;
+  adain_style_fidelity?: number;
+  adain_ref_weight?: number;
+  adain_strength?: number;
+}
+
+export interface ADE_ContextExtras_ContextRef_TuneAttnAdainInputPaths {
+  attn_style_fidelity: string;
+  attn_ref_weight: string;
+  attn_strength: string;
+  adain_style_fidelity: string;
+  adain_ref_weight: string;
+  adain_strength: string;
+}
+
+export interface ADE_ContextExtras_ContextRef_TuneAttnAdainResult extends ComfyNodeOutput {
+  CONTEXTREF_TUNE?: ComfyOutputValue<"CONTEXTREF_TUNE">;
+}
+
+export interface ADE_ContextExtras_ContextRef_TuneAttnAdainOutputs {
+  CONTEXTREF_TUNE: NodeRef<"CONTEXTREF_TUNE">;
+}
+
+export interface ADE_ContextExtras_NaiveReuseInputs {
+  prev_extras?: NodeRef<"CONTEXT_EXTRAS">;
+  strength_multival?: NodeRef<"MULTIVAL">;
+  naivereuse_kf?: NodeRef<"NAIVEREUSE_KEYFRAME">;
+  start_percent?: number;
+  end_percent?: number;
+  weighted_mean?: number;
+}
+
+export interface ADE_ContextExtras_NaiveReuseInputPaths {
+  prev_extras: string;
+  strength_multival: string;
+  naivereuse_kf: string;
+  start_percent: string;
+  end_percent: string;
+  weighted_mean: string;
+}
+
+export interface ADE_ContextExtras_NaiveReuseResult extends ComfyNodeOutput {
+  CONTEXT_EXTRAS?: ComfyOutputValue<"CONTEXT_EXTRAS">;
+}
+
+export interface ADE_ContextExtras_NaiveReuseOutputs {
+  CONTEXT_EXTRAS: NodeRef<"CONTEXT_EXTRAS">;
+}
+
+export interface ADE_ContextExtras_NaiveReuse_KeyframeInputs {
+  prev_kf?: NodeRef<"NAIVEREUSE_KEYFRAME">;
+  mult_multival?: NodeRef<"MULTIVAL">;
+  mult?: number;
+  start_percent?: number;
+  guarantee_steps?: number;
+  inherit_missing?: boolean;
+}
+
+export interface ADE_ContextExtras_NaiveReuse_KeyframeInputPaths {
+  prev_kf: string;
+  mult_multival: string;
+  mult: string;
+  start_percent: string;
+  guarantee_steps: string;
+  inherit_missing: string;
+}
+
+export interface ADE_ContextExtras_NaiveReuse_KeyframeResult extends ComfyNodeOutput {
+  NAIVEREUSE_KF?: ComfyOutputValue<"NAIVEREUSE_KEYFRAME">;
+}
+
+export interface ADE_ContextExtras_NaiveReuse_KeyframeOutputs {
+  NAIVEREUSE_KF: NodeRef<"NAIVEREUSE_KEYFRAME">;
+}
+
+export interface ADE_ContextExtras_NaiveReuse_KeyframeFromListInputs {
+  mults_float: number;
+  start_percent: number;
+  end_percent: number;
+  inherit_missing: boolean;
+  print_keyframes: boolean;
+  prev_kf?: NodeRef<"NAIVEREUSE_KEYFRAME">;
+  mult_multival?: NodeRef<"MULTIVAL">;
+}
+
+export interface ADE_ContextExtras_NaiveReuse_KeyframeFromListInputPaths {
+  mults_float: string;
+  start_percent: string;
+  end_percent: string;
+  inherit_missing: string;
+  print_keyframes: string;
+  prev_kf: string;
+  mult_multival: string;
+}
+
+export interface ADE_ContextExtras_NaiveReuse_KeyframeFromListResult extends ComfyNodeOutput {
+  NAIVEREUSE_KF?: ComfyOutputValue<"NAIVEREUSE_KEYFRAME">;
+}
+
+export interface ADE_ContextExtras_NaiveReuse_KeyframeFromListOutputs {
+  NAIVEREUSE_KF: NodeRef<"NAIVEREUSE_KEYFRAME">;
+}
+
+export interface ADE_ContextExtras_NaiveReuse_KeyframeInterpolationInputs {
+  start_percent: number;
+  end_percent: number;
+  mult_start: number;
+  mult_end: number;
+  interpolation: "linear" | "ease_in" | "ease_out" | "ease_in_out";
+  intervals: number;
+  inherit_missing: boolean;
+  print_keyframes: boolean;
+  prev_kf?: NodeRef<"NAIVEREUSE_KEYFRAME">;
+  mult_multival?: NodeRef<"MULTIVAL">;
+}
+
+export interface ADE_ContextExtras_NaiveReuse_KeyframeInterpolationInputPaths {
+  start_percent: string;
+  end_percent: string;
+  mult_start: string;
+  mult_end: string;
+  interpolation: string;
+  intervals: string;
+  inherit_missing: string;
+  print_keyframes: string;
+  prev_kf: string;
+  mult_multival: string;
+}
+
+export interface ADE_ContextExtras_NaiveReuse_KeyframeInterpolationResult extends ComfyNodeOutput {
+  NAIVEREUSE_KF?: ComfyOutputValue<"NAIVEREUSE_KEYFRAME">;
+}
+
+export interface ADE_ContextExtras_NaiveReuse_KeyframeInterpolationOutputs {
+  NAIVEREUSE_KF: NodeRef<"NAIVEREUSE_KEYFRAME">;
+}
+
+export interface ADE_ContextExtras_SetInputs {
+  context_opts: NodeRef<"CONTEXT_OPTIONS">;
+  context_extras?: NodeRef<"CONTEXT_EXTRAS">;
+}
+
+export interface ADE_ContextExtras_SetInputPaths {
+  context_opts: string;
+  context_extras: string;
+}
+
+export interface ADE_ContextExtras_SetResult extends ComfyNodeOutput {
+  CONTEXT_OPTS?: ComfyOutputValue<"CONTEXT_OPTIONS">;
+}
+
+export interface ADE_ContextExtras_SetOutputs {
+  CONTEXT_OPTS: NodeRef<"CONTEXT_OPTIONS">;
+}
+
+export interface ADE_CustomCFGInputs {
+  cfg_multival: NodeRef<"MULTIVAL">;
+  cfg_extras?: NodeRef<"CFG_EXTRAS">;
+}
+
+export interface ADE_CustomCFGInputPaths {
+  cfg_multival: string;
+  cfg_extras: string;
+}
+
+export interface ADE_CustomCFGResult extends ComfyNodeOutput {
+  CUSTOM_CFG?: ComfyOutputValue<"CUSTOM_CFG">;
+}
+
+export interface ADE_CustomCFGOutputs {
+  CUSTOM_CFG: NodeRef<"CUSTOM_CFG">;
+}
+
+export interface ADE_CustomCFGKeyframeInputs {
+  cfg_multival: NodeRef<"MULTIVAL">;
+  start_percent: number;
+  guarantee_steps: number;
+  prev_custom_cfg?: NodeRef<"CUSTOM_CFG">;
+  cfg_extras?: NodeRef<"CFG_EXTRAS">;
+}
+
+export interface ADE_CustomCFGKeyframeInputPaths {
+  cfg_multival: string;
+  start_percent: string;
+  guarantee_steps: string;
+  prev_custom_cfg: string;
+  cfg_extras: string;
+}
+
+export interface ADE_CustomCFGKeyframeResult extends ComfyNodeOutput {
+  CUSTOM_CFG?: ComfyOutputValue<"CUSTOM_CFG">;
+}
+
+export interface ADE_CustomCFGKeyframeOutputs {
+  CUSTOM_CFG: NodeRef<"CUSTOM_CFG">;
+}
+
+export interface ADE_CustomCFGKeyframeFromListInputs {
+  cfgs_float: number;
+  start_percent: number;
+  end_percent: number;
+  print_keyframes: boolean;
+  prev_custom_cfg?: NodeRef<"CUSTOM_CFG">;
+  cfg_extras?: NodeRef<"CFG_EXTRAS">;
+}
+
+export interface ADE_CustomCFGKeyframeFromListInputPaths {
+  cfgs_float: string;
+  start_percent: string;
+  end_percent: string;
+  print_keyframes: string;
+  prev_custom_cfg: string;
+  cfg_extras: string;
+}
+
+export interface ADE_CustomCFGKeyframeFromListResult extends ComfyNodeOutput {
+  CUSTOM_CFG?: ComfyOutputValue<"CUSTOM_CFG">;
+}
+
+export interface ADE_CustomCFGKeyframeFromListOutputs {
+  CUSTOM_CFG: NodeRef<"CUSTOM_CFG">;
+}
+
+export interface ADE_CustomCFGKeyframeInterpolationInputs {
+  start_percent: number;
+  end_percent: number;
+  cfg_start: number;
+  cfg_end: number;
+  interpolation: "linear" | "ease_in" | "ease_out" | "ease_in_out";
+  intervals: number;
+  print_keyframes: boolean;
+  prev_custom_cfg?: NodeRef<"CUSTOM_CFG">;
+  cfg_extras?: NodeRef<"CFG_EXTRAS">;
+}
+
+export interface ADE_CustomCFGKeyframeInterpolationInputPaths {
+  start_percent: string;
+  end_percent: string;
+  cfg_start: string;
+  cfg_end: string;
+  interpolation: string;
+  intervals: string;
+  print_keyframes: string;
+  prev_custom_cfg: string;
+  cfg_extras: string;
+}
+
+export interface ADE_CustomCFGKeyframeInterpolationResult extends ComfyNodeOutput {
+  CUSTOM_CFG?: ComfyOutputValue<"CUSTOM_CFG">;
+}
+
+export interface ADE_CustomCFGKeyframeInterpolationOutputs {
+  CUSTOM_CFG: NodeRef<"CUSTOM_CFG">;
+}
+
+export interface ADE_CustomCFGKeyframeSimpleInputs {
+  cfg: number;
+  start_percent: number;
+  guarantee_steps: number;
+  prev_custom_cfg?: NodeRef<"CUSTOM_CFG">;
+  cfg_extras?: NodeRef<"CFG_EXTRAS">;
+}
+
+export interface ADE_CustomCFGKeyframeSimpleInputPaths {
+  cfg: string;
+  start_percent: string;
+  guarantee_steps: string;
+  prev_custom_cfg: string;
+  cfg_extras: string;
+}
+
+export interface ADE_CustomCFGKeyframeSimpleResult extends ComfyNodeOutput {
+  CUSTOM_CFG?: ComfyOutputValue<"CUSTOM_CFG">;
+}
+
+export interface ADE_CustomCFGKeyframeSimpleOutputs {
+  CUSTOM_CFG: NodeRef<"CUSTOM_CFG">;
+}
+
+export interface ADE_CustomCFGSimpleInputs {
+  cfg: number;
+  cfg_extras?: NodeRef<"CFG_EXTRAS">;
+}
+
+export interface ADE_CustomCFGSimpleInputPaths {
+  cfg: string;
+  cfg_extras: string;
+}
+
+export interface ADE_CustomCFGSimpleResult extends ComfyNodeOutput {
+  CUSTOM_CFG?: ComfyOutputValue<"CUSTOM_CFG">;
+}
+
+export interface ADE_CustomCFGSimpleOutputs {
+  CUSTOM_CFG: NodeRef<"CUSTOM_CFG">;
+}
+
+export interface ADE_EmptyLatentImageLargeInputs {
+  width: number;
+  height: number;
+  batch_size: number;
+}
+
+export interface ADE_EmptyLatentImageLargeInputPaths {
+  width: string;
+  height: string;
+  batch_size: string;
+}
+
+export interface ADE_EmptyLatentImageLargeResult extends ComfyNodeOutput {
+  LATENT?: ComfyOutputValue<"LATENT">;
+}
+
+export interface ADE_EmptyLatentImageLargeOutputs {
+  LATENT: NodeRef<"LATENT">;
+}
+
+export interface ADE_FloatToFloatsInputs {
+  FLOAT: number;
+}
+
+export interface ADE_FloatToFloatsInputPaths {
+  FLOAT: string;
+}
+
+export interface ADE_FloatToFloatsResult extends ComfyNodeOutput {
+  FLOATS?: ComfyOutputValue<"FLOATS">;
+}
+
+export interface ADE_FloatToFloatsOutputs {
+  FLOATS: NodeRef<"FLOATS">;
+}
+
+export interface ADE_InjectI2VIntoAnimateDiffModelInputs {
+  model_name: "mm_sd_v15_v2.ckpt";
+  motion_model: NodeRef<"MOTION_MODEL_ADE">;
+  ad_settings?: NodeRef<"AD_SETTINGS">;
+}
+
+export interface ADE_InjectI2VIntoAnimateDiffModelInputPaths {
+  model_name: string;
+  motion_model: string;
+  ad_settings: string;
+}
+
+export interface ADE_InjectI2VIntoAnimateDiffModelResult extends ComfyNodeOutput {
+  MOTION_MODEL?: ComfyOutputValue<"MOTION_MODEL_ADE">;
+}
+
+export interface ADE_InjectI2VIntoAnimateDiffModelOutputs {
+  MOTION_MODEL: NodeRef<"MOTION_MODEL_ADE">;
+}
+
+export interface ADE_InjectPIAIntoAnimateDiffModelInputs {
+  model_name: "mm_sd_v15_v2.ckpt";
+  motion_model: NodeRef<"MOTION_MODEL_ADE">;
+  ad_settings?: NodeRef<"AD_SETTINGS">;
+}
+
+export interface ADE_InjectPIAIntoAnimateDiffModelInputPaths {
+  model_name: string;
+  motion_model: string;
+  ad_settings: string;
+}
+
+export interface ADE_InjectPIAIntoAnimateDiffModelResult extends ComfyNodeOutput {
+  MOTION_MODEL?: ComfyOutputValue<"MOTION_MODEL_ADE">;
+}
+
+export interface ADE_InjectPIAIntoAnimateDiffModelOutputs {
+  MOTION_MODEL: NodeRef<"MOTION_MODEL_ADE">;
+}
+
+export interface ADE_InputPIA_MultivalInputs {
+  multival: NodeRef<"MULTIVAL">;
+}
+
+export interface ADE_InputPIA_MultivalInputPaths {
+  multival: string;
+}
+
+export interface ADE_InputPIA_MultivalResult extends ComfyNodeOutput {
+  PIA_INPUT?: ComfyOutputValue<"PIA_INPUT">;
+}
+
+export interface ADE_InputPIA_MultivalOutputs {
+  PIA_INPUT: NodeRef<"PIA_INPUT">;
+}
+
+export interface ADE_InputPIA_PaperPresetsInputs {
+  preset: "Animation (Small Motion)" | "Animation (Medium Motion)" | "Animation (Large Motion)" | "Loop (Small Motion)" | "Loop (Medium Motion)" | "Loop (Large Motion)" | "Style Transfer (Small Motion)" | "Style Transfer (Medium Motion)" | "Style Transfer (Large Motion)";
+  batch_index: number;
+  mult_multival?: NodeRef<"MULTIVAL">;
+  print_values?: boolean;
+}
+
+export interface ADE_InputPIA_PaperPresetsInputPaths {
+  preset: string;
+  batch_index: string;
+  mult_multival: string;
+  print_values: string;
+}
+
+export interface ADE_InputPIA_PaperPresetsResult extends ComfyNodeOutput {
+  PIA_INPUT?: ComfyOutputValue<"PIA_INPUT">;
+}
+
+export interface ADE_InputPIA_PaperPresetsOutputs {
+  PIA_INPUT: NodeRef<"PIA_INPUT">;
+}
+
+export interface ADE_IterationOptsDefaultInputs {
+  iterations: number;
+  iter_batch_offset?: number;
+  iter_seed_offset?: number;
+}
+
+export interface ADE_IterationOptsDefaultInputPaths {
+  iterations: string;
+  iter_batch_offset: string;
+  iter_seed_offset: string;
+}
+
+export interface ADE_IterationOptsDefaultResult extends ComfyNodeOutput {
+  ITERATION_OPTS?: ComfyOutputValue<"ITERATION_OPTS">;
+}
+
+export interface ADE_IterationOptsDefaultOutputs {
+  ITERATION_OPTS: NodeRef<"ITERATION_OPTS">;
+}
+
+export interface ADE_IterationOptsFreeInitInputs {
+  iterations: number;
+  filter: "gaussian" | "butterworth" | "ideal" | "box";
+  d_s: number;
+  d_t: number;
+  n_butterworth: number;
+  sigma_step: number;
+  apply_to_1st_iter: boolean;
+  init_type: "FreeInit [sampler sigma]" | "FreeInit [model sigma]" | "DinkInit_v1";
+  iter_batch_offset?: number;
+  iter_seed_offset?: number;
+}
+
+export interface ADE_IterationOptsFreeInitInputPaths {
+  iterations: string;
+  filter: string;
+  d_s: string;
+  d_t: string;
+  n_butterworth: string;
+  sigma_step: string;
+  apply_to_1st_iter: string;
+  init_type: string;
+  iter_batch_offset: string;
+  iter_seed_offset: string;
+}
+
+export interface ADE_IterationOptsFreeInitResult extends ComfyNodeOutput {
+  ITERATION_OPTS?: ComfyOutputValue<"ITERATION_OPTS">;
+}
+
+export interface ADE_IterationOptsFreeInitOutputs {
+  ITERATION_OPTS: NodeRef<"ITERATION_OPTS">;
+}
+
+export interface ADE_LoadAnimateDiffModelInputs {
+  model_name: "mm_sd_v15_v2.ckpt";
+  ad_settings?: NodeRef<"AD_SETTINGS">;
+}
+
+export interface ADE_LoadAnimateDiffModelInputPaths {
+  model_name: string;
+  ad_settings: string;
+}
+
+export interface ADE_LoadAnimateDiffModelResult extends ComfyNodeOutput {
+  MOTION_MODEL?: ComfyOutputValue<"MOTION_MODEL_ADE">;
+}
+
+export interface ADE_LoadAnimateDiffModelOutputs {
+  MOTION_MODEL: NodeRef<"MOTION_MODEL_ADE">;
+}
+
+export interface ADE_LoadAnimateDiffModelWithCameraCtrlInputs {
+  model_name: "mm_sd_v15_v2.ckpt";
+  camera_ctrl: "mm_sd_v15_v2.ckpt";
+  ad_settings?: NodeRef<"AD_SETTINGS">;
+}
+
+export interface ADE_LoadAnimateDiffModelWithCameraCtrlInputPaths {
+  model_name: string;
+  camera_ctrl: string;
+  ad_settings: string;
+}
+
+export interface ADE_LoadAnimateDiffModelWithCameraCtrlResult extends ComfyNodeOutput {
+  MOTION_MODEL?: ComfyOutputValue<"MOTION_MODEL_ADE">;
+}
+
+export interface ADE_LoadAnimateDiffModelWithCameraCtrlOutputs {
+  MOTION_MODEL: NodeRef<"MOTION_MODEL_ADE">;
+}
+
+export interface ADE_LoadAnimateLCMI2VModelInputs {
+  model_name: "mm_sd_v15_v2.ckpt";
+  ad_settings?: NodeRef<"AD_SETTINGS">;
+}
+
+export interface ADE_LoadAnimateLCMI2VModelInputPaths {
+  model_name: string;
+  ad_settings: string;
+}
+
+export interface ADE_LoadAnimateLCMI2VModelResult extends ComfyNodeOutput {
+  MOTION_MODEL?: ComfyOutputValue<"MOTION_MODEL_ADE">;
+  encoder_only?: ComfyOutputValue<"MOTION_MODEL_ADE">;
+}
+
+export interface ADE_LoadAnimateLCMI2VModelOutputs {
+  MOTION_MODEL: NodeRef<"MOTION_MODEL_ADE">;
+  encoder_only: NodeRef<"MOTION_MODEL_ADE">;
+}
+
+export interface ADE_LoadCameraPosesInputs {
+  pose_filename: string;
+}
+
+export interface ADE_LoadCameraPosesInputPaths {
+  pose_filename: string;
+}
+
+export interface ADE_LoadCameraPosesResult extends ComfyNodeOutput {
+  CAMERACTRL_POSES?: ComfyOutputValue<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_LoadCameraPosesOutputs {
+  CAMERACTRL_POSES: NodeRef<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_LoadCameraPosesFromPathInputs {
+  file_path?: string;
+}
+
+export interface ADE_LoadCameraPosesFromPathInputPaths {
+  file_path: string;
+}
+
+export interface ADE_LoadCameraPosesFromPathResult extends ComfyNodeOutput {
+  CAMERACTRL_POSES?: ComfyOutputValue<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_LoadCameraPosesFromPathOutputs {
+  CAMERACTRL_POSES: NodeRef<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_LoopedUniformContextOptionsInputs {
+  context_length: number;
+  context_stride: number;
+  context_overlap: number;
+  closed_loop: boolean;
+  fuse_method?: "pyramid" | "flat" | "overlap-linear" | "🔬delayed reverse sawtooth" | "🔬pyramid-sigma" | "🔬pyramid-sigma inverse" | "🔬gauss-sigma" | "🔬gauss-sigma inverse" | "🔬random";
+  use_on_equal_length?: boolean;
+  start_percent?: number;
+  guarantee_steps?: number;
+  prev_context?: NodeRef<"CONTEXT_OPTIONS">;
+  view_opts?: NodeRef<"VIEW_OPTS">;
+}
+
+export interface ADE_LoopedUniformContextOptionsInputPaths {
+  context_length: string;
+  context_stride: string;
+  context_overlap: string;
+  closed_loop: string;
+  fuse_method: string;
+  use_on_equal_length: string;
+  start_percent: string;
+  guarantee_steps: string;
+  prev_context: string;
+  view_opts: string;
+}
+
+export interface ADE_LoopedUniformContextOptionsResult extends ComfyNodeOutput {
+  CONTEXT_OPTS?: ComfyOutputValue<"CONTEXT_OPTIONS">;
+}
+
+export interface ADE_LoopedUniformContextOptionsOutputs {
+  CONTEXT_OPTS: NodeRef<"CONTEXT_OPTIONS">;
+}
+
+export interface ADE_LoopedUniformViewOptionsInputs {
+  view_length: number;
+  view_stride: number;
+  view_overlap: number;
+  closed_loop: boolean;
+  fuse_method?: "pyramid" | "flat" | "overlap-linear" | "🔬delayed reverse sawtooth" | "🔬pyramid-sigma" | "🔬pyramid-sigma inverse" | "🔬gauss-sigma" | "🔬gauss-sigma inverse" | "🔬random";
+  use_on_equal_length?: boolean;
+}
+
+export interface ADE_LoopedUniformViewOptionsInputPaths {
+  view_length: string;
+  view_stride: string;
+  view_overlap: string;
+  closed_loop: string;
+  fuse_method: string;
+  use_on_equal_length: string;
+}
+
+export interface ADE_LoopedUniformViewOptionsResult extends ComfyNodeOutput {
+  VIEW_OPTS?: ComfyOutputValue<"VIEW_OPTS">;
+}
+
+export interface ADE_LoopedUniformViewOptionsOutputs {
+  VIEW_OPTS: NodeRef<"VIEW_OPTS">;
+}
+
+export interface ADE_LoraHookKeyframeInputs {
+  strength_model: number;
+  start_percent: number;
+  guarantee_steps: number;
+  prev_hook_kf?: NodeRef<"HOOK_KEYFRAMES">;
+}
+
+export interface ADE_LoraHookKeyframeInputPaths {
+  strength_model: string;
+  start_percent: string;
+  guarantee_steps: string;
+  prev_hook_kf: string;
+}
+
+export interface ADE_LoraHookKeyframeResult extends ComfyNodeOutput {
+  HOOK_KF?: ComfyOutputValue<"HOOK_KEYFRAMES">;
+}
+
+export interface ADE_LoraHookKeyframeOutputs {
+  HOOK_KF: NodeRef<"HOOK_KEYFRAMES">;
+}
+
+export interface ADE_LoraHookKeyframeFromStrengthListInputs {
+  strengths_float: number;
+  start_percent: number;
+  end_percent: number;
+  print_keyframes: boolean;
+  prev_hook_kf?: NodeRef<"HOOK_KEYFRAMES">;
+}
+
+export interface ADE_LoraHookKeyframeFromStrengthListInputPaths {
+  strengths_float: string;
+  start_percent: string;
+  end_percent: string;
+  print_keyframes: string;
+  prev_hook_kf: string;
+}
+
+export interface ADE_LoraHookKeyframeFromStrengthListResult extends ComfyNodeOutput {
+  HOOK_KF?: ComfyOutputValue<"HOOK_KEYFRAMES">;
+}
+
+export interface ADE_LoraHookKeyframeFromStrengthListOutputs {
+  HOOK_KF: NodeRef<"HOOK_KEYFRAMES">;
+}
+
+export interface ADE_LoraHookKeyframeInterpolationInputs {
+  start_percent: number;
+  end_percent: number;
+  strength_start: number;
+  strength_end: number;
+  interpolation: "linear" | "ease_in" | "ease_out" | "ease_in_out";
+  intervals: number;
+  print_keyframes: boolean;
+  prev_hook_kf?: NodeRef<"HOOK_KEYFRAMES">;
+}
+
+export interface ADE_LoraHookKeyframeInterpolationInputPaths {
+  start_percent: string;
+  end_percent: string;
+  strength_start: string;
+  strength_end: string;
+  interpolation: string;
+  intervals: string;
+  print_keyframes: string;
+  prev_hook_kf: string;
+}
+
+export interface ADE_LoraHookKeyframeInterpolationResult extends ComfyNodeOutput {
+  HOOK_KF?: ComfyOutputValue<"HOOK_KEYFRAMES">;
+}
+
+export interface ADE_LoraHookKeyframeInterpolationOutputs {
+  HOOK_KF: NodeRef<"HOOK_KEYFRAMES">;
+}
+
+export interface ADE_MultivalConvertToMaskInputs {
+  multival: NodeRef<"MULTIVAL">;
+}
+
+export interface ADE_MultivalConvertToMaskInputPaths {
+  multival: string;
+}
+
+export interface ADE_MultivalConvertToMaskResult extends ComfyNodeOutput {
+  MASK?: ComfyOutputValue<"MASK">;
+}
+
+export interface ADE_MultivalConvertToMaskOutputs {
+  MASK: NodeRef<"MASK">;
+}
+
+export interface ADE_MultivalDynamicInputs {
+  float_val: number;
+  mask_optional?: NodeRef<"MASK">;
+}
+
+export interface ADE_MultivalDynamicInputPaths {
+  float_val: string;
+  mask_optional: string;
+}
+
+export interface ADE_MultivalDynamicResult extends ComfyNodeOutput {
+  MULTIVAL?: ComfyOutputValue<"MULTIVAL">;
+}
+
+export interface ADE_MultivalDynamicOutputs {
+  MULTIVAL: NodeRef<"MULTIVAL">;
+}
+
+export interface ADE_MultivalDynamicFloatInputInputs {
+  float_val: number;
+  mask_optional?: NodeRef<"MASK">;
+}
+
+export interface ADE_MultivalDynamicFloatInputInputPaths {
+  float_val: string;
+  mask_optional: string;
+}
+
+export interface ADE_MultivalDynamicFloatInputResult extends ComfyNodeOutput {
+  MULTIVAL?: ComfyOutputValue<"MULTIVAL">;
+}
+
+export interface ADE_MultivalDynamicFloatInputOutputs {
+  MULTIVAL: NodeRef<"MULTIVAL">;
+}
+
+export interface ADE_MultivalDynamicFloatsInputs {
+  floats: NodeRef<"FLOATS">;
+  mask_optional?: NodeRef<"MASK">;
+}
+
+export interface ADE_MultivalDynamicFloatsInputPaths {
+  floats: string;
+  mask_optional: string;
+}
+
+export interface ADE_MultivalDynamicFloatsResult extends ComfyNodeOutput {
+  MULTIVAL?: ComfyOutputValue<"MULTIVAL">;
+}
+
+export interface ADE_MultivalDynamicFloatsOutputs {
+  MULTIVAL: NodeRef<"MULTIVAL">;
+}
+
+export interface ADE_MultivalScaledMaskInputs {
+  min_float_val: number;
+  max_float_val: number;
+  mask: NodeRef<"MASK">;
+  scaling?: "absolute" | "relative";
+}
+
+export interface ADE_MultivalScaledMaskInputPaths {
+  min_float_val: string;
+  max_float_val: string;
+  mask: string;
+  scaling: string;
+}
+
+export interface ADE_MultivalScaledMaskResult extends ComfyNodeOutput {
+  MULTIVAL?: ComfyOutputValue<"MULTIVAL">;
+}
+
+export interface ADE_MultivalScaledMaskOutputs {
+  MULTIVAL: NodeRef<"MULTIVAL">;
+}
+
+export interface ADE_NoisedImageInjectionInputs {
+  image: NodeRef<"IMAGE">;
+  vae: NodeRef<"VAE">;
+  mask_opt?: NodeRef<"MASK">;
+  invert_mask?: boolean;
+  resize_image?: boolean;
+  start_percent?: number;
+  guarantee_steps?: number;
+  img_inject_opts?: NodeRef<"IMAGE_INJECT_OPTIONS">;
+  strength_multival?: NodeRef<"MULTIVAL">;
+  prev_image_inject?: NodeRef<"IMAGE_INJECT">;
+}
+
+export interface ADE_NoisedImageInjectionInputPaths {
+  image: string;
+  vae: string;
+  mask_opt: string;
+  invert_mask: string;
+  resize_image: string;
+  start_percent: string;
+  guarantee_steps: string;
+  img_inject_opts: string;
+  strength_multival: string;
+  prev_image_inject: string;
+}
+
+export interface ADE_NoisedImageInjectionResult extends ComfyNodeOutput {
+  IMAGE_INJECT?: ComfyOutputValue<"IMAGE_INJECT">;
+}
+
+export interface ADE_NoisedImageInjectionOutputs {
+  IMAGE_INJECT: NodeRef<"IMAGE_INJECT">;
+}
+
+export interface ADE_NoisedImageInjectOptionsInputs {
+  composite_x?: number;
+  composite_y?: number;
+}
+
+export interface ADE_NoisedImageInjectOptionsInputPaths {
+  composite_x: string;
+  composite_y: string;
+}
+
+export interface ADE_NoisedImageInjectOptionsResult extends ComfyNodeOutput {
+  IMG_INJECT_OPTS?: ComfyOutputValue<"IMAGE_INJECT_OPTIONS">;
+}
+
+export interface ADE_NoisedImageInjectOptionsOutputs {
+  IMG_INJECT_OPTS: NodeRef<"IMAGE_INJECT_OPTIONS">;
+}
+
+export interface ADE_NoiseLayerAddInputs {
+  batch_offset: number;
+  noise_type: "default" | "constant" | "empty" | "repeated_context" | "FreeNoise";
+  seed_gen_override: "use existing" | "comfy" | "comfy [gpu]" | "auto1111" | "auto1111 [gpu]";
+  seed_offset: number;
+  noise_weight: number;
+  prev_noise_layers?: NodeRef<"NOISE_LAYERS">;
+  mask_optional?: NodeRef<"MASK">;
+  seed_override?: number;
+}
+
+export interface ADE_NoiseLayerAddInputPaths {
+  batch_offset: string;
+  noise_type: string;
+  seed_gen_override: string;
+  seed_offset: string;
+  noise_weight: string;
+  prev_noise_layers: string;
+  mask_optional: string;
+  seed_override: string;
+}
+
+export interface ADE_NoiseLayerAddResult extends ComfyNodeOutput {
+  NOISE_LAYERS?: ComfyOutputValue<"NOISE_LAYERS">;
+}
+
+export interface ADE_NoiseLayerAddOutputs {
+  NOISE_LAYERS: NodeRef<"NOISE_LAYERS">;
+}
+
+export interface ADE_NoiseLayerAddWeightedInputs {
+  batch_offset: number;
+  noise_type: "default" | "constant" | "empty" | "repeated_context" | "FreeNoise";
+  seed_gen_override: "use existing" | "comfy" | "comfy [gpu]" | "auto1111" | "auto1111 [gpu]";
+  seed_offset: number;
+  noise_weight: number;
+  balance_multiplier: number;
+  prev_noise_layers?: NodeRef<"NOISE_LAYERS">;
+  mask_optional?: NodeRef<"MASK">;
+  seed_override?: number;
+}
+
+export interface ADE_NoiseLayerAddWeightedInputPaths {
+  batch_offset: string;
+  noise_type: string;
+  seed_gen_override: string;
+  seed_offset: string;
+  noise_weight: string;
+  balance_multiplier: string;
+  prev_noise_layers: string;
+  mask_optional: string;
+  seed_override: string;
+}
+
+export interface ADE_NoiseLayerAddWeightedResult extends ComfyNodeOutput {
+  NOISE_LAYERS?: ComfyOutputValue<"NOISE_LAYERS">;
+}
+
+export interface ADE_NoiseLayerAddWeightedOutputs {
+  NOISE_LAYERS: NodeRef<"NOISE_LAYERS">;
+}
+
+export interface ADE_NoiseLayerNormalizedSumInputs {
+  batch_offset: number;
+  noise_type: "default" | "constant" | "empty" | "repeated_context" | "FreeNoise";
+  seed_gen_override: "use existing" | "comfy" | "comfy [gpu]" | "auto1111" | "auto1111 [gpu]";
+  seed_offset: number;
+  noise_weight: number;
+  prev_noise_layers?: NodeRef<"NOISE_LAYERS">;
+  mask_optional?: NodeRef<"MASK">;
+  seed_override?: number;
+}
+
+export interface ADE_NoiseLayerNormalizedSumInputPaths {
+  batch_offset: string;
+  noise_type: string;
+  seed_gen_override: string;
+  seed_offset: string;
+  noise_weight: string;
+  prev_noise_layers: string;
+  mask_optional: string;
+  seed_override: string;
+}
+
+export interface ADE_NoiseLayerNormalizedSumResult extends ComfyNodeOutput {
+  NOISE_LAYERS?: ComfyOutputValue<"NOISE_LAYERS">;
+}
+
+export interface ADE_NoiseLayerNormalizedSumOutputs {
+  NOISE_LAYERS: NodeRef<"NOISE_LAYERS">;
+}
+
+export interface ADE_NoiseLayerReplaceInputs {
+  batch_offset: number;
+  noise_type: "default" | "constant" | "empty" | "repeated_context" | "FreeNoise";
+  seed_gen_override: "use existing" | "comfy" | "comfy [gpu]" | "auto1111" | "auto1111 [gpu]";
+  seed_offset: number;
+  prev_noise_layers?: NodeRef<"NOISE_LAYERS">;
+  mask_optional?: NodeRef<"MASK">;
+  seed_override?: number;
+}
+
+export interface ADE_NoiseLayerReplaceInputPaths {
+  batch_offset: string;
+  noise_type: string;
+  seed_gen_override: string;
+  seed_offset: string;
+  prev_noise_layers: string;
+  mask_optional: string;
+  seed_override: string;
+}
+
+export interface ADE_NoiseLayerReplaceResult extends ComfyNodeOutput {
+  NOISE_LAYERS?: ComfyOutputValue<"NOISE_LAYERS">;
+}
+
+export interface ADE_NoiseLayerReplaceOutputs {
+  NOISE_LAYERS: NodeRef<"NOISE_LAYERS">;
+}
+
+export interface ADE_PairedConditioningCombineInputs {
+  positive_A: NodeRef<"CONDITIONING">;
+  negative_A: NodeRef<"CONDITIONING">;
+  positive_B: NodeRef<"CONDITIONING">;
+  negative_B: NodeRef<"CONDITIONING">;
+}
+
+export interface ADE_PairedConditioningCombineInputPaths {
+  positive_A: string;
+  negative_A: string;
+  positive_B: string;
+  negative_B: string;
+}
+
+export interface ADE_PairedConditioningCombineResult extends ComfyNodeOutput {
+  positive?: ComfyOutputValue<"CONDITIONING">;
+  negative?: ComfyOutputValue<"CONDITIONING">;
+}
+
+export interface ADE_PairedConditioningCombineOutputs {
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+}
+
+export interface ADE_PairedConditioningSetMaskInputs {
+  positive_ADD: NodeRef<"CONDITIONING">;
+  negative_ADD: NodeRef<"CONDITIONING">;
+  strength: number;
+  set_cond_area: "default" | "mask bounds";
+  opt_mask?: NodeRef<"MASK">;
+  opt_lora_hook?: NodeRef<"HOOKS">;
+  opt_timesteps?: NodeRef<"TIMESTEPS_RANGE">;
+}
+
+export interface ADE_PairedConditioningSetMaskInputPaths {
+  positive_ADD: string;
+  negative_ADD: string;
+  strength: string;
+  set_cond_area: string;
+  opt_mask: string;
+  opt_lora_hook: string;
+  opt_timesteps: string;
+}
+
+export interface ADE_PairedConditioningSetMaskResult extends ComfyNodeOutput {
+  positive?: ComfyOutputValue<"CONDITIONING">;
+  negative?: ComfyOutputValue<"CONDITIONING">;
+}
+
+export interface ADE_PairedConditioningSetMaskOutputs {
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+}
+
+export interface ADE_PairedConditioningSetMaskAndCombineInputs {
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+  positive_ADD: NodeRef<"CONDITIONING">;
+  negative_ADD: NodeRef<"CONDITIONING">;
+  strength: number;
+  set_cond_area: "default" | "mask bounds";
+  opt_mask?: NodeRef<"MASK">;
+  opt_lora_hook?: NodeRef<"HOOKS">;
+  opt_timesteps?: NodeRef<"TIMESTEPS_RANGE">;
+}
+
+export interface ADE_PairedConditioningSetMaskAndCombineInputPaths {
+  positive: string;
+  negative: string;
+  positive_ADD: string;
+  negative_ADD: string;
+  strength: string;
+  set_cond_area: string;
+  opt_mask: string;
+  opt_lora_hook: string;
+  opt_timesteps: string;
+}
+
+export interface ADE_PairedConditioningSetMaskAndCombineResult extends ComfyNodeOutput {
+  positive?: ComfyOutputValue<"CONDITIONING">;
+  negative?: ComfyOutputValue<"CONDITIONING">;
+}
+
+export interface ADE_PairedConditioningSetMaskAndCombineOutputs {
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+}
+
+export interface ADE_PairedConditioningSetUnmaskedAndCombineInputs {
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+  positive_DEFAULT: NodeRef<"CONDITIONING">;
+  negative_DEFAULT: NodeRef<"CONDITIONING">;
+  opt_lora_hook?: NodeRef<"HOOKS">;
+}
+
+export interface ADE_PairedConditioningSetUnmaskedAndCombineInputPaths {
+  positive: string;
+  negative: string;
+  positive_DEFAULT: string;
+  negative_DEFAULT: string;
+  opt_lora_hook: string;
+}
+
+export interface ADE_PairedConditioningSetUnmaskedAndCombineResult extends ComfyNodeOutput {
+  positive?: ComfyOutputValue<"CONDITIONING">;
+  negative?: ComfyOutputValue<"CONDITIONING">;
+}
+
+export interface ADE_PairedConditioningSetUnmaskedAndCombineOutputs {
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+}
+
+export interface ADE_PerBlock_SD15_FromFloatsInputs {
+  effect_21_floats?: NodeRef<"FLOATS">;
+  scale_21_floats?: NodeRef<"FLOATS">;
+}
+
+export interface ADE_PerBlock_SD15_FromFloatsInputPaths {
+  effect_21_floats: string;
+  scale_21_floats: string;
+}
+
+export interface ADE_PerBlock_SD15_FromFloatsResult extends ComfyNodeOutput {
+  PER_BLOCK?: ComfyOutputValue<"PER_BLOCK">;
+}
+
+export interface ADE_PerBlock_SD15_FromFloatsOutputs {
+  PER_BLOCK: NodeRef<"PER_BLOCK">;
+}
+
+export interface ADE_PerBlock_SD15_LowLevelInputs {
+  down_0__0?: NodeRef<"AD_BLOCK">;
+  down_0__1?: NodeRef<"AD_BLOCK">;
+  down_1__0?: NodeRef<"AD_BLOCK">;
+  down_1__1?: NodeRef<"AD_BLOCK">;
+  down_2__0?: NodeRef<"AD_BLOCK">;
+  down_2__1?: NodeRef<"AD_BLOCK">;
+  down_3__0?: NodeRef<"AD_BLOCK">;
+  down_3__1?: NodeRef<"AD_BLOCK">;
+  mid?: NodeRef<"AD_BLOCK">;
+  up_0__0?: NodeRef<"AD_BLOCK">;
+  up_0__1?: NodeRef<"AD_BLOCK">;
+  up_0__2?: NodeRef<"AD_BLOCK">;
+  up_1__0?: NodeRef<"AD_BLOCK">;
+  up_1__1?: NodeRef<"AD_BLOCK">;
+  up_1__2?: NodeRef<"AD_BLOCK">;
+  up_2__0?: NodeRef<"AD_BLOCK">;
+  up_2__1?: NodeRef<"AD_BLOCK">;
+  up_2__2?: NodeRef<"AD_BLOCK">;
+  up_3__0?: NodeRef<"AD_BLOCK">;
+  up_3__1?: NodeRef<"AD_BLOCK">;
+  up_3__2?: NodeRef<"AD_BLOCK">;
+}
+
+export interface ADE_PerBlock_SD15_LowLevelInputPaths {
+  down_0__0: string;
+  down_0__1: string;
+  down_1__0: string;
+  down_1__1: string;
+  down_2__0: string;
+  down_2__1: string;
+  down_3__0: string;
+  down_3__1: string;
+  mid: string;
+  up_0__0: string;
+  up_0__1: string;
+  up_0__2: string;
+  up_1__0: string;
+  up_1__1: string;
+  up_1__2: string;
+  up_2__0: string;
+  up_2__1: string;
+  up_2__2: string;
+  up_3__0: string;
+  up_3__1: string;
+  up_3__2: string;
+}
+
+export interface ADE_PerBlock_SD15_LowLevelResult extends ComfyNodeOutput {
+  PER_BLOCK?: ComfyOutputValue<"PER_BLOCK">;
+}
+
+export interface ADE_PerBlock_SD15_LowLevelOutputs {
+  PER_BLOCK: NodeRef<"PER_BLOCK">;
+}
+
+export interface ADE_PerBlock_SD15_MidLevelInputs {
+  down_0?: NodeRef<"AD_BLOCK">;
+  down_1?: NodeRef<"AD_BLOCK">;
+  down_2?: NodeRef<"AD_BLOCK">;
+  down_3?: NodeRef<"AD_BLOCK">;
+  mid?: NodeRef<"AD_BLOCK">;
+  up_0?: NodeRef<"AD_BLOCK">;
+  up_1?: NodeRef<"AD_BLOCK">;
+  up_2?: NodeRef<"AD_BLOCK">;
+  up_3?: NodeRef<"AD_BLOCK">;
+}
+
+export interface ADE_PerBlock_SD15_MidLevelInputPaths {
+  down_0: string;
+  down_1: string;
+  down_2: string;
+  down_3: string;
+  mid: string;
+  up_0: string;
+  up_1: string;
+  up_2: string;
+  up_3: string;
+}
+
+export interface ADE_PerBlock_SD15_MidLevelResult extends ComfyNodeOutput {
+  PER_BLOCK?: ComfyOutputValue<"PER_BLOCK">;
+}
+
+export interface ADE_PerBlock_SD15_MidLevelOutputs {
+  PER_BLOCK: NodeRef<"PER_BLOCK">;
+}
+
+export interface ADE_PerBlock_SDXL_FromFloatsInputs {
+  effect_16_floats?: NodeRef<"FLOATS">;
+  scale_16_floats?: NodeRef<"FLOATS">;
+}
+
+export interface ADE_PerBlock_SDXL_FromFloatsInputPaths {
+  effect_16_floats: string;
+  scale_16_floats: string;
+}
+
+export interface ADE_PerBlock_SDXL_FromFloatsResult extends ComfyNodeOutput {
+  PER_BLOCK?: ComfyOutputValue<"PER_BLOCK">;
+}
+
+export interface ADE_PerBlock_SDXL_FromFloatsOutputs {
+  PER_BLOCK: NodeRef<"PER_BLOCK">;
+}
+
+export interface ADE_PerBlock_SDXL_LowLevelInputs {
+  down_0__0?: NodeRef<"AD_BLOCK">;
+  down_0__1?: NodeRef<"AD_BLOCK">;
+  down_1__0?: NodeRef<"AD_BLOCK">;
+  down_1__1?: NodeRef<"AD_BLOCK">;
+  down_2__0?: NodeRef<"AD_BLOCK">;
+  down_2__1?: NodeRef<"AD_BLOCK">;
+  mid?: NodeRef<"AD_BLOCK">;
+  up_0__0?: NodeRef<"AD_BLOCK">;
+  up_0__1?: NodeRef<"AD_BLOCK">;
+  up_0__2?: NodeRef<"AD_BLOCK">;
+  up_1__0?: NodeRef<"AD_BLOCK">;
+  up_1__1?: NodeRef<"AD_BLOCK">;
+  up_1__2?: NodeRef<"AD_BLOCK">;
+  up_2__0?: NodeRef<"AD_BLOCK">;
+  up_2__1?: NodeRef<"AD_BLOCK">;
+  up_2__2?: NodeRef<"AD_BLOCK">;
+}
+
+export interface ADE_PerBlock_SDXL_LowLevelInputPaths {
+  down_0__0: string;
+  down_0__1: string;
+  down_1__0: string;
+  down_1__1: string;
+  down_2__0: string;
+  down_2__1: string;
+  mid: string;
+  up_0__0: string;
+  up_0__1: string;
+  up_0__2: string;
+  up_1__0: string;
+  up_1__1: string;
+  up_1__2: string;
+  up_2__0: string;
+  up_2__1: string;
+  up_2__2: string;
+}
+
+export interface ADE_PerBlock_SDXL_LowLevelResult extends ComfyNodeOutput {
+  PER_BLOCK?: ComfyOutputValue<"PER_BLOCK">;
+}
+
+export interface ADE_PerBlock_SDXL_LowLevelOutputs {
+  PER_BLOCK: NodeRef<"PER_BLOCK">;
+}
+
+export interface ADE_PerBlock_SDXL_MidLevelInputs {
+  down_0?: NodeRef<"AD_BLOCK">;
+  down_1?: NodeRef<"AD_BLOCK">;
+  down_2?: NodeRef<"AD_BLOCK">;
+  mid?: NodeRef<"AD_BLOCK">;
+  up_0?: NodeRef<"AD_BLOCK">;
+  up_1?: NodeRef<"AD_BLOCK">;
+  up_2?: NodeRef<"AD_BLOCK">;
+}
+
+export interface ADE_PerBlock_SDXL_MidLevelInputPaths {
+  down_0: string;
+  down_1: string;
+  down_2: string;
+  mid: string;
+  up_0: string;
+  up_1: string;
+  up_2: string;
+}
+
+export interface ADE_PerBlock_SDXL_MidLevelResult extends ComfyNodeOutput {
+  PER_BLOCK?: ComfyOutputValue<"PER_BLOCK">;
+}
+
+export interface ADE_PerBlock_SDXL_MidLevelOutputs {
+  PER_BLOCK: NodeRef<"PER_BLOCK">;
+}
+
+export interface ADE_PerBlockHighLevelInputs {
+  down?: NodeRef<"AD_BLOCK">;
+  mid?: NodeRef<"AD_BLOCK">;
+  up?: NodeRef<"AD_BLOCK">;
+}
+
+export interface ADE_PerBlockHighLevelInputPaths {
+  down: string;
+  mid: string;
+  up: string;
+}
+
+export interface ADE_PerBlockHighLevelResult extends ComfyNodeOutput {
+  PER_BLOCK?: ComfyOutputValue<"PER_BLOCK">;
+}
+
+export interface ADE_PerBlockHighLevelOutputs {
+  PER_BLOCK: NodeRef<"PER_BLOCK">;
+}
+
+export interface ADE_PerturbedAttentionGuidanceMultivalInputs {
+  model: NodeRef<"MODEL">;
+  scale_multival: NodeRef<"MULTIVAL">;
+}
+
+export interface ADE_PerturbedAttentionGuidanceMultivalInputPaths {
+  model: string;
+  scale_multival: string;
+}
+
+export interface ADE_PerturbedAttentionGuidanceMultivalResult extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+}
+
+export interface ADE_PerturbedAttentionGuidanceMultivalOutputs {
+  MODEL: NodeRef<"MODEL">;
+}
+
+export interface ADE_PIA_AnimateDiffKeyframeInputs {
+  start_percent: number;
+  prev_ad_keyframes?: NodeRef<"AD_KEYFRAMES">;
+  scale_multival?: NodeRef<"MULTIVAL">;
+  effect_multival?: NodeRef<"MULTIVAL">;
+  pia_input?: NodeRef<"PIA_INPUT">;
+  inherit_missing?: boolean;
+  guarantee_steps?: number;
+}
+
+export interface ADE_PIA_AnimateDiffKeyframeInputPaths {
+  start_percent: string;
+  prev_ad_keyframes: string;
+  scale_multival: string;
+  effect_multival: string;
+  pia_input: string;
+  inherit_missing: string;
+  guarantee_steps: string;
+}
+
+export interface ADE_PIA_AnimateDiffKeyframeResult extends ComfyNodeOutput {
+  AD_KEYFRAMES?: ComfyOutputValue<"AD_KEYFRAMES">;
+}
+
+export interface ADE_PIA_AnimateDiffKeyframeOutputs {
+  AD_KEYFRAMES: NodeRef<"AD_KEYFRAMES">;
+}
+
+export interface ADE_PromptSchedulingInputs {
+  prompts: string;
+  clip: NodeRef<"CLIP">;
+  prepend_text?: string;
+  append_text?: string;
+  values_replace?: NodeRef<"VALUES_REPLACE">;
+  print_schedule?: boolean;
+  max_length?: number;
+  tensor_interp?: "lerp" | "slerp";
+}
+
+export interface ADE_PromptSchedulingInputPaths {
+  prompts: string;
+  clip: string;
+  prepend_text: string;
+  append_text: string;
+  values_replace: string;
+  print_schedule: string;
+  max_length: string;
+  tensor_interp: string;
+}
+
+export interface ADE_PromptSchedulingResult extends ComfyNodeOutput {
+  CONDITIONING?: ComfyOutputValue<"CONDITIONING">;
+}
+
+export interface ADE_PromptSchedulingOutputs {
+  CONDITIONING: NodeRef<"CONDITIONING">;
+}
+
+export interface ADE_PromptSchedulingLatentsInputs {
+  prompts: string;
+  clip: NodeRef<"CLIP">;
+  latent: NodeRef<"LATENT">;
+  prepend_text?: string;
+  append_text?: string;
+  values_replace?: NodeRef<"VALUES_REPLACE">;
+  print_schedule?: boolean;
+  tensor_interp?: "lerp" | "slerp";
+}
+
+export interface ADE_PromptSchedulingLatentsInputPaths {
+  prompts: string;
+  clip: string;
+  latent: string;
+  prepend_text: string;
+  append_text: string;
+  values_replace: string;
+  print_schedule: string;
+  tensor_interp: string;
+}
+
+export interface ADE_PromptSchedulingLatentsResult extends ComfyNodeOutput {
+  CONDITIONING?: ComfyOutputValue<"CONDITIONING">;
+  LATENT?: ComfyOutputValue<"LATENT">;
+}
+
+export interface ADE_PromptSchedulingLatentsOutputs {
+  CONDITIONING: NodeRef<"CONDITIONING">;
+  LATENT: NodeRef<"LATENT">;
+}
+
+export interface ADE_RawSigmaScheduleInputs {
+  raw_beta_schedule: "linear" | "sqrt_linear" | "sqrt" | "cosine" | "squaredcos_cap_v2";
+  linear_start: number;
+  linear_end: number;
+  sampling: "eps" | "v_prediction" | "lcm";
+  lcm_original_timesteps: number;
+  zsnr: boolean;
+}
+
+export interface ADE_RawSigmaScheduleInputPaths {
+  raw_beta_schedule: string;
+  linear_start: string;
+  linear_end: string;
+  sampling: string;
+  lcm_original_timesteps: string;
+  zsnr: string;
+}
+
+export interface ADE_RawSigmaScheduleResult extends ComfyNodeOutput {
+  SIGMA_SCHEDULE?: ComfyOutputValue<"SIGMA_SCHEDULE">;
+}
+
+export interface ADE_RawSigmaScheduleOutputs {
+  SIGMA_SCHEDULE: NodeRef<"SIGMA_SCHEDULE">;
+}
+
+export interface ADE_RegisterLoraHookInputs {
+  model: NodeRef<"MODEL">;
+  clip: NodeRef<"CLIP">;
+  lora_name: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors" | "scavenger.safetensors";
+  strength_model: number;
+  strength_clip: number;
+}
+
+export interface ADE_RegisterLoraHookInputPaths {
+  model: string;
+  clip: string;
+  lora_name: string;
+  strength_model: string;
+  strength_clip: string;
+}
+
+export interface ADE_RegisterLoraHookResult extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+  CLIP?: ComfyOutputValue<"CLIP">;
+  HOOKS?: ComfyOutputValue<"HOOKS">;
+}
+
+export interface ADE_RegisterLoraHookOutputs {
+  MODEL: NodeRef<"MODEL">;
+  CLIP: NodeRef<"CLIP">;
+  HOOKS: NodeRef<"HOOKS">;
+}
+
+export interface ADE_RegisterLoraHookModelOnlyInputs {
+  model: NodeRef<"MODEL">;
+  lora_name: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors" | "scavenger.safetensors";
+  strength_model: number;
+}
+
+export interface ADE_RegisterLoraHookModelOnlyInputPaths {
+  model: string;
+  lora_name: string;
+  strength_model: string;
+}
+
+export interface ADE_RegisterLoraHookModelOnlyResult extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+  HOOKS?: ComfyOutputValue<"HOOKS">;
+}
+
+export interface ADE_RegisterLoraHookModelOnlyOutputs {
+  MODEL: NodeRef<"MODEL">;
+  HOOKS: NodeRef<"HOOKS">;
+}
+
+export interface ADE_RegisterModelAsLoraHookInputs {
+  model: NodeRef<"MODEL">;
+  clip: NodeRef<"CLIP">;
+  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
+  strength_model: number;
+  strength_clip: number;
+}
+
+export interface ADE_RegisterModelAsLoraHookInputPaths {
+  model: string;
+  clip: string;
+  ckpt_name: string;
+  strength_model: string;
+  strength_clip: string;
+}
+
+export interface ADE_RegisterModelAsLoraHookResult extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+  CLIP?: ComfyOutputValue<"CLIP">;
+  HOOKS?: ComfyOutputValue<"HOOKS">;
+}
+
+export interface ADE_RegisterModelAsLoraHookOutputs {
+  MODEL: NodeRef<"MODEL">;
+  CLIP: NodeRef<"CLIP">;
+  HOOKS: NodeRef<"HOOKS">;
+}
+
+export interface ADE_RegisterModelAsLoraHookModelOnlyInputs {
+  model: NodeRef<"MODEL">;
+  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
+  strength_model: number;
+}
+
+export interface ADE_RegisterModelAsLoraHookModelOnlyInputPaths {
+  model: string;
+  ckpt_name: string;
+  strength_model: string;
+}
+
+export interface ADE_RegisterModelAsLoraHookModelOnlyResult extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+  HOOKS?: ComfyOutputValue<"HOOKS">;
+}
+
+export interface ADE_RegisterModelAsLoraHookModelOnlyOutputs {
+  MODEL: NodeRef<"MODEL">;
+  HOOKS: NodeRef<"HOOKS">;
+}
+
+export interface ADE_ReplaceCameraParametersInputs {
+  poses: NodeRef<"CAMERACTRL_POSES">;
+  fx: number;
+  fy: number;
+  cx: number;
+  cy: number;
+}
+
+export interface ADE_ReplaceCameraParametersInputPaths {
+  poses: string;
+  fx: string;
+  fy: string;
+  cx: string;
+  cy: string;
+}
+
+export interface ADE_ReplaceCameraParametersResult extends ComfyNodeOutput {
+  CAMERACTRL_POSES?: ComfyOutputValue<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_ReplaceCameraParametersOutputs {
+  CAMERACTRL_POSES: NodeRef<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_ReplaceOriginalPoseAspectRatioInputs {
+  poses: NodeRef<"CAMERACTRL_POSES">;
+  orig_pose_width: number;
+  orig_pose_height: number;
+}
+
+export interface ADE_ReplaceOriginalPoseAspectRatioInputPaths {
+  poses: string;
+  orig_pose_width: string;
+  orig_pose_height: string;
+}
+
+export interface ADE_ReplaceOriginalPoseAspectRatioResult extends ComfyNodeOutput {
+  CAMERACTRL_POSES?: ComfyOutputValue<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_ReplaceOriginalPoseAspectRatioOutputs {
+  CAMERACTRL_POSES: NodeRef<"CAMERACTRL_POSES">;
+}
+
+export interface ADE_RescaleCFGMultivalInputs {
+  model: NodeRef<"MODEL">;
+  mult_multival: NodeRef<"MULTIVAL">;
+}
+
+export interface ADE_RescaleCFGMultivalInputPaths {
+  model: string;
+  mult_multival: string;
+}
+
+export interface ADE_RescaleCFGMultivalResult extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+}
+
+export interface ADE_RescaleCFGMultivalOutputs {
+  MODEL: NodeRef<"MODEL">;
+}
+
+export interface ADE_SetLoraHookKeyframeInputs {
+  lora_hook: NodeRef<"HOOKS">;
+  hook_kf: NodeRef<"HOOK_KEYFRAMES">;
+}
+
+export interface ADE_SetLoraHookKeyframeInputPaths {
+  lora_hook: string;
+  hook_kf: string;
+}
+
+export interface ADE_SetLoraHookKeyframeResult extends ComfyNodeOutput {
+  HOOKS?: ComfyOutputValue<"HOOKS">;
+}
+
+export interface ADE_SetLoraHookKeyframeOutputs {
+  HOOKS: NodeRef<"HOOKS">;
+}
+
+export interface ADE_SigmaScheduleInputs {
+  beta_schedule: "sqrt_linear (AnimateDiff)" | "linear (AnimateDiff-SDXL)" | "linear (HotshotXL/default)" | "avg(sqrt_linear,linear)" | "lcm avg(sqrt_linear,linear)" | "lcm" | "lcm[100_ots]" | "lcm >> sqrt_linear" | "sqrt" | "cosine" | "squaredcos_cap_v2";
+}
+
+export interface ADE_SigmaScheduleInputPaths {
+  beta_schedule: string;
+}
+
+export interface ADE_SigmaScheduleResult extends ComfyNodeOutput {
+  SIGMA_SCHEDULE?: ComfyOutputValue<"SIGMA_SCHEDULE">;
+}
+
+export interface ADE_SigmaScheduleOutputs {
+  SIGMA_SCHEDULE: NodeRef<"SIGMA_SCHEDULE">;
+}
+
+export interface ADE_SigmaScheduleSplitAndCombineInputs {
+  schedule_Start: NodeRef<"SIGMA_SCHEDULE">;
+  schedule_End: NodeRef<"SIGMA_SCHEDULE">;
+  idx_split_percent: number;
+}
+
+export interface ADE_SigmaScheduleSplitAndCombineInputPaths {
+  schedule_Start: string;
+  schedule_End: string;
+  idx_split_percent: string;
+}
+
+export interface ADE_SigmaScheduleSplitAndCombineResult extends ComfyNodeOutput {
+  SIGMA_SCHEDULE?: ComfyOutputValue<"SIGMA_SCHEDULE">;
+}
+
+export interface ADE_SigmaScheduleSplitAndCombineOutputs {
+  SIGMA_SCHEDULE: NodeRef<"SIGMA_SCHEDULE">;
+}
+
+export interface ADE_SigmaScheduleToSigmasInputs {
+  sigma_schedule: NodeRef<"SIGMA_SCHEDULE">;
+  scheduler: "simple" | "sgm_uniform" | "karras" | "exponential" | "ddim_uniform" | "beta" | "normal" | "linear_quadratic" | "kl_optimal";
+  steps: number;
+  denoise: number;
+}
+
+export interface ADE_SigmaScheduleToSigmasInputPaths {
+  sigma_schedule: string;
+  scheduler: string;
+  steps: string;
+  denoise: string;
+}
+
+export interface ADE_SigmaScheduleToSigmasResult extends ComfyNodeOutput {
+  SIGMAS?: ComfyOutputValue<"SIGMAS">;
+}
+
+export interface ADE_SigmaScheduleToSigmasOutputs {
+  SIGMAS: NodeRef<"SIGMAS">;
+}
+
+export interface ADE_SigmaScheduleWeightedAverageInputs {
+  schedule_A: NodeRef<"SIGMA_SCHEDULE">;
+  schedule_B: NodeRef<"SIGMA_SCHEDULE">;
+  weight_A: number;
+}
+
+export interface ADE_SigmaScheduleWeightedAverageInputPaths {
+  schedule_A: string;
+  schedule_B: string;
+  weight_A: string;
+}
+
+export interface ADE_SigmaScheduleWeightedAverageResult extends ComfyNodeOutput {
+  SIGMA_SCHEDULE?: ComfyOutputValue<"SIGMA_SCHEDULE">;
+}
+
+export interface ADE_SigmaScheduleWeightedAverageOutputs {
+  SIGMA_SCHEDULE: NodeRef<"SIGMA_SCHEDULE">;
+}
+
+export interface ADE_SigmaScheduleWeightedAverageInterpInputs {
+  schedule_A: NodeRef<"SIGMA_SCHEDULE">;
+  schedule_B: NodeRef<"SIGMA_SCHEDULE">;
+  weight_A_Start: number;
+  weight_A_End: number;
+  interpolation: "linear" | "ease_in" | "ease_out" | "ease_in_out";
+}
+
+export interface ADE_SigmaScheduleWeightedAverageInterpInputPaths {
+  schedule_A: string;
+  schedule_B: string;
+  weight_A_Start: string;
+  weight_A_End: string;
+  interpolation: string;
+}
+
+export interface ADE_SigmaScheduleWeightedAverageInterpResult extends ComfyNodeOutput {
+  SIGMA_SCHEDULE?: ComfyOutputValue<"SIGMA_SCHEDULE">;
+}
+
+export interface ADE_SigmaScheduleWeightedAverageInterpOutputs {
+  SIGMA_SCHEDULE: NodeRef<"SIGMA_SCHEDULE">;
+}
+
+export interface ADE_StandardStaticContextOptionsInputs {
+  context_length: number;
+  context_overlap: number;
+  fuse_method?: "pyramid" | "relative" | "flat" | "overlap-linear" | "🔬delayed reverse sawtooth" | "🔬pyramid-sigma" | "🔬pyramid-sigma inverse" | "🔬gauss-sigma" | "🔬gauss-sigma inverse" | "🔬random";
+  use_on_equal_length?: boolean;
+  start_percent?: number;
+  guarantee_steps?: number;
+  prev_context?: NodeRef<"CONTEXT_OPTIONS">;
+  view_opts?: NodeRef<"VIEW_OPTS">;
+}
+
+export interface ADE_StandardStaticContextOptionsInputPaths {
+  context_length: string;
+  context_overlap: string;
+  fuse_method: string;
+  use_on_equal_length: string;
+  start_percent: string;
+  guarantee_steps: string;
+  prev_context: string;
+  view_opts: string;
+}
+
+export interface ADE_StandardStaticContextOptionsResult extends ComfyNodeOutput {
+  CONTEXT_OPTS?: ComfyOutputValue<"CONTEXT_OPTIONS">;
+}
+
+export interface ADE_StandardStaticContextOptionsOutputs {
+  CONTEXT_OPTS: NodeRef<"CONTEXT_OPTIONS">;
+}
+
+export interface ADE_StandardStaticViewOptionsInputs {
+  view_length: number;
+  view_overlap: number;
+  fuse_method?: "pyramid" | "flat" | "overlap-linear" | "🔬delayed reverse sawtooth" | "🔬pyramid-sigma" | "🔬pyramid-sigma inverse" | "🔬gauss-sigma" | "🔬gauss-sigma inverse" | "🔬random";
+}
+
+export interface ADE_StandardStaticViewOptionsInputPaths {
+  view_length: string;
+  view_overlap: string;
+  fuse_method: string;
+}
+
+export interface ADE_StandardStaticViewOptionsResult extends ComfyNodeOutput {
+  VIEW_OPTS?: ComfyOutputValue<"VIEW_OPTS">;
+}
+
+export interface ADE_StandardStaticViewOptionsOutputs {
+  VIEW_OPTS: NodeRef<"VIEW_OPTS">;
+}
+
+export interface ADE_StandardUniformContextOptionsInputs {
+  context_length: number;
+  context_stride: number;
+  context_overlap: number;
+  fuse_method?: "pyramid" | "flat" | "overlap-linear" | "🔬delayed reverse sawtooth" | "🔬pyramid-sigma" | "🔬pyramid-sigma inverse" | "🔬gauss-sigma" | "🔬gauss-sigma inverse" | "🔬random";
+  use_on_equal_length?: boolean;
+  start_percent?: number;
+  guarantee_steps?: number;
+  prev_context?: NodeRef<"CONTEXT_OPTIONS">;
+  view_opts?: NodeRef<"VIEW_OPTS">;
+}
+
+export interface ADE_StandardUniformContextOptionsInputPaths {
+  context_length: string;
+  context_stride: string;
+  context_overlap: string;
+  fuse_method: string;
+  use_on_equal_length: string;
+  start_percent: string;
+  guarantee_steps: string;
+  prev_context: string;
+  view_opts: string;
+}
+
+export interface ADE_StandardUniformContextOptionsResult extends ComfyNodeOutput {
+  CONTEXT_OPTS?: ComfyOutputValue<"CONTEXT_OPTIONS">;
+}
+
+export interface ADE_StandardUniformContextOptionsOutputs {
+  CONTEXT_OPTS: NodeRef<"CONTEXT_OPTIONS">;
+}
+
+export interface ADE_StandardUniformViewOptionsInputs {
+  view_length: number;
+  view_stride: number;
+  view_overlap: number;
+  fuse_method?: "pyramid" | "flat" | "overlap-linear" | "🔬delayed reverse sawtooth" | "🔬pyramid-sigma" | "🔬pyramid-sigma inverse" | "🔬gauss-sigma" | "🔬gauss-sigma inverse" | "🔬random";
+}
+
+export interface ADE_StandardUniformViewOptionsInputPaths {
+  view_length: string;
+  view_stride: string;
+  view_overlap: string;
+  fuse_method: string;
+}
+
+export interface ADE_StandardUniformViewOptionsResult extends ComfyNodeOutput {
+  VIEW_OPTS?: ComfyOutputValue<"VIEW_OPTS">;
+}
+
+export interface ADE_StandardUniformViewOptionsOutputs {
+  VIEW_OPTS: NodeRef<"VIEW_OPTS">;
+}
+
+export interface ADE_TimestepsConditioningInputs {
+  start_percent: number;
+  end_percent: number;
+}
+
+export interface ADE_TimestepsConditioningInputPaths {
+  start_percent: string;
+  end_percent: string;
+}
+
+export interface ADE_TimestepsConditioningResult extends ComfyNodeOutput {
+  TIMESTEPS_RANGE?: ComfyOutputValue<"TIMESTEPS_RANGE">;
+}
+
+export interface ADE_TimestepsConditioningOutputs {
+  TIMESTEPS_RANGE: NodeRef<"TIMESTEPS_RANGE">;
+}
+
+export interface ADE_UpscaleAndVAEEncodeInputs {
+  image: NodeRef<"IMAGE">;
+  vae: NodeRef<"VAE">;
+  latent_size: NodeRef<"LATENT">;
+  scale_method: "nearest-exact" | "bilinear" | "area" | "bicubic" | "lanczos";
+  crop: "disabled" | "center";
+}
+
+export interface ADE_UpscaleAndVAEEncodeInputPaths {
+  image: string;
+  vae: string;
+  latent_size: string;
+  scale_method: string;
+  crop: string;
+}
+
+export interface ADE_UpscaleAndVAEEncodeResult extends ComfyNodeOutput {
+  LATENT?: ComfyOutputValue<"LATENT">;
+}
+
+export interface ADE_UpscaleAndVAEEncodeOutputs {
+  LATENT: NodeRef<"LATENT">;
+}
+
+export interface ADE_UseEvolvedSamplingInputs {
+  model: NodeRef<"MODEL">;
+  beta_schedule: "autoselect" | "use existing" | "sqrt_linear (AnimateDiff)" | "linear (AnimateDiff-SDXL)" | "linear (HotshotXL/default)" | "avg(sqrt_linear,linear)" | "lcm avg(sqrt_linear,linear)" | "lcm" | "lcm[100_ots]" | "lcm >> sqrt_linear" | "sqrt" | "cosine" | "squaredcos_cap_v2";
+  m_models?: NodeRef<"M_MODELS">;
+  context_options?: NodeRef<"CONTEXT_OPTIONS">;
+  sample_settings?: NodeRef<"SAMPLE_SETTINGS">;
+}
+
+export interface ADE_UseEvolvedSamplingInputPaths {
+  model: string;
+  beta_schedule: string;
+  m_models: string;
+  context_options: string;
+  sample_settings: string;
+}
+
+export interface ADE_UseEvolvedSamplingResult extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+}
+
+export interface ADE_UseEvolvedSamplingOutputs {
+  MODEL: NodeRef<"MODEL">;
+}
+
+export interface ADE_ValueSchedulingInputs {
+  values: string;
+  print_schedule?: boolean;
+  max_length?: number;
+}
+
+export interface ADE_ValueSchedulingInputPaths {
+  values: string;
+  print_schedule: string;
+  max_length: string;
+}
+
+export interface ADE_ValueSchedulingResult extends ComfyNodeOutput {
+  FLOAT?: ComfyOutputValue<"FLOAT">;
+  FLOATS?: ComfyOutputValue<"FLOATS">;
+  INT?: ComfyOutputValue<"INT">;
+  INTS?: ComfyOutputValue<"INTS">;
+}
+
+export interface ADE_ValueSchedulingOutputs {
+  FLOAT: NodeRef<"FLOAT">;
+  FLOATS: NodeRef<"FLOATS">;
+  INT: NodeRef<"INT">;
+  INTS: NodeRef<"INTS">;
+}
+
+export interface ADE_ValueSchedulingLatentsInputs {
+  values: string;
+  latent: NodeRef<"LATENT">;
+  print_schedule?: boolean;
+}
+
+export interface ADE_ValueSchedulingLatentsInputPaths {
+  values: string;
+  latent: string;
+  print_schedule: string;
+}
+
+export interface ADE_ValueSchedulingLatentsResult extends ComfyNodeOutput {
+  FLOAT?: ComfyOutputValue<"FLOAT">;
+  FLOATS?: ComfyOutputValue<"FLOATS">;
+  INT?: ComfyOutputValue<"INT">;
+  INTS?: ComfyOutputValue<"INTS">;
+}
+
+export interface ADE_ValueSchedulingLatentsOutputs {
+  FLOAT: NodeRef<"FLOAT">;
+  FLOATS: NodeRef<"FLOATS">;
+  INT: NodeRef<"INT">;
+  INTS: NodeRef<"INTS">;
+}
+
+export interface ADE_ValuesReplaceInputs {
+  value_key: string;
+  floats: NodeRef<"FLOATS">;
+  prev_replace?: NodeRef<"VALUES_REPLACE">;
+}
+
+export interface ADE_ValuesReplaceInputPaths {
+  value_key: string;
+  floats: string;
+  prev_replace: string;
+}
+
+export interface ADE_ValuesReplaceResult extends ComfyNodeOutput {
+  VALUES_REPLACE?: ComfyOutputValue<"VALUES_REPLACE">;
+}
+
+export interface ADE_ValuesReplaceOutputs {
+  VALUES_REPLACE: NodeRef<"VALUES_REPLACE">;
+}
+
+export interface ADE_ViewsOnlyContextOptionsInputs {
+  view_opts_req: NodeRef<"VIEW_OPTS">;
+  start_percent?: number;
+  guarantee_steps?: number;
+  prev_context?: NodeRef<"CONTEXT_OPTIONS">;
+}
+
+export interface ADE_ViewsOnlyContextOptionsInputPaths {
+  view_opts_req: string;
+  start_percent: string;
+  guarantee_steps: string;
+  prev_context: string;
+}
+
+export interface ADE_ViewsOnlyContextOptionsResult extends ComfyNodeOutput {
+  CONTEXT_OPTS?: ComfyOutputValue<"CONTEXT_OPTIONS">;
+}
+
+export interface ADE_ViewsOnlyContextOptionsOutputs {
+  CONTEXT_OPTS: NodeRef<"CONTEXT_OPTIONS">;
+}
+
+export interface ADE_VisualizeContextOptionsKInputs {
+  model: NodeRef<"MODEL">;
+  sampler_name: "euler" | "euler_cfg_pp" | "euler_ancestral" | "euler_ancestral_cfg_pp" | "heun" | "heunpp2" | "exp_heun_2_x0" | "exp_heun_2_x0_sde" | "dpm_2" | "dpm_2_ancestral" | "lms" | "dpm_fast" | "dpm_adaptive" | "dpmpp_2s_ancestral" | "dpmpp_2s_ancestral_cfg_pp" | "dpmpp_sde" | "dpmpp_sde_gpu" | "dpmpp_2m" | "dpmpp_2m_cfg_pp" | "dpmpp_2m_sde" | "dpmpp_2m_sde_gpu" | "dpmpp_2m_sde_heun" | "dpmpp_2m_sde_heun_gpu" | "dpmpp_3m_sde" | "dpmpp_3m_sde_gpu" | "ddpm" | "lcm" | "ipndm" | "ipndm_v" | "deis" | "res_multistep" | "res_multistep_cfg_pp" | "res_multistep_ancestral" | "res_multistep_ancestral_cfg_pp" | "gradient_estimation" | "gradient_estimation_cfg_pp" | "er_sde" | "seeds_2" | "seeds_3" | "sa_solver" | "sa_solver_pece" | "ddim" | "uni_pc" | "uni_pc_bh2";
+  scheduler: "simple" | "sgm_uniform" | "karras" | "exponential" | "ddim_uniform" | "beta" | "normal" | "linear_quadratic" | "kl_optimal";
+  context_opts?: NodeRef<"CONTEXT_OPTIONS">;
+  visual_width?: number;
+  latents_length?: number;
+  steps?: number;
+  denoise?: number;
+}
+
+export interface ADE_VisualizeContextOptionsKInputPaths {
+  model: string;
+  sampler_name: string;
+  scheduler: string;
+  context_opts: string;
+  visual_width: string;
+  latents_length: string;
+  steps: string;
+  denoise: string;
+}
+
+export interface ADE_VisualizeContextOptionsKResult extends ComfyNodeOutput {
+  IMAGE?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface ADE_VisualizeContextOptionsKOutputs {
+  IMAGE: NodeRef<"IMAGE">;
+}
+
+export interface ADE_VisualizeContextOptionsKAdvInputs {
+  model: NodeRef<"MODEL">;
+  sampler_name: "euler" | "euler_cfg_pp" | "euler_ancestral" | "euler_ancestral_cfg_pp" | "heun" | "heunpp2" | "exp_heun_2_x0" | "exp_heun_2_x0_sde" | "dpm_2" | "dpm_2_ancestral" | "lms" | "dpm_fast" | "dpm_adaptive" | "dpmpp_2s_ancestral" | "dpmpp_2s_ancestral_cfg_pp" | "dpmpp_sde" | "dpmpp_sde_gpu" | "dpmpp_2m" | "dpmpp_2m_cfg_pp" | "dpmpp_2m_sde" | "dpmpp_2m_sde_gpu" | "dpmpp_2m_sde_heun" | "dpmpp_2m_sde_heun_gpu" | "dpmpp_3m_sde" | "dpmpp_3m_sde_gpu" | "ddpm" | "lcm" | "ipndm" | "ipndm_v" | "deis" | "res_multistep" | "res_multistep_cfg_pp" | "res_multistep_ancestral" | "res_multistep_ancestral_cfg_pp" | "gradient_estimation" | "gradient_estimation_cfg_pp" | "er_sde" | "seeds_2" | "seeds_3" | "sa_solver" | "sa_solver_pece" | "ddim" | "uni_pc" | "uni_pc_bh2";
+  scheduler: "simple" | "sgm_uniform" | "karras" | "exponential" | "ddim_uniform" | "beta" | "normal" | "linear_quadratic" | "kl_optimal";
+  context_opts?: NodeRef<"CONTEXT_OPTIONS">;
+  visual_width?: number;
+  latents_length?: number;
+  steps?: number;
+  start_step?: number;
+  end_step?: number;
+}
+
+export interface ADE_VisualizeContextOptionsKAdvInputPaths {
+  model: string;
+  sampler_name: string;
+  scheduler: string;
+  context_opts: string;
+  visual_width: string;
+  latents_length: string;
+  steps: string;
+  start_step: string;
+  end_step: string;
+}
+
+export interface ADE_VisualizeContextOptionsKAdvResult extends ComfyNodeOutput {
+  IMAGE?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface ADE_VisualizeContextOptionsKAdvOutputs {
+  IMAGE: NodeRef<"IMAGE">;
+}
+
+export interface ADE_VisualizeContextOptionsSCustomInputs {
+  model: NodeRef<"MODEL">;
+  sigmas: NodeRef<"SIGMAS">;
+  context_opts?: NodeRef<"CONTEXT_OPTIONS">;
+  visual_width?: number;
+  latents_length?: number;
+}
+
+export interface ADE_VisualizeContextOptionsSCustomInputPaths {
+  model: string;
+  sigmas: string;
+  context_opts: string;
+  visual_width: string;
+  latents_length: string;
+}
+
+export interface ADE_VisualizeContextOptionsSCustomResult extends ComfyNodeOutput {
+  IMAGE?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface ADE_VisualizeContextOptionsSCustomOutputs {
+  IMAGE: NodeRef<"IMAGE">;
 }
 
 export interface AdjustBrightnessInputs {
@@ -649,7 +4263,7 @@ export interface AILab_LamaRemoverOutputs {
 
 export interface AILab_LoadImageInputs {
   image_path_or_URL: string;
-  image: "" | "0.png" | "02_no-lora_hands-on-hips.png" | "1.png" | "11825534i.jpeg" | "11834342.png" | "11839199i.jpeg" | "11844201.png" | "11844382i.jpeg" | "147030163_p0_master1200.jpg" | "1758718416-oUa45JKFIWBLMCnH3GluqeyT.webp" | "2.png" | "3.png" | "ComfyUI_00008_.png" | "HN_XH40bYAAbCHh.jpeg" | "HNrls4iaQAA_ktf.jpeg" | "__toki_blue_archive_drawn_by_shimontaru__27180d4527a52c85b41b12e4fc9ec666.jpg" | "__yoko_littner_tengen_toppa_gurren_lagann_generated_by_depressuart__sample-0a9ff519b07cb5b46f096a0d6d5c5d62.jpg" | "anima_startframe_00001_.png" | "capeless_f1.png" | "capeless_f2.png" | "capeless_f3.png" | "capeless_f4.png" | "char_ref_front.png" | "char_tpose_final.png" | "charsheet_hires_src.png" | "cnpose_f1.png" | "cnpose_f2.png" | "cnpose_f3.png" | "cnpose_f4.png" | "cs_34.png" | "cs_back.png" | "cs_side.png" | "demo_00032_.png" | "front_00001_.png" | "front_00021_.png" | "h3d_test_char.png" | "handmask_320.png" | "mech_00001_.png" | "scavenger_00001_.png" | "scavenger_00002_.png" | "text_00006_.png" | "tpose_openpose.png" | "tpose_openpose_1152.png" | "tpose_openpose_v2.png" | "walk_pose_1.png" | "walk_pose_2.png" | "walk_pose_3.png" | "walk_pose_4.png" | "スクリーンショット 2026-08-24 1.20.33.png";
+  image: "" | "0.png" | "02_no-lora_hands-on-hips.png" | "1.png" | "11825534i.jpeg" | "11834342.png" | "11839199i.jpeg" | "11844201.png" | "11844382i.jpeg" | "147030163_p0_master1200.jpg" | "1758718416-oUa45JKFIWBLMCnH3GluqeyT.webp" | "2.png" | "3.png" | "ComfyUI_00008_.png" | "HN_XH40bYAAbCHh.jpeg" | "HNrls4iaQAA_ktf.jpeg" | "__toki_blue_archive_drawn_by_shimontaru__27180d4527a52c85b41b12e4fc9ec666.jpg" | "__yoko_littner_tengen_toppa_gurren_lagann_generated_by_depressuart__sample-0a9ff519b07cb5b46f096a0d6d5c5d62.jpg" | "aim_down_0.png" | "aim_down_1.png" | "aim_downside_0.png" | "aim_downside_1.png" | "aim_side_0.png" | "aim_side_1.png" | "aim_up_0.png" | "aim_up_1.png" | "aim_upside_0.png" | "aim_upside_1.png" | "anima_startframe_00001_.png" | "attack_down_0.png" | "attack_down_1.png" | "attack_down_2.png" | "attack_down_3.png" | "attack_downside_0.png" | "attack_downside_1.png" | "attack_downside_2.png" | "attack_downside_3.png" | "attack_side_0.png" | "attack_side_1.png" | "attack_side_2.png" | "attack_side_3.png" | "attack_up_0.png" | "attack_up_1.png" | "attack_up_2.png" | "attack_up_3.png" | "attack_upside_0.png" | "attack_upside_1.png" | "attack_upside_2.png" | "attack_upside_3.png" | "capeless_f1.png" | "capeless_f2.png" | "capeless_f3.png" | "capeless_f4.png" | "char_ref_front.png" | "char_tpose_final.png" | "charsheet_hires_src.png" | "cnpose_f1.png" | "cnpose_f2.png" | "cnpose_f3.png" | "cnpose_f4.png" | "cs_34.png" | "cs_back.png" | "cs_side.png" | "demo_00032_.png" | "dodge_down_0.png" | "dodge_down_1.png" | "dodge_down_2.png" | "dodge_down_3.png" | "dodge_downside_0.png" | "dodge_downside_1.png" | "dodge_downside_2.png" | "dodge_downside_3.png" | "dodge_side_0.png" | "dodge_side_1.png" | "dodge_side_2.png" | "dodge_side_3.png" | "dodge_up_0.png" | "dodge_up_1.png" | "dodge_up_2.png" | "dodge_up_3.png" | "dodge_upside_0.png" | "dodge_upside_1.png" | "dodge_upside_2.png" | "dodge_upside_3.png" | "front_00001_.png" | "front_00021_.png" | "h3d_test_char.png" | "handmask_320.png" | "idle_down_0.depth.png" | "idle_down_0.png" | "idle_down_1.depth.png" | "idle_down_1.png" | "idle_down_2.depth.png" | "idle_down_2.png" | "idle_down_3.depth.png" | "idle_down_3.png" | "idle_downright_0.depth.png" | "idle_downright_0.png" | "idle_downright_1.depth.png" | "idle_downright_1.png" | "idle_downright_2.depth.png" | "idle_downright_2.png" | "idle_downright_3.depth.png" | "idle_downright_3.png" | "idle_downside_0.png" | "idle_downside_1.png" | "idle_downside_2.png" | "idle_downside_3.png" | "idle_right_0.depth.png" | "idle_right_0.png" | "idle_right_1.depth.png" | "idle_right_1.png" | "idle_right_2.depth.png" | "idle_right_2.png" | "idle_right_3.depth.png" | "idle_right_3.png" | "idle_side_0.png" | "idle_side_1.png" | "idle_side_2.png" | "idle_side_3.png" | "idle_up_0.depth.png" | "idle_up_0.png" | "idle_up_1.depth.png" | "idle_up_1.png" | "idle_up_2.depth.png" | "idle_up_2.png" | "idle_up_3.depth.png" | "idle_up_3.png" | "idle_upright_0.depth.png" | "idle_upright_0.png" | "idle_upright_1.depth.png" | "idle_upright_1.png" | "idle_upright_2.depth.png" | "idle_upright_2.png" | "idle_upright_3.depth.png" | "idle_upright_3.png" | "idle_upside_0.png" | "idle_upside_1.png" | "idle_upside_2.png" | "idle_upside_3.png" | "mech_00001_.png" | "run_down_0.png" | "run_down_1.png" | "run_down_2.png" | "run_down_3.png" | "run_down_4.png" | "run_down_5.png" | "run_downside_0.png" | "run_downside_1.png" | "run_downside_2.png" | "run_downside_3.png" | "run_downside_4.png" | "run_downside_5.png" | "run_side_0.png" | "run_side_1.png" | "run_side_2.png" | "run_side_3.png" | "run_side_4.png" | "run_side_5.png" | "run_up_0.png" | "run_up_1.png" | "run_up_2.png" | "run_up_3.png" | "run_up_4.png" | "run_up_5.png" | "run_upside_0.png" | "run_upside_1.png" | "run_upside_2.png" | "run_upside_3.png" | "run_upside_4.png" | "run_upside_5.png" | "scavenger.png" | "scavenger_00001_.png" | "scavenger_00002_.png" | "scavenger_ref.png" | "source.png" | "text_00006_.png" | "tpose_openpose.png" | "tpose_openpose_1152.png" | "tpose_openpose_v2.png" | "walk_down_0.depth.png" | "walk_down_0.png" | "walk_down_1.depth.png" | "walk_down_1.png" | "walk_down_2.depth.png" | "walk_down_2.png" | "walk_down_3.depth.png" | "walk_down_3.png" | "walk_down_4.depth.png" | "walk_down_4.png" | "walk_down_5.depth.png" | "walk_down_5.png" | "walk_down_6.depth.png" | "walk_down_6.png" | "walk_down_7.depth.png" | "walk_down_7.png" | "walk_downright_0.depth.png" | "walk_downright_0.png" | "walk_downright_1.depth.png" | "walk_downright_1.png" | "walk_downright_2.depth.png" | "walk_downright_2.png" | "walk_downright_3.depth.png" | "walk_downright_3.png" | "walk_downright_4.depth.png" | "walk_downright_4.png" | "walk_downright_5.depth.png" | "walk_downright_5.png" | "walk_downright_6.depth.png" | "walk_downright_6.png" | "walk_downright_7.depth.png" | "walk_downright_7.png" | "walk_downside_0.png" | "walk_downside_1.png" | "walk_downside_2.png" | "walk_downside_3.png" | "walk_downside_4.png" | "walk_downside_5.png" | "walk_pose_1.png" | "walk_pose_2.png" | "walk_pose_3.png" | "walk_pose_4.png" | "walk_right_0.depth.png" | "walk_right_0.png" | "walk_right_1.depth.png" | "walk_right_1.png" | "walk_right_2.depth.png" | "walk_right_2.png" | "walk_right_3.depth.png" | "walk_right_3.png" | "walk_right_4.depth.png" | "walk_right_4.png" | "walk_right_5.depth.png" | "walk_right_5.png" | "walk_right_6.depth.png" | "walk_right_6.png" | "walk_right_7.depth.png" | "walk_right_7.png" | "walk_side_0.png" | "walk_side_1.png" | "walk_side_2.png" | "walk_side_3.png" | "walk_side_4.png" | "walk_side_5.png" | "walk_up_0.depth.png" | "walk_up_0.png" | "walk_up_1.depth.png" | "walk_up_1.png" | "walk_up_2.depth.png" | "walk_up_2.png" | "walk_up_3.depth.png" | "walk_up_3.png" | "walk_up_4.depth.png" | "walk_up_4.png" | "walk_up_5.depth.png" | "walk_up_5.png" | "walk_up_6.depth.png" | "walk_up_6.png" | "walk_up_7.depth.png" | "walk_up_7.png" | "walk_upright_0.depth.png" | "walk_upright_0.png" | "walk_upright_1.depth.png" | "walk_upright_1.png" | "walk_upright_2.depth.png" | "walk_upright_2.png" | "walk_upright_3.depth.png" | "walk_upright_3.png" | "walk_upright_4.depth.png" | "walk_upright_4.png" | "walk_upright_5.depth.png" | "walk_upright_5.png" | "walk_upright_6.depth.png" | "walk_upright_6.png" | "walk_upright_7.depth.png" | "walk_upright_7.png" | "walk_upside_0.png" | "walk_upside_1.png" | "walk_upside_2.png" | "walk_upside_3.png" | "walk_upside_4.png" | "walk_upside_5.png" | "スクリーンショット 2026-08-24 1.20.33.png";
   upscale_method: "nearest-exact" | "bilinear" | "area" | "bicubic" | "lanczos";
   megapixels: number;
   scale_by: number;
@@ -683,7 +4297,7 @@ export interface AILab_LoadImageOutputs {
 
 export interface AILab_LoadImageAdvancedInputs {
   image_path_or_URL: string;
-  image: "" | "0.png" | "02_no-lora_hands-on-hips.png" | "1.png" | "11825534i.jpeg" | "11834342.png" | "11839199i.jpeg" | "11844201.png" | "11844382i.jpeg" | "147030163_p0_master1200.jpg" | "1758718416-oUa45JKFIWBLMCnH3GluqeyT.webp" | "2.png" | "3.png" | "ComfyUI_00008_.png" | "HN_XH40bYAAbCHh.jpeg" | "HNrls4iaQAA_ktf.jpeg" | "__toki_blue_archive_drawn_by_shimontaru__27180d4527a52c85b41b12e4fc9ec666.jpg" | "__yoko_littner_tengen_toppa_gurren_lagann_generated_by_depressuart__sample-0a9ff519b07cb5b46f096a0d6d5c5d62.jpg" | "anima_startframe_00001_.png" | "capeless_f1.png" | "capeless_f2.png" | "capeless_f3.png" | "capeless_f4.png" | "char_ref_front.png" | "char_tpose_final.png" | "charsheet_hires_src.png" | "cnpose_f1.png" | "cnpose_f2.png" | "cnpose_f3.png" | "cnpose_f4.png" | "cs_34.png" | "cs_back.png" | "cs_side.png" | "demo_00032_.png" | "front_00001_.png" | "front_00021_.png" | "h3d_test_char.png" | "handmask_320.png" | "mech_00001_.png" | "scavenger_00001_.png" | "scavenger_00002_.png" | "text_00006_.png" | "tpose_openpose.png" | "tpose_openpose_1152.png" | "tpose_openpose_v2.png" | "walk_pose_1.png" | "walk_pose_2.png" | "walk_pose_3.png" | "walk_pose_4.png" | "スクリーンショット 2026-08-24 1.20.33.png";
+  image: "" | "0.png" | "02_no-lora_hands-on-hips.png" | "1.png" | "11825534i.jpeg" | "11834342.png" | "11839199i.jpeg" | "11844201.png" | "11844382i.jpeg" | "147030163_p0_master1200.jpg" | "1758718416-oUa45JKFIWBLMCnH3GluqeyT.webp" | "2.png" | "3.png" | "ComfyUI_00008_.png" | "HN_XH40bYAAbCHh.jpeg" | "HNrls4iaQAA_ktf.jpeg" | "__toki_blue_archive_drawn_by_shimontaru__27180d4527a52c85b41b12e4fc9ec666.jpg" | "__yoko_littner_tengen_toppa_gurren_lagann_generated_by_depressuart__sample-0a9ff519b07cb5b46f096a0d6d5c5d62.jpg" | "aim_down_0.png" | "aim_down_1.png" | "aim_downside_0.png" | "aim_downside_1.png" | "aim_side_0.png" | "aim_side_1.png" | "aim_up_0.png" | "aim_up_1.png" | "aim_upside_0.png" | "aim_upside_1.png" | "anima_startframe_00001_.png" | "attack_down_0.png" | "attack_down_1.png" | "attack_down_2.png" | "attack_down_3.png" | "attack_downside_0.png" | "attack_downside_1.png" | "attack_downside_2.png" | "attack_downside_3.png" | "attack_side_0.png" | "attack_side_1.png" | "attack_side_2.png" | "attack_side_3.png" | "attack_up_0.png" | "attack_up_1.png" | "attack_up_2.png" | "attack_up_3.png" | "attack_upside_0.png" | "attack_upside_1.png" | "attack_upside_2.png" | "attack_upside_3.png" | "capeless_f1.png" | "capeless_f2.png" | "capeless_f3.png" | "capeless_f4.png" | "char_ref_front.png" | "char_tpose_final.png" | "charsheet_hires_src.png" | "cnpose_f1.png" | "cnpose_f2.png" | "cnpose_f3.png" | "cnpose_f4.png" | "cs_34.png" | "cs_back.png" | "cs_side.png" | "demo_00032_.png" | "dodge_down_0.png" | "dodge_down_1.png" | "dodge_down_2.png" | "dodge_down_3.png" | "dodge_downside_0.png" | "dodge_downside_1.png" | "dodge_downside_2.png" | "dodge_downside_3.png" | "dodge_side_0.png" | "dodge_side_1.png" | "dodge_side_2.png" | "dodge_side_3.png" | "dodge_up_0.png" | "dodge_up_1.png" | "dodge_up_2.png" | "dodge_up_3.png" | "dodge_upside_0.png" | "dodge_upside_1.png" | "dodge_upside_2.png" | "dodge_upside_3.png" | "front_00001_.png" | "front_00021_.png" | "h3d_test_char.png" | "handmask_320.png" | "idle_down_0.depth.png" | "idle_down_0.png" | "idle_down_1.depth.png" | "idle_down_1.png" | "idle_down_2.depth.png" | "idle_down_2.png" | "idle_down_3.depth.png" | "idle_down_3.png" | "idle_downright_0.depth.png" | "idle_downright_0.png" | "idle_downright_1.depth.png" | "idle_downright_1.png" | "idle_downright_2.depth.png" | "idle_downright_2.png" | "idle_downright_3.depth.png" | "idle_downright_3.png" | "idle_downside_0.png" | "idle_downside_1.png" | "idle_downside_2.png" | "idle_downside_3.png" | "idle_right_0.depth.png" | "idle_right_0.png" | "idle_right_1.depth.png" | "idle_right_1.png" | "idle_right_2.depth.png" | "idle_right_2.png" | "idle_right_3.depth.png" | "idle_right_3.png" | "idle_side_0.png" | "idle_side_1.png" | "idle_side_2.png" | "idle_side_3.png" | "idle_up_0.depth.png" | "idle_up_0.png" | "idle_up_1.depth.png" | "idle_up_1.png" | "idle_up_2.depth.png" | "idle_up_2.png" | "idle_up_3.depth.png" | "idle_up_3.png" | "idle_upright_0.depth.png" | "idle_upright_0.png" | "idle_upright_1.depth.png" | "idle_upright_1.png" | "idle_upright_2.depth.png" | "idle_upright_2.png" | "idle_upright_3.depth.png" | "idle_upright_3.png" | "idle_upside_0.png" | "idle_upside_1.png" | "idle_upside_2.png" | "idle_upside_3.png" | "mech_00001_.png" | "run_down_0.png" | "run_down_1.png" | "run_down_2.png" | "run_down_3.png" | "run_down_4.png" | "run_down_5.png" | "run_downside_0.png" | "run_downside_1.png" | "run_downside_2.png" | "run_downside_3.png" | "run_downside_4.png" | "run_downside_5.png" | "run_side_0.png" | "run_side_1.png" | "run_side_2.png" | "run_side_3.png" | "run_side_4.png" | "run_side_5.png" | "run_up_0.png" | "run_up_1.png" | "run_up_2.png" | "run_up_3.png" | "run_up_4.png" | "run_up_5.png" | "run_upside_0.png" | "run_upside_1.png" | "run_upside_2.png" | "run_upside_3.png" | "run_upside_4.png" | "run_upside_5.png" | "scavenger.png" | "scavenger_00001_.png" | "scavenger_00002_.png" | "scavenger_ref.png" | "source.png" | "text_00006_.png" | "tpose_openpose.png" | "tpose_openpose_1152.png" | "tpose_openpose_v2.png" | "walk_down_0.depth.png" | "walk_down_0.png" | "walk_down_1.depth.png" | "walk_down_1.png" | "walk_down_2.depth.png" | "walk_down_2.png" | "walk_down_3.depth.png" | "walk_down_3.png" | "walk_down_4.depth.png" | "walk_down_4.png" | "walk_down_5.depth.png" | "walk_down_5.png" | "walk_down_6.depth.png" | "walk_down_6.png" | "walk_down_7.depth.png" | "walk_down_7.png" | "walk_downright_0.depth.png" | "walk_downright_0.png" | "walk_downright_1.depth.png" | "walk_downright_1.png" | "walk_downright_2.depth.png" | "walk_downright_2.png" | "walk_downright_3.depth.png" | "walk_downright_3.png" | "walk_downright_4.depth.png" | "walk_downright_4.png" | "walk_downright_5.depth.png" | "walk_downright_5.png" | "walk_downright_6.depth.png" | "walk_downright_6.png" | "walk_downright_7.depth.png" | "walk_downright_7.png" | "walk_downside_0.png" | "walk_downside_1.png" | "walk_downside_2.png" | "walk_downside_3.png" | "walk_downside_4.png" | "walk_downside_5.png" | "walk_pose_1.png" | "walk_pose_2.png" | "walk_pose_3.png" | "walk_pose_4.png" | "walk_right_0.depth.png" | "walk_right_0.png" | "walk_right_1.depth.png" | "walk_right_1.png" | "walk_right_2.depth.png" | "walk_right_2.png" | "walk_right_3.depth.png" | "walk_right_3.png" | "walk_right_4.depth.png" | "walk_right_4.png" | "walk_right_5.depth.png" | "walk_right_5.png" | "walk_right_6.depth.png" | "walk_right_6.png" | "walk_right_7.depth.png" | "walk_right_7.png" | "walk_side_0.png" | "walk_side_1.png" | "walk_side_2.png" | "walk_side_3.png" | "walk_side_4.png" | "walk_side_5.png" | "walk_up_0.depth.png" | "walk_up_0.png" | "walk_up_1.depth.png" | "walk_up_1.png" | "walk_up_2.depth.png" | "walk_up_2.png" | "walk_up_3.depth.png" | "walk_up_3.png" | "walk_up_4.depth.png" | "walk_up_4.png" | "walk_up_5.depth.png" | "walk_up_5.png" | "walk_up_6.depth.png" | "walk_up_6.png" | "walk_up_7.depth.png" | "walk_up_7.png" | "walk_upright_0.depth.png" | "walk_upright_0.png" | "walk_upright_1.depth.png" | "walk_upright_1.png" | "walk_upright_2.depth.png" | "walk_upright_2.png" | "walk_upright_3.depth.png" | "walk_upright_3.png" | "walk_upright_4.depth.png" | "walk_upright_4.png" | "walk_upright_5.depth.png" | "walk_upright_5.png" | "walk_upright_6.depth.png" | "walk_upright_6.png" | "walk_upright_7.depth.png" | "walk_upright_7.png" | "walk_upside_0.png" | "walk_upside_1.png" | "walk_upside_2.png" | "walk_upside_3.png" | "walk_upside_4.png" | "walk_upside_5.png" | "スクリーンショット 2026-08-24 1.20.33.png";
   mask_channel: "alpha" | "red" | "green" | "blue";
   upscale_method: "nearest-exact" | "bilinear" | "area" | "bicubic" | "lanczos";
   megapixels: number;
@@ -761,7 +4375,7 @@ export interface AILab_LoadImageBatchOutputs {
 
 export interface AILab_LoadImageSimpleInputs {
   image_path_or_URL: string;
-  image: "" | "0.png" | "02_no-lora_hands-on-hips.png" | "1.png" | "11825534i.jpeg" | "11834342.png" | "11839199i.jpeg" | "11844201.png" | "11844382i.jpeg" | "147030163_p0_master1200.jpg" | "1758718416-oUa45JKFIWBLMCnH3GluqeyT.webp" | "2.png" | "3.png" | "ComfyUI_00008_.png" | "HN_XH40bYAAbCHh.jpeg" | "HNrls4iaQAA_ktf.jpeg" | "__toki_blue_archive_drawn_by_shimontaru__27180d4527a52c85b41b12e4fc9ec666.jpg" | "__yoko_littner_tengen_toppa_gurren_lagann_generated_by_depressuart__sample-0a9ff519b07cb5b46f096a0d6d5c5d62.jpg" | "anima_startframe_00001_.png" | "capeless_f1.png" | "capeless_f2.png" | "capeless_f3.png" | "capeless_f4.png" | "char_ref_front.png" | "char_tpose_final.png" | "charsheet_hires_src.png" | "cnpose_f1.png" | "cnpose_f2.png" | "cnpose_f3.png" | "cnpose_f4.png" | "cs_34.png" | "cs_back.png" | "cs_side.png" | "demo_00032_.png" | "front_00001_.png" | "front_00021_.png" | "h3d_test_char.png" | "handmask_320.png" | "mech_00001_.png" | "scavenger_00001_.png" | "scavenger_00002_.png" | "text_00006_.png" | "tpose_openpose.png" | "tpose_openpose_1152.png" | "tpose_openpose_v2.png" | "walk_pose_1.png" | "walk_pose_2.png" | "walk_pose_3.png" | "walk_pose_4.png" | "スクリーンショット 2026-08-24 1.20.33.png";
+  image: "" | "0.png" | "02_no-lora_hands-on-hips.png" | "1.png" | "11825534i.jpeg" | "11834342.png" | "11839199i.jpeg" | "11844201.png" | "11844382i.jpeg" | "147030163_p0_master1200.jpg" | "1758718416-oUa45JKFIWBLMCnH3GluqeyT.webp" | "2.png" | "3.png" | "ComfyUI_00008_.png" | "HN_XH40bYAAbCHh.jpeg" | "HNrls4iaQAA_ktf.jpeg" | "__toki_blue_archive_drawn_by_shimontaru__27180d4527a52c85b41b12e4fc9ec666.jpg" | "__yoko_littner_tengen_toppa_gurren_lagann_generated_by_depressuart__sample-0a9ff519b07cb5b46f096a0d6d5c5d62.jpg" | "aim_down_0.png" | "aim_down_1.png" | "aim_downside_0.png" | "aim_downside_1.png" | "aim_side_0.png" | "aim_side_1.png" | "aim_up_0.png" | "aim_up_1.png" | "aim_upside_0.png" | "aim_upside_1.png" | "anima_startframe_00001_.png" | "attack_down_0.png" | "attack_down_1.png" | "attack_down_2.png" | "attack_down_3.png" | "attack_downside_0.png" | "attack_downside_1.png" | "attack_downside_2.png" | "attack_downside_3.png" | "attack_side_0.png" | "attack_side_1.png" | "attack_side_2.png" | "attack_side_3.png" | "attack_up_0.png" | "attack_up_1.png" | "attack_up_2.png" | "attack_up_3.png" | "attack_upside_0.png" | "attack_upside_1.png" | "attack_upside_2.png" | "attack_upside_3.png" | "capeless_f1.png" | "capeless_f2.png" | "capeless_f3.png" | "capeless_f4.png" | "char_ref_front.png" | "char_tpose_final.png" | "charsheet_hires_src.png" | "cnpose_f1.png" | "cnpose_f2.png" | "cnpose_f3.png" | "cnpose_f4.png" | "cs_34.png" | "cs_back.png" | "cs_side.png" | "demo_00032_.png" | "dodge_down_0.png" | "dodge_down_1.png" | "dodge_down_2.png" | "dodge_down_3.png" | "dodge_downside_0.png" | "dodge_downside_1.png" | "dodge_downside_2.png" | "dodge_downside_3.png" | "dodge_side_0.png" | "dodge_side_1.png" | "dodge_side_2.png" | "dodge_side_3.png" | "dodge_up_0.png" | "dodge_up_1.png" | "dodge_up_2.png" | "dodge_up_3.png" | "dodge_upside_0.png" | "dodge_upside_1.png" | "dodge_upside_2.png" | "dodge_upside_3.png" | "front_00001_.png" | "front_00021_.png" | "h3d_test_char.png" | "handmask_320.png" | "idle_down_0.depth.png" | "idle_down_0.png" | "idle_down_1.depth.png" | "idle_down_1.png" | "idle_down_2.depth.png" | "idle_down_2.png" | "idle_down_3.depth.png" | "idle_down_3.png" | "idle_downright_0.depth.png" | "idle_downright_0.png" | "idle_downright_1.depth.png" | "idle_downright_1.png" | "idle_downright_2.depth.png" | "idle_downright_2.png" | "idle_downright_3.depth.png" | "idle_downright_3.png" | "idle_downside_0.png" | "idle_downside_1.png" | "idle_downside_2.png" | "idle_downside_3.png" | "idle_right_0.depth.png" | "idle_right_0.png" | "idle_right_1.depth.png" | "idle_right_1.png" | "idle_right_2.depth.png" | "idle_right_2.png" | "idle_right_3.depth.png" | "idle_right_3.png" | "idle_side_0.png" | "idle_side_1.png" | "idle_side_2.png" | "idle_side_3.png" | "idle_up_0.depth.png" | "idle_up_0.png" | "idle_up_1.depth.png" | "idle_up_1.png" | "idle_up_2.depth.png" | "idle_up_2.png" | "idle_up_3.depth.png" | "idle_up_3.png" | "idle_upright_0.depth.png" | "idle_upright_0.png" | "idle_upright_1.depth.png" | "idle_upright_1.png" | "idle_upright_2.depth.png" | "idle_upright_2.png" | "idle_upright_3.depth.png" | "idle_upright_3.png" | "idle_upside_0.png" | "idle_upside_1.png" | "idle_upside_2.png" | "idle_upside_3.png" | "mech_00001_.png" | "run_down_0.png" | "run_down_1.png" | "run_down_2.png" | "run_down_3.png" | "run_down_4.png" | "run_down_5.png" | "run_downside_0.png" | "run_downside_1.png" | "run_downside_2.png" | "run_downside_3.png" | "run_downside_4.png" | "run_downside_5.png" | "run_side_0.png" | "run_side_1.png" | "run_side_2.png" | "run_side_3.png" | "run_side_4.png" | "run_side_5.png" | "run_up_0.png" | "run_up_1.png" | "run_up_2.png" | "run_up_3.png" | "run_up_4.png" | "run_up_5.png" | "run_upside_0.png" | "run_upside_1.png" | "run_upside_2.png" | "run_upside_3.png" | "run_upside_4.png" | "run_upside_5.png" | "scavenger.png" | "scavenger_00001_.png" | "scavenger_00002_.png" | "scavenger_ref.png" | "source.png" | "text_00006_.png" | "tpose_openpose.png" | "tpose_openpose_1152.png" | "tpose_openpose_v2.png" | "walk_down_0.depth.png" | "walk_down_0.png" | "walk_down_1.depth.png" | "walk_down_1.png" | "walk_down_2.depth.png" | "walk_down_2.png" | "walk_down_3.depth.png" | "walk_down_3.png" | "walk_down_4.depth.png" | "walk_down_4.png" | "walk_down_5.depth.png" | "walk_down_5.png" | "walk_down_6.depth.png" | "walk_down_6.png" | "walk_down_7.depth.png" | "walk_down_7.png" | "walk_downright_0.depth.png" | "walk_downright_0.png" | "walk_downright_1.depth.png" | "walk_downright_1.png" | "walk_downright_2.depth.png" | "walk_downright_2.png" | "walk_downright_3.depth.png" | "walk_downright_3.png" | "walk_downright_4.depth.png" | "walk_downright_4.png" | "walk_downright_5.depth.png" | "walk_downright_5.png" | "walk_downright_6.depth.png" | "walk_downright_6.png" | "walk_downright_7.depth.png" | "walk_downright_7.png" | "walk_downside_0.png" | "walk_downside_1.png" | "walk_downside_2.png" | "walk_downside_3.png" | "walk_downside_4.png" | "walk_downside_5.png" | "walk_pose_1.png" | "walk_pose_2.png" | "walk_pose_3.png" | "walk_pose_4.png" | "walk_right_0.depth.png" | "walk_right_0.png" | "walk_right_1.depth.png" | "walk_right_1.png" | "walk_right_2.depth.png" | "walk_right_2.png" | "walk_right_3.depth.png" | "walk_right_3.png" | "walk_right_4.depth.png" | "walk_right_4.png" | "walk_right_5.depth.png" | "walk_right_5.png" | "walk_right_6.depth.png" | "walk_right_6.png" | "walk_right_7.depth.png" | "walk_right_7.png" | "walk_side_0.png" | "walk_side_1.png" | "walk_side_2.png" | "walk_side_3.png" | "walk_side_4.png" | "walk_side_5.png" | "walk_up_0.depth.png" | "walk_up_0.png" | "walk_up_1.depth.png" | "walk_up_1.png" | "walk_up_2.depth.png" | "walk_up_2.png" | "walk_up_3.depth.png" | "walk_up_3.png" | "walk_up_4.depth.png" | "walk_up_4.png" | "walk_up_5.depth.png" | "walk_up_5.png" | "walk_up_6.depth.png" | "walk_up_6.png" | "walk_up_7.depth.png" | "walk_up_7.png" | "walk_upright_0.depth.png" | "walk_upright_0.png" | "walk_upright_1.depth.png" | "walk_upright_1.png" | "walk_upright_2.depth.png" | "walk_upright_2.png" | "walk_upright_3.depth.png" | "walk_upright_3.png" | "walk_upright_4.depth.png" | "walk_upright_4.png" | "walk_upright_5.depth.png" | "walk_upright_5.png" | "walk_upright_6.depth.png" | "walk_upright_6.png" | "walk_upright_7.depth.png" | "walk_upright_7.png" | "walk_upside_0.png" | "walk_upside_1.png" | "walk_upside_2.png" | "walk_upside_3.png" | "walk_upside_4.png" | "walk_upside_5.png" | "スクリーンショット 2026-08-24 1.20.33.png";
 }
 
 export interface AILab_LoadImageSimpleInputPaths {
@@ -1157,6 +4771,34 @@ export interface AlignYourStepsSchedulerOutputs {
   SIGMAS: NodeRef<"SIGMAS">;
 }
 
+export interface AnimaLLLiteApplyInputs {
+  model: NodeRef<"MODEL">;
+  model_patch: NodeRef<"MODEL_PATCH">;
+  image: NodeRef<"IMAGE">;
+  strength: number;
+  start_percent: number;
+  end_percent: number;
+  mask?: NodeRef<"MASK">;
+}
+
+export interface AnimaLLLiteApplyInputPaths {
+  model: string;
+  model_patch: string;
+  image: string;
+  strength: string;
+  start_percent: string;
+  end_percent: string;
+  mask: string;
+}
+
+export interface AnimaLLLiteApplyResult extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+}
+
+export interface AnimaLLLiteApplyOutputs {
+  MODEL: NodeRef<"MODEL">;
+}
+
 export interface AnimalPosePreprocessorInputs {
   image: NodeRef<"IMAGE">;
   bbox_detector?: "None" | "yolox_l.torchscript.pt" | "yolox_l.onnx" | "yolo_nas_l_fp16.onnx" | "yolo_nas_m_fp16.onnx" | "yolo_nas_s_fp16.onnx";
@@ -1179,6 +4821,32 @@ export interface AnimalPosePreprocessorResult extends ComfyNodeOutput {
 export interface AnimalPosePreprocessorOutputs {
   IMAGE: NodeRef<"IMAGE">;
   POSE_KEYPOINT: NodeRef<"POSE_KEYPOINT">;
+}
+
+export interface AnimateDiffLoaderV1Inputs {
+  model: NodeRef<"MODEL">;
+  latents: NodeRef<"LATENT">;
+  model_name: "mm_sd_v15_v2.ckpt";
+  unlimited_area_hack: boolean;
+  beta_schedule: "sqrt_linear (AnimateDiff)" | "use existing" | "autoselect" | "linear (AnimateDiff-SDXL)" | "linear (HotshotXL/default)" | "avg(sqrt_linear,linear)" | "lcm avg(sqrt_linear,linear)" | "lcm" | "lcm[100_ots]" | "lcm >> sqrt_linear" | "sqrt" | "cosine" | "squaredcos_cap_v2";
+}
+
+export interface AnimateDiffLoaderV1InputPaths {
+  model: string;
+  latents: string;
+  model_name: string;
+  unlimited_area_hack: string;
+  beta_schedule: string;
+}
+
+export interface AnimateDiffLoaderV1Result extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+  LATENT?: ComfyOutputValue<"LATENT">;
+}
+
+export interface AnimateDiffLoaderV1Outputs {
+  MODEL: NodeRef<"MODEL">;
+  LATENT: NodeRef<"LATENT">;
 }
 
 export interface AnimeFace_SemSegPreprocessorInputs {
@@ -1395,6 +5063,32 @@ export interface ApplyRifleXRoPE_WanVideoOutputs {
   MODEL: NodeRef<"MODEL">;
 }
 
+export interface ApplyTextureToMeshInputs {
+  mesh: NodeRef<"MESH">;
+  base_color: NodeRef<"IMAGE">;
+  metallic?: NodeRef<"IMAGE">;
+  roughness?: NodeRef<"IMAGE">;
+  occlusion?: NodeRef<"IMAGE">;
+  normal_map?: NodeRef<"IMAGE">;
+}
+
+export interface ApplyTextureToMeshInputPaths {
+  mesh: string;
+  base_color: string;
+  metallic: string;
+  roughness: string;
+  occlusion: string;
+  normal_map: string;
+}
+
+export interface ApplyTextureToMeshResult extends ComfyNodeOutput {
+  mesh?: ComfyOutputValue<"MESH">;
+}
+
+export interface ApplyTextureToMeshOutputs {
+  mesh: NodeRef<"MESH">;
+}
+
 export interface ARVideoI2VInputs {
   model: NodeRef<"MODEL">;
   vae: NodeRef<"VAE">;
@@ -1583,6 +5277,84 @@ export interface BAENormalMapPreprocessorResult extends ComfyNodeOutput {
 
 export interface BAENormalMapPreprocessorOutputs {
   IMAGE: NodeRef<"IMAGE">;
+}
+
+export interface BakeAmbientOcclusionInputs {
+  low_poly: NodeRef<"MESH">;
+  high_poly: NodeRef<"MESH">;
+  resolution: number;
+  samples: number;
+  max_distance: number;
+  strength: number;
+  bias: number;
+}
+
+export interface BakeAmbientOcclusionInputPaths {
+  low_poly: string;
+  high_poly: string;
+  resolution: string;
+  samples: string;
+  max_distance: string;
+  strength: string;
+  bias: string;
+}
+
+export interface BakeAmbientOcclusionResult extends ComfyNodeOutput {
+  occlusion?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface BakeAmbientOcclusionOutputs {
+  occlusion: NodeRef<"IMAGE">;
+}
+
+export interface BakeNormalMapFromMeshInputs {
+  low_poly: NodeRef<"MESH">;
+  high_poly: NodeRef<"MESH">;
+  resolution: number;
+  cage_distance: number;
+  ignore_backfaces: boolean;
+}
+
+export interface BakeNormalMapFromMeshInputPaths {
+  low_poly: string;
+  high_poly: string;
+  resolution: string;
+  cage_distance: string;
+  ignore_backfaces: string;
+}
+
+export interface BakeNormalMapFromMeshResult extends ComfyNodeOutput {
+  normal_map?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface BakeNormalMapFromMeshOutputs {
+  normal_map: NodeRef<"IMAGE">;
+}
+
+export interface BakeTextureFromVoxelInputs {
+  mesh: NodeRef<"MESH">;
+  voxel_colors: NodeRef<"VOXEL">;
+  texture_size: number;
+  reference_mesh?: NodeRef<"MESH">;
+}
+
+export interface BakeTextureFromVoxelInputPaths {
+  mesh: string;
+  voxel_colors: string;
+  texture_size: string;
+  reference_mesh: string;
+}
+
+export interface BakeTextureFromVoxelResult extends ComfyNodeOutput {
+  base_color?: ComfyOutputValue<"IMAGE">;
+  metallic?: ComfyOutputValue<"IMAGE">;
+  roughness?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface BakeTextureFromVoxelOutputs {
+  base_color: NodeRef<"IMAGE">;
+  metallic: NodeRef<"IMAGE">;
+  roughness: NodeRef<"IMAGE">;
 }
 
 export interface BasicGuiderInputs {
@@ -2173,6 +5945,84 @@ export interface BOOLConstantOutputs {
   value: NodeRef<"BOOLEAN">;
 }
 
+export interface BriaEraserInputs {
+  image: NodeRef<"IMAGE">;
+  mask: NodeRef<"MASK">;
+  mask_type: "manual" | "automatic";
+  moderation: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface BriaEraserInputPaths {
+  image: string;
+  mask: string;
+  mask_type: string;
+  moderation: string;
+}
+
+export interface BriaEraserResult extends ComfyNodeOutput {
+  IMAGE?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface BriaEraserOutputs {
+  IMAGE: NodeRef<"IMAGE">;
+}
+
+export interface BriaExpandImageInputs {
+  image: NodeRef<"IMAGE">;
+  expand_mode: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  prompt: string;
+  negative_prompt: string;
+  seed: number;
+  moderation: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface BriaExpandImageInputPaths {
+  image: string;
+  expand_mode: string;
+  prompt: string;
+  negative_prompt: string;
+  seed: string;
+  moderation: string;
+}
+
+export interface BriaExpandImageResult extends ComfyNodeOutput {
+  IMAGE?: ComfyOutputValue<"IMAGE">;
+  prompt?: ComfyOutputValue<"STRING">;
+}
+
+export interface BriaExpandImageOutputs {
+  IMAGE: NodeRef<"IMAGE">;
+  prompt: NodeRef<"STRING">;
+}
+
+export interface BriaGenFillInputs {
+  image: NodeRef<"IMAGE">;
+  mask: NodeRef<"MASK">;
+  prompt: string;
+  negative_prompt: string;
+  refine_prompt: boolean;
+  seed: number;
+  moderation: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface BriaGenFillInputPaths {
+  image: string;
+  mask: string;
+  prompt: string;
+  negative_prompt: string;
+  refine_prompt: string;
+  seed: string;
+  moderation: string;
+}
+
+export interface BriaGenFillResult extends ComfyNodeOutput {
+  IMAGE?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface BriaGenFillOutputs {
+  IMAGE: NodeRef<"IMAGE">;
+}
+
 export interface BriaImageEditNodeInputs {
   model: "FIBO";
   image: NodeRef<"IMAGE">;
@@ -2207,6 +6057,28 @@ export interface BriaImageEditNodeResult extends ComfyNodeOutput {
 export interface BriaImageEditNodeOutputs {
   IMAGE: NodeRef<"IMAGE">;
   structured_prompt: NodeRef<"STRING">;
+}
+
+export interface BriaIncreaseResolutionInputs {
+  image: NodeRef<"IMAGE">;
+  desired_increase: "2" | "4";
+  auto_downscale: boolean;
+  moderation: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface BriaIncreaseResolutionInputPaths {
+  image: string;
+  desired_increase: string;
+  auto_downscale: string;
+  moderation: string;
+}
+
+export interface BriaIncreaseResolutionResult extends ComfyNodeOutput {
+  IMAGE?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface BriaIncreaseResolutionOutputs {
+  IMAGE: NodeRef<"IMAGE">;
 }
 
 export interface BriaRemoveImageBackgroundInputs {
@@ -2341,6 +6213,32 @@ export interface BuildJsonPromptIdeogramOutputs {
   prompt: NodeRef<"DICT">;
 }
 
+export interface BuildPoseFileInputs {
+  pose_data: NodeRef<"MHR_POSE_DATA,KIMODO_POSE_DATA">;
+  format: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  fps: number;
+  camera_translation: "off" | "centered" | "absolute";
+  track_index: number;
+  sam3d_body_model?: NodeRef<"SAM3D_BODY_MODEL">;
+}
+
+export interface BuildPoseFileInputPaths {
+  pose_data: string;
+  format: string;
+  fps: string;
+  camera_translation: string;
+  track_index: string;
+  sam3d_body_model: string;
+}
+
+export interface BuildPoseFileResult extends ComfyNodeOutput {
+  model_3d?: ComfyOutputValue<"FILE_3D">;
+}
+
+export interface BuildPoseFileOutputs {
+  model_3d: NodeRef<"FILE_3D">;
+}
+
 export interface ByteDance2FirstLastFrameNodeInputs {
   model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
   seed: number;
@@ -2386,6 +6284,26 @@ export interface ByteDance2ReferenceNodeResult extends ComfyNodeOutput {
 }
 
 export interface ByteDance2ReferenceNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface ByteDance2ReferenceNodeV2Inputs {
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  seed: number;
+  watermark: boolean;
+}
+
+export interface ByteDance2ReferenceNodeV2InputPaths {
+  model: string;
+  seed: string;
+  watermark: string;
+}
+
+export interface ByteDance2ReferenceNodeV2Result extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface ByteDance2ReferenceNodeV2Outputs {
   VIDEO: NodeRef<"VIDEO">;
 }
 
@@ -2579,6 +6497,36 @@ export interface ByteDanceImageToVideoNodeOutputs {
   VIDEO: NodeRef<"VIDEO">;
 }
 
+export interface ByteDanceSeedAudioInputs {
+  text_prompt: string;
+  reference_mode: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  sample_rate: "8000" | "16000" | "24000" | "32000" | "44100" | "48000";
+  speech_rate: number;
+  loudness_rate: number;
+  pitch_rate: number;
+  seed: number;
+  model?: "seed-audio-1.0-multilingual" | "seed-audio-1.0";
+}
+
+export interface ByteDanceSeedAudioInputPaths {
+  text_prompt: string;
+  reference_mode: string;
+  sample_rate: string;
+  speech_rate: string;
+  loudness_rate: string;
+  pitch_rate: string;
+  seed: string;
+  model: string;
+}
+
+export interface ByteDanceSeedAudioResult extends ComfyNodeOutput {
+  AUDIO?: ComfyOutputValue<"AUDIO">;
+}
+
+export interface ByteDanceSeedAudioOutputs {
+  AUDIO: NodeRef<"AUDIO">;
+}
+
 export interface ByteDanceSeedNodeInputs {
   prompt: string;
   model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
@@ -2601,8 +6549,46 @@ export interface ByteDanceSeedNodeOutputs {
   STRING: NodeRef<"STRING">;
 }
 
+export interface ByteDanceSeedreamLayerSeparationNodeInputs {
+  image: NodeRef<"IMAGE">;
+  prompt: string;
+  size: "auto" | "1K" | "1.5K" | "2K";
+  seed: number;
+  prompt_optimization?: "standard" | "fast";
+  watermark?: boolean;
+  crop_layers?: boolean;
+}
+
+export interface ByteDanceSeedreamLayerSeparationNodeInputPaths {
+  image: string;
+  prompt: string;
+  size: string;
+  seed: string;
+  prompt_optimization: string;
+  watermark: string;
+  crop_layers: string;
+}
+
+export interface ByteDanceSeedreamLayerSeparationNodeResult extends ComfyNodeOutput {
+  base_image?: ComfyOutputValue<"IMAGE">;
+  base_mask?: ComfyOutputValue<"MASK">;
+  layers?: ComfyOutputValue<"IMAGE">;
+  masks?: ComfyOutputValue<"MASK">;
+  bboxes?: ComfyOutputValue<"BOUNDING_BOX">;
+  layer_stack?: ComfyOutputValue<"LAYERS">;
+}
+
+export interface ByteDanceSeedreamLayerSeparationNodeOutputs {
+  base_image: NodeRef<"IMAGE">;
+  base_mask: NodeRef<"MASK">;
+  layers: NodeRef<"IMAGE">;
+  masks: NodeRef<"MASK">;
+  bboxes: NodeRef<"BOUNDING_BOX">;
+  layer_stack: NodeRef<"LAYERS">;
+}
+
 export interface ByteDanceSeedreamNodeInputs {
-  model: "seedream 5.0 lite" | "seedream-4-5-251128" | "seedream-4-0-250828";
+  model: "seedream 5.0 pro" | "seedream 5.0 lite" | "seedream-4-5-251128" | "seedream-4-0-250828";
   prompt: string;
   size_preset: "2048x2048 (1:1)" | "2304x1728 (4:3)" | "1728x2304 (3:4)" | "2560x1440 (16:9)" | "1440x2560 (9:16)" | "2496x1664 (3:2)" | "1664x2496 (2:3)" | "3024x1296 (21:9)" | "3072x3072 (1:1)" | "4096x4096 (1:1)" | "Custom";
   image?: NodeRef<"IMAGE">;
@@ -2642,6 +6628,7 @@ export interface ByteDanceSeedreamNodeV2Inputs {
   model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
   seed: number;
   watermark: boolean;
+  thinking?: boolean;
 }
 
 export interface ByteDanceSeedreamNodeV2InputPaths {
@@ -2649,6 +6636,7 @@ export interface ByteDanceSeedreamNodeV2InputPaths {
   model: string;
   seed: string;
   watermark: string;
+  thinking: string;
 }
 
 export interface ByteDanceSeedreamNodeV2Result extends ComfyNodeOutput {
@@ -2656,6 +6644,24 @@ export interface ByteDanceSeedreamNodeV2Result extends ComfyNodeOutput {
 }
 
 export interface ByteDanceSeedreamNodeV2Outputs {
+  IMAGE: NodeRef<"IMAGE">;
+}
+
+export interface ByteDanceSeedreamNodeV3Inputs {
+  prompt: string;
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface ByteDanceSeedreamNodeV3InputPaths {
+  prompt: string;
+  model: string;
+}
+
+export interface ByteDanceSeedreamNodeV3Result extends ComfyNodeOutput {
+  IMAGE?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface ByteDanceSeedreamNodeV3Outputs {
   IMAGE: NodeRef<"IMAGE">;
 }
 
@@ -2688,6 +6694,30 @@ export interface ByteDanceTextToVideoNodeResult extends ComfyNodeOutput {
 }
 
 export interface ByteDanceTextToVideoNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface ByteDanceVideoEnhanceNodeInputs {
+  video: NodeRef<"VIDEO">;
+  tool_version: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  resolution: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  fps: "source" | "24" | "25" | "30" | "48" | "50" | "60" | "120";
+  bitrate_level: "low" | "medium" | "high";
+}
+
+export interface ByteDanceVideoEnhanceNodeInputPaths {
+  video: string;
+  tool_version: string;
+  resolution: string;
+  fps: string;
+  bitrate_level: string;
+}
+
+export interface ByteDanceVideoEnhanceNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface ByteDanceVideoEnhanceNodeOutputs {
   VIDEO: NodeRef<"VIDEO">;
 }
 
@@ -3127,7 +7157,7 @@ export interface CharacterSheetCropperOutputs {
 
 export interface CheckpointLoaderInputs {
   config_name: "anything_v3.yaml" | "v1-inference.yaml" | "v1-inference_clip_skip_2.yaml" | "v1-inference_clip_skip_2_fp16.yaml" | "v1-inference_fp16.yaml" | "v1-inpainting-inference.yaml" | "v2-inference-v.yaml" | "v2-inference-v_fp32.yaml" | "v2-inference.yaml" | "v2-inference_fp32.yaml" | "v2-inpainting-inference.yaml";
-  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
+  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
 }
 
 export interface CheckpointLoaderInputPaths {
@@ -3148,7 +7178,7 @@ export interface CheckpointLoaderOutputs {
 }
 
 export interface CheckpointLoaderKJInputs {
-  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
+  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
   weight_dtype: "default" | "fp8_e4m3fn" | "fp8_e4m3fn_fast" | "fp8_e5m2" | "fp16" | "bf16" | "fp32";
   compute_dtype: "default" | "fp16" | "bf16" | "fp32";
   patch_cublaslinear: boolean;
@@ -3178,7 +7208,7 @@ export interface CheckpointLoaderKJOutputs {
 }
 
 export interface CheckpointLoaderSimpleInputs {
-  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
+  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
 }
 
 export interface CheckpointLoaderSimpleInputPaths {
@@ -3192,6 +7222,32 @@ export interface CheckpointLoaderSimpleResult extends ComfyNodeOutput {
 }
 
 export interface CheckpointLoaderSimpleOutputs {
+  MODEL: NodeRef<"MODEL">;
+  CLIP: NodeRef<"CLIP">;
+  VAE: NodeRef<"VAE">;
+}
+
+export interface CheckpointLoaderSimpleWithNoiseSelectInputs {
+  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
+  beta_schedule: "autoselect" | "use existing" | "sqrt_linear (AnimateDiff)" | "linear (AnimateDiff-SDXL)" | "linear (HotshotXL/default)" | "avg(sqrt_linear,linear)" | "lcm avg(sqrt_linear,linear)" | "lcm" | "lcm[100_ots]" | "lcm >> sqrt_linear" | "sqrt" | "cosine" | "squaredcos_cap_v2";
+  use_custom_scale_factor?: boolean;
+  scale_factor?: number;
+}
+
+export interface CheckpointLoaderSimpleWithNoiseSelectInputPaths {
+  ckpt_name: string;
+  beta_schedule: string;
+  use_custom_scale_factor: string;
+  scale_factor: string;
+}
+
+export interface CheckpointLoaderSimpleWithNoiseSelectResult extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+  CLIP?: ComfyOutputValue<"CLIP">;
+  VAE?: ComfyOutputValue<"VAE">;
+}
+
+export interface CheckpointLoaderSimpleWithNoiseSelectOutputs {
   MODEL: NodeRef<"MODEL">;
   CLIP: NodeRef<"CLIP">;
   VAE: NodeRef<"VAE">;
@@ -3314,7 +7370,7 @@ export interface CLIPAttentionMultiplyOutputs {
 
 export interface CLIPLoaderInputs {
   clip_name: "clip_l.safetensors" | "qwen_2.5_vl_7b_fp8_scaled.safetensors" | "qwen_3_06b_base.safetensors" | "qwen_3_4b.safetensors" | "qwen_3_8b_fp8mixed.safetensors" | "t5xxl_fp8_e4m3fn.safetensors" | "umt5_xxl_fp8_e4m3fn_scaled.safetensors";
-  type: "stable_diffusion" | "stable_cascade" | "sd3" | "stable_audio" | "mochi" | "ltxv" | "pixart" | "cosmos" | "lumina2" | "wan" | "hidream" | "chroma" | "ace" | "omnigen2" | "qwen_image" | "hunyuan_image" | "flux2" | "ovis" | "longcat_image" | "cogvideox" | "lens" | "pixeldit" | "ideogram4" | "boogu" | "krea2";
+  type: "stable_diffusion" | "stable_cascade" | "sd3" | "stable_audio" | "mochi" | "ltxv" | "pixart" | "cosmos" | "lumina2" | "wan" | "hidream" | "chroma" | "ace" | "omnigen2" | "qwen_image" | "hunyuan_image" | "flux2" | "ovis" | "longcat_image" | "cogvideox" | "lens" | "pixeldit" | "ideogram4" | "boogu" | "krea2" | "joyimage" | "mage" | "minimax";
   device?: "default" | "cpu";
 }
 
@@ -3334,7 +7390,7 @@ export interface CLIPLoaderOutputs {
 
 export interface CLIPLoaderGGUFInputs {
   clip_name: "clip_l.safetensors" | "qwen_2.5_vl_7b_fp8_scaled.safetensors" | "qwen_3_06b_base.safetensors" | "qwen_3_4b.safetensors" | "qwen_3_8b_fp8mixed.safetensors" | "t5xxl_fp8_e4m3fn.safetensors" | "umt5_xxl_fp8_e4m3fn_scaled.safetensors";
-  type: "stable_diffusion" | "stable_cascade" | "sd3" | "stable_audio" | "mochi" | "ltxv" | "pixart" | "cosmos" | "lumina2" | "wan" | "hidream" | "chroma" | "ace" | "omnigen2" | "qwen_image" | "hunyuan_image" | "flux2" | "ovis" | "longcat_image" | "cogvideox" | "lens" | "pixeldit" | "ideogram4" | "boogu" | "krea2";
+  type: "stable_diffusion" | "stable_cascade" | "sd3" | "stable_audio" | "mochi" | "ltxv" | "pixart" | "cosmos" | "lumina2" | "wan" | "hidream" | "chroma" | "ace" | "omnigen2" | "qwen_image" | "hunyuan_image" | "flux2" | "ovis" | "longcat_image" | "cogvideox" | "lens" | "pixeldit" | "ideogram4" | "boogu" | "krea2" | "joyimage" | "mage" | "minimax";
 }
 
 export interface CLIPLoaderGGUFInputPaths {
@@ -3938,11 +7994,13 @@ export interface ColorToRGBIntInputPaths {
 export interface ColorToRGBIntResult extends ComfyNodeOutput {
   rgb_int?: ComfyOutputValue<"INT">;
   hex?: ComfyOutputValue<"COLOR">;
+  alpha?: ComfyOutputValue<"FLOAT">;
 }
 
 export interface ColorToRGBIntOutputs {
   rgb_int: NodeRef<"INT">;
   hex: NodeRef<"COLOR">;
+  alpha: NodeRef<"FLOAT">;
 }
 
 export interface ColorTransferInputs {
@@ -4053,6 +8111,202 @@ export interface ComfyAndNodeResult extends ComfyNodeOutput {
 
 export interface ComfyAndNodeOutputs {
   BOOLEAN: NodeRef<"BOOLEAN">;
+}
+
+export interface ComfyCloudFlux2TextToImageNodeInputs {
+  prompt: string;
+  seed: number;
+  aspect_ratio: "1:1" | "3:4" | "2:3" | "3:2" | "4:3" | "16:9" | "9:16" | "21:9";
+  megapixels: number;
+  turbo: boolean;
+}
+
+export interface ComfyCloudFlux2TextToImageNodeInputPaths {
+  prompt: string;
+  seed: string;
+  aspect_ratio: string;
+  megapixels: string;
+  turbo: string;
+}
+
+export interface ComfyCloudFlux2TextToImageNodeResult extends ComfyNodeOutput {
+  IMAGE?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface ComfyCloudFlux2TextToImageNodeOutputs {
+  IMAGE: NodeRef<"IMAGE">;
+}
+
+export interface ComfyCloudMageFlowTextToImageNodeInputs {
+  prompt: string;
+  negative_prompt: string;
+  seed: number;
+  aspect_ratio: "1:1" | "3:4" | "2:3" | "3:2" | "4:3" | "16:9" | "9:16" | "21:9";
+  megapixels: number;
+}
+
+export interface ComfyCloudMageFlowTextToImageNodeInputPaths {
+  prompt: string;
+  negative_prompt: string;
+  seed: string;
+  aspect_ratio: string;
+  megapixels: string;
+}
+
+export interface ComfyCloudMageFlowTextToImageNodeResult extends ComfyNodeOutput {
+  IMAGE?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface ComfyCloudMageFlowTextToImageNodeOutputs {
+  IMAGE: NodeRef<"IMAGE">;
+}
+
+export interface ComfyCloudMageFlowTurboTextToImageNodeInputs {
+  prompt: string;
+  negative_prompt: string;
+  seed: number;
+  aspect_ratio: "1:1" | "3:4" | "2:3" | "3:2" | "4:3" | "16:9" | "9:16" | "21:9";
+  megapixels: number;
+}
+
+export interface ComfyCloudMageFlowTurboTextToImageNodeInputPaths {
+  prompt: string;
+  negative_prompt: string;
+  seed: string;
+  aspect_ratio: string;
+  megapixels: string;
+}
+
+export interface ComfyCloudMageFlowTurboTextToImageNodeResult extends ComfyNodeOutput {
+  IMAGE?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface ComfyCloudMageFlowTurboTextToImageNodeOutputs {
+  IMAGE: NodeRef<"IMAGE">;
+}
+
+export interface ComfyCloudMiniMaxH3FirstLastFrameToVideoNodeInputs {
+  first_frame: NodeRef<"IMAGE">;
+  prompt: string;
+  seed: number;
+  aspect_ratio: "1:1" | "3:4" | "2:3" | "3:2" | "4:3" | "16:9" | "9:16" | "21:9";
+  resolution: "480p" | "720p";
+  duration_seconds: number;
+  last_frame?: NodeRef<"IMAGE">;
+}
+
+export interface ComfyCloudMiniMaxH3FirstLastFrameToVideoNodeInputPaths {
+  first_frame: string;
+  prompt: string;
+  seed: string;
+  aspect_ratio: string;
+  resolution: string;
+  duration_seconds: string;
+  last_frame: string;
+}
+
+export interface ComfyCloudMiniMaxH3FirstLastFrameToVideoNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface ComfyCloudMiniMaxH3FirstLastFrameToVideoNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface ComfyCloudMiniMaxH3ImageToVideoNodeInputs {
+  first_frame: NodeRef<"IMAGE">;
+  prompt: string;
+  seed: number;
+  aspect_ratio: "1:1" | "3:4" | "2:3" | "3:2" | "4:3" | "16:9" | "9:16" | "21:9";
+  resolution: "480p" | "720p";
+  duration_seconds: number;
+}
+
+export interface ComfyCloudMiniMaxH3ImageToVideoNodeInputPaths {
+  first_frame: string;
+  prompt: string;
+  seed: string;
+  aspect_ratio: string;
+  resolution: string;
+  duration_seconds: string;
+}
+
+export interface ComfyCloudMiniMaxH3ImageToVideoNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface ComfyCloudMiniMaxH3ImageToVideoNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface ComfyCloudMiniMaxH3TextToVideoNodeInputs {
+  prompt: string;
+  seed: number;
+  aspect_ratio: "1:1" | "3:4" | "2:3" | "3:2" | "4:3" | "16:9" | "9:16" | "21:9";
+  resolution: "480p" | "720p";
+  duration_seconds: number;
+}
+
+export interface ComfyCloudMiniMaxH3TextToVideoNodeInputPaths {
+  prompt: string;
+  seed: string;
+  aspect_ratio: string;
+  resolution: string;
+  duration_seconds: string;
+}
+
+export interface ComfyCloudMiniMaxH3TextToVideoNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface ComfyCloudMiniMaxH3TextToVideoNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface ComfyCloudMiniMaxMusic3TextToAudioNodeInputs {
+  prompt: string;
+  lyrics: string;
+  seed: number;
+  max_duration: number;
+  audio_quality: "V0" | "128k" | "320k";
+}
+
+export interface ComfyCloudMiniMaxMusic3TextToAudioNodeInputPaths {
+  prompt: string;
+  lyrics: string;
+  seed: string;
+  max_duration: string;
+  audio_quality: string;
+}
+
+export interface ComfyCloudMiniMaxMusic3TextToAudioNodeResult extends ComfyNodeOutput {
+  AUDIO?: ComfyOutputValue<"AUDIO">;
+}
+
+export interface ComfyCloudMiniMaxMusic3TextToAudioNodeOutputs {
+  AUDIO: NodeRef<"AUDIO">;
+}
+
+export interface ComfyCloudZImageTurboNodeInputs {
+  prompt: string;
+  seed: number;
+  aspect_ratio: "1:1" | "3:4" | "2:3" | "3:2" | "4:3" | "16:9" | "9:16" | "21:9";
+  megapixels: number;
+}
+
+export interface ComfyCloudZImageTurboNodeInputPaths {
+  prompt: string;
+  seed: string;
+  aspect_ratio: string;
+  megapixels: string;
+}
+
+export interface ComfyCloudZImageTurboNodeResult extends ComfyNodeOutput {
+  IMAGE?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface ComfyCloudZImageTurboNodeOutputs {
+  IMAGE: NodeRef<"IMAGE">;
 }
 
 export interface ComfyMathExpressionInputs {
@@ -4847,7 +9101,7 @@ export interface ContextBigRgthreeInputs {
   steps?: number;
   step_refiner?: number;
   cfg?: number;
-  ckpt_name?: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
+  ckpt_name?: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
   sampler?: "euler" | "euler_cfg_pp" | "euler_ancestral" | "euler_ancestral_cfg_pp" | "heun" | "heunpp2" | "exp_heun_2_x0" | "exp_heun_2_x0_sde" | "dpm_2" | "dpm_2_ancestral" | "lms" | "dpm_fast" | "dpm_adaptive" | "dpmpp_2s_ancestral" | "dpmpp_2s_ancestral_cfg_pp" | "dpmpp_sde" | "dpmpp_sde_gpu" | "dpmpp_2m" | "dpmpp_2m_cfg_pp" | "dpmpp_2m_sde" | "dpmpp_2m_sde_gpu" | "dpmpp_2m_sde_heun" | "dpmpp_2m_sde_heun_gpu" | "dpmpp_3m_sde" | "dpmpp_3m_sde_gpu" | "ddpm" | "lcm" | "ipndm" | "ipndm_v" | "deis" | "res_multistep" | "res_multistep_cfg_pp" | "res_multistep_ancestral" | "res_multistep_ancestral_cfg_pp" | "gradient_estimation" | "gradient_estimation_cfg_pp" | "er_sde" | "seeds_2" | "seeds_3" | "sa_solver" | "sa_solver_pece" | "ddim" | "uni_pc" | "uni_pc_bh2";
   scheduler?: "simple" | "sgm_uniform" | "karras" | "exponential" | "ddim_uniform" | "beta" | "normal" | "linear_quadratic" | "kl_optimal";
   clip_width?: number;
@@ -4899,7 +9153,7 @@ export interface ContextBigRgthreeResult extends ComfyNodeOutput {
   STEPS?: ComfyOutputValue<"INT">;
   STEP_REFINER?: ComfyOutputValue<"INT">;
   CFG?: ComfyOutputValue<"FLOAT">;
-  CKPT_NAME?: ComfyOutputValue<"JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors">;
+  CKPT_NAME?: ComfyOutputValue<"JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors">;
   SAMPLER?: ComfyOutputValue<"euler" | "euler_cfg_pp" | "euler_ancestral" | "euler_ancestral_cfg_pp" | "heun" | "heunpp2" | "exp_heun_2_x0" | "exp_heun_2_x0_sde" | "dpm_2" | "dpm_2_ancestral" | "lms" | "dpm_fast" | "dpm_adaptive" | "dpmpp_2s_ancestral" | "dpmpp_2s_ancestral_cfg_pp" | "dpmpp_sde" | "dpmpp_sde_gpu" | "dpmpp_2m" | "dpmpp_2m_cfg_pp" | "dpmpp_2m_sde" | "dpmpp_2m_sde_gpu" | "dpmpp_2m_sde_heun" | "dpmpp_2m_sde_heun_gpu" | "dpmpp_3m_sde" | "dpmpp_3m_sde_gpu" | "ddpm" | "lcm" | "ipndm" | "ipndm_v" | "deis" | "res_multistep" | "res_multistep_cfg_pp" | "res_multistep_ancestral" | "res_multistep_ancestral_cfg_pp" | "gradient_estimation" | "gradient_estimation_cfg_pp" | "er_sde" | "seeds_2" | "seeds_3" | "sa_solver" | "sa_solver_pece" | "ddim" | "uni_pc" | "uni_pc_bh2">;
   SCHEDULER?: ComfyOutputValue<"simple" | "sgm_uniform" | "karras" | "exponential" | "ddim_uniform" | "beta" | "normal" | "linear_quadratic" | "kl_optimal">;
   CLIP_WIDTH?: ComfyOutputValue<"INT">;
@@ -4925,7 +9179,7 @@ export interface ContextBigRgthreeOutputs {
   STEPS: NodeRef<"INT">;
   STEP_REFINER: NodeRef<"INT">;
   CFG: NodeRef<"FLOAT">;
-  CKPT_NAME: NodeRef<"JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors">;
+  CKPT_NAME: NodeRef<"JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors">;
   SAMPLER: NodeRef<"euler" | "euler_cfg_pp" | "euler_ancestral" | "euler_ancestral_cfg_pp" | "heun" | "heunpp2" | "exp_heun_2_x0" | "exp_heun_2_x0_sde" | "dpm_2" | "dpm_2_ancestral" | "lms" | "dpm_fast" | "dpm_adaptive" | "dpmpp_2s_ancestral" | "dpmpp_2s_ancestral_cfg_pp" | "dpmpp_sde" | "dpmpp_sde_gpu" | "dpmpp_2m" | "dpmpp_2m_cfg_pp" | "dpmpp_2m_sde" | "dpmpp_2m_sde_gpu" | "dpmpp_2m_sde_heun" | "dpmpp_2m_sde_heun_gpu" | "dpmpp_3m_sde" | "dpmpp_3m_sde_gpu" | "ddpm" | "lcm" | "ipndm" | "ipndm_v" | "deis" | "res_multistep" | "res_multistep_cfg_pp" | "res_multistep_ancestral" | "res_multistep_ancestral_cfg_pp" | "gradient_estimation" | "gradient_estimation_cfg_pp" | "er_sde" | "seeds_2" | "seeds_3" | "sa_solver" | "sa_solver_pece" | "ddim" | "uni_pc" | "uni_pc_bh2">;
   SCHEDULER: NodeRef<"simple" | "sgm_uniform" | "karras" | "exponential" | "ddim_uniform" | "beta" | "normal" | "linear_quadratic" | "kl_optimal">;
   CLIP_WIDTH: NodeRef<"INT">;
@@ -4987,7 +9241,7 @@ export interface ContextMergeBigRgthreeResult extends ComfyNodeOutput {
   STEPS?: ComfyOutputValue<"INT">;
   STEP_REFINER?: ComfyOutputValue<"INT">;
   CFG?: ComfyOutputValue<"FLOAT">;
-  CKPT_NAME?: ComfyOutputValue<"JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors">;
+  CKPT_NAME?: ComfyOutputValue<"JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors">;
   SAMPLER?: ComfyOutputValue<"euler" | "euler_cfg_pp" | "euler_ancestral" | "euler_ancestral_cfg_pp" | "heun" | "heunpp2" | "exp_heun_2_x0" | "exp_heun_2_x0_sde" | "dpm_2" | "dpm_2_ancestral" | "lms" | "dpm_fast" | "dpm_adaptive" | "dpmpp_2s_ancestral" | "dpmpp_2s_ancestral_cfg_pp" | "dpmpp_sde" | "dpmpp_sde_gpu" | "dpmpp_2m" | "dpmpp_2m_cfg_pp" | "dpmpp_2m_sde" | "dpmpp_2m_sde_gpu" | "dpmpp_2m_sde_heun" | "dpmpp_2m_sde_heun_gpu" | "dpmpp_3m_sde" | "dpmpp_3m_sde_gpu" | "ddpm" | "lcm" | "ipndm" | "ipndm_v" | "deis" | "res_multistep" | "res_multistep_cfg_pp" | "res_multistep_ancestral" | "res_multistep_ancestral_cfg_pp" | "gradient_estimation" | "gradient_estimation_cfg_pp" | "er_sde" | "seeds_2" | "seeds_3" | "sa_solver" | "sa_solver_pece" | "ddim" | "uni_pc" | "uni_pc_bh2">;
   SCHEDULER?: ComfyOutputValue<"simple" | "sgm_uniform" | "karras" | "exponential" | "ddim_uniform" | "beta" | "normal" | "linear_quadratic" | "kl_optimal">;
   CLIP_WIDTH?: ComfyOutputValue<"INT">;
@@ -5013,7 +9267,7 @@ export interface ContextMergeBigRgthreeOutputs {
   STEPS: NodeRef<"INT">;
   STEP_REFINER: NodeRef<"INT">;
   CFG: NodeRef<"FLOAT">;
-  CKPT_NAME: NodeRef<"JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors">;
+  CKPT_NAME: NodeRef<"JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors">;
   SAMPLER: NodeRef<"euler" | "euler_cfg_pp" | "euler_ancestral" | "euler_ancestral_cfg_pp" | "heun" | "heunpp2" | "exp_heun_2_x0" | "exp_heun_2_x0_sde" | "dpm_2" | "dpm_2_ancestral" | "lms" | "dpm_fast" | "dpm_adaptive" | "dpmpp_2s_ancestral" | "dpmpp_2s_ancestral_cfg_pp" | "dpmpp_sde" | "dpmpp_sde_gpu" | "dpmpp_2m" | "dpmpp_2m_cfg_pp" | "dpmpp_2m_sde" | "dpmpp_2m_sde_gpu" | "dpmpp_2m_sde_heun" | "dpmpp_2m_sde_heun_gpu" | "dpmpp_3m_sde" | "dpmpp_3m_sde_gpu" | "ddpm" | "lcm" | "ipndm" | "ipndm_v" | "deis" | "res_multistep" | "res_multistep_cfg_pp" | "res_multistep_ancestral" | "res_multistep_ancestral_cfg_pp" | "gradient_estimation" | "gradient_estimation_cfg_pp" | "er_sde" | "seeds_2" | "seeds_3" | "sa_solver" | "sa_solver_pece" | "ddim" | "uni_pc" | "uni_pc_bh2">;
   SCHEDULER: NodeRef<"simple" | "sgm_uniform" | "karras" | "exponential" | "ddim_uniform" | "beta" | "normal" | "linear_quadratic" | "kl_optimal">;
   CLIP_WIDTH: NodeRef<"INT">;
@@ -5075,7 +9329,7 @@ export interface ContextSwitchBigRgthreeResult extends ComfyNodeOutput {
   STEPS?: ComfyOutputValue<"INT">;
   STEP_REFINER?: ComfyOutputValue<"INT">;
   CFG?: ComfyOutputValue<"FLOAT">;
-  CKPT_NAME?: ComfyOutputValue<"JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors">;
+  CKPT_NAME?: ComfyOutputValue<"JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors">;
   SAMPLER?: ComfyOutputValue<"euler" | "euler_cfg_pp" | "euler_ancestral" | "euler_ancestral_cfg_pp" | "heun" | "heunpp2" | "exp_heun_2_x0" | "exp_heun_2_x0_sde" | "dpm_2" | "dpm_2_ancestral" | "lms" | "dpm_fast" | "dpm_adaptive" | "dpmpp_2s_ancestral" | "dpmpp_2s_ancestral_cfg_pp" | "dpmpp_sde" | "dpmpp_sde_gpu" | "dpmpp_2m" | "dpmpp_2m_cfg_pp" | "dpmpp_2m_sde" | "dpmpp_2m_sde_gpu" | "dpmpp_2m_sde_heun" | "dpmpp_2m_sde_heun_gpu" | "dpmpp_3m_sde" | "dpmpp_3m_sde_gpu" | "ddpm" | "lcm" | "ipndm" | "ipndm_v" | "deis" | "res_multistep" | "res_multistep_cfg_pp" | "res_multistep_ancestral" | "res_multistep_ancestral_cfg_pp" | "gradient_estimation" | "gradient_estimation_cfg_pp" | "er_sde" | "seeds_2" | "seeds_3" | "sa_solver" | "sa_solver_pece" | "ddim" | "uni_pc" | "uni_pc_bh2">;
   SCHEDULER?: ComfyOutputValue<"simple" | "sgm_uniform" | "karras" | "exponential" | "ddim_uniform" | "beta" | "normal" | "linear_quadratic" | "kl_optimal">;
   CLIP_WIDTH?: ComfyOutputValue<"INT">;
@@ -5101,7 +9355,7 @@ export interface ContextSwitchBigRgthreeOutputs {
   STEPS: NodeRef<"INT">;
   STEP_REFINER: NodeRef<"INT">;
   CFG: NodeRef<"FLOAT">;
-  CKPT_NAME: NodeRef<"JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors">;
+  CKPT_NAME: NodeRef<"JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors">;
   SAMPLER: NodeRef<"euler" | "euler_cfg_pp" | "euler_ancestral" | "euler_ancestral_cfg_pp" | "heun" | "heunpp2" | "exp_heun_2_x0" | "exp_heun_2_x0_sde" | "dpm_2" | "dpm_2_ancestral" | "lms" | "dpm_fast" | "dpm_adaptive" | "dpmpp_2s_ancestral" | "dpmpp_2s_ancestral_cfg_pp" | "dpmpp_sde" | "dpmpp_sde_gpu" | "dpmpp_2m" | "dpmpp_2m_cfg_pp" | "dpmpp_2m_sde" | "dpmpp_2m_sde_gpu" | "dpmpp_2m_sde_heun" | "dpmpp_2m_sde_heun_gpu" | "dpmpp_3m_sde" | "dpmpp_3m_sde_gpu" | "ddpm" | "lcm" | "ipndm" | "ipndm_v" | "deis" | "res_multistep" | "res_multistep_cfg_pp" | "res_multistep_ancestral" | "res_multistep_ancestral_cfg_pp" | "gradient_estimation" | "gradient_estimation_cfg_pp" | "er_sde" | "seeds_2" | "seeds_3" | "sa_solver" | "sa_solver_pece" | "ddim" | "uni_pc" | "uni_pc_bh2">;
   SCHEDULER: NodeRef<"simple" | "sgm_uniform" | "karras" | "exponential" | "ddim_uniform" | "beta" | "normal" | "linear_quadratic" | "kl_optimal">;
   CLIP_WIDTH: NodeRef<"INT">;
@@ -5293,7 +9547,7 @@ export interface ControlNetInpaintingAliMamaApplyOutputs {
 }
 
 export interface ControlNetLoaderInputs {
-  control_net_name: "control_v11p_sd15_openpose_fp16.safetensors" | "controlnet-union-sdxl-promax.safetensors" | "flux1-dev-controlnet-union-pro-2.0.safetensors" | "noobaiXLControlnet_epsBlur.safetensors" | "noobaiXLControlnet_openposeModel.safetensors";
+  control_net_name: "control_v11f1p_sd15_depth_fp16.safetensors" | "control_v11p_sd15_openpose_fp16.safetensors" | "controlnet-union-sdxl-promax.safetensors" | "flux1-dev-controlnet-union-pro-2.0.safetensors" | "noobaiXLControlnet_epsBlur.safetensors" | "noobaiXLControlnet_openposeModel.safetensors";
 }
 
 export interface ControlNetLoaderInputPaths {
@@ -5447,6 +9701,8 @@ export interface CreateBoundingBoxesInputs {
   height: number;
   editor_state: NodeRef<"BOUNDING_BOXES">;
   background?: NodeRef<"IMAGE">;
+  bboxes?: NodeRef<"BOUNDING_BOX,ARRAY,STRING">;
+  last_incoming?: NodeRef<"BOUNDING_BOXES">;
 }
 
 export interface CreateBoundingBoxesInputPaths {
@@ -5454,6 +9710,8 @@ export interface CreateBoundingBoxesInputPaths {
   height: string;
   editor_state: string;
   background: string;
+  bboxes: string;
+  last_incoming: string;
 }
 
 export interface CreateBoundingBoxesResult extends ComfyNodeOutput {
@@ -5713,7 +9971,7 @@ export interface CreateHookKeyframesInterpolatedOutputs {
 }
 
 export interface CreateHookLoraInputs {
-  lora_name: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors";
+  lora_name: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors" | "scavenger.safetensors";
   strength_model: number;
   strength_clip: number;
   prev_hooks?: NodeRef<"HOOKS">;
@@ -5735,7 +9993,7 @@ export interface CreateHookLoraOutputs {
 }
 
 export interface CreateHookLoraModelOnlyInputs {
-  lora_name: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors";
+  lora_name: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors" | "scavenger.safetensors";
   strength_model: number;
   prev_hooks?: NodeRef<"HOOKS">;
 }
@@ -5755,7 +10013,7 @@ export interface CreateHookLoraModelOnlyOutputs {
 }
 
 export interface CreateHookModelAsLoraInputs {
-  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
+  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
   strength_model: number;
   strength_clip: number;
   prev_hooks?: NodeRef<"HOOKS">;
@@ -5777,7 +10035,7 @@ export interface CreateHookModelAsLoraOutputs {
 }
 
 export interface CreateHookModelAsLoraModelOnlyInputs {
-  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
+  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
   strength_model: number;
   prev_hooks?: NodeRef<"HOOKS">;
 }
@@ -6104,7 +10362,8 @@ export interface CreateVideoInputs {
   images: NodeRef<"IMAGE">;
   fps: number;
   audio?: NodeRef<"AUDIO">;
-  bit_depth?: number;
+  bit_depth?: "auto";
+  color_space?: "sRGB" | "HDR" | "HDR PQ";
 }
 
 export interface CreateVideoInputPaths {
@@ -6112,6 +10371,7 @@ export interface CreateVideoInputPaths {
   fps: string;
   audio: string;
   bit_depth: string;
+  color_space: string;
 }
 
 export interface CreateVideoResult extends ComfyNodeOutput {
@@ -6483,12 +10743,32 @@ export interface DebugTensorShapeInputPaths {
 export interface DebugTensorShapeResult extends ComfyNodeOutput {
 }
 
+export interface DecimateMeshInputs {
+  mesh: NodeRef<"MESH">;
+  target_face_count: number;
+  placement_mode: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface DecimateMeshInputPaths {
+  mesh: string;
+  target_face_count: string;
+  placement_mode: string;
+}
+
+export interface DecimateMeshResult extends ComfyNodeOutput {
+  mesh?: ComfyOutputValue<"MESH">;
+}
+
+export interface DecimateMeshOutputs {
+  mesh: NodeRef<"MESH">;
+}
+
 export interface DecodeAndSaveVideoInputs {
   video_latent: NodeRef<"LATENT">;
   fps: number;
   filename_prefix: string;
-  format: "auto" | "mp4";
-  codec: "auto" | "h264";
+  format: "auto" | "mp4" | "mkv" | "webm";
+  codec: "auto" | "h264" | "av1";
   video_vae: NodeRef<"VAE">;
   tiling: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
   audio_latent?: NodeRef<"LATENT">;
@@ -6574,7 +10854,7 @@ export interface DepthAnythingV2PreprocessorOutputs {
 
 export interface DiffControlNetLoaderInputs {
   model: NodeRef<"MODEL">;
-  control_net_name: "control_v11p_sd15_openpose_fp16.safetensors" | "controlnet-union-sdxl-promax.safetensors" | "flux1-dev-controlnet-union-pro-2.0.safetensors" | "noobaiXLControlnet_epsBlur.safetensors" | "noobaiXLControlnet_openposeModel.safetensors";
+  control_net_name: "control_v11f1p_sd15_depth_fp16.safetensors" | "control_v11p_sd15_openpose_fp16.safetensors" | "controlnet-union-sdxl-promax.safetensors" | "flux1-dev-controlnet-union-pro-2.0.safetensors" | "noobaiXLControlnet_epsBlur.safetensors" | "noobaiXLControlnet_openposeModel.safetensors";
 }
 
 export interface DiffControlNetLoaderInputPaths {
@@ -6757,7 +11037,7 @@ export interface DisplayIntRgthreeResult extends ComfyNodeOutput {
 export interface DiTBlockLoraLoaderInputs {
   model: NodeRef<"MODEL">;
   strength_model: number;
-  lora_name?: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors";
+  lora_name?: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors" | "scavenger.safetensors";
   opt_lora_path?: string;
   blocks?: NodeRef<"SELECTEDDITBLOCKS">;
 }
@@ -7712,6 +11992,44 @@ export interface EmptyLTXVLatentVideoOutputs {
   LATENT: NodeRef<"LATENT">;
 }
 
+export interface EmptyMiniMaxH3LatentAVInputs {
+  width: number;
+  height: number;
+  length: number;
+}
+
+export interface EmptyMiniMaxH3LatentAVInputPaths {
+  width: string;
+  height: string;
+  length: string;
+}
+
+export interface EmptyMiniMaxH3LatentAVResult extends ComfyNodeOutput {
+  LATENT?: ComfyOutputValue<"LATENT">;
+}
+
+export interface EmptyMiniMaxH3LatentAVOutputs {
+  LATENT: NodeRef<"LATENT">;
+}
+
+export interface EmptyMiniMaxMusic3LatentAudioInputs {
+  seconds: number;
+  batch_size: number;
+}
+
+export interface EmptyMiniMaxMusic3LatentAudioInputPaths {
+  seconds: string;
+  batch_size: string;
+}
+
+export interface EmptyMiniMaxMusic3LatentAudioResult extends ComfyNodeOutput {
+  LATENT?: ComfyOutputValue<"LATENT">;
+}
+
+export interface EmptyMiniMaxMusic3LatentAudioOutputs {
+  LATENT: NodeRef<"LATENT">;
+}
+
 export interface EmptyMochiLatentVideoInputs {
   width: number;
   height: number;
@@ -7773,6 +12091,22 @@ export interface EmptySD3LatentImageResult extends ComfyNodeOutput {
 }
 
 export interface EmptySD3LatentImageOutputs {
+  LATENT: NodeRef<"LATENT">;
+}
+
+export interface EmptyTrellis2LatentStructureInputs {
+  batch_size: number;
+}
+
+export interface EmptyTrellis2LatentStructureInputPaths {
+  batch_size: string;
+}
+
+export interface EmptyTrellis2LatentStructureResult extends ComfyNodeOutput {
+  LATENT?: ComfyOutputValue<"LATENT">;
+}
+
+export interface EmptyTrellis2LatentStructureOutputs {
   LATENT: NodeRef<"LATENT">;
 }
 
@@ -8237,6 +12571,30 @@ export interface File3DToSplatOutputs {
   splat: NodeRef<"SPLAT">;
 }
 
+export interface FillHolesInputs {
+  mesh: NodeRef<"MESH">;
+  max_perimeter: number;
+  weld_epsilon_rel: number;
+  max_vertices: number;
+  fill_chains: boolean;
+}
+
+export interface FillHolesInputPaths {
+  mesh: string;
+  max_perimeter: string;
+  weld_epsilon_rel: string;
+  max_vertices: string;
+  fill_chains: string;
+}
+
+export interface FillHolesResult extends ComfyNodeOutput {
+  mesh?: ComfyOutputValue<"MESH">;
+}
+
+export interface FillHolesOutputs {
+  mesh: NodeRef<"MESH">;
+}
+
 export interface FilterZeroMasksAndCorrespondingImagesInputs {
   masks: NodeRef<"MASK">;
   original_images?: NodeRef<"IMAGE">;
@@ -8259,6 +12617,84 @@ export interface FilterZeroMasksAndCorrespondingImagesOutputs {
   non_zero_mask_images_out: NodeRef<"IMAGE">;
   zero_mask_images_out: NodeRef<"IMAGE">;
   zero_mask_images_out_indexes: NodeRef<"INDEXES">;
+}
+
+export interface FishAudioInstantVoiceCloneInputs {
+  files: NodeRef<"COMFY_AUTOGROW_V3">;
+  enhance_audio_quality: boolean;
+}
+
+export interface FishAudioInstantVoiceCloneInputPaths {
+  files: string;
+  enhance_audio_quality: string;
+}
+
+export interface FishAudioInstantVoiceCloneResult extends ComfyNodeOutput {
+  voice?: ComfyOutputValue<"FISHAUDIO_VOICE">;
+}
+
+export interface FishAudioInstantVoiceCloneOutputs {
+  voice: NodeRef<"FISHAUDIO_VOICE">;
+}
+
+export interface FishAudioSpeechToTextInputs {
+  audio: NodeRef<"AUDIO">;
+  language: string;
+  precise_timestamps: boolean;
+}
+
+export interface FishAudioSpeechToTextInputPaths {
+  audio: string;
+  language: string;
+  precise_timestamps: string;
+}
+
+export interface FishAudioSpeechToTextResult extends ComfyNodeOutput {
+  text?: ComfyOutputValue<"STRING">;
+  language_code?: ComfyOutputValue<"STRING">;
+  segments_json?: ComfyOutputValue<"STRING">;
+}
+
+export interface FishAudioSpeechToTextOutputs {
+  text: NodeRef<"STRING">;
+  language_code: NodeRef<"STRING">;
+  segments_json: NodeRef<"STRING">;
+}
+
+export interface FishAudioTextToSpeechInputs {
+  text: string;
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  seed: number;
+}
+
+export interface FishAudioTextToSpeechInputPaths {
+  text: string;
+  model: string;
+  seed: string;
+}
+
+export interface FishAudioTextToSpeechResult extends ComfyNodeOutput {
+  AUDIO?: ComfyOutputValue<"AUDIO">;
+}
+
+export interface FishAudioTextToSpeechOutputs {
+  AUDIO: NodeRef<"AUDIO">;
+}
+
+export interface FishAudioVoiceSelectorInputs {
+  voice: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface FishAudioVoiceSelectorInputPaths {
+  voice: string;
+}
+
+export interface FishAudioVoiceSelectorResult extends ComfyNodeOutput {
+  voice?: ComfyOutputValue<"FISHAUDIO_VOICE">;
+}
+
+export interface FishAudioVoiceSelectorOutputs {
+  voice: NodeRef<"FISHAUDIO_VOICE">;
 }
 
 export interface FlipSigmasInputs {
@@ -8443,6 +12879,96 @@ export interface Flux2SchedulerResult extends ComfyNodeOutput {
 
 export interface Flux2SchedulerOutputs {
   SIGMAS: NodeRef<"SIGMAS">;
+}
+
+export interface Flux3ImageToVideoNodeInputs {
+  prompt: string;
+  keyframes: NodeRef<"COMFY_AUTOGROW_V3">;
+  placement: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  aspect_ratio: "auto" | "21:9" | "2:1" | "16:9" | "4:3" | "1:1" | "3:4" | "9:16";
+  duration: "auto" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12" | "13" | "14" | "15" | "16" | "17" | "18" | "19" | "20";
+  resolution: "720p" | "1080p";
+  generate_audio: boolean;
+  safety_tolerance: number;
+  seed: number;
+}
+
+export interface Flux3ImageToVideoNodeInputPaths {
+  prompt: string;
+  keyframes: string;
+  placement: string;
+  aspect_ratio: string;
+  duration: string;
+  resolution: string;
+  generate_audio: string;
+  safety_tolerance: string;
+  seed: string;
+}
+
+export interface Flux3ImageToVideoNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface Flux3ImageToVideoNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface Flux3TextToVideoNodeInputs {
+  prompt: string;
+  aspect_ratio: "auto" | "21:9" | "2:1" | "16:9" | "4:3" | "1:1" | "3:4" | "9:16";
+  duration: "auto" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12" | "13" | "14" | "15" | "16" | "17" | "18" | "19" | "20";
+  resolution: "720p" | "1080p";
+  generate_audio: boolean;
+  safety_tolerance: number;
+  seed: number;
+}
+
+export interface Flux3TextToVideoNodeInputPaths {
+  prompt: string;
+  aspect_ratio: string;
+  duration: string;
+  resolution: string;
+  generate_audio: string;
+  safety_tolerance: string;
+  seed: string;
+}
+
+export interface Flux3TextToVideoNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface Flux3TextToVideoNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface Flux3VideoContinuationNodeInputs {
+  video: NodeRef<"VIDEO">;
+  prompt: string;
+  aspect_ratio: "auto" | "21:9" | "2:1" | "16:9" | "4:3" | "1:1" | "3:4" | "9:16";
+  duration: "auto" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12" | "13" | "14" | "15" | "16" | "17" | "18" | "19" | "20";
+  resolution: "720p" | "1080p";
+  generate_audio: boolean;
+  safety_tolerance: number;
+  seed: number;
+}
+
+export interface Flux3VideoContinuationNodeInputPaths {
+  video: string;
+  prompt: string;
+  aspect_ratio: string;
+  duration: string;
+  resolution: string;
+  generate_audio: string;
+  safety_tolerance: string;
+  seed: string;
+}
+
+export interface Flux3VideoContinuationNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface Flux3VideoContinuationNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
 }
 
 export interface FluxBlockLoraSelectInputs {
@@ -8865,6 +13391,34 @@ export interface FluxSamplerParamsOutputs {
   params: NodeRef<"SAMPLER_PARAMS">;
 }
 
+export interface FluxVideoUpscaleNodeInputs {
+  video: NodeRef<"VIDEO">;
+  upscale_factor: number;
+  mode: "creative" | "precise";
+  prompt: string;
+  auto_downscale: boolean;
+  safety_tolerance: number;
+  seed: number;
+}
+
+export interface FluxVideoUpscaleNodeInputPaths {
+  video: string;
+  upscale_factor: string;
+  mode: string;
+  prompt: string;
+  auto_downscale: string;
+  safety_tolerance: string;
+  seed: string;
+}
+
+export interface FluxVideoUpscaleNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface FluxVideoUpscaleNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
 export interface FluxVTONodeInputs {
   person: NodeRef<"IMAGE">;
   garment: NodeRef<"IMAGE">;
@@ -9219,6 +13773,24 @@ export interface GeminiVideoOmniOutputs {
   STRING: NodeRef<"STRING">;
 }
 
+export interface GeminiVideoOmniV2Inputs {
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface GeminiVideoOmniV2InputPaths {
+  model: string;
+}
+
+export interface GeminiVideoOmniV2Result extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+  STRING?: ComfyOutputValue<"STRING">;
+}
+
+export interface GeminiVideoOmniV2Outputs {
+  VIDEO: NodeRef<"VIDEO">;
+  STRING: NodeRef<"STRING">;
+}
+
 export interface GenerateNoiseInputs {
   width: number;
   height: number;
@@ -9547,6 +14119,24 @@ export interface GetMaskSizeAndCountOutputs {
   count: NodeRef<"INT">;
 }
 
+export interface GetMeshInfoInputs {
+  mesh: NodeRef<"MESH">;
+}
+
+export interface GetMeshInfoInputPaths {
+  mesh: string;
+}
+
+export interface GetMeshInfoResult extends ComfyNodeOutput {
+  mesh?: ComfyOutputValue<"MESH">;
+  info?: ComfyOutputValue<"STRING">;
+}
+
+export interface GetMeshInfoOutputs {
+  mesh: NodeRef<"MESH">;
+  info: NodeRef<"STRING">;
+}
+
 export interface GetPreviewOverrideFramesKJInputs {
   model: NodeRef<"MODEL">;
   after_sample: NodeRef<"LATENT,IMAGE">;
@@ -9615,14 +14205,16 @@ export interface GetVideoComponentsResult extends ComfyNodeOutput {
   images?: ComfyOutputValue<"IMAGE">;
   audio?: ComfyOutputValue<"AUDIO">;
   fps?: ComfyOutputValue<"FLOAT">;
-  bit_depth?: ComfyOutputValue<"INT">;
+  bit_depth?: ComfyOutputValue<"COMBO">;
+  color_space?: ComfyOutputValue<"COMBO">;
 }
 
 export interface GetVideoComponentsOutputs {
   images: NodeRef<"IMAGE">;
   audio: NodeRef<"AUDIO">;
   fps: NodeRef<"FLOAT">;
-  bit_depth: NodeRef<"INT">;
+  bit_depth: NodeRef<"COMBO">;
+  color_space: NodeRef<"COMBO">;
 }
 
 export interface GGUFLoaderKJInputs {
@@ -9856,12 +14448,13 @@ export interface GrokImageEditNodeV2Outputs {
 }
 
 export interface GrokImageNodeInputs {
-  model: "grok-imagine-image-quality" | "grok-imagine-image-pro" | "grok-imagine-image";
+  model: "grok-imagine-image-2.0" | "grok-imagine-image-quality" | "grok-imagine-image-pro" | "grok-imagine-image";
   prompt: string;
   aspect_ratio: "1:1" | "2:3" | "3:2" | "3:4" | "4:3" | "9:16" | "16:9" | "9:19.5" | "19.5:9" | "9:20" | "20:9" | "1:2" | "2:1";
   number_of_images: number;
   seed: number;
   resolution?: "1K" | "2K";
+  quality?: "medium" | "low";
 }
 
 export interface GrokImageNodeInputPaths {
@@ -9871,6 +14464,7 @@ export interface GrokImageNodeInputPaths {
   number_of_images: string;
   seed: string;
   resolution: string;
+  quality: string;
 }
 
 export interface GrokImageNodeResult extends ComfyNodeOutput {
@@ -10153,6 +14747,130 @@ export interface HEDPreprocessorResult extends ComfyNodeOutput {
 
 export interface HEDPreprocessorOutputs {
   IMAGE: NodeRef<"IMAGE">;
+}
+
+export interface HeyGenAvatarVideoNodeInputs {
+  engine: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  speech: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  custom_avatar_id?: string;
+  resolution?: "720p" | "1080p";
+  aspect_ratio?: "auto" | "16:9" | "9:16" | "1:1" | "4:5" | "5:4";
+  background_color?: string;
+  seed?: number;
+}
+
+export interface HeyGenAvatarVideoNodeInputPaths {
+  engine: string;
+  speech: string;
+  custom_avatar_id: string;
+  resolution: string;
+  aspect_ratio: string;
+  background_color: string;
+  seed: string;
+}
+
+export interface HeyGenAvatarVideoNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface HeyGenAvatarVideoNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface HeyGenCreateAvatarNodeInputs {
+  source: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface HeyGenCreateAvatarNodeInputPaths {
+  source: string;
+}
+
+export interface HeyGenCreateAvatarNodeResult extends ComfyNodeOutput {
+  avatar_id?: ComfyOutputValue<"STRING">;
+  preview?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface HeyGenCreateAvatarNodeOutputs {
+  avatar_id: NodeRef<"STRING">;
+  preview: NodeRef<"IMAGE">;
+}
+
+export interface HeyGenTalkingPhotoNodeInputs {
+  image: NodeRef<"IMAGE">;
+  speech: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  resolution?: "720p" | "1080p";
+  aspect_ratio?: "auto" | "16:9" | "9:16" | "1:1" | "4:5" | "5:4";
+  expressiveness?: "low" | "medium" | "high";
+  seed?: number;
+}
+
+export interface HeyGenTalkingPhotoNodeInputPaths {
+  image: string;
+  speech: string;
+  resolution: string;
+  aspect_ratio: string;
+  expressiveness: string;
+  seed: string;
+}
+
+export interface HeyGenTalkingPhotoNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface HeyGenTalkingPhotoNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface HeyGenTextToSpeechNodeInputs {
+  text: string;
+  voice: "Chill Brian (English, male)" | "Zain (English, female)" | "Narrator Mateo - Excited 🤩 (Spanish, male)" | "Aria (English, female)" | "Caryns (English, female)" | "Klara (English, female)" | "Bold Kasia - Excited 🤩 (Polish, female)" | "Shaun (English, male)" | "Senthil (English, male)" | "Cody (English, male)" | "Saffron (English, female)" | "Blanka - Lifelike (English, female)" | "Rami (English, male)" | "Rhodes (English, female)" | "Michelle - Voice 1 (English, female)" | "Autumn - UGC 3 (English, female)" | "Reassuring Rupert (English, male)" | "Rose - UGC -2  (English, female)" | "Derya - Lifelike - Broadcaster 🎙️ (English, female)" | "Dynamic Derek (English, male)" | "Lotte (English, female)" | "Thanos - Broadcaster 🎙️ (English, male)" | "Marcia (English, female)" | "Camden (English, male)" | "Rumi (English, female)" | "Pippa (English, female)" | "William Prescott - Broadcaster 🎙️ (English, male)" | "Sammy (English, female)" | "Breezy Bagus (Indonesian, male)" | "Ben (English, male)" | "Smooth Dev (English, male)" | "Daran inside booth (English, male)" | "Peppy Stella (English, female)" | "Silas (English, male)" | "Aditya (English, male)" | "Christy (English, female)" | "Elio (English, male)" | "Luminous Laksh (Hindi, male)" | "Jeff (English, male)" | "Tahlia Brooks - Excited 🤩 (English, female)" | "Riya Mehta (Hindi, female)" | "Ben Hart (English, male)" | "Skylar (English, female)" | "Relaxed Reece (English, male)" | "Daniel (English, male)" | "Melani (English, female)" | "Clover (English, female)" | "Pedro Lima - Serious 😐 (Portuguese, male)" | "Ana Carvalho (Portuguese, female)" | "Confident Connor - Excited 🤩 (English, male)" | "Vibrant Victor (Spanish, male)" | "Young Olivier (French, male)" | "Émile Noir (French, male)" | "Steadfast Stefan (German, male)" | "Deep Dieter (German, male)" | "Serene Marco (Italian, male)" | "Murmuring Matteo (Italian, male)" | "Gail in car (Multilingual, female)" | "Daran outside walking (Multilingual, male)" | "BOB - Voice 1 (Chinese, unknown)" | "Hakeem Hassan (Arabic, male)" | "Rami Idris (Arabic, male)" | "Bold Kasia - Friendly 😊 (Polish, female)" | "Tranquil Tulin (Turkish, female)" | "Dynamic Derya (Turkish, female)" | "Quiet Dewa (Indonesian, male)" | "Cuong (Vietnamese, male)";
+  custom_voice_id?: string;
+  speed?: number;
+  ssml?: boolean;
+  seed?: number;
+}
+
+export interface HeyGenTextToSpeechNodeInputPaths {
+  text: string;
+  voice: string;
+  custom_voice_id: string;
+  speed: string;
+  ssml: string;
+  seed: string;
+}
+
+export interface HeyGenTextToSpeechNodeResult extends ComfyNodeOutput {
+  AUDIO?: ComfyOutputValue<"AUDIO">;
+}
+
+export interface HeyGenTextToSpeechNodeOutputs {
+  AUDIO: NodeRef<"AUDIO">;
+}
+
+export interface HeyGenVideoTranslateNodeInputs {
+  video: NodeRef<"VIDEO">;
+  output_language: "English" | "Spanish" | "Spanish (Spain)" | "Spanish (Mexico)" | "French" | "French (France)" | "German" | "German (Germany)" | "Portuguese" | "Portuguese (Brazil)" | "Italian" | "Italian (Italy)" | "Japanese" | "Japanese (Japan)" | "Korean" | "Chinese (Mandarin, Simplified)" | "Arabic" | "Hindi" | "Hindi (India)" | "Russian" | "Russian (Russia)" | "Dutch" | "Polish" | "Turkish" | "Indonesian" | "Vietnamese" | "Ukrainian" | "Afrikaans (South Africa)" | "Albanian (Albania)" | "Amharic (Ethiopia)" | "Arabic (Algeria)" | "Arabic (Bahrain)" | "Arabic (Egypt)" | "Arabic (Iraq)" | "Arabic (Jordan)" | "Arabic (Kuwait)" | "Arabic (Lebanon)" | "Arabic (Libya)" | "Arabic (Morocco)" | "Arabic (Oman)" | "Arabic (Qatar)" | "Arabic (Saudi Arabia)" | "Arabic (Syria)" | "Arabic (Tunisia)" | "Arabic (United Arab Emirates)" | "Arabic (World)" | "Arabic (Yemen)" | "Armenian (Armenia)" | "Azerbaijani (Latin, Azerbaijan)" | "Bangla (Bangladesh)" | "Basque" | "Belarusian (Belarus)" | "Bengali (India)" | "Bosnian (Bosnia and Herzegovina)" | "Bulgarian" | "Bulgarian (Bulgaria)" | "Burmese (Myanmar)" | "Catalan" | "Chinese (Cantonese, Traditional)" | "Chinese (Jilu Mandarin, Simplified)" | "Chinese (Northeastern Mandarin, Simplified)" | "Chinese (Southwestern Mandarin, Simplified)" | "Chinese (Taiwanese Mandarin, Traditional)" | "Chinese (Wu, Simplified)" | "Chinese (Zhongyuan Mandarin Henan, Simplified)" | "Chinese (Zhongyuan Mandarin Shaanxi, Simplified)" | "Croatian" | "Croatian (Croatia)" | "Czech" | "Czech (Czechia)" | "Danish" | "Danish (Denmark)" | "Dutch (Belgium)" | "Dutch (Netherlands)" | "English (Australia)" | "English (Canada)" | "English (Hong Kong SAR)" | "English (India)" | "English (Ireland)" | "English (Kenya)" | "English (New Zealand)" | "English (Nigeria)" | "English (Philippines)" | "English (Singapore)" | "English (South Africa)" | "English (Tanzania)" | "English (UK)" | "English (United States)" | "Estonian (Estonia)" | "Filipino" | "Filipino (Cebuano)" | "Filipino (Philippines)" | "Finnish" | "Finnish (Finland)" | "French (Belgium)" | "French (Canada)" | "French (Switzerland)" | "Galician" | "Georgian (Georgia)" | "German (Austria)" | "German (Switzerland)" | "Greek" | "Greek (Greece)" | "Gujarati (India)" | "Haitian Creole (Haiti)" | "Hebrew (Israel)" | "Hungarian (Hungary)" | "Icelandic (Iceland)" | "Indonesian (Indonesia)" | "Irish (Ireland)" | "Javanese (Latin, Indonesia)" | "Kannada (India)" | "Kazakh (Kazakhstan)" | "Khmer (Cambodia)" | "Konkani (India)" | "Korean (Korea)" | "Lao (Laos)" | "Latin (Vatican City)" | "Latvian (Latvia)" | "Lithuanian (Lithuania)" | "Luxembourgish (Luxembourg)" | "Macedonian (North Macedonia)" | "Maithili (India)" | "Malagasy (Madagascar)" | "Malay" | "Malay (Malaysia)" | "Malayalam (India)" | "Maltese (Malta)" | "Mandarin" | "Marathi (India)" | "Mongolian (Mongolia)" | "Nepali (Nepal)" | "Norwegian Bokmål (Norway)" | "Norwegian Nynorsk (Norway)" | "Odia (India)" | "Pashto (Afghanistan)" | "Persian (Iran)" | "Polish (Poland)" | "Portuguese (Portugal)" | "Punjabi (India)" | "Romanian" | "Romanian (Romania)" | "Serbian (Latin, Serbia)" | "Sindhi (India)" | "Sinhala (Sri Lanka)" | "Slovak" | "Slovak (Slovakia)" | "Slovenian (Slovenia)" | "Somali (Somalia)" | "Spanish (Argentina)" | "Spanish (Bolivia)" | "Spanish (Chile)" | "Spanish (Colombia)" | "Spanish (Costa Rica)" | "Spanish (Cuba)" | "Spanish (Dominican Republic)" | "Spanish (Ecuador)" | "Spanish (El Salvador)" | "Spanish (Equatorial Guinea)" | "Spanish (Guatemala)" | "Spanish (Honduras)" | "Spanish (Latin America)" | "Spanish (Nicaragua)" | "Spanish (Panama)" | "Spanish (Paraguay)" | "Spanish (Peru)" | "Spanish (Puerto Rico)" | "Spanish (United States)" | "Spanish (Uruguay)" | "Spanish (Venezuela)" | "Sundanese (Indonesia)" | "Swahili (Kenya)" | "Swahili (Tanzania)" | "Swedish" | "Swedish (Sweden)" | "Tamil" | "Tamil (India)" | "Tamil (Malaysia)" | "Tamil (Singapore)" | "Tamil (Sri Lanka)" | "Telugu (India)" | "Thai (Thailand)" | "Turkish (Türkiye)" | "Ukrainian (Ukraine)" | "Urdu (India)" | "Urdu (Pakistan)" | "Uzbek (Latin, Uzbekistan)" | "Vietnamese (Vietnam)" | "Welsh (United Kingdom)" | "Zulu (South Africa)";
+  mode: "speed" | "precision";
+  translate_audio_only?: boolean;
+  speaker_count?: number;
+  seed?: number;
+}
+
+export interface HeyGenVideoTranslateNodeInputPaths {
+  video: string;
+  output_language: string;
+  mode: string;
+  translate_audio_only: string;
+  speaker_count: string;
+  seed: string;
+}
+
+export interface HeyGenVideoTranslateNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface HeyGenVideoTranslateNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
 }
 
 export interface HiDreamO1PatchSeamSmoothingInputs {
@@ -10783,64 +15501,32 @@ export interface Ideogram4SchedulerOutputs {
   SIGMAS: NodeRef<"SIGMAS">;
 }
 
-export interface IdeogramV1Inputs {
+export interface IdeogramPImageInputs {
   prompt: string;
-  turbo: boolean;
-  aspect_ratio?: "1:1" | "4:3" | "3:4" | "16:9" | "9:16" | "2:1" | "1:2" | "3:2" | "2:3" | "4:5" | "5:4";
-  magic_prompt_option?: "AUTO" | "ON" | "OFF";
+  quality: "VERY_LOW" | "LOW" | "MEDIUM" | "HIGH";
+  resolution: "1K" | "2K";
+  aspect_ratio: "1:3" | "3:1" | "1:2" | "2:1" | "9:16" | "16:9" | "10:16" | "16:10" | "2:3" | "3:2" | "3:4" | "4:3" | "4:5" | "5:4" | "1:1";
+  prompt_upsampling: "AUTO" | "ON" | "OFF";
   seed?: number;
-  negative_prompt?: string;
-  num_images?: number;
 }
 
-export interface IdeogramV1InputPaths {
+export interface IdeogramPImageInputPaths {
   prompt: string;
-  turbo: string;
-  aspect_ratio: string;
-  magic_prompt_option: string;
-  seed: string;
-  negative_prompt: string;
-  num_images: string;
-}
-
-export interface IdeogramV1Result extends ComfyNodeOutput {
-  IMAGE?: ComfyOutputValue<"IMAGE">;
-}
-
-export interface IdeogramV1Outputs {
-  IMAGE: NodeRef<"IMAGE">;
-}
-
-export interface IdeogramV2Inputs {
-  prompt: string;
-  turbo: boolean;
-  aspect_ratio?: "1:1" | "4:3" | "3:4" | "16:9" | "9:16" | "2:1" | "1:2" | "3:2" | "2:3" | "4:5" | "5:4";
-  resolution?: "Auto" | "512 x 1536" | "576 x 1408" | "576 x 1472" | "576 x 1536" | "640 x 1024" | "640 x 1344" | "640 x 1408" | "640 x 1472" | "640 x 1536" | "704 x 1152" | "704 x 1216" | "704 x 1280" | "704 x 1344" | "704 x 1408" | "704 x 1472" | "720 x 1280" | "736 x 1312" | "768 x 1024" | "768 x 1088" | "768 x 1152" | "768 x 1216" | "768 x 1232" | "768 x 1280" | "768 x 1344" | "832 x 960" | "832 x 1024" | "832 x 1088" | "832 x 1152" | "832 x 1216" | "832 x 1248" | "864 x 1152" | "896 x 960" | "896 x 1024" | "896 x 1088" | "896 x 1120" | "896 x 1152" | "960 x 832" | "960 x 896" | "960 x 1024" | "960 x 1088" | "1024 x 640" | "1024 x 768" | "1024 x 832" | "1024 x 896" | "1024 x 960" | "1024 x 1024" | "1088 x 768" | "1088 x 832" | "1088 x 896" | "1088 x 960" | "1120 x 896" | "1152 x 704" | "1152 x 768" | "1152 x 832" | "1152 x 864" | "1152 x 896" | "1216 x 704" | "1216 x 768" | "1216 x 832" | "1232 x 768" | "1248 x 832" | "1280 x 704" | "1280 x 720" | "1280 x 768" | "1280 x 800" | "1312 x 736" | "1344 x 640" | "1344 x 704" | "1344 x 768" | "1408 x 576" | "1408 x 640" | "1408 x 704" | "1472 x 576" | "1472 x 640" | "1472 x 704" | "1536 x 512" | "1536 x 576" | "1536 x 640";
-  magic_prompt_option?: "AUTO" | "ON" | "OFF";
-  seed?: number;
-  style_type?: "AUTO" | "GENERAL" | "REALISTIC" | "DESIGN" | "RENDER_3D" | "ANIME";
-  negative_prompt?: string;
-  num_images?: number;
-}
-
-export interface IdeogramV2InputPaths {
-  prompt: string;
-  turbo: string;
-  aspect_ratio: string;
+  quality: string;
   resolution: string;
-  magic_prompt_option: string;
+  aspect_ratio: string;
+  prompt_upsampling: string;
   seed: string;
-  style_type: string;
-  negative_prompt: string;
-  num_images: string;
 }
 
-export interface IdeogramV2Result extends ComfyNodeOutput {
+export interface IdeogramPImageResult extends ComfyNodeOutput {
   IMAGE?: ComfyOutputValue<"IMAGE">;
+  final_prompt?: ComfyOutputValue<"STRING">;
 }
 
-export interface IdeogramV2Outputs {
+export interface IdeogramPImageOutputs {
   IMAGE: NodeRef<"IMAGE">;
+  final_prompt: NodeRef<"STRING">;
 }
 
 export interface IdeogramV3Inputs {
@@ -11510,6 +16196,26 @@ export interface ImageCompositeMaskedOutputs {
   IMAGE: NodeRef<"IMAGE">;
 }
 
+export interface ImageCompositorInputs {
+  layers: NodeRef<"LAYERS">;
+  compositor: NodeRef<"COMPOSITOR">;
+}
+
+export interface ImageCompositorInputPaths {
+  layers: string;
+  compositor: string;
+}
+
+export interface ImageCompositorResult extends ComfyNodeOutput {
+  IMAGE?: ComfyOutputValue<"IMAGE">;
+  MASK?: ComfyOutputValue<"MASK">;
+}
+
+export interface ImageCompositorOutputs {
+  IMAGE: NodeRef<"IMAGE">;
+  MASK: NodeRef<"MASK">;
+}
+
 export interface ImageConcanateInputs {
   image1: NodeRef<"COMFY_MATCHTYPE_V3">;
   image2: NodeRef<"IMAGE,MASK">;
@@ -11708,6 +16414,34 @@ export interface ImageCropByMaskBatchResult extends ComfyNodeOutput {
 export interface ImageCropByMaskBatchOutputs {
   images: NodeRef<"IMAGE">;
   masks: NodeRef<"MASK">;
+}
+
+export interface ImageCropToMaskInputs {
+  images: NodeRef<"IMAGE">;
+  masks: NodeRef<"MASK">;
+  width: number;
+  height: number;
+  pad_factor: number;
+  grow_mask: number;
+  background: NodeRef<"COLOR">;
+}
+
+export interface ImageCropToMaskInputPaths {
+  images: string;
+  masks: string;
+  width: string;
+  height: string;
+  pad_factor: string;
+  grow_mask: string;
+  background: string;
+}
+
+export interface ImageCropToMaskResult extends ComfyNodeOutput {
+  images?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface ImageCropToMaskOutputs {
+  images: NodeRef<"IMAGE">;
 }
 
 export interface ImageCropV2Inputs {
@@ -12221,7 +16955,7 @@ export interface ImageNormalize_Neg1_To_1Outputs {
 }
 
 export interface ImageOnlyCheckpointLoaderInputs {
-  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
+  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
 }
 
 export interface ImageOnlyCheckpointLoaderInputPaths {
@@ -13804,7 +18538,7 @@ export interface IPAdapterLoadEmbedsOutputs {
 }
 
 export interface IPAdapterModelLoaderInputs {
-  ipadapter_file: "ip-adapter-plus_sdxl_vit-h.safetensors";
+  ipadapter_file: "ip-adapter-plus_sd15.safetensors" | "ip-adapter-plus_sdxl_vit-h.safetensors";
 }
 
 export interface IPAdapterModelLoaderInputPaths {
@@ -14442,120 +19176,6 @@ export interface KlingAvatarNodeOutputs {
   VIDEO: NodeRef<"VIDEO">;
 }
 
-export interface KlingCameraControlI2VNodeInputs {
-  start_frame: NodeRef<"IMAGE">;
-  prompt: string;
-  negative_prompt: string;
-  cfg_scale: number;
-  aspect_ratio: "16:9" | "9:16" | "1:1";
-  camera_control: NodeRef<"CAMERA_CONTROL">;
-}
-
-export interface KlingCameraControlI2VNodeInputPaths {
-  start_frame: string;
-  prompt: string;
-  negative_prompt: string;
-  cfg_scale: string;
-  aspect_ratio: string;
-  camera_control: string;
-}
-
-export interface KlingCameraControlI2VNodeResult extends ComfyNodeOutput {
-  VIDEO?: ComfyOutputValue<"VIDEO">;
-  video_id?: ComfyOutputValue<"STRING">;
-  duration?: ComfyOutputValue<"STRING">;
-}
-
-export interface KlingCameraControlI2VNodeOutputs {
-  VIDEO: NodeRef<"VIDEO">;
-  video_id: NodeRef<"STRING">;
-  duration: NodeRef<"STRING">;
-}
-
-export interface KlingCameraControlsInputs {
-  camera_control_type: "simple" | "down_back" | "forward_up" | "right_turn_forward" | "left_turn_forward";
-  horizontal_movement: number;
-  vertical_movement: number;
-  pan: number;
-  tilt: number;
-  roll: number;
-  zoom: number;
-}
-
-export interface KlingCameraControlsInputPaths {
-  camera_control_type: string;
-  horizontal_movement: string;
-  vertical_movement: string;
-  pan: string;
-  tilt: string;
-  roll: string;
-  zoom: string;
-}
-
-export interface KlingCameraControlsResult extends ComfyNodeOutput {
-  camera_control?: ComfyOutputValue<"CAMERA_CONTROL">;
-}
-
-export interface KlingCameraControlsOutputs {
-  camera_control: NodeRef<"CAMERA_CONTROL">;
-}
-
-export interface KlingCameraControlT2VNodeInputs {
-  prompt: string;
-  negative_prompt: string;
-  cfg_scale: number;
-  aspect_ratio: "16:9" | "9:16" | "1:1";
-  camera_control: NodeRef<"CAMERA_CONTROL">;
-}
-
-export interface KlingCameraControlT2VNodeInputPaths {
-  prompt: string;
-  negative_prompt: string;
-  cfg_scale: string;
-  aspect_ratio: string;
-  camera_control: string;
-}
-
-export interface KlingCameraControlT2VNodeResult extends ComfyNodeOutput {
-  VIDEO?: ComfyOutputValue<"VIDEO">;
-  video_id?: ComfyOutputValue<"STRING">;
-  duration?: ComfyOutputValue<"STRING">;
-}
-
-export interface KlingCameraControlT2VNodeOutputs {
-  VIDEO: NodeRef<"VIDEO">;
-  video_id: NodeRef<"STRING">;
-  duration: NodeRef<"STRING">;
-}
-
-export interface KlingDualCharacterVideoEffectNodeInputs {
-  image_left: NodeRef<"IMAGE">;
-  image_right: NodeRef<"IMAGE">;
-  effect_scene: "hug" | "kiss" | "heart_gesture";
-  model_name: "kling-v1" | "kling-v1-5" | "kling-v1-6";
-  mode: "std" | "pro";
-  duration: "5" | "10";
-}
-
-export interface KlingDualCharacterVideoEffectNodeInputPaths {
-  image_left: string;
-  image_right: string;
-  effect_scene: string;
-  model_name: string;
-  mode: string;
-  duration: string;
-}
-
-export interface KlingDualCharacterVideoEffectNodeResult extends ComfyNodeOutput {
-  VIDEO?: ComfyOutputValue<"VIDEO">;
-  duration?: ComfyOutputValue<"STRING">;
-}
-
-export interface KlingDualCharacterVideoEffectNodeOutputs {
-  VIDEO: NodeRef<"VIDEO">;
-  duration: NodeRef<"STRING">;
-}
-
 export interface KlingFirstLastFrameNodeInputs {
   prompt: string;
   duration: number;
@@ -14588,9 +19208,9 @@ export interface KlingImage2VideoNodeInputs {
   start_frame: NodeRef<"IMAGE">;
   prompt: string;
   negative_prompt: string;
-  model_name: "kling-v1" | "kling-v1-5" | "kling-v1-6" | "kling-v2-master" | "kling-v2-1" | "kling-v2-1-master" | "kling-v2-5-turbo";
+  model_name: "kling-v2-5-turbo";
   cfg_scale: number;
-  mode: "std" | "pro";
+  mode: "pro";
   aspect_ratio: "16:9" | "9:16" | "1:1";
   duration: "5" | "10";
 }
@@ -14624,7 +19244,7 @@ export interface KlingImageGenerationNodeInputs {
   image_type: "subject" | "face";
   image_fidelity: number;
   human_fidelity: number;
-  model_name: "kling-v3" | "kling-v2" | "kling-v1-5";
+  model_name: "kling-v3";
   aspect_ratio: "16:9" | "9:16" | "1:1" | "4:3" | "3:4" | "3:2" | "2:3" | "21:9";
   n: number;
   image?: NodeRef<"IMAGE">;
@@ -14940,32 +19560,6 @@ export interface KlingOmniProVideoToVideoNodeOutputs {
   VIDEO: NodeRef<"VIDEO">;
 }
 
-export interface KlingSingleImageVideoEffectNodeInputs {
-  image: NodeRef<"IMAGE">;
-  effect_scene: "bloombloom" | "dizzydizzy" | "fuzzyfuzzy" | "squish" | "expansion";
-  model_name: "kling-v1-6";
-  duration: "5" | "10";
-}
-
-export interface KlingSingleImageVideoEffectNodeInputPaths {
-  image: string;
-  effect_scene: string;
-  model_name: string;
-  duration: string;
-}
-
-export interface KlingSingleImageVideoEffectNodeResult extends ComfyNodeOutput {
-  VIDEO?: ComfyOutputValue<"VIDEO">;
-  video_id?: ComfyOutputValue<"STRING">;
-  duration?: ComfyOutputValue<"STRING">;
-}
-
-export interface KlingSingleImageVideoEffectNodeOutputs {
-  VIDEO: NodeRef<"VIDEO">;
-  video_id: NodeRef<"STRING">;
-  duration: NodeRef<"STRING">;
-}
-
 export interface KlingStartEndFrameNodeInputs {
   start_frame: NodeRef<"IMAGE">;
   end_frame: NodeRef<"IMAGE">;
@@ -14973,7 +19567,7 @@ export interface KlingStartEndFrameNodeInputs {
   negative_prompt: string;
   cfg_scale: number;
   aspect_ratio: "16:9" | "9:16" | "1:1";
-  mode: "pro mode / 5s duration / kling-v1-5" | "pro mode / 10s duration / kling-v1-5" | "pro mode / 5s duration / kling-v1-6" | "pro mode / 10s duration / kling-v1-6" | "pro mode / 5s duration / kling-v2-1" | "pro mode / 10s duration / kling-v2-1" | "pro mode / 5s duration / kling-v2-5-turbo" | "pro mode / 10s duration / kling-v2-5-turbo";
+  mode: "pro mode / 5s duration / kling-v2-5-turbo" | "pro mode / 10s duration / kling-v2-5-turbo";
 }
 
 export interface KlingStartEndFrameNodeInputPaths {
@@ -15003,7 +19597,7 @@ export interface KlingTextToVideoNodeInputs {
   negative_prompt: string;
   cfg_scale: number;
   aspect_ratio: "16:9" | "9:16" | "1:1";
-  mode: "standard mode / 5s duration / kling-v1-6" | "standard mode / 10s duration / kling-v1-6" | "pro mode / 5s duration / kling-v2-master" | "pro mode / 10s duration / kling-v2-master" | "standard mode / 5s duration / kling-v2-master" | "standard mode / 10s duration / kling-v2-master" | "pro mode / 5s duration / kling-v2-1-master" | "pro mode / 10s duration / kling-v2-1-master" | "pro mode / 5s duration / kling-v2-5-turbo" | "pro mode / 10s duration / kling-v2-5-turbo";
+  mode: "pro mode / 5s duration / kling-v2-5-turbo" | "pro mode / 10s duration / kling-v2-5-turbo";
 }
 
 export interface KlingTextToVideoNodeInputPaths {
@@ -15100,26 +19694,6 @@ export interface KlingVideoNodeResult extends ComfyNodeOutput {
 
 export interface KlingVideoNodeOutputs {
   VIDEO: NodeRef<"VIDEO">;
-}
-
-export interface KlingVirtualTryOnNodeInputs {
-  human_image: NodeRef<"IMAGE">;
-  cloth_image: NodeRef<"IMAGE">;
-  model_name: "kolors-virtual-try-on-v1" | "kolors-virtual-try-on-v1-5";
-}
-
-export interface KlingVirtualTryOnNodeInputPaths {
-  human_image: string;
-  cloth_image: string;
-  model_name: string;
-}
-
-export interface KlingVirtualTryOnNodeResult extends ComfyNodeOutput {
-  IMAGE?: ComfyOutputValue<"IMAGE">;
-}
-
-export interface KlingVirtualTryOnNodeOutputs {
-  IMAGE: NodeRef<"IMAGE">;
 }
 
 export interface Krea2ImageNodeInputs {
@@ -18284,6 +22858,34 @@ export interface LayerMaskYoloV8DetectOutputs {
   mask: NodeRef<"MASK">;
   yolo_plot_image: NodeRef<"IMAGE">;
   yolo_masks: NodeRef<"MASK">;
+}
+
+export interface LayersFromBoundingBoxesInputs {
+  image: NodeRef<"IMAGE">;
+  bboxes: NodeRef<"BOUNDING_BOX,ARRAY,STRING">;
+  mask?: NodeRef<"MASK">;
+  layers?: NodeRef<"LAYERS">;
+  crop_to_content?: boolean;
+  canvas_width?: number;
+  canvas_height?: number;
+}
+
+export interface LayersFromBoundingBoxesInputPaths {
+  image: string;
+  bboxes: string;
+  mask: string;
+  layers: string;
+  crop_to_content: string;
+  canvas_width: string;
+  canvas_height: string;
+}
+
+export interface LayersFromBoundingBoxesResult extends ComfyNodeOutput {
+  LAYERS?: ComfyOutputValue<"LAYERS">;
+}
+
+export interface LayersFromBoundingBoxesOutputs {
+  LAYERS: NodeRef<"LAYERS">;
 }
 
 export interface LayerStyleColorOverlayInputs {
@@ -21596,7 +26198,7 @@ export interface Load3DAdvancedOutputs {
 }
 
 export interface LoadAndResizeImageInputs {
-  image: ".keep" | "0.png" | "02_no-lora_hands-on-hips.png" | "1.png" | "11825534i.jpeg" | "11834342.png" | "11839199i.jpeg" | "11844201.png" | "11844382i.jpeg" | "147030163_p0_master1200.jpg" | "1758718416-oUa45JKFIWBLMCnH3GluqeyT.webp" | "2.png" | "3.png" | "ComfyUI_00008_.png" | "HN_XH40bYAAbCHh.jpeg" | "HNrls4iaQAA_ktf.jpeg" | "__toki_blue_archive_drawn_by_shimontaru__27180d4527a52c85b41b12e4fc9ec666.jpg" | "__yoko_littner_tengen_toppa_gurren_lagann_generated_by_depressuart__sample-0a9ff519b07cb5b46f096a0d6d5c5d62.jpg" | "anima_startframe_00001_.png" | "capeless_f1.png" | "capeless_f2.png" | "capeless_f3.png" | "capeless_f4.png" | "char_ref_front.png" | "char_tpose_final.png" | "charsheet_hires_src.png" | "cnpose_f1.png" | "cnpose_f2.png" | "cnpose_f3.png" | "cnpose_f4.png" | "cs_34.png" | "cs_back.png" | "cs_side.png" | "demo_00032_.png" | "front_00001_.png" | "front_00021_.png" | "h3d_test_char.png" | "handmask_320.png" | "mech_00001_.png" | "scavenger_00001_.png" | "scavenger_00002_.png" | "text_00006_.png" | "tpose_openpose.png" | "tpose_openpose_1152.png" | "tpose_openpose_v2.png" | "walk_pose.json" | "walk_pose_1.png" | "walk_pose_2.png" | "walk_pose_3.png" | "walk_pose_4.png" | "スクリーンショット 2026-08-24 1.20.33.png";
+  image: ".keep" | "0.png" | "02_no-lora_hands-on-hips.png" | "1.png" | "11825534i.jpeg" | "11834342.png" | "11839199i.jpeg" | "11844201.png" | "11844382i.jpeg" | "147030163_p0_master1200.jpg" | "1758718416-oUa45JKFIWBLMCnH3GluqeyT.webp" | "2.png" | "3.png" | "ComfyUI_00008_.png" | "HN_XH40bYAAbCHh.jpeg" | "HNrls4iaQAA_ktf.jpeg" | "__toki_blue_archive_drawn_by_shimontaru__27180d4527a52c85b41b12e4fc9ec666.jpg" | "__yoko_littner_tengen_toppa_gurren_lagann_generated_by_depressuart__sample-0a9ff519b07cb5b46f096a0d6d5c5d62.jpg" | "aim_down_0.png" | "aim_down_1.png" | "aim_downside_0.png" | "aim_downside_1.png" | "aim_side_0.png" | "aim_side_1.png" | "aim_up_0.png" | "aim_up_1.png" | "aim_upside_0.png" | "aim_upside_1.png" | "anima_startframe_00001_.png" | "attack_down_0.png" | "attack_down_1.png" | "attack_down_2.png" | "attack_down_3.png" | "attack_downside_0.png" | "attack_downside_1.png" | "attack_downside_2.png" | "attack_downside_3.png" | "attack_side_0.png" | "attack_side_1.png" | "attack_side_2.png" | "attack_side_3.png" | "attack_up_0.png" | "attack_up_1.png" | "attack_up_2.png" | "attack_up_3.png" | "attack_upside_0.png" | "attack_upside_1.png" | "attack_upside_2.png" | "attack_upside_3.png" | "capeless_f1.png" | "capeless_f2.png" | "capeless_f3.png" | "capeless_f4.png" | "char_ref_front.png" | "char_tpose_final.png" | "charsheet_hires_src.png" | "cnpose_f1.png" | "cnpose_f2.png" | "cnpose_f3.png" | "cnpose_f4.png" | "cs_34.png" | "cs_back.png" | "cs_side.png" | "demo_00032_.png" | "dodge_down_0.png" | "dodge_down_1.png" | "dodge_down_2.png" | "dodge_down_3.png" | "dodge_downside_0.png" | "dodge_downside_1.png" | "dodge_downside_2.png" | "dodge_downside_3.png" | "dodge_side_0.png" | "dodge_side_1.png" | "dodge_side_2.png" | "dodge_side_3.png" | "dodge_up_0.png" | "dodge_up_1.png" | "dodge_up_2.png" | "dodge_up_3.png" | "dodge_upside_0.png" | "dodge_upside_1.png" | "dodge_upside_2.png" | "dodge_upside_3.png" | "front_00001_.png" | "front_00021_.png" | "h3d_test_char.png" | "handmask_320.png" | "idle_down_0.depth.png" | "idle_down_0.png" | "idle_down_1.depth.png" | "idle_down_1.png" | "idle_down_2.depth.png" | "idle_down_2.png" | "idle_down_3.depth.png" | "idle_down_3.png" | "idle_downright_0.depth.png" | "idle_downright_0.png" | "idle_downright_1.depth.png" | "idle_downright_1.png" | "idle_downright_2.depth.png" | "idle_downright_2.png" | "idle_downright_3.depth.png" | "idle_downright_3.png" | "idle_downside_0.png" | "idle_downside_1.png" | "idle_downside_2.png" | "idle_downside_3.png" | "idle_right_0.depth.png" | "idle_right_0.png" | "idle_right_1.depth.png" | "idle_right_1.png" | "idle_right_2.depth.png" | "idle_right_2.png" | "idle_right_3.depth.png" | "idle_right_3.png" | "idle_side_0.png" | "idle_side_1.png" | "idle_side_2.png" | "idle_side_3.png" | "idle_up_0.depth.png" | "idle_up_0.png" | "idle_up_1.depth.png" | "idle_up_1.png" | "idle_up_2.depth.png" | "idle_up_2.png" | "idle_up_3.depth.png" | "idle_up_3.png" | "idle_upright_0.depth.png" | "idle_upright_0.png" | "idle_upright_1.depth.png" | "idle_upright_1.png" | "idle_upright_2.depth.png" | "idle_upright_2.png" | "idle_upright_3.depth.png" | "idle_upright_3.png" | "idle_upside_0.png" | "idle_upside_1.png" | "idle_upside_2.png" | "idle_upside_3.png" | "mech_00001_.png" | "run_down_0.png" | "run_down_1.png" | "run_down_2.png" | "run_down_3.png" | "run_down_4.png" | "run_down_5.png" | "run_downside_0.png" | "run_downside_1.png" | "run_downside_2.png" | "run_downside_3.png" | "run_downside_4.png" | "run_downside_5.png" | "run_side_0.png" | "run_side_1.png" | "run_side_2.png" | "run_side_3.png" | "run_side_4.png" | "run_side_5.png" | "run_up_0.png" | "run_up_1.png" | "run_up_2.png" | "run_up_3.png" | "run_up_4.png" | "run_up_5.png" | "run_upside_0.png" | "run_upside_1.png" | "run_upside_2.png" | "run_upside_3.png" | "run_upside_4.png" | "run_upside_5.png" | "scavenger.png" | "scavenger_00001_.png" | "scavenger_00002_.png" | "scavenger_ref.png" | "source.png" | "text_00006_.png" | "tpose_openpose.png" | "tpose_openpose_1152.png" | "tpose_openpose_v2.png" | "walk_down_0.depth.png" | "walk_down_0.png" | "walk_down_1.depth.png" | "walk_down_1.png" | "walk_down_2.depth.png" | "walk_down_2.png" | "walk_down_3.depth.png" | "walk_down_3.png" | "walk_down_4.depth.png" | "walk_down_4.png" | "walk_down_5.depth.png" | "walk_down_5.png" | "walk_down_6.depth.png" | "walk_down_6.png" | "walk_down_7.depth.png" | "walk_down_7.png" | "walk_downright_0.depth.png" | "walk_downright_0.png" | "walk_downright_1.depth.png" | "walk_downright_1.png" | "walk_downright_2.depth.png" | "walk_downright_2.png" | "walk_downright_3.depth.png" | "walk_downright_3.png" | "walk_downright_4.depth.png" | "walk_downright_4.png" | "walk_downright_5.depth.png" | "walk_downright_5.png" | "walk_downright_6.depth.png" | "walk_downright_6.png" | "walk_downright_7.depth.png" | "walk_downright_7.png" | "walk_downside_0.png" | "walk_downside_1.png" | "walk_downside_2.png" | "walk_downside_3.png" | "walk_downside_4.png" | "walk_downside_5.png" | "walk_pose.json" | "walk_pose_1.png" | "walk_pose_2.png" | "walk_pose_3.png" | "walk_pose_4.png" | "walk_right_0.depth.png" | "walk_right_0.png" | "walk_right_1.depth.png" | "walk_right_1.png" | "walk_right_2.depth.png" | "walk_right_2.png" | "walk_right_3.depth.png" | "walk_right_3.png" | "walk_right_4.depth.png" | "walk_right_4.png" | "walk_right_5.depth.png" | "walk_right_5.png" | "walk_right_6.depth.png" | "walk_right_6.png" | "walk_right_7.depth.png" | "walk_right_7.png" | "walk_side_0.png" | "walk_side_1.png" | "walk_side_2.png" | "walk_side_3.png" | "walk_side_4.png" | "walk_side_5.png" | "walk_up_0.depth.png" | "walk_up_0.png" | "walk_up_1.depth.png" | "walk_up_1.png" | "walk_up_2.depth.png" | "walk_up_2.png" | "walk_up_3.depth.png" | "walk_up_3.png" | "walk_up_4.depth.png" | "walk_up_4.png" | "walk_up_5.depth.png" | "walk_up_5.png" | "walk_up_6.depth.png" | "walk_up_6.png" | "walk_up_7.depth.png" | "walk_up_7.png" | "walk_upright_0.depth.png" | "walk_upright_0.png" | "walk_upright_1.depth.png" | "walk_upright_1.png" | "walk_upright_2.depth.png" | "walk_upright_2.png" | "walk_upright_3.depth.png" | "walk_upright_3.png" | "walk_upright_4.depth.png" | "walk_upright_4.png" | "walk_upright_5.depth.png" | "walk_upright_5.png" | "walk_upright_6.depth.png" | "walk_upright_6.png" | "walk_upright_7.depth.png" | "walk_upright_7.png" | "walk_upside_0.png" | "walk_upside_1.png" | "walk_upside_2.png" | "walk_upside_3.png" | "walk_upside_4.png" | "walk_upside_5.png" | "スクリーンショット 2026-08-24 1.20.33.png";
   resize: boolean;
   width: number;
   height: number;
@@ -21700,7 +26302,7 @@ export interface LoadDA3ModelOutputs {
 }
 
 export interface LoadImageInputs {
-  image: "0.png" | "02_no-lora_hands-on-hips.png" | "1.png" | "11825534i.jpeg" | "11834342.png" | "11839199i.jpeg" | "11844201.png" | "11844382i.jpeg" | "147030163_p0_master1200.jpg" | "1758718416-oUa45JKFIWBLMCnH3GluqeyT.webp" | "2.png" | "3.png" | "ComfyUI_00008_.png" | "HN_XH40bYAAbCHh.jpeg" | "HNrls4iaQAA_ktf.jpeg" | "__toki_blue_archive_drawn_by_shimontaru__27180d4527a52c85b41b12e4fc9ec666.jpg" | "__yoko_littner_tengen_toppa_gurren_lagann_generated_by_depressuart__sample-0a9ff519b07cb5b46f096a0d6d5c5d62.jpg" | "anima_startframe_00001_.png" | "capeless_f1.png" | "capeless_f2.png" | "capeless_f3.png" | "capeless_f4.png" | "char_ref_front.png" | "char_tpose_final.png" | "charsheet_hires_src.png" | "cnpose_f1.png" | "cnpose_f2.png" | "cnpose_f3.png" | "cnpose_f4.png" | "cs_34.png" | "cs_back.png" | "cs_side.png" | "demo_00032_.png" | "front_00001_.png" | "front_00021_.png" | "h3d_test_char.png" | "handmask_320.png" | "mech_00001_.png" | "scavenger_00001_.png" | "scavenger_00002_.png" | "text_00006_.png" | "tpose_openpose.png" | "tpose_openpose_1152.png" | "tpose_openpose_v2.png" | "walk_pose_1.png" | "walk_pose_2.png" | "walk_pose_3.png" | "walk_pose_4.png" | "スクリーンショット 2026-08-24 1.20.33.png";
+  image: "0.png" | "02_no-lora_hands-on-hips.png" | "1.png" | "11825534i.jpeg" | "11834342.png" | "11839199i.jpeg" | "11844201.png" | "11844382i.jpeg" | "147030163_p0_master1200.jpg" | "1758718416-oUa45JKFIWBLMCnH3GluqeyT.webp" | "2.png" | "3.png" | "ComfyUI_00008_.png" | "HN_XH40bYAAbCHh.jpeg" | "HNrls4iaQAA_ktf.jpeg" | "__toki_blue_archive_drawn_by_shimontaru__27180d4527a52c85b41b12e4fc9ec666.jpg" | "__yoko_littner_tengen_toppa_gurren_lagann_generated_by_depressuart__sample-0a9ff519b07cb5b46f096a0d6d5c5d62.jpg" | "aim_down_0.png" | "aim_down_1.png" | "aim_downside_0.png" | "aim_downside_1.png" | "aim_side_0.png" | "aim_side_1.png" | "aim_up_0.png" | "aim_up_1.png" | "aim_upside_0.png" | "aim_upside_1.png" | "anima_startframe_00001_.png" | "attack_down_0.png" | "attack_down_1.png" | "attack_down_2.png" | "attack_down_3.png" | "attack_downside_0.png" | "attack_downside_1.png" | "attack_downside_2.png" | "attack_downside_3.png" | "attack_side_0.png" | "attack_side_1.png" | "attack_side_2.png" | "attack_side_3.png" | "attack_up_0.png" | "attack_up_1.png" | "attack_up_2.png" | "attack_up_3.png" | "attack_upside_0.png" | "attack_upside_1.png" | "attack_upside_2.png" | "attack_upside_3.png" | "capeless_f1.png" | "capeless_f2.png" | "capeless_f3.png" | "capeless_f4.png" | "char_ref_front.png" | "char_tpose_final.png" | "charsheet_hires_src.png" | "cnpose_f1.png" | "cnpose_f2.png" | "cnpose_f3.png" | "cnpose_f4.png" | "cs_34.png" | "cs_back.png" | "cs_side.png" | "demo_00032_.png" | "dodge_down_0.png" | "dodge_down_1.png" | "dodge_down_2.png" | "dodge_down_3.png" | "dodge_downside_0.png" | "dodge_downside_1.png" | "dodge_downside_2.png" | "dodge_downside_3.png" | "dodge_side_0.png" | "dodge_side_1.png" | "dodge_side_2.png" | "dodge_side_3.png" | "dodge_up_0.png" | "dodge_up_1.png" | "dodge_up_2.png" | "dodge_up_3.png" | "dodge_upside_0.png" | "dodge_upside_1.png" | "dodge_upside_2.png" | "dodge_upside_3.png" | "front_00001_.png" | "front_00021_.png" | "h3d_test_char.png" | "handmask_320.png" | "idle_down_0.depth.png" | "idle_down_0.png" | "idle_down_1.depth.png" | "idle_down_1.png" | "idle_down_2.depth.png" | "idle_down_2.png" | "idle_down_3.depth.png" | "idle_down_3.png" | "idle_downright_0.depth.png" | "idle_downright_0.png" | "idle_downright_1.depth.png" | "idle_downright_1.png" | "idle_downright_2.depth.png" | "idle_downright_2.png" | "idle_downright_3.depth.png" | "idle_downright_3.png" | "idle_downside_0.png" | "idle_downside_1.png" | "idle_downside_2.png" | "idle_downside_3.png" | "idle_right_0.depth.png" | "idle_right_0.png" | "idle_right_1.depth.png" | "idle_right_1.png" | "idle_right_2.depth.png" | "idle_right_2.png" | "idle_right_3.depth.png" | "idle_right_3.png" | "idle_side_0.png" | "idle_side_1.png" | "idle_side_2.png" | "idle_side_3.png" | "idle_up_0.depth.png" | "idle_up_0.png" | "idle_up_1.depth.png" | "idle_up_1.png" | "idle_up_2.depth.png" | "idle_up_2.png" | "idle_up_3.depth.png" | "idle_up_3.png" | "idle_upright_0.depth.png" | "idle_upright_0.png" | "idle_upright_1.depth.png" | "idle_upright_1.png" | "idle_upright_2.depth.png" | "idle_upright_2.png" | "idle_upright_3.depth.png" | "idle_upright_3.png" | "idle_upside_0.png" | "idle_upside_1.png" | "idle_upside_2.png" | "idle_upside_3.png" | "mech_00001_.png" | "run_down_0.png" | "run_down_1.png" | "run_down_2.png" | "run_down_3.png" | "run_down_4.png" | "run_down_5.png" | "run_downside_0.png" | "run_downside_1.png" | "run_downside_2.png" | "run_downside_3.png" | "run_downside_4.png" | "run_downside_5.png" | "run_side_0.png" | "run_side_1.png" | "run_side_2.png" | "run_side_3.png" | "run_side_4.png" | "run_side_5.png" | "run_up_0.png" | "run_up_1.png" | "run_up_2.png" | "run_up_3.png" | "run_up_4.png" | "run_up_5.png" | "run_upside_0.png" | "run_upside_1.png" | "run_upside_2.png" | "run_upside_3.png" | "run_upside_4.png" | "run_upside_5.png" | "scavenger.png" | "scavenger_00001_.png" | "scavenger_00002_.png" | "scavenger_ref.png" | "source.png" | "text_00006_.png" | "tpose_openpose.png" | "tpose_openpose_1152.png" | "tpose_openpose_v2.png" | "walk_down_0.depth.png" | "walk_down_0.png" | "walk_down_1.depth.png" | "walk_down_1.png" | "walk_down_2.depth.png" | "walk_down_2.png" | "walk_down_3.depth.png" | "walk_down_3.png" | "walk_down_4.depth.png" | "walk_down_4.png" | "walk_down_5.depth.png" | "walk_down_5.png" | "walk_down_6.depth.png" | "walk_down_6.png" | "walk_down_7.depth.png" | "walk_down_7.png" | "walk_downright_0.depth.png" | "walk_downright_0.png" | "walk_downright_1.depth.png" | "walk_downright_1.png" | "walk_downright_2.depth.png" | "walk_downright_2.png" | "walk_downright_3.depth.png" | "walk_downright_3.png" | "walk_downright_4.depth.png" | "walk_downright_4.png" | "walk_downright_5.depth.png" | "walk_downright_5.png" | "walk_downright_6.depth.png" | "walk_downright_6.png" | "walk_downright_7.depth.png" | "walk_downright_7.png" | "walk_downside_0.png" | "walk_downside_1.png" | "walk_downside_2.png" | "walk_downside_3.png" | "walk_downside_4.png" | "walk_downside_5.png" | "walk_pose_1.png" | "walk_pose_2.png" | "walk_pose_3.png" | "walk_pose_4.png" | "walk_right_0.depth.png" | "walk_right_0.png" | "walk_right_1.depth.png" | "walk_right_1.png" | "walk_right_2.depth.png" | "walk_right_2.png" | "walk_right_3.depth.png" | "walk_right_3.png" | "walk_right_4.depth.png" | "walk_right_4.png" | "walk_right_5.depth.png" | "walk_right_5.png" | "walk_right_6.depth.png" | "walk_right_6.png" | "walk_right_7.depth.png" | "walk_right_7.png" | "walk_side_0.png" | "walk_side_1.png" | "walk_side_2.png" | "walk_side_3.png" | "walk_side_4.png" | "walk_side_5.png" | "walk_up_0.depth.png" | "walk_up_0.png" | "walk_up_1.depth.png" | "walk_up_1.png" | "walk_up_2.depth.png" | "walk_up_2.png" | "walk_up_3.depth.png" | "walk_up_3.png" | "walk_up_4.depth.png" | "walk_up_4.png" | "walk_up_5.depth.png" | "walk_up_5.png" | "walk_up_6.depth.png" | "walk_up_6.png" | "walk_up_7.depth.png" | "walk_up_7.png" | "walk_upright_0.depth.png" | "walk_upright_0.png" | "walk_upright_1.depth.png" | "walk_upright_1.png" | "walk_upright_2.depth.png" | "walk_upright_2.png" | "walk_upright_3.depth.png" | "walk_upright_3.png" | "walk_upright_4.depth.png" | "walk_upright_4.png" | "walk_upright_5.depth.png" | "walk_upright_5.png" | "walk_upright_6.depth.png" | "walk_upright_6.png" | "walk_upright_7.depth.png" | "walk_upright_7.png" | "walk_upside_0.png" | "walk_upside_1.png" | "walk_upside_2.png" | "walk_upside_3.png" | "walk_upside_4.png" | "walk_upside_5.png" | "スクリーンショット 2026-08-24 1.20.33.png";
 }
 
 export interface LoadImageInputPaths {
@@ -21734,7 +26336,7 @@ export interface LoadImageDataSetFromFolderOutputs {
 }
 
 export interface LoadImageMaskInputs {
-  image: "0.png" | "02_no-lora_hands-on-hips.png" | "1.png" | "11825534i.jpeg" | "11834342.png" | "11839199i.jpeg" | "11844201.png" | "11844382i.jpeg" | "147030163_p0_master1200.jpg" | "1758718416-oUa45JKFIWBLMCnH3GluqeyT.webp" | "2.png" | "3.png" | "ComfyUI_00008_.png" | "HN_XH40bYAAbCHh.jpeg" | "HNrls4iaQAA_ktf.jpeg" | "__toki_blue_archive_drawn_by_shimontaru__27180d4527a52c85b41b12e4fc9ec666.jpg" | "__yoko_littner_tengen_toppa_gurren_lagann_generated_by_depressuart__sample-0a9ff519b07cb5b46f096a0d6d5c5d62.jpg" | "anima_startframe_00001_.png" | "capeless_f1.png" | "capeless_f2.png" | "capeless_f3.png" | "capeless_f4.png" | "char_ref_front.png" | "char_tpose_final.png" | "charsheet_hires_src.png" | "cnpose_f1.png" | "cnpose_f2.png" | "cnpose_f3.png" | "cnpose_f4.png" | "cs_34.png" | "cs_back.png" | "cs_side.png" | "demo_00032_.png" | "front_00001_.png" | "front_00021_.png" | "h3d_test_char.png" | "handmask_320.png" | "mech_00001_.png" | "scavenger_00001_.png" | "scavenger_00002_.png" | "text_00006_.png" | "tpose_openpose.png" | "tpose_openpose_1152.png" | "tpose_openpose_v2.png" | "walk_pose_1.png" | "walk_pose_2.png" | "walk_pose_3.png" | "walk_pose_4.png" | "スクリーンショット 2026-08-24 1.20.33.png";
+  image: "0.png" | "02_no-lora_hands-on-hips.png" | "1.png" | "11825534i.jpeg" | "11834342.png" | "11839199i.jpeg" | "11844201.png" | "11844382i.jpeg" | "147030163_p0_master1200.jpg" | "1758718416-oUa45JKFIWBLMCnH3GluqeyT.webp" | "2.png" | "3.png" | "ComfyUI_00008_.png" | "HN_XH40bYAAbCHh.jpeg" | "HNrls4iaQAA_ktf.jpeg" | "__toki_blue_archive_drawn_by_shimontaru__27180d4527a52c85b41b12e4fc9ec666.jpg" | "__yoko_littner_tengen_toppa_gurren_lagann_generated_by_depressuart__sample-0a9ff519b07cb5b46f096a0d6d5c5d62.jpg" | "aim_down_0.png" | "aim_down_1.png" | "aim_downside_0.png" | "aim_downside_1.png" | "aim_side_0.png" | "aim_side_1.png" | "aim_up_0.png" | "aim_up_1.png" | "aim_upside_0.png" | "aim_upside_1.png" | "anima_startframe_00001_.png" | "attack_down_0.png" | "attack_down_1.png" | "attack_down_2.png" | "attack_down_3.png" | "attack_downside_0.png" | "attack_downside_1.png" | "attack_downside_2.png" | "attack_downside_3.png" | "attack_side_0.png" | "attack_side_1.png" | "attack_side_2.png" | "attack_side_3.png" | "attack_up_0.png" | "attack_up_1.png" | "attack_up_2.png" | "attack_up_3.png" | "attack_upside_0.png" | "attack_upside_1.png" | "attack_upside_2.png" | "attack_upside_3.png" | "capeless_f1.png" | "capeless_f2.png" | "capeless_f3.png" | "capeless_f4.png" | "char_ref_front.png" | "char_tpose_final.png" | "charsheet_hires_src.png" | "cnpose_f1.png" | "cnpose_f2.png" | "cnpose_f3.png" | "cnpose_f4.png" | "cs_34.png" | "cs_back.png" | "cs_side.png" | "demo_00032_.png" | "dodge_down_0.png" | "dodge_down_1.png" | "dodge_down_2.png" | "dodge_down_3.png" | "dodge_downside_0.png" | "dodge_downside_1.png" | "dodge_downside_2.png" | "dodge_downside_3.png" | "dodge_side_0.png" | "dodge_side_1.png" | "dodge_side_2.png" | "dodge_side_3.png" | "dodge_up_0.png" | "dodge_up_1.png" | "dodge_up_2.png" | "dodge_up_3.png" | "dodge_upside_0.png" | "dodge_upside_1.png" | "dodge_upside_2.png" | "dodge_upside_3.png" | "front_00001_.png" | "front_00021_.png" | "h3d_test_char.png" | "handmask_320.png" | "idle_down_0.depth.png" | "idle_down_0.png" | "idle_down_1.depth.png" | "idle_down_1.png" | "idle_down_2.depth.png" | "idle_down_2.png" | "idle_down_3.depth.png" | "idle_down_3.png" | "idle_downright_0.depth.png" | "idle_downright_0.png" | "idle_downright_1.depth.png" | "idle_downright_1.png" | "idle_downright_2.depth.png" | "idle_downright_2.png" | "idle_downright_3.depth.png" | "idle_downright_3.png" | "idle_downside_0.png" | "idle_downside_1.png" | "idle_downside_2.png" | "idle_downside_3.png" | "idle_right_0.depth.png" | "idle_right_0.png" | "idle_right_1.depth.png" | "idle_right_1.png" | "idle_right_2.depth.png" | "idle_right_2.png" | "idle_right_3.depth.png" | "idle_right_3.png" | "idle_side_0.png" | "idle_side_1.png" | "idle_side_2.png" | "idle_side_3.png" | "idle_up_0.depth.png" | "idle_up_0.png" | "idle_up_1.depth.png" | "idle_up_1.png" | "idle_up_2.depth.png" | "idle_up_2.png" | "idle_up_3.depth.png" | "idle_up_3.png" | "idle_upright_0.depth.png" | "idle_upright_0.png" | "idle_upright_1.depth.png" | "idle_upright_1.png" | "idle_upright_2.depth.png" | "idle_upright_2.png" | "idle_upright_3.depth.png" | "idle_upright_3.png" | "idle_upside_0.png" | "idle_upside_1.png" | "idle_upside_2.png" | "idle_upside_3.png" | "mech_00001_.png" | "run_down_0.png" | "run_down_1.png" | "run_down_2.png" | "run_down_3.png" | "run_down_4.png" | "run_down_5.png" | "run_downside_0.png" | "run_downside_1.png" | "run_downside_2.png" | "run_downside_3.png" | "run_downside_4.png" | "run_downside_5.png" | "run_side_0.png" | "run_side_1.png" | "run_side_2.png" | "run_side_3.png" | "run_side_4.png" | "run_side_5.png" | "run_up_0.png" | "run_up_1.png" | "run_up_2.png" | "run_up_3.png" | "run_up_4.png" | "run_up_5.png" | "run_upside_0.png" | "run_upside_1.png" | "run_upside_2.png" | "run_upside_3.png" | "run_upside_4.png" | "run_upside_5.png" | "scavenger.png" | "scavenger_00001_.png" | "scavenger_00002_.png" | "scavenger_ref.png" | "source.png" | "text_00006_.png" | "tpose_openpose.png" | "tpose_openpose_1152.png" | "tpose_openpose_v2.png" | "walk_down_0.depth.png" | "walk_down_0.png" | "walk_down_1.depth.png" | "walk_down_1.png" | "walk_down_2.depth.png" | "walk_down_2.png" | "walk_down_3.depth.png" | "walk_down_3.png" | "walk_down_4.depth.png" | "walk_down_4.png" | "walk_down_5.depth.png" | "walk_down_5.png" | "walk_down_6.depth.png" | "walk_down_6.png" | "walk_down_7.depth.png" | "walk_down_7.png" | "walk_downright_0.depth.png" | "walk_downright_0.png" | "walk_downright_1.depth.png" | "walk_downright_1.png" | "walk_downright_2.depth.png" | "walk_downright_2.png" | "walk_downright_3.depth.png" | "walk_downright_3.png" | "walk_downright_4.depth.png" | "walk_downright_4.png" | "walk_downright_5.depth.png" | "walk_downright_5.png" | "walk_downright_6.depth.png" | "walk_downright_6.png" | "walk_downright_7.depth.png" | "walk_downright_7.png" | "walk_downside_0.png" | "walk_downside_1.png" | "walk_downside_2.png" | "walk_downside_3.png" | "walk_downside_4.png" | "walk_downside_5.png" | "walk_pose_1.png" | "walk_pose_2.png" | "walk_pose_3.png" | "walk_pose_4.png" | "walk_right_0.depth.png" | "walk_right_0.png" | "walk_right_1.depth.png" | "walk_right_1.png" | "walk_right_2.depth.png" | "walk_right_2.png" | "walk_right_3.depth.png" | "walk_right_3.png" | "walk_right_4.depth.png" | "walk_right_4.png" | "walk_right_5.depth.png" | "walk_right_5.png" | "walk_right_6.depth.png" | "walk_right_6.png" | "walk_right_7.depth.png" | "walk_right_7.png" | "walk_side_0.png" | "walk_side_1.png" | "walk_side_2.png" | "walk_side_3.png" | "walk_side_4.png" | "walk_side_5.png" | "walk_up_0.depth.png" | "walk_up_0.png" | "walk_up_1.depth.png" | "walk_up_1.png" | "walk_up_2.depth.png" | "walk_up_2.png" | "walk_up_3.depth.png" | "walk_up_3.png" | "walk_up_4.depth.png" | "walk_up_4.png" | "walk_up_5.depth.png" | "walk_up_5.png" | "walk_up_6.depth.png" | "walk_up_6.png" | "walk_up_7.depth.png" | "walk_up_7.png" | "walk_upright_0.depth.png" | "walk_upright_0.png" | "walk_upright_1.depth.png" | "walk_upright_1.png" | "walk_upright_2.depth.png" | "walk_upright_2.png" | "walk_upright_3.depth.png" | "walk_upright_3.png" | "walk_upright_4.depth.png" | "walk_upright_4.png" | "walk_upright_5.depth.png" | "walk_upright_5.png" | "walk_upright_6.depth.png" | "walk_upright_6.png" | "walk_upright_7.depth.png" | "walk_upright_7.png" | "walk_upside_0.png" | "walk_upside_1.png" | "walk_upside_2.png" | "walk_upside_3.png" | "walk_upside_4.png" | "walk_upside_5.png" | "スクリーンショット 2026-08-24 1.20.33.png";
   channel: "alpha" | "red" | "green" | "blue";
 }
 
@@ -21903,6 +26505,22 @@ export interface LoadVideoOutputs {
   VIDEO: NodeRef<"VIDEO">;
 }
 
+export interface LoadVideoDataSetFromFolderInputs {
+  folder: "3d" | "sprite" | "sprite/walk" | "sprite/walk/beauty" | "sprite/walk/depth" | "sprite/walk/pose" | "yedp_anims" | "yedp_cams" | "yedp_envs" | "yedp_mocap" | "yedp_rigs";
+}
+
+export interface LoadVideoDataSetFromFolderInputPaths {
+  folder: string;
+}
+
+export interface LoadVideoDataSetFromFolderResult extends ComfyNodeOutput {
+  videos?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface LoadVideoDataSetFromFolderOutputs {
+  videos: NodeRef<"VIDEO">;
+}
+
 export interface LoadVideosFromFolderInputs {
   video: string;
   force_rate: number;
@@ -21937,16 +26555,34 @@ export interface LoadVideosFromFolderOutputs {
   IMAGE: NodeRef<"IMAGE">;
 }
 
+export interface LoadVideoTextDataSetFromFolderInputs {
+  folder: "3d" | "sprite" | "sprite/walk" | "sprite/walk/beauty" | "sprite/walk/depth" | "sprite/walk/pose" | "yedp_anims" | "yedp_cams" | "yedp_envs" | "yedp_mocap" | "yedp_rigs";
+}
+
+export interface LoadVideoTextDataSetFromFolderInputPaths {
+  folder: string;
+}
+
+export interface LoadVideoTextDataSetFromFolderResult extends ComfyNodeOutput {
+  videos?: ComfyOutputValue<"VIDEO">;
+  texts?: ComfyOutputValue<"STRING">;
+}
+
+export interface LoadVideoTextDataSetFromFolderOutputs {
+  videos: NodeRef<"VIDEO">;
+  texts: NodeRef<"STRING">;
+}
+
 export interface LoraLoaderStackRgthreeInputs {
   model: NodeRef<"MODEL">;
   clip: NodeRef<"CLIP">;
-  lora_01: "None" | "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors";
+  lora_01: "None" | "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors" | "scavenger.safetensors";
   strength_01: number;
-  lora_02: "None" | "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors";
+  lora_02: "None" | "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors" | "scavenger.safetensors";
   strength_02: number;
-  lora_03: "None" | "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors";
+  lora_03: "None" | "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors" | "scavenger.safetensors";
   strength_03: number;
-  lora_04: "None" | "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors";
+  lora_04: "None" | "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors" | "scavenger.safetensors";
   strength_04: number;
 }
 
@@ -22007,7 +26643,7 @@ export interface LoraExtractKJResult extends ComfyNodeOutput {
 export interface LoraLoaderInputs {
   model: NodeRef<"MODEL">;
   clip: NodeRef<"CLIP">;
-  lora_name: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors";
+  lora_name: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors" | "scavenger.safetensors";
   strength_model: number;
   strength_clip: number;
 }
@@ -22033,7 +26669,7 @@ export interface LoraLoaderOutputs {
 export interface LoraLoaderBypassInputs {
   model: NodeRef<"MODEL">;
   clip: NodeRef<"CLIP">;
-  lora_name: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors";
+  lora_name: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors" | "scavenger.safetensors";
   strength_model: number;
   strength_clip: number;
 }
@@ -22058,7 +26694,7 @@ export interface LoraLoaderBypassOutputs {
 
 export interface LoraLoaderBypassModelOnlyInputs {
   model: NodeRef<"MODEL">;
-  lora_name: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors";
+  lora_name: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors" | "scavenger.safetensors";
   strength_model: number;
 }
 
@@ -22078,7 +26714,7 @@ export interface LoraLoaderBypassModelOnlyOutputs {
 
 export interface LoraLoaderModelOnlyInputs {
   model: NodeRef<"MODEL">;
-  lora_name: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors";
+  lora_name: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors" | "scavenger.safetensors";
   strength_model: number;
 }
 
@@ -22119,7 +26755,7 @@ export interface LoraModelLoaderOutputs {
 }
 
 export interface LoraReduceRankKJInputs {
-  lora_name: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors";
+  lora_name: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors" | "scavenger.safetensors";
   new_rank: number;
   dynamic_method: "disabled" | "sv_ratio" | "sv_cumulative" | "sv_fro" | "sv_knee";
   dynamic_param: number;
@@ -22372,7 +27008,7 @@ export interface LTX2BlockLoraSelectOutputs {
 }
 
 export interface LTX2LoraLoaderAdvancedInputs {
-  lora_name: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors";
+  lora_name: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors" | "scavenger.safetensors";
   model: NodeRef<"MODEL">;
   strength_model: number;
   video: number;
@@ -22449,9 +27085,77 @@ export interface LTX2SamplingPreviewOverrideOutputs {
   MODEL: NodeRef<"MODEL">;
 }
 
+export interface LtxApi25AudioToVideoInputs {
+  audio: NodeRef<"AUDIO">;
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  prompt: string;
+  seed: number;
+  image?: NodeRef<"IMAGE">;
+}
+
+export interface LtxApi25AudioToVideoInputPaths {
+  audio: string;
+  model: string;
+  prompt: string;
+  seed: string;
+  image: string;
+}
+
+export interface LtxApi25AudioToVideoResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface LtxApi25AudioToVideoOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface LtxApi25ImageToVideoInputs {
+  image: NodeRef<"IMAGE">;
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  prompt: string;
+  seed: number;
+  last_frame?: NodeRef<"IMAGE">;
+}
+
+export interface LtxApi25ImageToVideoInputPaths {
+  image: string;
+  model: string;
+  prompt: string;
+  seed: string;
+  last_frame: string;
+}
+
+export interface LtxApi25ImageToVideoResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface LtxApi25ImageToVideoOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface LtxApi25TextToVideoInputs {
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  prompt: string;
+  seed: number;
+}
+
+export interface LtxApi25TextToVideoInputPaths {
+  model: string;
+  prompt: string;
+  seed: string;
+}
+
+export interface LtxApi25TextToVideoResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface LtxApi25TextToVideoOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
 export interface LTXAVTextEncoderLoaderInputs {
   text_encoder: "clip_l.safetensors" | "qwen_2.5_vl_7b_fp8_scaled.safetensors" | "qwen_3_06b_base.safetensors" | "qwen_3_4b.safetensors" | "qwen_3_8b_fp8mixed.safetensors" | "t5xxl_fp8_e4m3fn.safetensors" | "umt5_xxl_fp8_e4m3fn_scaled.safetensors";
-  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
+  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
   device: "default" | "cpu";
 }
 
@@ -22654,7 +27358,7 @@ export interface LTXVAudioVAEEncodeOutputs {
 }
 
 export interface LTXVAudioVAELoaderInputs {
-  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
+  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
 }
 
 export interface LTXVAudioVAELoaderInputPaths {
@@ -22821,9 +27525,61 @@ export interface LTXVCropGuidesOutputs {
   latent: NodeRef<"LATENT">;
 }
 
+export interface LTXVDualCFGGuiderInputs {
+  model: NodeRef<"MODEL">;
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+  video_cfg: number;
+  audio_cfg: number;
+}
+
+export interface LTXVDualCFGGuiderInputPaths {
+  model: string;
+  positive: string;
+  negative: string;
+  video_cfg: string;
+  audio_cfg: string;
+}
+
+export interface LTXVDualCFGGuiderResult extends ComfyNodeOutput {
+  GUIDER?: ComfyOutputValue<"GUIDER">;
+}
+
+export interface LTXVDualCFGGuiderOutputs {
+  GUIDER: NodeRef<"GUIDER">;
+}
+
+export interface LTXVDurationPredictorInputs {
+  model: NodeRef<"MODEL">;
+  positive: NodeRef<"CONDITIONING">;
+  duration_head: NodeRef<"MODEL_PATCH">;
+  frame_rate: number;
+  min_seconds: number;
+  max_seconds: number;
+}
+
+export interface LTXVDurationPredictorInputPaths {
+  model: string;
+  positive: string;
+  duration_head: string;
+  frame_rate: string;
+  min_seconds: string;
+  max_seconds: string;
+}
+
+export interface LTXVDurationPredictorResult extends ComfyNodeOutput {
+  num_frames?: ComfyOutputValue<"INT">;
+  seconds?: ComfyOutputValue<"FLOAT">;
+}
+
+export interface LTXVDurationPredictorOutputs {
+  num_frames: NodeRef<"INT">;
+  seconds: NodeRef<"FLOAT">;
+}
+
 export interface LTXVEmptyLatentAudioInputs {
   frames_number: number;
-  frame_rate: number;
+  frame_rate: NodeRef<"FLOAT,INT">;
   batch_size: number;
   audio_vae: NodeRef<"VAE">;
 }
@@ -22963,6 +27719,28 @@ export interface LTXVLatentUpsamplerOutputs {
   LATENT: NodeRef<"LATENT">;
 }
 
+export interface LTXVModalityGuidanceInputs {
+  model: NodeRef<"MODEL">;
+  modality_scale: number;
+  start_percent: number;
+  end_percent: number;
+}
+
+export interface LTXVModalityGuidanceInputPaths {
+  model: string;
+  modality_scale: string;
+  start_percent: string;
+  end_percent: string;
+}
+
+export interface LTXVModalityGuidanceResult extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+}
+
+export interface LTXVModalityGuidanceOutputs {
+  MODEL: NodeRef<"MODEL">;
+}
+
 export interface LTXVPreprocessInputs {
   image: NodeRef<"IMAGE">;
   img_compression: number;
@@ -23057,6 +27835,30 @@ export interface LTXVSeparateAVLatentResult extends ComfyNodeOutput {
 export interface LTXVSeparateAVLatentOutputs {
   video_latent: NodeRef<"LATENT">;
   audio_latent: NodeRef<"LATENT">;
+}
+
+export interface LTXVSpatioTemporalGuidanceInputs {
+  model: NodeRef<"MODEL">;
+  scale: number;
+  blocks: string;
+  start_percent: number;
+  end_percent: number;
+}
+
+export interface LTXVSpatioTemporalGuidanceInputPaths {
+  model: string;
+  scale: string;
+  blocks: string;
+  start_percent: string;
+  end_percent: string;
+}
+
+export interface LTXVSpatioTemporalGuidanceResult extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+}
+
+export interface LTXVSpatioTemporalGuidanceOutputs {
+  MODEL: NodeRef<"MODEL">;
 }
 
 export interface LumaConceptsNodeInputs {
@@ -24040,6 +28842,11 @@ export interface MaskPreviewInputPaths {
 }
 
 export interface MaskPreviewResult extends ComfyNodeOutput {
+  mask?: ComfyOutputValue<"MASK">;
+}
+
+export interface MaskPreviewOutputs {
+  mask: NodeRef<"MASK">;
 }
 
 export interface MaskPreview2Inputs {
@@ -24224,6 +29031,22 @@ export interface MergeImageListsOutputs {
   images: NodeRef<"IMAGE">;
 }
 
+export interface MergeMeshesInputs {
+  meshes: NodeRef<"COMFY_AUTOGROW_V3">;
+}
+
+export interface MergeMeshesInputPaths {
+  meshes: string;
+}
+
+export interface MergeMeshesResult extends ComfyNodeOutput {
+  mesh?: ComfyOutputValue<"MESH">;
+}
+
+export interface MergeMeshesOutputs {
+  mesh: NodeRef<"MESH">;
+}
+
 export interface MergeSplatInputs {
   splats: NodeRef<"COMFY_AUTOGROW_V3">;
 }
@@ -24326,6 +29149,64 @@ export interface MeshGraphormerImpactDetectorDepthMapPreprocessorOutputs {
   INPAINTING_MASK: NodeRef<"MASK">;
 }
 
+export interface MeshSmoothNormalsInputs {
+  mesh: NodeRef<"MESH">;
+  crease_angle: number;
+}
+
+export interface MeshSmoothNormalsInputPaths {
+  mesh: string;
+  crease_angle: string;
+}
+
+export interface MeshSmoothNormalsResult extends ComfyNodeOutput {
+  mesh?: ComfyOutputValue<"MESH">;
+}
+
+export interface MeshSmoothNormalsOutputs {
+  mesh: NodeRef<"MESH">;
+}
+
+export interface MeshTextureToImageInputs {
+  mesh: NodeRef<"MESH">;
+}
+
+export interface MeshTextureToImageInputPaths {
+  mesh: string;
+}
+
+export interface MeshTextureToImageResult extends ComfyNodeOutput {
+  base_color?: ComfyOutputValue<"IMAGE">;
+  metallic?: ComfyOutputValue<"IMAGE">;
+  roughness?: ComfyOutputValue<"IMAGE">;
+  occlusion?: ComfyOutputValue<"IMAGE">;
+  normal_map?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface MeshTextureToImageOutputs {
+  base_color: NodeRef<"IMAGE">;
+  metallic: NodeRef<"IMAGE">;
+  roughness: NodeRef<"IMAGE">;
+  occlusion: NodeRef<"IMAGE">;
+  normal_map: NodeRef<"IMAGE">;
+}
+
+export interface MeshToFile3DInputs {
+  mesh: NodeRef<"MESH">;
+}
+
+export interface MeshToFile3DInputPaths {
+  mesh: string;
+}
+
+export interface MeshToFile3DResult extends ComfyNodeOutput {
+  model_3d?: ComfyOutputValue<"FILE_3D_GLB">;
+}
+
+export interface MeshToFile3DOutputs {
+  model_3d: NodeRef<"FILE_3D_GLB">;
+}
+
 export interface MeshyAnimateModelNodeInputs {
   rig_task_id: NodeRef<"MESHY_RIGGED_TASK_ID">;
   action_id: number;
@@ -24349,13 +29230,14 @@ export interface MeshyAnimateModelNodeOutputs {
 }
 
 export interface MeshyImageToModelNodeInputs {
-  model: "latest";
+  model: "meshy-7" | "meshy-6" | "latest";
   image: NodeRef<"IMAGE">;
   should_remesh: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
   symmetry_mode: "auto" | "on" | "off";
   should_texture: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
   pose_mode: "" | "A-pose" | "T-pose";
   seed: number;
+  ultra_mode: boolean;
 }
 
 export interface MeshyImageToModelNodeInputPaths {
@@ -24366,6 +29248,7 @@ export interface MeshyImageToModelNodeInputPaths {
   should_texture: string;
   pose_mode: string;
   seed: string;
+  ultra_mode: string;
 }
 
 export interface MeshyImageToModelNodeResult extends ComfyNodeOutput {
@@ -24383,7 +29266,7 @@ export interface MeshyImageToModelNodeOutputs {
 }
 
 export interface MeshyMultiImageToModelNodeInputs {
-  model: "latest";
+  model: "meshy-7" | "meshy-6" | "latest";
   images: NodeRef<"COMFY_AUTOGROW_V3">;
   should_remesh: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
   symmetry_mode: "auto" | "on" | "off";
@@ -24417,10 +29300,11 @@ export interface MeshyMultiImageToModelNodeOutputs {
 }
 
 export interface MeshyRefineNodeInputs {
-  model: "latest";
+  model: "meshy-7" | "meshy-6" | "latest";
   meshy_task_id: NodeRef<"MESHY_TASK_ID">;
   enable_pbr: boolean;
   texture_prompt: string;
+  texture_resolution: "2k" | "4k" | "8k";
   texture_image?: NodeRef<"IMAGE">;
 }
 
@@ -24429,6 +29313,7 @@ export interface MeshyRefineNodeInputPaths {
   meshy_task_id: string;
   enable_pbr: string;
   texture_prompt: string;
+  texture_resolution: string;
   texture_image: string;
 }
 
@@ -24473,13 +29358,14 @@ export interface MeshyRigModelNodeOutputs {
 }
 
 export interface MeshyTextToModelNodeInputs {
-  model: "latest";
+  model: "meshy-7" | "meshy-6" | "latest";
   prompt: string;
-  style: "realistic" | "sculpture";
+  style: "realistic";
   should_remesh: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
   symmetry_mode: "auto" | "on" | "off";
   pose_mode: "" | "A-pose" | "T-pose";
   seed: number;
+  ultra_mode: boolean;
 }
 
 export interface MeshyTextToModelNodeInputPaths {
@@ -24490,6 +29376,7 @@ export interface MeshyTextToModelNodeInputPaths {
   symmetry_mode: string;
   pose_mode: string;
   seed: string;
+  ultra_mode: string;
 }
 
 export interface MeshyTextToModelNodeResult extends ComfyNodeOutput {
@@ -24506,12 +29393,45 @@ export interface MeshyTextToModelNodeOutputs {
   FBX: NodeRef<"FILE_3D_FBX">;
 }
 
+export interface MeshyTextureMultiViewNodeInputs {
+  model: "meshy-7";
+  meshy_task_id: NodeRef<"MESHY_TASK_ID">;
+  multiview_images: NodeRef<"COMFY_AUTOGROW_V3">;
+  enable_original_uv: boolean;
+  pbr: boolean;
+  texture_resolution: "2k" | "4k" | "8k";
+}
+
+export interface MeshyTextureMultiViewNodeInputPaths {
+  model: string;
+  meshy_task_id: string;
+  multiview_images: string;
+  enable_original_uv: string;
+  pbr: string;
+  texture_resolution: string;
+}
+
+export interface MeshyTextureMultiViewNodeResult extends ComfyNodeOutput {
+  model_file?: ComfyOutputValue<"STRING">;
+  meshy_task_id?: ComfyOutputValue<"MESHY_TASK_ID">;
+  GLB?: ComfyOutputValue<"FILE_3D_GLB">;
+  FBX?: ComfyOutputValue<"FILE_3D_FBX">;
+}
+
+export interface MeshyTextureMultiViewNodeOutputs {
+  model_file: NodeRef<"STRING">;
+  meshy_task_id: NodeRef<"MESHY_TASK_ID">;
+  GLB: NodeRef<"FILE_3D_GLB">;
+  FBX: NodeRef<"FILE_3D_FBX">;
+}
+
 export interface MeshyTextureNodeInputs {
-  model: "latest";
+  model: "meshy-7" | "meshy-6" | "latest";
   meshy_task_id: NodeRef<"MESHY_TASK_ID">;
   enable_original_uv: boolean;
   pbr: boolean;
   text_style_prompt: string;
+  texture_resolution: "2k" | "4k" | "8k";
   image_style?: NodeRef<"IMAGE">;
 }
 
@@ -24521,21 +29441,54 @@ export interface MeshyTextureNodeInputPaths {
   enable_original_uv: string;
   pbr: string;
   text_style_prompt: string;
+  texture_resolution: string;
   image_style: string;
 }
 
 export interface MeshyTextureNodeResult extends ComfyNodeOutput {
   model_file?: ComfyOutputValue<"STRING">;
-  meshy_task_id?: ComfyOutputValue<"MODEL_TASK_ID">;
+  meshy_task_id?: ComfyOutputValue<"MESHY_TASK_ID">;
   GLB?: ComfyOutputValue<"FILE_3D_GLB">;
   FBX?: ComfyOutputValue<"FILE_3D_FBX">;
 }
 
 export interface MeshyTextureNodeOutputs {
   model_file: NodeRef<"STRING">;
-  meshy_task_id: NodeRef<"MODEL_TASK_ID">;
+  meshy_task_id: NodeRef<"MESHY_TASK_ID">;
   GLB: NodeRef<"FILE_3D_GLB">;
   FBX: NodeRef<"FILE_3D_FBX">;
+}
+
+export interface MetaMuseImageEditApiInputs {
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface MetaMuseImageEditApiInputPaths {
+  model: string;
+}
+
+export interface MetaMuseImageEditApiResult extends ComfyNodeOutput {
+  IMAGE?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface MetaMuseImageEditApiOutputs {
+  IMAGE: NodeRef<"IMAGE">;
+}
+
+export interface MetaMuseImageTextToImageApiInputs {
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface MetaMuseImageTextToImageApiInputPaths {
+  model: string;
+}
+
+export interface MetaMuseImageTextToImageApiResult extends ComfyNodeOutput {
+  IMAGE?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface MetaMuseImageTextToImageApiOutputs {
+  IMAGE: NodeRef<"IMAGE">;
 }
 
 export interface Metric3DDepthMapPreprocessorInputs {
@@ -24674,6 +29627,234 @@ export interface MiDaSNormalMapPreprocessorOutputs {
   IMAGE: NodeRef<"IMAGE">;
 }
 
+export interface MiniMaxH3AddGuideInputs {
+  positive: NodeRef<"CONDITIONING">;
+  latent: NodeRef<"LATENT">;
+  frame_idx: number;
+  vae?: NodeRef<"VAE">;
+  audio_vae?: NodeRef<"VAE">;
+  image?: NodeRef<"IMAGE">;
+  audio?: NodeRef<"AUDIO">;
+}
+
+export interface MiniMaxH3AddGuideInputPaths {
+  positive: string;
+  latent: string;
+  frame_idx: string;
+  vae: string;
+  audio_vae: string;
+  image: string;
+  audio: string;
+}
+
+export interface MiniMaxH3AddGuideResult extends ComfyNodeOutput {
+  positive?: ComfyOutputValue<"CONDITIONING">;
+}
+
+export interface MiniMaxH3AddGuideOutputs {
+  positive: NodeRef<"CONDITIONING">;
+}
+
+export interface MiniMaxH3ImageToVideoInputs {
+  clip: NodeRef<"CLIP">;
+  vae: NodeRef<"VAE">;
+  prompt: string;
+  width: number;
+  height: number;
+  length: number;
+  first_frame?: NodeRef<"IMAGE">;
+  last_frame?: NodeRef<"IMAGE">;
+}
+
+export interface MiniMaxH3ImageToVideoInputPaths {
+  clip: string;
+  vae: string;
+  prompt: string;
+  width: string;
+  height: string;
+  length: string;
+  first_frame: string;
+  last_frame: string;
+}
+
+export interface MiniMaxH3ImageToVideoResult extends ComfyNodeOutput {
+  positive?: ComfyOutputValue<"CONDITIONING">;
+  LATENT?: ComfyOutputValue<"LATENT">;
+}
+
+export interface MiniMaxH3ImageToVideoOutputs {
+  positive: NodeRef<"CONDITIONING">;
+  LATENT: NodeRef<"LATENT">;
+}
+
+export interface MiniMaxH3ReferenceToVideoInputs {
+  clip: NodeRef<"CLIP">;
+  vae: NodeRef<"VAE">;
+  audio_vae: NodeRef<"VAE">;
+  prompt: string;
+  width: number;
+  height: number;
+  length: number;
+  ref_image_size: "match" | "max";
+  ref_images?: NodeRef<"COMFY_AUTOGROW_V3">;
+  ref_videos?: NodeRef<"COMFY_AUTOGROW_V3">;
+  ref_video_audios?: NodeRef<"COMFY_AUTOGROW_V3">;
+  ref_audios?: NodeRef<"COMFY_AUTOGROW_V3">;
+}
+
+export interface MiniMaxH3ReferenceToVideoInputPaths {
+  clip: string;
+  vae: string;
+  audio_vae: string;
+  prompt: string;
+  width: string;
+  height: string;
+  length: string;
+  ref_image_size: string;
+  ref_images: string;
+  ref_videos: string;
+  ref_video_audios: string;
+  ref_audios: string;
+}
+
+export interface MiniMaxH3ReferenceToVideoResult extends ComfyNodeOutput {
+  positive?: ComfyOutputValue<"CONDITIONING">;
+  LATENT?: ComfyOutputValue<"LATENT">;
+}
+
+export interface MiniMaxH3ReferenceToVideoOutputs {
+  positive: NodeRef<"CONDITIONING">;
+  LATENT: NodeRef<"LATENT">;
+}
+
+export interface MiniMaxH3SigmaShiftInputs {
+  model: NodeRef<"MODEL">;
+  shift_video: number;
+  shift_audio: number;
+}
+
+export interface MiniMaxH3SigmaShiftInputPaths {
+  model: string;
+  shift_video: string;
+  shift_audio: string;
+}
+
+export interface MiniMaxH3SigmaShiftResult extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+}
+
+export interface MiniMaxH3SigmaShiftOutputs {
+  MODEL: NodeRef<"MODEL">;
+}
+
+export interface MinimaxHailuo03ContextIRNodeInputs {
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  first_frame?: NodeRef<"IMAGE">;
+  last_frame?: NodeRef<"IMAGE">;
+}
+
+export interface MinimaxHailuo03ContextIRNodeInputPaths {
+  model: string;
+  first_frame: string;
+  last_frame: string;
+}
+
+export interface MinimaxHailuo03ContextIRNodeResult extends ComfyNodeOutput {
+  STRING?: ComfyOutputValue<"STRING">;
+}
+
+export interface MinimaxHailuo03ContextIRNodeOutputs {
+  STRING: NodeRef<"STRING">;
+}
+
+export interface MinimaxHailuo03FirstLastFrameNodeInputs {
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  first_frame: NodeRef<"IMAGE">;
+  seed: number;
+  watermark: boolean;
+  last_frame?: NodeRef<"IMAGE">;
+}
+
+export interface MinimaxHailuo03FirstLastFrameNodeInputPaths {
+  model: string;
+  first_frame: string;
+  seed: string;
+  watermark: string;
+  last_frame: string;
+}
+
+export interface MinimaxHailuo03FirstLastFrameNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface MinimaxHailuo03FirstLastFrameNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface MinimaxHailuo03ReferenceNodeInputs {
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  seed: number;
+  watermark: boolean;
+}
+
+export interface MinimaxHailuo03ReferenceNodeInputPaths {
+  model: string;
+  seed: string;
+  watermark: string;
+}
+
+export interface MinimaxHailuo03ReferenceNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface MinimaxHailuo03ReferenceNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface MinimaxHailuo03RegenerateNodeInputs {
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  video: NodeRef<"VIDEO">;
+  watermark: boolean;
+  first_frame?: NodeRef<"IMAGE">;
+  last_frame?: NodeRef<"IMAGE">;
+}
+
+export interface MinimaxHailuo03RegenerateNodeInputPaths {
+  model: string;
+  video: string;
+  watermark: string;
+  first_frame: string;
+  last_frame: string;
+}
+
+export interface MinimaxHailuo03RegenerateNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface MinimaxHailuo03RegenerateNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface MinimaxHailuo03TextToVideoNodeInputs {
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  seed: number;
+  watermark: boolean;
+}
+
+export interface MinimaxHailuo03TextToVideoNodeInputPaths {
+  model: string;
+  seed: string;
+  watermark: string;
+}
+
+export interface MinimaxHailuo03TextToVideoNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface MinimaxHailuo03TextToVideoNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
 export interface MinimaxHailuoVideoNodeInputs {
   prompt_text: string;
   seed?: number;
@@ -24722,6 +29903,36 @@ export interface MinimaxImageToVideoNodeOutputs {
   VIDEO: NodeRef<"VIDEO">;
 }
 
+export interface MiniMaxMusic3TextEncodeInputs {
+  clip: NodeRef<"CLIP">;
+  caption: string;
+  lyrics: string;
+  seed: number;
+  max_duration: number;
+  cfg_scale: number;
+  top_k: number;
+}
+
+export interface MiniMaxMusic3TextEncodeInputPaths {
+  clip: string;
+  caption: string;
+  lyrics: string;
+  seed: string;
+  max_duration: string;
+  cfg_scale: string;
+  top_k: string;
+}
+
+export interface MiniMaxMusic3TextEncodeResult extends ComfyNodeOutput {
+  CONDITIONING?: ComfyOutputValue<"CONDITIONING">;
+  seconds?: ComfyOutputValue<"FLOAT">;
+}
+
+export interface MiniMaxMusic3TextEncodeOutputs {
+  CONDITIONING: NodeRef<"CONDITIONING">;
+  seconds: NodeRef<"FLOAT">;
+}
+
 export interface MinimaxTextToVideoNodeInputs {
   prompt_text: string;
   model: "T2V-01" | "T2V-01-Director";
@@ -24740,6 +29951,24 @@ export interface MinimaxTextToVideoNodeResult extends ComfyNodeOutput {
 
 export interface MinimaxTextToVideoNodeOutputs {
   VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface ModelAttentionBackendInputs {
+  model: NodeRef<"MODEL">;
+  attention: "pytorch attention" | "comfy kitchen attention";
+}
+
+export interface ModelAttentionBackendInputPaths {
+  model: string;
+  attention: string;
+}
+
+export interface ModelAttentionBackendResult extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+}
+
+export interface ModelAttentionBackendOutputs {
+  MODEL: NodeRef<"MODEL">;
 }
 
 export interface ModelCompileInputs {
@@ -26774,6 +32003,28 @@ export interface ModelSaveKJInputPaths {
 export interface ModelSaveKJResult extends ComfyNodeOutput {
 }
 
+export interface MoGeGeometryToFOVInputs {
+  moge_geometry: NodeRef<"MOGE_GEOMETRY">;
+  axis: "vertical" | "horizontal" | "diagonal";
+  unit: "degrees" | "radians";
+}
+
+export interface MoGeGeometryToFOVInputPaths {
+  moge_geometry: string;
+  axis: string;
+  unit: string;
+}
+
+export interface MoGeGeometryToFOVResult extends ComfyNodeOutput {
+  fov?: ComfyOutputValue<"FLOAT">;
+  focal_pixels?: ComfyOutputValue<"FLOAT">;
+}
+
+export interface MoGeGeometryToFOVOutputs {
+  fov: NodeRef<"FLOAT">;
+  focal_pixels: NodeRef<"FLOAT">;
+}
+
 export interface MoGeInferenceInputs {
   moge_model: NodeRef<"MOGE_MODEL">;
   image: NodeRef<"IMAGE">;
@@ -27197,7 +32448,7 @@ export interface OpenAIChatConfigOutputs {
 export interface OpenAIChatNodeInputs {
   prompt: string;
   persist_context: boolean;
-  model: "gpt-5.5-pro" | "gpt-5.5" | "gpt-5" | "gpt-5-mini" | "gpt-5-nano" | "gpt-4.1" | "gpt-4.1-mini" | "gpt-4.1-nano" | "o4-mini" | "o3" | "o1-pro" | "o1";
+  model: "gpt-5.6-sol" | "gpt-5.6-terra" | "gpt-5.6-luna" | "gpt-5.5-pro" | "gpt-5.5" | "gpt-5" | "gpt-5-mini" | "gpt-5-nano" | "gpt-4.1" | "gpt-4.1-mini" | "gpt-4.1-nano" | "o4-mini" | "o3" | "o1-pro" | "o1";
   images?: NodeRef<"IMAGE">;
   files?: NodeRef<"OPENAI_INPUT_FILES">;
   advanced_options?: NodeRef<"OPENAI_CHAT_CONFIG">;
@@ -27506,6 +32757,24 @@ export interface PainterResult extends ComfyNodeOutput {
 export interface PainterOutputs {
   IMAGE: NodeRef<"IMAGE">;
   MASK: NodeRef<"MASK">;
+}
+
+export interface PaintMeshInputs {
+  mesh: NodeRef<"MESH">;
+  voxel_colors: NodeRef<"VOXEL">;
+}
+
+export interface PaintMeshInputPaths {
+  mesh: string;
+  voxel_colors: string;
+}
+
+export interface PaintMeshResult extends ComfyNodeOutput {
+  mesh?: ComfyOutputValue<"MESH">;
+}
+
+export interface PaintMeshOutputs {
+  mesh: NodeRef<"MESH">;
 }
 
 export interface PairConditioningCombineInputs {
@@ -27896,6 +33165,28 @@ export interface PiDiNetPreprocessorOutputs {
   IMAGE: NodeRef<"IMAGE">;
 }
 
+export interface Pixal3DConditioningInputs {
+  clip_vision_model: NodeRef<"CLIP_VISION">;
+  image: NodeRef<"IMAGE">;
+  camera_angle_x: number;
+}
+
+export interface Pixal3DConditioningInputPaths {
+  clip_vision_model: string;
+  image: string;
+  camera_angle_x: string;
+}
+
+export interface Pixal3DConditioningResult extends ComfyNodeOutput {
+  positive?: ComfyOutputValue<"CONDITIONING">;
+  negative?: ComfyOutputValue<"CONDITIONING">;
+}
+
+export interface Pixal3DConditioningOutputs {
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+}
+
 export interface PixelOEPixelizeInputs {
   image: NodeRef<"IMAGE">;
   downscale_mode: "contrast" | "bicubic" | "nearest" | "center" | "k-centroid";
@@ -28049,6 +33340,100 @@ export interface PixverseTransitionVideoNodeResult extends ComfyNodeOutput {
 }
 
 export interface PixverseTransitionVideoNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface PixverseV6ExtendVideoNodeInputs {
+  video: NodeRef<"VIDEO">;
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface PixverseV6ExtendVideoNodeInputPaths {
+  video: string;
+  model: string;
+}
+
+export interface PixverseV6ExtendVideoNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface PixverseV6ExtendVideoNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface PixverseV6FirstLastFrameNodeInputs {
+  first_frame: NodeRef<"IMAGE">;
+  last_frame: NodeRef<"IMAGE">;
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface PixverseV6FirstLastFrameNodeInputPaths {
+  first_frame: string;
+  last_frame: string;
+  model: string;
+}
+
+export interface PixverseV6FirstLastFrameNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface PixverseV6FirstLastFrameNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface PixverseV6FusionVideoNodeInputs {
+  subjects: NodeRef<"COMFY_AUTOGROW_V3">;
+  backgrounds: NodeRef<"COMFY_AUTOGROW_V3">;
+  videos: NodeRef<"COMFY_AUTOGROW_V3">;
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface PixverseV6FusionVideoNodeInputPaths {
+  subjects: string;
+  backgrounds: string;
+  videos: string;
+  model: string;
+}
+
+export interface PixverseV6FusionVideoNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface PixverseV6FusionVideoNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface PixverseV6ImageToVideoNodeInputs {
+  image: NodeRef<"IMAGE">;
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface PixverseV6ImageToVideoNodeInputPaths {
+  image: string;
+  model: string;
+}
+
+export interface PixverseV6ImageToVideoNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface PixverseV6ImageToVideoNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface PixverseV6TextToVideoNodeInputs {
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface PixverseV6TextToVideoNodeInputPaths {
+  model: string;
+}
+
+export interface PixverseV6TextToVideoNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface PixverseV6TextToVideoNodeOutputs {
   VIDEO: NodeRef<"VIDEO">;
 }
 
@@ -28290,7 +33675,7 @@ export interface PowerPromptRgthreeInputs {
   prompt: string;
   opt_model?: NodeRef<"MODEL">;
   opt_clip?: NodeRef<"CLIP">;
-  insert_lora?: "CHOOSE" | "DISABLE LORAS" | "Anima\\anima-turbo-lora-v0.1" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0" | "Illustrious\\Yani Neko [anime style]-Illus" | "Illustrious\\Zazipou_IL_v2" | "Illustrious\\handplugillustrious" | "Illustrious\\pixel-Illustrius" | "Illustrious\\shadyfox" | "Illustrious\\yani neko IL" | "Illustrious\\yani_neko_yani_nekoILL" | "apoc_char_01" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5";
+  insert_lora?: "CHOOSE" | "DISABLE LORAS" | "Anima\\anima-turbo-lora-v0.1" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0" | "Illustrious\\Yani Neko [anime style]-Illus" | "Illustrious\\Zazipou_IL_v2" | "Illustrious\\handplugillustrious" | "Illustrious\\pixel-Illustrius" | "Illustrious\\shadyfox" | "Illustrious\\yani neko IL" | "Illustrious\\yani_neko_yani_nekoILL" | "apoc_char_01" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5" | "scavenger";
   insert_embedding?: "CHOOSE" | "SD1.5\\easynegative";
   insert_saved?: "CHOOSE";
 }
@@ -28801,6 +34186,56 @@ export interface QwenImageDiffsynthControlnetOutputs {
   MODEL: NodeRef<"MODEL">;
 }
 
+export interface QwenImageEditApiInputs {
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  size: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  n: number;
+  seed: number;
+  prompt_extend: boolean;
+  watermark: boolean;
+}
+
+export interface QwenImageEditApiInputPaths {
+  model: string;
+  size: string;
+  n: string;
+  seed: string;
+  prompt_extend: string;
+  watermark: string;
+}
+
+export interface QwenImageEditApiResult extends ComfyNodeOutput {
+  IMAGE?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface QwenImageEditApiOutputs {
+  IMAGE: NodeRef<"IMAGE">;
+}
+
+export interface QwenImageTextToImageApiInputs {
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  n: number;
+  seed: number;
+  prompt_extend: boolean;
+  watermark: boolean;
+}
+
+export interface QwenImageTextToImageApiInputPaths {
+  model: string;
+  n: string;
+  seed: string;
+  prompt_extend: string;
+  watermark: string;
+}
+
+export interface QwenImageTextToImageApiResult extends ComfyNodeOutput {
+  IMAGE?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface QwenImageTextToImageApiOutputs {
+  IMAGE: NodeRef<"IMAGE">;
+}
+
 export interface RandomCropImagesInputs {
   images: NodeRef<"IMAGE">;
   width: number;
@@ -29233,6 +34668,24 @@ export interface RecraftTextToVectorNodeOutputs {
   SVG: NodeRef<"SVG">;
 }
 
+export interface RecraftV4CreateStyleNodeInputs {
+  model: "recraftv4_styles" | "recraftv4_styles_vector" | "recraftv4_styles_pro" | "recraftv4_styles_pro_vector";
+  images: NodeRef<"COMFY_AUTOGROW_V3">;
+}
+
+export interface RecraftV4CreateStyleNodeInputPaths {
+  model: string;
+  images: string;
+}
+
+export interface RecraftV4CreateStyleNodeResult extends ComfyNodeOutput {
+  style_id?: ComfyOutputValue<"STRING">;
+}
+
+export interface RecraftV4CreateStyleNodeOutputs {
+  style_id: NodeRef<"STRING">;
+}
+
 export interface RecraftV4TextToImageNodeInputs {
   prompt: string;
   negative_prompt: string;
@@ -29240,6 +34693,9 @@ export interface RecraftV4TextToImageNodeInputs {
   n: number;
   seed: number;
   recraft_controls?: NodeRef<"RECRAFT_CONTROLS">;
+  style_id?: string;
+  style_match?: "precise" | "flexible";
+  style_references?: NodeRef<"COMFY_AUTOGROW_V3">;
 }
 
 export interface RecraftV4TextToImageNodeInputPaths {
@@ -29249,14 +34705,19 @@ export interface RecraftV4TextToImageNodeInputPaths {
   n: string;
   seed: string;
   recraft_controls: string;
+  style_id: string;
+  style_match: string;
+  style_references: string;
 }
 
 export interface RecraftV4TextToImageNodeResult extends ComfyNodeOutput {
   IMAGE?: ComfyOutputValue<"IMAGE">;
+  style_id?: ComfyOutputValue<"STRING">;
 }
 
 export interface RecraftV4TextToImageNodeOutputs {
   IMAGE: NodeRef<"IMAGE">;
+  style_id: NodeRef<"STRING">;
 }
 
 export interface RecraftV4TextToVectorNodeInputs {
@@ -29266,6 +34727,9 @@ export interface RecraftV4TextToVectorNodeInputs {
   n: number;
   seed: number;
   recraft_controls?: NodeRef<"RECRAFT_CONTROLS">;
+  style_id?: string;
+  style_match?: "precise" | "flexible";
+  style_references?: NodeRef<"COMFY_AUTOGROW_V3">;
 }
 
 export interface RecraftV4TextToVectorNodeInputPaths {
@@ -29275,14 +34739,19 @@ export interface RecraftV4TextToVectorNodeInputPaths {
   n: string;
   seed: string;
   recraft_controls: string;
+  style_id: string;
+  style_match: string;
+  style_references: string;
 }
 
 export interface RecraftV4TextToVectorNodeResult extends ComfyNodeOutput {
   SVG?: ComfyOutputValue<"SVG">;
+  style_id?: ComfyOutputValue<"STRING">;
 }
 
 export interface RecraftV4TextToVectorNodeOutputs {
   SVG: NodeRef<"SVG">;
+  style_id: NodeRef<"STRING">;
 }
 
 export interface RecraftVectorizeImageNodeInputs {
@@ -29477,6 +34946,38 @@ export interface RemBGSessionOutputs {
   REMBG_SESSION: NodeRef<"REMBG_SESSION">;
 }
 
+export interface RemeshMeshInputs {
+  mesh: NodeRef<"MESH">;
+  resolution: number;
+  sign_mode: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  band: number;
+  project_back: number;
+  fix_poles: boolean;
+  smooth_iters: number;
+  drop_small_components: number;
+  precluster_max_verts: number;
+}
+
+export interface RemeshMeshInputPaths {
+  mesh: string;
+  resolution: string;
+  sign_mode: string;
+  band: string;
+  project_back: string;
+  fix_poles: string;
+  smooth_iters: string;
+  drop_small_components: string;
+  precluster_max_verts: string;
+}
+
+export interface RemeshMeshResult extends ComfyNodeOutput {
+  mesh?: ComfyOutputValue<"MESH">;
+}
+
+export interface RemeshMeshOutputs {
+  mesh: NodeRef<"MESH">;
+}
+
 export interface RemoveBackgroundInputs {
   bg_removal_model: NodeRef<"BACKGROUND_REMOVAL">;
   image: NodeRef<"IMAGE">;
@@ -29525,6 +35026,36 @@ export interface RenderAnimalKpsResult extends ComfyNodeOutput {
 
 export interface RenderAnimalKpsOutputs {
   IMAGE: NodeRef<"IMAGE">;
+}
+
+export interface RenderMeshInputs {
+  mesh: NodeRef<"MESH">;
+  mode: "auto" | "texture" | "vertex colors" | "solid" | "normal" | "depth";
+  width: number;
+  height: number;
+  background: NodeRef<"COLOR">;
+  model_3d_info?: NodeRef<"LOAD3D_MODEL_INFO">;
+  camera_info?: NodeRef<"LOAD3D_CAMERA">;
+}
+
+export interface RenderMeshInputPaths {
+  mesh: string;
+  mode: string;
+  width: string;
+  height: string;
+  background: string;
+  model_3d_info: string;
+  camera_info: string;
+}
+
+export interface RenderMeshResult extends ComfyNodeOutput {
+  image?: ComfyOutputValue<"IMAGE">;
+  mask?: ComfyOutputValue<"MASK">;
+}
+
+export interface RenderMeshOutputs {
+  image: NodeRef<"IMAGE">;
+  mask: NodeRef<"MASK">;
 }
 
 export interface RenderPeopleKpsInputs {
@@ -29587,6 +35118,24 @@ export interface RenderSplatResult extends ComfyNodeOutput {
 export interface RenderSplatOutputs {
   image: NodeRef<"IMAGE">;
   mask: NodeRef<"MASK">;
+}
+
+export interface RenderUVAtlasInputs {
+  mesh: NodeRef<"MESH">;
+  resolution: number;
+}
+
+export interface RenderUVAtlasInputPaths {
+  mesh: string;
+  resolution: string;
+}
+
+export interface RenderUVAtlasResult extends ComfyNodeOutput {
+  image?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface RenderUVAtlasOutputs {
+  image: NodeRef<"IMAGE">;
 }
 
 export interface RenormCFGInputs {
@@ -30215,6 +35764,24 @@ export interface Rodin3D_SmoothOutputs {
   GLB: NodeRef<"FILE_3D_GLB">;
 }
 
+export interface RotateMeshInputs {
+  mesh: NodeRef<"MESH">;
+  mode: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface RotateMeshInputPaths {
+  mesh: string;
+  mode: string;
+}
+
+export interface RotateMeshResult extends ComfyNodeOutput {
+  mesh?: ComfyOutputValue<"MESH">;
+}
+
+export interface RotateMeshOutputs {
+  mesh: NodeRef<"MESH">;
+}
+
 export interface RoundMaskInputs {
   mask: NodeRef<"MASK">;
 }
@@ -30550,6 +36117,132 @@ export interface SAM3_VideoTrackResult extends ComfyNodeOutput {
 
 export interface SAM3_VideoTrackOutputs {
   track_data: NodeRef<"SAM3_TRACK_DATA">;
+}
+
+export interface SAM3DBody_FaceExpressionInputs {
+  sam3d_body_model: NodeRef<"SAM3D_BODY_MODEL">;
+  mhr_pose_data: NodeRef<"MHR_POSE_DATA">;
+  image: NodeRef<"IMAGE">;
+  strength: number;
+  mouth_strength: number;
+  eye_strength: number;
+  brow_strength: number;
+  input_threshold: number;
+  blendshape_smooth_window: number;
+}
+
+export interface SAM3DBody_FaceExpressionInputPaths {
+  sam3d_body_model: string;
+  mhr_pose_data: string;
+  image: string;
+  strength: string;
+  mouth_strength: string;
+  eye_strength: string;
+  brow_strength: string;
+  input_threshold: string;
+  blendshape_smooth_window: string;
+}
+
+export interface SAM3DBody_FaceExpressionResult extends ComfyNodeOutput {
+  mhr_pose_data?: ComfyOutputValue<"MHR_POSE_DATA">;
+}
+
+export interface SAM3DBody_FaceExpressionOutputs {
+  mhr_pose_data: NodeRef<"MHR_POSE_DATA">;
+}
+
+export interface SAM3DBody_LoaderInputs {
+  model_file: string;
+}
+
+export interface SAM3DBody_LoaderInputPaths {
+  model_file: string;
+}
+
+export interface SAM3DBody_LoaderResult extends ComfyNodeOutput {
+  sam3d_body_model?: ComfyOutputValue<"SAM3D_BODY_MODEL">;
+}
+
+export interface SAM3DBody_LoaderOutputs {
+  sam3d_body_model: NodeRef<"SAM3D_BODY_MODEL">;
+}
+
+export interface SAM3DBody_PredictInputs {
+  sam3d_body_model: NodeRef<"SAM3D_BODY_MODEL">;
+  image: NodeRef<"IMAGE">;
+  run_hand_refinement: boolean;
+  fov: number;
+  batch_size: number;
+  track_data?: NodeRef<"SAM3_TRACK_DATA">;
+  bboxes?: NodeRef<"BOUNDING_BOX">;
+}
+
+export interface SAM3DBody_PredictInputPaths {
+  sam3d_body_model: string;
+  image: string;
+  run_hand_refinement: string;
+  fov: string;
+  batch_size: string;
+  track_data: string;
+  bboxes: string;
+}
+
+export interface SAM3DBody_PredictResult extends ComfyNodeOutput {
+  mhr_pose_data?: ComfyOutputValue<"MHR_POSE_DATA">;
+}
+
+export interface SAM3DBody_PredictOutputs {
+  mhr_pose_data: NodeRef<"MHR_POSE_DATA">;
+}
+
+export interface SAM3DBody_RenderInputs {
+  pose_data: NodeRef<"MHR_POSE_DATA,KIMODO_POSE_DATA">;
+  width: number;
+  height: number;
+  render_style: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  background?: NodeRef<"IMAGE">;
+  camera_info?: NodeRef<"LOAD3D_CAMERA">;
+}
+
+export interface SAM3DBody_RenderInputPaths {
+  pose_data: string;
+  width: string;
+  height: string;
+  render_style: string;
+  background: string;
+  camera_info: string;
+}
+
+export interface SAM3DBody_RenderResult extends ComfyNodeOutput {
+  image?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface SAM3DBody_RenderOutputs {
+  image: NodeRef<"IMAGE">;
+}
+
+export interface SAM3DBody_SmoothInputs {
+  mhr_pose_data: NodeRef<"MHR_POSE_DATA">;
+  strength: number;
+  method: "gaussian" | "savgol";
+  window: number;
+  rotation_threshold_degrees: number;
+}
+
+export interface SAM3DBody_SmoothInputPaths {
+  mhr_pose_data: string;
+  strength: string;
+  method: string;
+  window: string;
+  rotation_threshold_degrees: string;
+}
+
+export interface SAM3DBody_SmoothResult extends ComfyNodeOutput {
+  mhr_pose_data?: ComfyOutputValue<"MHR_POSE_DATA">;
+}
+
+export interface SAM3DBody_SmoothOutputs {
+  mhr_pose_data: NodeRef<"MHR_POSE_DATA">;
 }
 
 export interface SAM3SegmentInputs {
@@ -31036,6 +36729,42 @@ export interface SAMPreprocessorOutputs {
   IMAGE: NodeRef<"IMAGE">;
 }
 
+export interface Save3DAdvancedInputs {
+  model_3d: NodeRef<"FILE_3D_GLB,FILE_3D_GLTF,FILE_3D_FBX,FILE_3D_OBJ,FILE_3D_STL,FILE_3D_USDZ,FILE_3D">;
+  filename_prefix: string;
+  viewport_state: NodeRef<"LOAD_3D">;
+  width: number;
+  height: number;
+  model_3d_info?: NodeRef<"LOAD3D_MODEL_INFO">;
+  camera_info?: NodeRef<"LOAD3D_CAMERA">;
+}
+
+export interface Save3DAdvancedInputPaths {
+  model_3d: string;
+  filename_prefix: string;
+  viewport_state: string;
+  width: string;
+  height: string;
+  model_3d_info: string;
+  camera_info: string;
+}
+
+export interface Save3DAdvancedResult extends ComfyNodeOutput {
+  model_3d?: ComfyOutputValue<"FILE_3D">;
+  model_3d_info?: ComfyOutputValue<"LOAD3D_MODEL_INFO">;
+  camera_info?: ComfyOutputValue<"LOAD3D_CAMERA">;
+  width?: ComfyOutputValue<"INT">;
+  height?: ComfyOutputValue<"INT">;
+}
+
+export interface Save3DAdvancedOutputs {
+  model_3d: NodeRef<"FILE_3D">;
+  model_3d_info: NodeRef<"LOAD3D_MODEL_INFO">;
+  camera_info: NodeRef<"LOAD3D_CAMERA">;
+  width: NodeRef<"INT">;
+  height: NodeRef<"INT">;
+}
+
 export interface SaveAnimatedPNGInputs {
   images: NodeRef<"IMAGE">;
   filename_prefix: string;
@@ -31160,6 +36889,42 @@ export interface SaveAudioOpusResult extends ComfyNodeOutput {
 
 export interface SaveAudioOpusOutputs {
   audio: NodeRef<"AUDIO">;
+}
+
+export interface SaveGaussianSplatInputs {
+  model_3d: NodeRef<"FILE_3D_SPLAT_ANY,FILE_3D_PLY,FILE_3D_SPLAT,FILE_3D_SPZ,FILE_3D_KSPLAT">;
+  filename_prefix: string;
+  viewport_state: NodeRef<"LOAD_3D">;
+  width: number;
+  height: number;
+  model_3d_info?: NodeRef<"LOAD3D_MODEL_INFO">;
+  camera_info?: NodeRef<"LOAD3D_CAMERA">;
+}
+
+export interface SaveGaussianSplatInputPaths {
+  model_3d: string;
+  filename_prefix: string;
+  viewport_state: string;
+  width: string;
+  height: string;
+  model_3d_info: string;
+  camera_info: string;
+}
+
+export interface SaveGaussianSplatResult extends ComfyNodeOutput {
+  model_3d?: ComfyOutputValue<"FILE_3D_SPLAT_ANY">;
+  model_3d_info?: ComfyOutputValue<"LOAD3D_MODEL_INFO">;
+  camera_info?: ComfyOutputValue<"LOAD3D_CAMERA">;
+  width?: ComfyOutputValue<"INT">;
+  height?: ComfyOutputValue<"INT">;
+}
+
+export interface SaveGaussianSplatOutputs {
+  model_3d: NodeRef<"FILE_3D_SPLAT_ANY">;
+  model_3d_info: NodeRef<"LOAD3D_MODEL_INFO">;
+  camera_info: NodeRef<"LOAD3D_CAMERA">;
+  width: NodeRef<"INT">;
+  height: NodeRef<"INT">;
 }
 
 export interface SaveGLBInputs {
@@ -31336,6 +37101,42 @@ export interface SaveLoRAInputPaths {
 export interface SaveLoRAResult extends ComfyNodeOutput {
 }
 
+export interface SavePointCloudInputs {
+  model_3d: NodeRef<"FILE_3D_POINT_CLOUD_ANY,FILE_3D_PLY">;
+  filename_prefix: string;
+  viewport_state: NodeRef<"LOAD_3D">;
+  width: number;
+  height: number;
+  model_3d_info?: NodeRef<"LOAD3D_MODEL_INFO">;
+  camera_info?: NodeRef<"LOAD3D_CAMERA">;
+}
+
+export interface SavePointCloudInputPaths {
+  model_3d: string;
+  filename_prefix: string;
+  viewport_state: string;
+  width: string;
+  height: string;
+  model_3d_info: string;
+  camera_info: string;
+}
+
+export interface SavePointCloudResult extends ComfyNodeOutput {
+  model_3d?: ComfyOutputValue<"FILE_3D_POINT_CLOUD_ANY">;
+  model_3d_info?: ComfyOutputValue<"LOAD3D_MODEL_INFO">;
+  camera_info?: ComfyOutputValue<"LOAD3D_CAMERA">;
+  width?: ComfyOutputValue<"INT">;
+  height?: ComfyOutputValue<"INT">;
+}
+
+export interface SavePointCloudOutputs {
+  model_3d: NodeRef<"FILE_3D_POINT_CLOUD_ANY">;
+  model_3d_info: NodeRef<"LOAD3D_MODEL_INFO">;
+  camera_info: NodeRef<"LOAD3D_CAMERA">;
+  width: NodeRef<"INT">;
+  height: NodeRef<"INT">;
+}
+
 export interface SavePoseKpsAsJsonFileInputs {
   pose_kps: NodeRef<"POSE_KEYPOINT">;
   filename_prefix: string;
@@ -31389,6 +37190,26 @@ export interface SaveSVGNodeOutputs {
   svg: NodeRef<"SVG">;
 }
 
+export interface SaveTextInputs {
+  text: string;
+  filename_prefix: string;
+  format: "txt" | "csv" | "md" | "json";
+}
+
+export interface SaveTextInputPaths {
+  text: string;
+  filename_prefix: string;
+  format: string;
+}
+
+export interface SaveTextResult extends ComfyNodeOutput {
+  text?: ComfyOutputValue<"STRING">;
+}
+
+export interface SaveTextOutputs {
+  text: NodeRef<"STRING">;
+}
+
 export interface SaveTrainingDatasetInputs {
   latents: NodeRef<"LATENT">;
   conditioning: NodeRef<"CONDITIONING">;
@@ -31409,8 +37230,8 @@ export interface SaveTrainingDatasetResult extends ComfyNodeOutput {
 export interface SaveVideoInputs {
   video: NodeRef<"VIDEO">;
   filename_prefix: string;
-  format: "auto" | "mp4";
-  codec: "auto" | "h264";
+  format: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  codec?: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
 }
 
 export interface SaveVideoInputPaths {
@@ -31829,7 +37650,7 @@ export interface SDXLPowerPromptPositiveRgthreeInputs {
   opt_clip?: NodeRef<"CLIP">;
   opt_clip_width?: number;
   opt_clip_height?: number;
-  insert_lora?: "CHOOSE" | "DISABLE LORAS" | "Anima\\anima-turbo-lora-v0.1" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0" | "Illustrious\\Yani Neko [anime style]-Illus" | "Illustrious\\Zazipou_IL_v2" | "Illustrious\\handplugillustrious" | "Illustrious\\pixel-Illustrius" | "Illustrious\\shadyfox" | "Illustrious\\yani neko IL" | "Illustrious\\yani_neko_yani_nekoILL" | "apoc_char_01" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5";
+  insert_lora?: "CHOOSE" | "DISABLE LORAS" | "Anima\\anima-turbo-lora-v0.1" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0" | "Illustrious\\Yani Neko [anime style]-Illus" | "Illustrious\\Zazipou_IL_v2" | "Illustrious\\handplugillustrious" | "Illustrious\\pixel-Illustrius" | "Illustrious\\shadyfox" | "Illustrious\\yani neko IL" | "Illustrious\\yani_neko_yani_nekoILL" | "apoc_char_01" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5" | "scavenger";
   insert_embedding?: "CHOOSE" | "SD1.5\\easynegative";
   insert_saved?: "CHOOSE";
   target_width?: number;
@@ -31966,6 +37787,102 @@ export interface SeedNodeResult extends ComfyNodeOutput {
 
 export interface SeedNodeOutputs {
   seed: NodeRef<"INT">;
+}
+
+export interface SeedVR2ConditioningInputs {
+  model: NodeRef<"MODEL">;
+  vae_conditioning: NodeRef<"LATENT">;
+}
+
+export interface SeedVR2ConditioningInputPaths {
+  model: string;
+  vae_conditioning: string;
+}
+
+export interface SeedVR2ConditioningResult extends ComfyNodeOutput {
+  positive?: ComfyOutputValue<"CONDITIONING">;
+  negative?: ComfyOutputValue<"CONDITIONING">;
+}
+
+export interface SeedVR2ConditioningOutputs {
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+}
+
+export interface SeedVR2PostProcessingInputs {
+  images: NodeRef<"IMAGE">;
+  original_resized_images: NodeRef<"IMAGE">;
+  color_correction_method: "lab" | "wavelet" | "adain" | "none";
+}
+
+export interface SeedVR2PostProcessingInputPaths {
+  images: string;
+  original_resized_images: string;
+  color_correction_method: string;
+}
+
+export interface SeedVR2PostProcessingResult extends ComfyNodeOutput {
+  images?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface SeedVR2PostProcessingOutputs {
+  images: NodeRef<"IMAGE">;
+}
+
+export interface SeedVR2PreprocessInputs {
+  resized_images: NodeRef<"IMAGE">;
+}
+
+export interface SeedVR2PreprocessInputPaths {
+  resized_images: string;
+}
+
+export interface SeedVR2PreprocessResult extends ComfyNodeOutput {
+  images?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface SeedVR2PreprocessOutputs {
+  images: NodeRef<"IMAGE">;
+}
+
+export interface SeedVR2TemporalChunkInputs {
+  latent: NodeRef<"LATENT">;
+  temporal_overlap: number;
+  chunking_mode: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface SeedVR2TemporalChunkInputPaths {
+  latent: string;
+  temporal_overlap: string;
+  chunking_mode: string;
+}
+
+export interface SeedVR2TemporalChunkResult extends ComfyNodeOutput {
+  latents?: ComfyOutputValue<"LATENT">;
+  temporal_overlap?: ComfyOutputValue<"INT">;
+}
+
+export interface SeedVR2TemporalChunkOutputs {
+  latents: NodeRef<"LATENT">;
+  temporal_overlap: NodeRef<"INT">;
+}
+
+export interface SeedVR2TemporalMergeInputs {
+  latents: NodeRef<"LATENT">;
+  temporal_overlap: number;
+}
+
+export interface SeedVR2TemporalMergeInputPaths {
+  latents: string;
+  temporal_overlap: string;
+}
+
+export interface SeedVR2TemporalMergeResult extends ComfyNodeOutput {
+  latent?: ComfyOutputValue<"LATENT">;
+}
+
+export interface SeedVR2TemporalMergeOutputs {
+  latent: NodeRef<"LATENT">;
 }
 
 export interface SegmentInputs {
@@ -32310,6 +38227,46 @@ export interface ShufflePreprocessorResult extends ComfyNodeOutput {
 
 export interface ShufflePreprocessorOutputs {
   IMAGE: NodeRef<"IMAGE">;
+}
+
+export interface ShuffleVideoDatasetInputs {
+  videos: NodeRef<"VIDEO">;
+  seed: number;
+}
+
+export interface ShuffleVideoDatasetInputPaths {
+  videos: string;
+  seed: string;
+}
+
+export interface ShuffleVideoDatasetResult extends ComfyNodeOutput {
+  videos?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface ShuffleVideoDatasetOutputs {
+  videos: NodeRef<"VIDEO">;
+}
+
+export interface ShuffleVideoTextDatasetInputs {
+  videos: NodeRef<"VIDEO">;
+  texts: string;
+  seed: number;
+}
+
+export interface ShuffleVideoTextDatasetInputPaths {
+  videos: string;
+  texts: string;
+  seed: string;
+}
+
+export interface ShuffleVideoTextDatasetResult extends ComfyNodeOutput {
+  videos?: ComfyOutputValue<"VIDEO">;
+  texts?: ComfyOutputValue<"STRING">;
+}
+
+export interface ShuffleVideoTextDatasetOutputs {
+  videos: NodeRef<"VIDEO">;
+  texts: NodeRef<"STRING">;
 }
 
 export interface SigmasToFloatInputs {
@@ -32872,214 +38829,6 @@ export interface SpriteManagerOutputs {
   masks: NodeRef<"MASK">;
 }
 
-export interface StabilityAudioInpaintInputs {
-  model: "stable-audio-2.5";
-  prompt: string;
-  audio: NodeRef<"AUDIO">;
-  duration?: number;
-  seed?: number;
-  steps?: number;
-  mask_start?: number;
-  mask_end?: number;
-}
-
-export interface StabilityAudioInpaintInputPaths {
-  model: string;
-  prompt: string;
-  audio: string;
-  duration: string;
-  seed: string;
-  steps: string;
-  mask_start: string;
-  mask_end: string;
-}
-
-export interface StabilityAudioInpaintResult extends ComfyNodeOutput {
-  AUDIO?: ComfyOutputValue<"AUDIO">;
-}
-
-export interface StabilityAudioInpaintOutputs {
-  AUDIO: NodeRef<"AUDIO">;
-}
-
-export interface StabilityAudioToAudioInputs {
-  model: "stable-audio-2.5";
-  prompt: string;
-  audio: NodeRef<"AUDIO">;
-  duration?: number;
-  seed?: number;
-  steps?: number;
-  strength?: number;
-}
-
-export interface StabilityAudioToAudioInputPaths {
-  model: string;
-  prompt: string;
-  audio: string;
-  duration: string;
-  seed: string;
-  steps: string;
-  strength: string;
-}
-
-export interface StabilityAudioToAudioResult extends ComfyNodeOutput {
-  AUDIO?: ComfyOutputValue<"AUDIO">;
-}
-
-export interface StabilityAudioToAudioOutputs {
-  AUDIO: NodeRef<"AUDIO">;
-}
-
-export interface StabilityStableImageSD_3_5NodeInputs {
-  prompt: string;
-  model: "sd3.5-large" | "sd3.5-medium";
-  aspect_ratio: "1:1" | "16:9" | "9:16" | "3:2" | "2:3" | "5:4" | "4:5" | "21:9" | "9:21";
-  style_preset: "None" | "3d-model" | "analog-film" | "anime" | "cinematic" | "comic-book" | "digital-art" | "enhance" | "fantasy-art" | "isometric" | "line-art" | "low-poly" | "modeling-compound" | "neon-punk" | "origami" | "photographic" | "pixel-art" | "tile-texture";
-  cfg_scale: number;
-  seed: number;
-  image?: NodeRef<"IMAGE">;
-  negative_prompt?: string;
-  image_denoise?: number;
-}
-
-export interface StabilityStableImageSD_3_5NodeInputPaths {
-  prompt: string;
-  model: string;
-  aspect_ratio: string;
-  style_preset: string;
-  cfg_scale: string;
-  seed: string;
-  image: string;
-  negative_prompt: string;
-  image_denoise: string;
-}
-
-export interface StabilityStableImageSD_3_5NodeResult extends ComfyNodeOutput {
-  IMAGE?: ComfyOutputValue<"IMAGE">;
-}
-
-export interface StabilityStableImageSD_3_5NodeOutputs {
-  IMAGE: NodeRef<"IMAGE">;
-}
-
-export interface StabilityStableImageUltraNodeInputs {
-  prompt: string;
-  aspect_ratio: "1:1" | "16:9" | "9:16" | "3:2" | "2:3" | "5:4" | "4:5" | "21:9" | "9:21";
-  style_preset: "None" | "3d-model" | "analog-film" | "anime" | "cinematic" | "comic-book" | "digital-art" | "enhance" | "fantasy-art" | "isometric" | "line-art" | "low-poly" | "modeling-compound" | "neon-punk" | "origami" | "photographic" | "pixel-art" | "tile-texture";
-  seed: number;
-  image?: NodeRef<"IMAGE">;
-  negative_prompt?: string;
-  image_denoise?: number;
-}
-
-export interface StabilityStableImageUltraNodeInputPaths {
-  prompt: string;
-  aspect_ratio: string;
-  style_preset: string;
-  seed: string;
-  image: string;
-  negative_prompt: string;
-  image_denoise: string;
-}
-
-export interface StabilityStableImageUltraNodeResult extends ComfyNodeOutput {
-  IMAGE?: ComfyOutputValue<"IMAGE">;
-}
-
-export interface StabilityStableImageUltraNodeOutputs {
-  IMAGE: NodeRef<"IMAGE">;
-}
-
-export interface StabilityTextToAudioInputs {
-  model: "stable-audio-2.5";
-  prompt: string;
-  duration?: number;
-  seed?: number;
-  steps?: number;
-}
-
-export interface StabilityTextToAudioInputPaths {
-  model: string;
-  prompt: string;
-  duration: string;
-  seed: string;
-  steps: string;
-}
-
-export interface StabilityTextToAudioResult extends ComfyNodeOutput {
-  AUDIO?: ComfyOutputValue<"AUDIO">;
-}
-
-export interface StabilityTextToAudioOutputs {
-  AUDIO: NodeRef<"AUDIO">;
-}
-
-export interface StabilityUpscaleConservativeNodeInputs {
-  image: NodeRef<"IMAGE">;
-  prompt: string;
-  creativity: number;
-  seed: number;
-  negative_prompt?: string;
-}
-
-export interface StabilityUpscaleConservativeNodeInputPaths {
-  image: string;
-  prompt: string;
-  creativity: string;
-  seed: string;
-  negative_prompt: string;
-}
-
-export interface StabilityUpscaleConservativeNodeResult extends ComfyNodeOutput {
-  IMAGE?: ComfyOutputValue<"IMAGE">;
-}
-
-export interface StabilityUpscaleConservativeNodeOutputs {
-  IMAGE: NodeRef<"IMAGE">;
-}
-
-export interface StabilityUpscaleCreativeNodeInputs {
-  image: NodeRef<"IMAGE">;
-  prompt: string;
-  creativity: number;
-  style_preset: "None" | "3d-model" | "analog-film" | "anime" | "cinematic" | "comic-book" | "digital-art" | "enhance" | "fantasy-art" | "isometric" | "line-art" | "low-poly" | "modeling-compound" | "neon-punk" | "origami" | "photographic" | "pixel-art" | "tile-texture";
-  seed: number;
-  negative_prompt?: string;
-}
-
-export interface StabilityUpscaleCreativeNodeInputPaths {
-  image: string;
-  prompt: string;
-  creativity: string;
-  style_preset: string;
-  seed: string;
-  negative_prompt: string;
-}
-
-export interface StabilityUpscaleCreativeNodeResult extends ComfyNodeOutput {
-  IMAGE?: ComfyOutputValue<"IMAGE">;
-}
-
-export interface StabilityUpscaleCreativeNodeOutputs {
-  IMAGE: NodeRef<"IMAGE">;
-}
-
-export interface StabilityUpscaleFastNodeInputs {
-  image: NodeRef<"IMAGE">;
-}
-
-export interface StabilityUpscaleFastNodeInputPaths {
-  image: string;
-}
-
-export interface StabilityUpscaleFastNodeResult extends ComfyNodeOutput {
-  IMAGE?: ComfyOutputValue<"IMAGE">;
-}
-
-export interface StabilityUpscaleFastNodeOutputs {
-  IMAGE: NodeRef<"IMAGE">;
-}
-
 export interface StableCascade_EmptyLatentImageInputs {
   width: number;
   height: number;
@@ -33520,6 +39269,102 @@ export interface StripWhitespaceOutputs {
   texts: NodeRef<"STRING">;
 }
 
+export interface StyleAlignedBatchAlignInputs {
+  model: NodeRef<"MODEL">;
+  share_norm: "both" | "group" | "layer" | "disabled";
+  share_attn: "q+k" | "q+k+v" | "disabled";
+  scale: number;
+}
+
+export interface StyleAlignedBatchAlignInputPaths {
+  model: string;
+  share_norm: string;
+  share_attn: string;
+  scale: string;
+}
+
+export interface StyleAlignedBatchAlignResult extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+}
+
+export interface StyleAlignedBatchAlignOutputs {
+  MODEL: NodeRef<"MODEL">;
+}
+
+export interface StyleAlignedReferenceSamplerInputs {
+  model: NodeRef<"MODEL">;
+  share_norm: "both" | "group" | "layer" | "disabled";
+  share_attn: "q+k" | "q+k+v" | "disabled";
+  scale: number;
+  batch_size: number;
+  noise_seed: number;
+  cfg: number;
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+  ref_positive: NodeRef<"CONDITIONING">;
+  sampler: NodeRef<"SAMPLER">;
+  sigmas: NodeRef<"SIGMAS">;
+  ref_latents: NodeRef<"STEP_LATENTS">;
+}
+
+export interface StyleAlignedReferenceSamplerInputPaths {
+  model: string;
+  share_norm: string;
+  share_attn: string;
+  scale: string;
+  batch_size: string;
+  noise_seed: string;
+  cfg: string;
+  positive: string;
+  negative: string;
+  ref_positive: string;
+  sampler: string;
+  sigmas: string;
+  ref_latents: string;
+}
+
+export interface StyleAlignedReferenceSamplerResult extends ComfyNodeOutput {
+  output?: ComfyOutputValue<"LATENT">;
+  denoised_output?: ComfyOutputValue<"LATENT">;
+}
+
+export interface StyleAlignedReferenceSamplerOutputs {
+  output: NodeRef<"LATENT">;
+  denoised_output: NodeRef<"LATENT">;
+}
+
+export interface StyleAlignedSampleReferenceLatentsInputs {
+  model: NodeRef<"MODEL">;
+  noise_seed: number;
+  cfg: number;
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+  sampler: NodeRef<"SAMPLER">;
+  sigmas: NodeRef<"SIGMAS">;
+  latent_image: NodeRef<"LATENT">;
+}
+
+export interface StyleAlignedSampleReferenceLatentsInputPaths {
+  model: string;
+  noise_seed: string;
+  cfg: string;
+  positive: string;
+  negative: string;
+  sampler: string;
+  sigmas: string;
+  latent_image: string;
+}
+
+export interface StyleAlignedSampleReferenceLatentsResult extends ComfyNodeOutput {
+  ref_latents?: ComfyOutputValue<"STEP_LATENTS">;
+  noised_output?: ComfyOutputValue<"LATENT">;
+}
+
+export interface StyleAlignedSampleReferenceLatentsOutputs {
+  ref_latents: NodeRef<"STEP_LATENTS">;
+  noised_output: NodeRef<"LATENT">;
+}
+
 export interface StyleModelApplyInputs {
   conditioning: NodeRef<"CONDITIONING">;
   style_model: NodeRef<"STYLE_MODEL">;
@@ -33734,6 +39579,52 @@ export interface SVD_img2vid_ConditioningOutputs {
   positive: NodeRef<"CONDITIONING">;
   negative: NodeRef<"CONDITIONING">;
   latent: NodeRef<"LATENT">;
+}
+
+export interface SyncLipSyncNodeInputs {
+  video: NodeRef<"VIDEO">;
+  audio: NodeRef<"AUDIO">;
+  seed: number;
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface SyncLipSyncNodeInputPaths {
+  video: string;
+  audio: string;
+  seed: string;
+  model: string;
+}
+
+export interface SyncLipSyncNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface SyncLipSyncNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface SyncTalkingImageNodeInputs {
+  image: NodeRef<"IMAGE">;
+  audio: NodeRef<"AUDIO">;
+  prompt: string;
+  seed: number;
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+}
+
+export interface SyncTalkingImageNodeInputPaths {
+  image: string;
+  audio: string;
+  prompt: string;
+  seed: string;
+  model: string;
+}
+
+export interface SyncTalkingImageNodeResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface SyncTalkingImageNodeOutputs {
+  VIDEO: NodeRef<"VIDEO">;
 }
 
 export interface T5TokenizerOptionsInputs {
@@ -34084,6 +39975,62 @@ export interface TextEncodeHunyuanVideo_ImageToVideoOutputs {
   CONDITIONING: NodeRef<"CONDITIONING">;
 }
 
+export interface TextEncodeJoyImageEditInputs {
+  clip: NodeRef<"CLIP">;
+  prompt: string;
+  vae?: NodeRef<"VAE">;
+  images?: NodeRef<"COMFY_AUTOGROW_V3">;
+}
+
+export interface TextEncodeJoyImageEditInputPaths {
+  clip: string;
+  prompt: string;
+  vae: string;
+  images: string;
+}
+
+export interface TextEncodeJoyImageEditResult extends ComfyNodeOutput {
+  CONDITIONING?: ComfyOutputValue<"CONDITIONING">;
+}
+
+export interface TextEncodeJoyImageEditOutputs {
+  CONDITIONING: NodeRef<"CONDITIONING">;
+}
+
+export interface TextEncodeMageFlowEditInputs {
+  clip: NodeRef<"CLIP">;
+  prompt: string;
+  negative_prompt: string;
+  images: NodeRef<"COMFY_AUTOGROW_V3">;
+  width: number;
+  height: number;
+  batch_size: number;
+  vae?: NodeRef<"VAE">;
+}
+
+export interface TextEncodeMageFlowEditInputPaths {
+  clip: string;
+  prompt: string;
+  negative_prompt: string;
+  images: string;
+  width: string;
+  height: string;
+  batch_size: string;
+  vae: string;
+}
+
+export interface TextEncodeMageFlowEditResult extends ComfyNodeOutput {
+  positive?: ComfyOutputValue<"CONDITIONING">;
+  negative?: ComfyOutputValue<"CONDITIONING">;
+  latent?: ComfyOutputValue<"LATENT">;
+}
+
+export interface TextEncodeMageFlowEditOutputs {
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+  latent: NodeRef<"LATENT">;
+}
+
 export interface TextEncodeQwenImageEditInputs {
   clip: NodeRef<"CLIP">;
   prompt: string;
@@ -34224,6 +40171,34 @@ export interface TextGenerateLTX2PromptResult extends ComfyNodeOutput {
 
 export interface TextGenerateLTX2PromptOutputs {
   generated_text: NodeRef<"STRING">;
+}
+
+export interface TextOverlayInputs {
+  images: NodeRef<"IMAGE">;
+  text: string;
+  font_size: number;
+  color: NodeRef<"COLOR">;
+  position: "top" | "bottom";
+  align: "left" | "center" | "right";
+  outline: boolean;
+}
+
+export interface TextOverlayInputPaths {
+  images: string;
+  text: string;
+  font_size: string;
+  color: string;
+  position: string;
+  align: string;
+  outline: string;
+}
+
+export interface TextOverlayResult extends ComfyNodeOutput {
+  images?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface TextOverlayOutputs {
+  images: NodeRef<"IMAGE">;
 }
 
 export interface TextToLowercaseInputs {
@@ -34377,6 +40352,28 @@ export interface TopazImageEnhanceResult extends ComfyNodeOutput {
 }
 
 export interface TopazImageEnhanceOutputs {
+  IMAGE: NodeRef<"IMAGE">;
+}
+
+export interface TopazImageEnhanceV2Inputs {
+  image: NodeRef<"IMAGE">;
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  output_width?: number;
+  output_height?: number;
+}
+
+export interface TopazImageEnhanceV2InputPaths {
+  image: string;
+  model: string;
+  output_width: string;
+  output_height: string;
+}
+
+export interface TopazImageEnhanceV2Result extends ComfyNodeOutput {
+  IMAGE?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface TopazImageEnhanceV2Outputs {
   IMAGE: NodeRef<"IMAGE">;
 }
 
@@ -34715,7 +40712,7 @@ export interface TrainLoraNodeInputs {
   gradient_checkpointing: boolean;
   checkpoint_depth: number;
   offloading: boolean;
-  existing_lora: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors" | "[None]";
+  existing_lora: "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors" | "scavenger.safetensors" | "[None]";
   bucket_mode: boolean;
   bypass_mode: boolean;
 }
@@ -34896,6 +40893,102 @@ export interface TransparentBGSessionOutputs {
   REMBG_SESSION: NodeRef<"REMBG_SESSION">;
 }
 
+export interface Trellis2ConditioningInputs {
+  clip_vision_model: NodeRef<"CLIP_VISION">;
+  image: NodeRef<"IMAGE">;
+}
+
+export interface Trellis2ConditioningInputPaths {
+  clip_vision_model: string;
+  image: string;
+}
+
+export interface Trellis2ConditioningResult extends ComfyNodeOutput {
+  positive?: ComfyOutputValue<"CONDITIONING">;
+  negative?: ComfyOutputValue<"CONDITIONING">;
+}
+
+export interface Trellis2ConditioningOutputs {
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+}
+
+export interface Trellis2ShapeStageInputs {
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+  voxel: NodeRef<"VOXEL">;
+}
+
+export interface Trellis2ShapeStageInputPaths {
+  positive: string;
+  negative: string;
+  voxel: string;
+}
+
+export interface Trellis2ShapeStageResult extends ComfyNodeOutput {
+  positive?: ComfyOutputValue<"CONDITIONING">;
+  negative?: ComfyOutputValue<"CONDITIONING">;
+  LATENT?: ComfyOutputValue<"LATENT">;
+}
+
+export interface Trellis2ShapeStageOutputs {
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+  LATENT: NodeRef<"LATENT">;
+}
+
+export interface Trellis2TextureStageInputs {
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+  shape_latent: NodeRef<"LATENT">;
+}
+
+export interface Trellis2TextureStageInputPaths {
+  positive: string;
+  negative: string;
+  shape_latent: string;
+}
+
+export interface Trellis2TextureStageResult extends ComfyNodeOutput {
+  positive?: ComfyOutputValue<"CONDITIONING">;
+  negative?: ComfyOutputValue<"CONDITIONING">;
+  LATENT?: ComfyOutputValue<"LATENT">;
+}
+
+export interface Trellis2TextureStageOutputs {
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+  LATENT: NodeRef<"LATENT">;
+}
+
+export interface Trellis2UpsampleStageInputs {
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+  shape_latent: NodeRef<"LATENT">;
+  vae: NodeRef<"VAE">;
+  target_resolution: number;
+}
+
+export interface Trellis2UpsampleStageInputPaths {
+  positive: string;
+  negative: string;
+  shape_latent: string;
+  vae: string;
+  target_resolution: string;
+}
+
+export interface Trellis2UpsampleStageResult extends ComfyNodeOutput {
+  positive?: ComfyOutputValue<"CONDITIONING">;
+  negative?: ComfyOutputValue<"CONDITIONING">;
+  LATENT?: ComfyOutputValue<"LATENT">;
+}
+
+export interface Trellis2UpsampleStageOutputs {
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+  LATENT: NodeRef<"LATENT">;
+}
+
 export interface TrimAudioDurationInputs {
   audio: NodeRef<"AUDIO">;
   start_index: number;
@@ -34975,7 +41068,7 @@ export interface TripleCLIPLoaderGGUFOutputs {
 }
 
 export interface TripoConversionNodeInputs {
-  original_model_task_id: NodeRef<"MODEL_TASK_ID,RIG_TASK_ID,RETARGET_TASK_ID">;
+  original_model_task_id: NodeRef<"MODEL_TASK_ID,RIG_TASK_ID,RETARGET_TASK_ID,SEGMENT_TASK_ID">;
   format: "GLTF" | "USDZ" | "FBX" | "OBJ" | "STL" | "3MF";
   quad?: boolean;
   face_limit?: number;
@@ -34990,9 +41083,9 @@ export interface TripoConversionNodeInputs {
   pack_uv?: boolean;
   bake?: boolean;
   part_names?: string;
-  fbx_preset?: "blender" | "mixamo" | "3dsmax";
+  fbx_preset?: "blender" | "mixamo" | "3dsmax" | "bake_scale";
   export_vertex_colors?: boolean;
-  export_orientation?: "align_image" | "default";
+  export_orientation?: "default" | "+x" | "-x" | "+y" | "-y";
   animate_in_place?: boolean;
 }
 
@@ -35019,22 +41112,59 @@ export interface TripoConversionNodeInputPaths {
 }
 
 export interface TripoConversionNodeResult extends ComfyNodeOutput {
+  model_3d?: ComfyOutputValue<"FILE_3D">;
+}
+
+export interface TripoConversionNodeOutputs {
+  model_3d: NodeRef<"FILE_3D">;
+}
+
+export interface TripoEditMultiviewNodeInputs {
+  multiview_task_id: NodeRef<"MULTIVIEW_TASK_ID">;
+  front_prompt?: string;
+  left_prompt?: string;
+  back_prompt?: string;
+  right_prompt?: string;
+}
+
+export interface TripoEditMultiviewNodeInputPaths {
+  multiview_task_id: string;
+  front_prompt: string;
+  left_prompt: string;
+  back_prompt: string;
+  right_prompt: string;
+}
+
+export interface TripoEditMultiviewNodeResult extends ComfyNodeOutput {
+  front?: ComfyOutputValue<"IMAGE">;
+  left?: ComfyOutputValue<"IMAGE">;
+  back?: ComfyOutputValue<"IMAGE">;
+  right?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface TripoEditMultiviewNodeOutputs {
+  front: NodeRef<"IMAGE">;
+  left: NodeRef<"IMAGE">;
+  back: NodeRef<"IMAGE">;
+  right: NodeRef<"IMAGE">;
 }
 
 export interface TripoImageToModelNodeInputs {
   image: NodeRef<"IMAGE">;
-  model_version?: "v3.1-20260211" | "v3.0-20250812" | "v2.5-20250123" | "v2.0-20240919" | "v1.4-20240625";
+  model_version?: "v3.1-20260211" | "v3.0-20250812" | "v2.5-20250123";
   style?: "person:person2cartoon" | "animal:venom" | "object:clay" | "object:steampunk" | "object:christmas" | "object:barbie" | "gold" | "ancient_bronze" | "None";
   texture?: boolean;
   pbr?: boolean;
   model_seed?: number;
   orientation?: "align_image" | "default";
   texture_seed?: number;
-  texture_quality?: "standard" | "detailed";
+  texture_quality?: "standard" | "detailed" | "extreme";
   texture_alignment?: "original_image" | "geometry";
   face_limit?: number;
   quad?: boolean;
   geometry_quality?: "standard" | "detailed";
+  smart_low_poly?: boolean;
+  auto_size?: boolean;
 }
 
 export interface TripoImageToModelNodeInputPaths {
@@ -35051,18 +41181,46 @@ export interface TripoImageToModelNodeInputPaths {
   face_limit: string;
   quad: string;
   geometry_quality: string;
+  smart_low_poly: string;
+  auto_size: string;
 }
 
 export interface TripoImageToModelNodeResult extends ComfyNodeOutput {
   model_file?: ComfyOutputValue<"STRING">;
   "model task_id"?: ComfyOutputValue<"MODEL_TASK_ID">;
   GLB?: ComfyOutputValue<"FILE_3D_GLB">;
+  FBX?: ComfyOutputValue<"FILE_3D_FBX">;
 }
 
 export interface TripoImageToModelNodeOutputs {
   model_file: NodeRef<"STRING">;
   "model task_id": NodeRef<"MODEL_TASK_ID">;
   GLB: NodeRef<"FILE_3D_GLB">;
+  FBX: NodeRef<"FILE_3D_FBX">;
+}
+
+export interface TripoImageToMultiviewNodeInputs {
+  image: NodeRef<"IMAGE">;
+}
+
+export interface TripoImageToMultiviewNodeInputPaths {
+  image: string;
+}
+
+export interface TripoImageToMultiviewNodeResult extends ComfyNodeOutput {
+  "multiview task_id"?: ComfyOutputValue<"MULTIVIEW_TASK_ID">;
+  front?: ComfyOutputValue<"IMAGE">;
+  left?: ComfyOutputValue<"IMAGE">;
+  back?: ComfyOutputValue<"IMAGE">;
+  right?: ComfyOutputValue<"IMAGE">;
+}
+
+export interface TripoImageToMultiviewNodeOutputs {
+  "multiview task_id": NodeRef<"MULTIVIEW_TASK_ID">;
+  front: NodeRef<"IMAGE">;
+  left: NodeRef<"IMAGE">;
+  back: NodeRef<"IMAGE">;
+  right: NodeRef<"IMAGE">;
 }
 
 export interface TripoImportModelNodeInputs {
@@ -35081,22 +41239,46 @@ export interface TripoImportModelNodeOutputs {
   "model task_id": NodeRef<"MODEL_TASK_ID">;
 }
 
+export interface TripoMeshCompleteNodeInputs {
+  segment_task_id: NodeRef<"SEGMENT_TASK_ID">;
+  part_names?: string;
+}
+
+export interface TripoMeshCompleteNodeInputPaths {
+  segment_task_id: string;
+  part_names: string;
+}
+
+export interface TripoMeshCompleteNodeResult extends ComfyNodeOutput {
+  model_file?: ComfyOutputValue<"STRING">;
+  "model task_id"?: ComfyOutputValue<"MODEL_TASK_ID">;
+  GLB?: ComfyOutputValue<"FILE_3D_GLB">;
+}
+
+export interface TripoMeshCompleteNodeOutputs {
+  model_file: NodeRef<"STRING">;
+  "model task_id": NodeRef<"MODEL_TASK_ID">;
+  GLB: NodeRef<"FILE_3D_GLB">;
+}
+
 export interface TripoMultiviewToModelNodeInputs {
   image: NodeRef<"IMAGE">;
   image_left?: NodeRef<"IMAGE">;
   image_back?: NodeRef<"IMAGE">;
   image_right?: NodeRef<"IMAGE">;
-  model_version?: "v3.1-20260211" | "v3.0-20250812" | "v2.5-20250123" | "v2.0-20240919" | "v1.4-20240625";
+  model_version?: "v3.1-20260211" | "v3.0-20250812" | "v2.5-20250123";
   orientation?: "align_image" | "default";
   texture?: boolean;
   pbr?: boolean;
   model_seed?: number;
   texture_seed?: number;
-  texture_quality?: "standard" | "detailed";
+  texture_quality?: "standard" | "detailed" | "extreme";
   texture_alignment?: "original_image" | "geometry";
   face_limit?: number;
   quad?: boolean;
   geometry_quality?: "standard" | "detailed";
+  smart_low_poly?: boolean;
+  auto_size?: boolean;
 }
 
 export interface TripoMultiviewToModelNodeInputPaths {
@@ -35115,18 +41297,22 @@ export interface TripoMultiviewToModelNodeInputPaths {
   face_limit: string;
   quad: string;
   geometry_quality: string;
+  smart_low_poly: string;
+  auto_size: string;
 }
 
 export interface TripoMultiviewToModelNodeResult extends ComfyNodeOutput {
   model_file?: ComfyOutputValue<"STRING">;
   "model task_id"?: ComfyOutputValue<"MODEL_TASK_ID">;
   GLB?: ComfyOutputValue<"FILE_3D_GLB">;
+  FBX?: ComfyOutputValue<"FILE_3D_FBX">;
 }
 
 export interface TripoMultiviewToModelNodeOutputs {
   model_file: NodeRef<"STRING">;
   "model task_id": NodeRef<"MODEL_TASK_ID">;
   GLB: NodeRef<"FILE_3D_GLB">;
+  FBX: NodeRef<"FILE_3D_FBX">;
 }
 
 export interface TripoP1ImageToModelNodeInputs {
@@ -35237,66 +41423,134 @@ export interface TripoP1TextToModelNodeOutputs {
   GLB: NodeRef<"FILE_3D_GLB">;
 }
 
-export interface TripoRefineNodeInputs {
-  model_task_id: NodeRef<"MODEL_TASK_ID">;
-}
-
-export interface TripoRefineNodeInputPaths {
-  model_task_id: string;
-}
-
-export interface TripoRefineNodeResult extends ComfyNodeOutput {
-  model_file?: ComfyOutputValue<"STRING">;
-  "model task_id"?: ComfyOutputValue<"MODEL_TASK_ID">;
-  GLB?: ComfyOutputValue<"FILE_3D_GLB">;
-}
-
-export interface TripoRefineNodeOutputs {
-  model_file: NodeRef<"STRING">;
-  "model task_id": NodeRef<"MODEL_TASK_ID">;
-  GLB: NodeRef<"FILE_3D_GLB">;
-}
-
 export interface TripoRetargetNodeInputs {
   original_model_task_id: NodeRef<"RIG_TASK_ID">;
-  animation: "preset:idle" | "preset:walk" | "preset:run" | "preset:dive" | "preset:climb" | "preset:jump" | "preset:slash" | "preset:shoot" | "preset:hurt" | "preset:fall" | "preset:turn" | "preset:quadruped:walk" | "preset:hexapod:walk" | "preset:octopod:walk" | "preset:serpentine:march" | "preset:aquatic:march";
+  animation: "preset:idle" | "preset:walk" | "preset:run" | "preset:dive" | "preset:climb" | "preset:jump" | "preset:slash" | "preset:shoot" | "preset:hurt" | "preset:fall" | "preset:turn" | "preset:quadruped:walk" | "preset:hexapod:walk" | "preset:octopod:walk" | "preset:serpentine:march" | "preset:aquatic:march" | "preset:biped:afraid" | "preset:biped:agree" | "preset:biped:angry_01" | "preset:biped:angry_02" | "preset:biped:angry_03" | "preset:biped:basketball_shot" | "preset:biped:bow" | "preset:biped:box_01" | "preset:biped:box_02" | "preset:biped:box_03" | "preset:biped:cast_a_spell" | "preset:biped:cheer" | "preset:biped:chop" | "preset:biped:clap" | "preset:biped:climb" | "preset:biped:complain_01" | "preset:biped:complain_02" | "preset:biped:cross_body_crunch" | "preset:biped:crossover_dribble" | "preset:biped:cry" | "preset:biped:dance_01" | "preset:biped:dance_02" | "preset:biped:dance_03" | "preset:biped:dance_04" | "preset:biped:dance_05" | "preset:biped:dance_06" | "preset:biped:defeat_02" | "preset:biped:defeat_03" | "preset:biped:depressed" | "preset:biped:dig" | "preset:biped:dive" | "preset:biped:dribble" | "preset:biped:fall" | "preset:biped:fire" | "preset:biped:flee_01" | "preset:biped:flee_02" | "preset:biped:flip" | "preset:biped:fold_arms" | "preset:biped:football_catch" | "preset:biped:football_save" | "preset:biped:football_pass" | "preset:biped:freaky" | "preset:biped:frightened" | "preset:biped:front_kick_01" | "preset:biped:front_kick_02" | "preset:biped:frustrated_01" | "preset:biped:frustrated_02" | "preset:biped:golf" | "preset:biped:greet_01" | "preset:biped:greet_02" | "preset:biped:greet_03" | "preset:biped:greet_04" | "preset:biped:heart_pose" | "preset:biped:hit_to_body_01" | "preset:biped:hit_to_body_02" | "preset:biped:hit_to_head" | "preset:biped:hit_to_side" | "preset:biped:hit_to_stomach" | "preset:biped:hug" | "preset:biped:hurt" | "preset:biped:idle" | "preset:biped:jump_down" | "preset:biped:jump" | "preset:biped:jump_rope_01" | "preset:biped:jump_rope_02" | "preset:biped:laugh_01" | "preset:biped:laugh_02" | "preset:biped:lift_heavy" | "preset:biped:look_around" | "preset:biped:make_a_call_01" | "preset:biped:make_a_call_02" | "preset:biped:pitch_baseball" | "preset:biped:play_mobile_game" | "preset:biped:play_video_game" | "preset:biped:run_upstairs" | "preset:biped:run" | "preset:biped:scared_01" | "preset:biped:scared_02" | "preset:biped:scratch" | "preset:biped:shoot" | "preset:biped:shovel" | "preset:biped:sing_01" | "preset:biped:sing_02" | "preset:biped:sing_03" | "preset:biped:sing_04" | "preset:biped:sit" | "preset:biped:slash" | "preset:biped:sob" | "preset:biped:standing_relax" | "preset:biped:surf" | "preset:biped:swagger" | "preset:biped:swim" | "preset:biped:turn" | "preset:biped:victory_celebration" | "preset:biped:volleyball" | "preset:biped:wait" | "preset:biped:walk" | "preset:biped:warm_up" | "preset:biped:wave_goodbye_01" | "preset:biped:wave_goodbye_02";
+  out_format?: "glb" | "fbx";
+  export_with_geometry?: boolean;
+  animate_in_place?: boolean;
 }
 
 export interface TripoRetargetNodeInputPaths {
   original_model_task_id: string;
   animation: string;
+  out_format: string;
+  export_with_geometry: string;
+  animate_in_place: string;
 }
 
 export interface TripoRetargetNodeResult extends ComfyNodeOutput {
   model_file?: ComfyOutputValue<"STRING">;
   "retarget task_id"?: ComfyOutputValue<"RETARGET_TASK_ID">;
   GLB?: ComfyOutputValue<"FILE_3D_GLB">;
+  FBX?: ComfyOutputValue<"FILE_3D_FBX">;
 }
 
 export interface TripoRetargetNodeOutputs {
   model_file: NodeRef<"STRING">;
   "retarget task_id": NodeRef<"RETARGET_TASK_ID">;
   GLB: NodeRef<"FILE_3D_GLB">;
+  FBX: NodeRef<"FILE_3D_FBX">;
+}
+
+export interface TripoRetopologyNodeInputs {
+  model_task_id: NodeRef<"MODEL_TASK_ID,SEGMENT_TASK_ID">;
+  face_limit: number;
+  quad: boolean;
+  bake?: boolean;
+  part_names?: string;
+}
+
+export interface TripoRetopologyNodeInputPaths {
+  model_task_id: string;
+  face_limit: string;
+  quad: string;
+  bake: string;
+  part_names: string;
+}
+
+export interface TripoRetopologyNodeResult extends ComfyNodeOutput {
+  model_file?: ComfyOutputValue<"STRING">;
+  "model task_id"?: ComfyOutputValue<"MODEL_TASK_ID">;
+  GLB?: ComfyOutputValue<"FILE_3D_GLB">;
+  FBX?: ComfyOutputValue<"FILE_3D_FBX">;
+}
+
+export interface TripoRetopologyNodeOutputs {
+  model_file: NodeRef<"STRING">;
+  "model task_id": NodeRef<"MODEL_TASK_ID">;
+  GLB: NodeRef<"FILE_3D_GLB">;
+  FBX: NodeRef<"FILE_3D_FBX">;
+}
+
+export interface TripoRigCheckNodeInputs {
+  model_task_id: NodeRef<"MODEL_TASK_ID">;
+}
+
+export interface TripoRigCheckNodeInputPaths {
+  model_task_id: string;
+}
+
+export interface TripoRigCheckNodeResult extends ComfyNodeOutput {
+  riggable?: ComfyOutputValue<"BOOLEAN">;
+  rig_type?: ComfyOutputValue<"STRING">;
+}
+
+export interface TripoRigCheckNodeOutputs {
+  riggable: NodeRef<"BOOLEAN">;
+  rig_type: NodeRef<"STRING">;
 }
 
 export interface TripoRigNodeInputs {
   original_model_task_id: NodeRef<"MODEL_TASK_ID">;
+  model_version?: "v1.0-20240301" | "v2.5-20260210";
+  rig_type?: "auto" | "biped" | "quadruped" | "hexapod" | "octopod" | "avian" | "serpentine" | "aquatic";
+  spec?: "mixamo" | "tripo";
+  out_format?: "glb" | "fbx";
 }
 
 export interface TripoRigNodeInputPaths {
   original_model_task_id: string;
+  model_version: string;
+  rig_type: string;
+  spec: string;
+  out_format: string;
 }
 
 export interface TripoRigNodeResult extends ComfyNodeOutput {
   model_file?: ComfyOutputValue<"STRING">;
   "rig task_id"?: ComfyOutputValue<"RIG_TASK_ID">;
   GLB?: ComfyOutputValue<"FILE_3D_GLB">;
+  FBX?: ComfyOutputValue<"FILE_3D_FBX">;
 }
 
 export interface TripoRigNodeOutputs {
   model_file: NodeRef<"STRING">;
   "rig task_id": NodeRef<"RIG_TASK_ID">;
   GLB: NodeRef<"FILE_3D_GLB">;
+  FBX: NodeRef<"FILE_3D_FBX">;
+}
+
+export interface TripoSegmentNodeInputs {
+  model_task_id: NodeRef<"MODEL_TASK_ID">;
+}
+
+export interface TripoSegmentNodeInputPaths {
+  model_task_id: string;
+}
+
+export interface TripoSegmentNodeResult extends ComfyNodeOutput {
+  model_file?: ComfyOutputValue<"STRING">;
+  "segment task_id"?: ComfyOutputValue<"SEGMENT_TASK_ID">;
+  GLB?: ComfyOutputValue<"FILE_3D_GLB">;
+  part_names?: ComfyOutputValue<"STRING">;
+}
+
+export interface TripoSegmentNodeOutputs {
+  model_file: NodeRef<"STRING">;
+  "segment task_id": NodeRef<"SEGMENT_TASK_ID">;
+  GLB: NodeRef<"FILE_3D_GLB">;
+  part_names: NodeRef<"STRING">;
 }
 
 export interface TripoSplatConditioningInputs {
@@ -35376,17 +41630,19 @@ export interface TripoSplatSamplingPreviewOutputs {
 export interface TripoTextToModelNodeInputs {
   prompt: string;
   negative_prompt?: string;
-  model_version?: "v3.1-20260211" | "v3.0-20250812" | "v2.5-20250123" | "v2.0-20240919" | "v1.4-20240625";
+  model_version?: "v3.1-20260211" | "v3.0-20250812" | "v2.5-20250123";
   style?: "person:person2cartoon" | "animal:venom" | "object:clay" | "object:steampunk" | "object:christmas" | "object:barbie" | "gold" | "ancient_bronze" | "None";
   texture?: boolean;
   pbr?: boolean;
   image_seed?: number;
   model_seed?: number;
   texture_seed?: number;
-  texture_quality?: "standard" | "detailed";
+  texture_quality?: "standard" | "detailed" | "extreme";
   face_limit?: number;
   quad?: boolean;
   geometry_quality?: "standard" | "detailed";
+  smart_low_poly?: boolean;
+  auto_size?: boolean;
 }
 
 export interface TripoTextToModelNodeInputPaths {
@@ -35403,28 +41659,36 @@ export interface TripoTextToModelNodeInputPaths {
   face_limit: string;
   quad: string;
   geometry_quality: string;
+  smart_low_poly: string;
+  auto_size: string;
 }
 
 export interface TripoTextToModelNodeResult extends ComfyNodeOutput {
   model_file?: ComfyOutputValue<"STRING">;
   "model task_id"?: ComfyOutputValue<"MODEL_TASK_ID">;
   GLB?: ComfyOutputValue<"FILE_3D_GLB">;
+  FBX?: ComfyOutputValue<"FILE_3D_FBX">;
 }
 
 export interface TripoTextToModelNodeOutputs {
   model_file: NodeRef<"STRING">;
   "model task_id": NodeRef<"MODEL_TASK_ID">;
   GLB: NodeRef<"FILE_3D_GLB">;
+  FBX: NodeRef<"FILE_3D_FBX">;
 }
 
 export interface TripoTextureNodeInputs {
-  model_task_id: NodeRef<"MODEL_TASK_ID">;
+  model_task_id: NodeRef<"MODEL_TASK_ID,SEGMENT_TASK_ID">;
   texture?: boolean;
   pbr?: boolean;
   texture_seed?: number;
-  texture_quality?: "standard" | "detailed";
+  texture_quality?: "standard" | "detailed" | "extreme";
   texture_alignment?: "original_image" | "geometry";
   texture_prompt?: string;
+  model_version?: "v3.0-20250812" | "v2.5-20250123";
+  style_image?: NodeRef<"IMAGE">;
+  reference?: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  part_names?: string;
 }
 
 export interface TripoTextureNodeInputPaths {
@@ -35435,18 +41699,24 @@ export interface TripoTextureNodeInputPaths {
   texture_quality: string;
   texture_alignment: string;
   texture_prompt: string;
+  model_version: string;
+  style_image: string;
+  reference: string;
+  part_names: string;
 }
 
 export interface TripoTextureNodeResult extends ComfyNodeOutput {
   model_file?: ComfyOutputValue<"STRING">;
   "model task_id"?: ComfyOutputValue<"MODEL_TASK_ID">;
   GLB?: ComfyOutputValue<"FILE_3D_GLB">;
+  FBX?: ComfyOutputValue<"FILE_3D_FBX">;
 }
 
 export interface TripoTextureNodeOutputs {
   model_file: NodeRef<"STRING">;
   "model task_id": NodeRef<"MODEL_TASK_ID">;
   GLB: NodeRef<"FILE_3D_GLB">;
+  FBX: NodeRef<"FILE_3D_FBX">;
 }
 
 export interface TruncateTextInputs {
@@ -35514,7 +41784,7 @@ export interface TTPlanet_TileSimple_PreprocessorOutputs {
 }
 
 export interface UnCLIPCheckpointLoaderInputs {
-  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
+  ckpt_name: "JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors";
 }
 
 export interface UnCLIPCheckpointLoaderInputPaths {
@@ -35995,6 +42265,30 @@ export interface UniRigViewRiggingInputPaths {
 export interface UniRigViewRiggingResult extends ComfyNodeOutput {
 }
 
+export interface UnwrapMeshInputs {
+  mesh: NodeRef<"MESH">;
+  segmenter: "pec" | "adaptive";
+  resolution: number;
+  padding: number;
+  weld_distance: number;
+}
+
+export interface UnwrapMeshInputPaths {
+  mesh: string;
+  segmenter: string;
+  resolution: string;
+  padding: string;
+  weld_distance: string;
+}
+
+export interface UnwrapMeshResult extends ComfyNodeOutput {
+  mesh?: ComfyOutputValue<"MESH">;
+}
+
+export interface UnwrapMeshOutputs {
+  mesh: NodeRef<"MESH">;
+}
+
 export interface UpperBodyTrackingFromPoseKpsInputs {
   pose_kps: NodeRef<"POSE_KEYPOINT">;
   id_include: string;
@@ -36165,6 +42459,66 @@ export interface VAEDecodeLoopKJResult extends ComfyNodeOutput {
 
 export interface VAEDecodeLoopKJOutputs {
   IMAGE: NodeRef<"IMAGE">;
+}
+
+export interface VaeDecodeShapeTrellisInputs {
+  samples: NodeRef<"LATENT">;
+  vae: NodeRef<"VAE">;
+}
+
+export interface VaeDecodeShapeTrellisInputPaths {
+  samples: string;
+  vae: string;
+}
+
+export interface VaeDecodeShapeTrellisResult extends ComfyNodeOutput {
+  mesh?: ComfyOutputValue<"MESH">;
+  shape_subdivides?: ComfyOutputValue<"SHAPE_SUBDIVIDES">;
+}
+
+export interface VaeDecodeShapeTrellisOutputs {
+  mesh: NodeRef<"MESH">;
+  shape_subdivides: NodeRef<"SHAPE_SUBDIVIDES">;
+}
+
+export interface VaeDecodeStructureTrellis2Inputs {
+  samples: NodeRef<"LATENT">;
+  vae: NodeRef<"VAE">;
+  resolution: "32" | "64";
+}
+
+export interface VaeDecodeStructureTrellis2InputPaths {
+  samples: string;
+  vae: string;
+  resolution: string;
+}
+
+export interface VaeDecodeStructureTrellis2Result extends ComfyNodeOutput {
+  voxel?: ComfyOutputValue<"VOXEL">;
+}
+
+export interface VaeDecodeStructureTrellis2Outputs {
+  voxel: NodeRef<"VOXEL">;
+}
+
+export interface VaeDecodeTextureTrellisInputs {
+  samples: NodeRef<"LATENT">;
+  vae: NodeRef<"VAE">;
+  shape_subdivides: NodeRef<"SHAPE_SUBDIVIDES">;
+}
+
+export interface VaeDecodeTextureTrellisInputPaths {
+  samples: string;
+  vae: string;
+  shape_subdivides: string;
+}
+
+export interface VaeDecodeTextureTrellisResult extends ComfyNodeOutput {
+  voxel_colors?: ComfyOutputValue<"VOXEL">;
+}
+
+export interface VaeDecodeTextureTrellisOutputs {
+  voxel_colors: NodeRef<"VOXEL">;
 }
 
 export interface VAEDecodeTiledInputs {
@@ -36392,7 +42746,7 @@ export interface Veo3VideoGenerationNodeInputs {
   person_generation?: "ALLOW" | "BLOCK";
   seed?: number;
   image?: NodeRef<"IMAGE">;
-  model?: "veo-3.1-generate" | "veo-3.1-fast-generate" | "veo-3.1-lite" | "veo-3.0-generate-001" | "veo-3.0-fast-generate-001";
+  model?: "veo-3.1-generate" | "veo-3.1-fast-generate" | "veo-3.1-lite";
   generate_audio?: boolean;
 }
 
@@ -36418,38 +42772,6 @@ export interface Veo3VideoGenerationNodeOutputs {
   VIDEO: NodeRef<"VIDEO">;
 }
 
-export interface VeoVideoGenerationNodeInputs {
-  prompt: string;
-  aspect_ratio: "16:9" | "9:16";
-  negative_prompt?: string;
-  duration_seconds?: number;
-  enhance_prompt?: boolean;
-  person_generation?: "ALLOW" | "BLOCK";
-  seed?: number;
-  image?: NodeRef<"IMAGE">;
-  model?: "veo-2.0-generate-001";
-}
-
-export interface VeoVideoGenerationNodeInputPaths {
-  prompt: string;
-  aspect_ratio: string;
-  negative_prompt: string;
-  duration_seconds: string;
-  enhance_prompt: string;
-  person_generation: string;
-  seed: string;
-  image: string;
-  model: string;
-}
-
-export interface VeoVideoGenerationNodeResult extends ComfyNodeOutput {
-  VIDEO?: ComfyOutputValue<"VIDEO">;
-}
-
-export interface VeoVideoGenerationNodeOutputs {
-  VIDEO: NodeRef<"VIDEO">;
-}
-
 export interface VideoSliceInputs {
   video: NodeRef<"VIDEO">;
   start_time: number;
@@ -36472,6 +42794,28 @@ export interface VideoSliceOutputs {
   VIDEO: NodeRef<"VIDEO">;
 }
 
+export interface VideoFrameSampleInputs {
+  video: NodeRef<"VIDEO">;
+  num_frames: number;
+  strategy: "uniform" | "head" | "tail" | "random";
+  seed: number;
+}
+
+export interface VideoFrameSampleInputPaths {
+  video: string;
+  num_frames: string;
+  strategy: string;
+  seed: string;
+}
+
+export interface VideoFrameSampleResult extends ComfyNodeOutput {
+  video?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface VideoFrameSampleOutputs {
+  video: NodeRef<"VIDEO">;
+}
+
 export interface VideoLinearCFGGuidanceInputs {
   model: NodeRef<"MODEL">;
   min_cfg: number;
@@ -36488,6 +42832,46 @@ export interface VideoLinearCFGGuidanceResult extends ComfyNodeOutput {
 
 export interface VideoLinearCFGGuidanceOutputs {
   MODEL: NodeRef<"MODEL">;
+}
+
+export interface VideoRandomTemporalCropInputs {
+  video: NodeRef<"VIDEO">;
+  length: number;
+  seed: number;
+}
+
+export interface VideoRandomTemporalCropInputPaths {
+  video: string;
+  length: string;
+  seed: string;
+}
+
+export interface VideoRandomTemporalCropResult extends ComfyNodeOutput {
+  video?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface VideoRandomTemporalCropOutputs {
+  video: NodeRef<"VIDEO">;
+}
+
+export interface VideoTemporalCropInputs {
+  video: NodeRef<"VIDEO">;
+  start_frame: number;
+  length: number;
+}
+
+export interface VideoTemporalCropInputPaths {
+  video: string;
+  start_frame: string;
+  length: string;
+}
+
+export interface VideoTemporalCropResult extends ComfyNodeOutput {
+  video?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface VideoTemporalCropOutputs {
+  video: NodeRef<"VIDEO">;
 }
 
 export interface VideoTriangleCFGGuidanceInputs {
@@ -37312,7 +43696,7 @@ export interface VNCCS_PipeInputs {
   pipe?: NodeRef;
   sampler_name?: "(← pipe)" | "euler" | "euler_cfg_pp" | "euler_ancestral" | "euler_ancestral_cfg_pp" | "heun" | "heunpp2" | "exp_heun_2_x0" | "exp_heun_2_x0_sde" | "dpm_2" | "dpm_2_ancestral" | "lms" | "dpm_fast" | "dpm_adaptive" | "dpmpp_2s_ancestral" | "dpmpp_2s_ancestral_cfg_pp" | "dpmpp_sde" | "dpmpp_sde_gpu" | "dpmpp_2m" | "dpmpp_2m_cfg_pp" | "dpmpp_2m_sde" | "dpmpp_2m_sde_gpu" | "dpmpp_2m_sde_heun" | "dpmpp_2m_sde_heun_gpu" | "dpmpp_3m_sde" | "dpmpp_3m_sde_gpu" | "ddpm" | "lcm" | "ipndm" | "ipndm_v" | "deis" | "res_multistep" | "res_multistep_cfg_pp" | "res_multistep_ancestral" | "res_multistep_ancestral_cfg_pp" | "gradient_estimation" | "gradient_estimation_cfg_pp" | "er_sde" | "seeds_2" | "seeds_3" | "sa_solver" | "sa_solver_pece" | "ddim" | "uni_pc" | "uni_pc_bh2";
   scheduler?: "(← pipe)" | "simple" | "sgm_uniform" | "karras" | "exponential" | "ddim_uniform" | "beta" | "normal" | "linear_quadratic" | "kl_optimal";
-  lora_name?: "none" | "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors";
+  lora_name?: "none" | "Anima\\anima-turbo-lora-v0.1.safetensors" | "Illustrious\\BPP0FBJ8DK8GY87KNJ4MYQBAS0.safetensors" | "Illustrious\\JG687K1V543VKZH5Z4XWK77VX0.safetensors" | "Illustrious\\Yani Neko [anime style]-Illus.safetensors" | "Illustrious\\Zazipou_IL_v2.safetensors" | "Illustrious\\handplugillustrious.safetensors" | "Illustrious\\pixel-Illustrius.safetensors" | "Illustrious\\shadyfox.safetensors" | "Illustrious\\yani neko IL.safetensors" | "Illustrious\\yani_neko_yani_nekoILL.safetensors" | "apoc_char_01.safetensors" | "qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors" | "qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors" | "scavenger.safetensors";
   lora_strength?: number;
   lora_options_json?: string;
 }
@@ -37643,7 +44027,7 @@ export interface VNCCS_ResizeOutputs {
 
 export interface VNCCS_RMBG2Inputs {
   image: NodeRef<"IMAGE">;
-  model: "RMBG-2.0" | "INSPYRENET" | "BEN" | "BEN2";
+  model: "RMBG-2.0" | "INSPYRENET" | "BEN" | "BEN2" | "BiRefNet_toonout.safetensors";
   sensitivity?: number;
   process_res?: number;
   mask_blur?: number;
@@ -38413,6 +44797,130 @@ export interface Wan2VideoEditApiResult extends ComfyNodeOutput {
 
 export interface Wan2VideoEditApiOutputs {
   VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface Wan3ImageToVideoApiInputs {
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  first_frame: NodeRef<"IMAGE">;
+  seed: number;
+  watermark: boolean;
+  last_frame?: NodeRef<"IMAGE">;
+}
+
+export interface Wan3ImageToVideoApiInputPaths {
+  model: string;
+  first_frame: string;
+  seed: string;
+  watermark: string;
+  last_frame: string;
+}
+
+export interface Wan3ImageToVideoApiResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface Wan3ImageToVideoApiOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface Wan3ReferenceToVideoApiInputs {
+  model: NodeRef<"COMFY_DYNAMICCOMBO_V3">;
+  seed: number;
+  watermark: boolean;
+}
+
+export interface Wan3ReferenceToVideoApiInputPaths {
+  model: string;
+  seed: string;
+  watermark: string;
+}
+
+export interface Wan3ReferenceToVideoApiResult extends ComfyNodeOutput {
+  VIDEO?: ComfyOutputValue<"VIDEO">;
+}
+
+export interface Wan3ReferenceToVideoApiOutputs {
+  VIDEO: NodeRef<"VIDEO">;
+}
+
+export interface WanAnimate2CacheInputs {
+  model: NodeRef<"MODEL">;
+  device: "cpu" | "gpu";
+  dtype: "default" | "int8" | "int4";
+}
+
+export interface WanAnimate2CacheInputPaths {
+  model: string;
+  device: string;
+  dtype: string;
+}
+
+export interface WanAnimate2CacheResult extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+}
+
+export interface WanAnimate2CacheOutputs {
+  MODEL: NodeRef<"MODEL">;
+}
+
+export interface WanAnimate2ToVideoInputs {
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+  vae: NodeRef<"VAE">;
+  width: number;
+  height: number;
+  length: number;
+  batch_size: number;
+  video_frame_offset: number;
+  pose_strength: number;
+  pose_start_percent: number;
+  pose_end_percent: number;
+  reference_image_strength: number;
+  reference_image?: NodeRef<"IMAGE">;
+  pose_video?: NodeRef<"IMAGE">;
+  clip_vision_output?: NodeRef<"CLIP_VISION_OUTPUT">;
+  positive_pose?: NodeRef<"CONDITIONING">;
+  clip_vision_output_pose?: NodeRef<"CLIP_VISION_OUTPUT">;
+  continue_motion?: NodeRef<"IMAGE">;
+}
+
+export interface WanAnimate2ToVideoInputPaths {
+  positive: string;
+  negative: string;
+  vae: string;
+  width: string;
+  height: string;
+  length: string;
+  batch_size: string;
+  video_frame_offset: string;
+  pose_strength: string;
+  pose_start_percent: string;
+  pose_end_percent: string;
+  reference_image_strength: string;
+  reference_image: string;
+  pose_video: string;
+  clip_vision_output: string;
+  positive_pose: string;
+  clip_vision_output_pose: string;
+  continue_motion: string;
+}
+
+export interface WanAnimate2ToVideoResult extends ComfyNodeOutput {
+  positive?: ComfyOutputValue<"CONDITIONING">;
+  negative?: ComfyOutputValue<"CONDITIONING">;
+  latent?: ComfyOutputValue<"LATENT">;
+  trim_latent?: ComfyOutputValue<"INT">;
+  trim_image?: ComfyOutputValue<"INT">;
+  video_frame_offset?: ComfyOutputValue<"INT">;
+}
+
+export interface WanAnimate2ToVideoOutputs {
+  positive: NodeRef<"CONDITIONING">;
+  negative: NodeRef<"CONDITIONING">;
+  latent: NodeRef<"LATENT">;
+  trim_latent: NodeRef<"INT">;
+  trim_image: NodeRef<"INT">;
+  video_frame_offset: NodeRef<"INT">;
 }
 
 export interface WanAnimateToVideoInputs {
@@ -39477,6 +45985,34 @@ export interface WanTrackToVideoOutputs {
   latent: NodeRef<"LATENT">;
 }
 
+export interface WanUni3CControlnetApplyInputs {
+  model: NodeRef<"MODEL">;
+  model_patch: NodeRef<"MODEL_PATCH">;
+  vae: NodeRef<"VAE">;
+  render_video: NodeRef<"IMAGE">;
+  strength: number;
+  start_percent: number;
+  end_percent: number;
+}
+
+export interface WanUni3CControlnetApplyInputPaths {
+  model: string;
+  model_patch: string;
+  vae: string;
+  render_video: string;
+  strength: string;
+  start_percent: string;
+  end_percent: string;
+}
+
+export interface WanUni3CControlnetApplyResult extends ComfyNodeOutput {
+  MODEL?: ComfyOutputValue<"MODEL">;
+}
+
+export interface WanUni3CControlnetApplyOutputs {
+  MODEL: NodeRef<"MODEL">;
+}
+
 export interface WanVaceToVideoInputs {
   positive: NodeRef<"CONDITIONING">;
   negative: NodeRef<"CONDITIONING">;
@@ -39779,6 +46315,26 @@ export interface WeightScheduleExtendOutputs {
   FLOAT: NodeRef<"FLOAT">;
 }
 
+export interface WeldVerticesInputs {
+  mesh: NodeRef<"MESH">;
+  epsilon_rel: number;
+  epsilon_abs: number;
+}
+
+export interface WeldVerticesInputPaths {
+  mesh: string;
+  epsilon_rel: string;
+  epsilon_abs: string;
+}
+
+export interface WeldVerticesResult extends ComfyNodeOutput {
+  mesh?: ComfyOutputValue<"MESH">;
+}
+
+export interface WeldVerticesOutputs {
+  mesh: NodeRef<"MESH">;
+}
+
 export interface WidgetToStringInputs {
   id: number;
   widget_name: string;
@@ -39969,6 +46525,31 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  AddLayer(inputs: AddLayerInputs): AddLayerOutputs & { __id: OutputNodeId<AddLayerResult>; inputs: AddLayerInputPaths } {
+    const id = this.addNode("AddLayer", inputs);
+    const inputPaths = {
+      image: `${id}.inputs.image`,
+      layers: `${id}.inputs.layers`,
+      mask: `${id}.inputs.mask`,
+      name: `${id}.inputs.name`,
+      x: `${id}.inputs.x`,
+      y: `${id}.inputs.y`,
+      opacity: `${id}.inputs.opacity`,
+      blend_mode: `${id}.inputs.blend_mode`,
+      rotation: `${id}.inputs.rotation`,
+      width: `${id}.inputs.width`,
+      height: `${id}.inputs.height`,
+      z_index: `${id}.inputs.z_index`,
+      flip_h: `${id}.inputs.flip_h`,
+      flip_v: `${id}.inputs.flip_v`,
+    };
+    return {
+      LAYERS: this.makeRef<"LAYERS">(id, 0),
+      __id: id as OutputNodeId<AddLayerResult>,
+      inputs: inputPaths
+    };
+  }
+
   AddNoise(inputs: AddNoiseInputs): AddNoiseOutputs & { __id: OutputNodeId<AddNoiseResult>; inputs: AddNoiseInputPaths } {
     const id = this.addNode("AddNoise", inputs);
     const inputPaths = {
@@ -40023,6 +46604,2364 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       texts: this.makeRef<"STRING">(id, 0),
       __id: id as OutputNodeId<AddTextSuffixResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ADBlockCombo(inputs: ADE_ADBlockComboInputs): ADE_ADBlockComboOutputs & { __id: OutputNodeId<ADE_ADBlockComboResult>; inputs: ADE_ADBlockComboInputPaths } {
+    const id = this.addNode("ADE_ADBlockCombo", inputs);
+    const inputPaths = {
+      effect: `${id}.inputs.effect`,
+      scale: `${id}.inputs.scale`,
+    };
+    return {
+      AD_BLOCK: this.makeRef<"AD_BLOCK">(id, 0),
+      __id: id as OutputNodeId<ADE_ADBlockComboResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ADBlockIndiv(inputs: ADE_ADBlockIndivInputs): ADE_ADBlockIndivOutputs & { __id: OutputNodeId<ADE_ADBlockIndivResult>; inputs: ADE_ADBlockIndivInputPaths } {
+    const id = this.addNode("ADE_ADBlockIndiv", inputs);
+    const inputPaths = {
+      effect: `${id}.inputs.effect`,
+      scale_0: `${id}.inputs.scale_0`,
+      scale_1: `${id}.inputs.scale_1`,
+    };
+    return {
+      AD_BLOCK: this.makeRef<"AD_BLOCK">(id, 0),
+      __id: id as OutputNodeId<ADE_ADBlockIndivResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AdjustPEFullStretch(inputs: ADE_AdjustPEFullStretchInputs): ADE_AdjustPEFullStretchOutputs & { __id: OutputNodeId<ADE_AdjustPEFullStretchResult>; inputs: ADE_AdjustPEFullStretchInputPaths } {
+    const id = this.addNode("ADE_AdjustPEFullStretch", inputs);
+    const inputPaths = {
+      pe_stretch: `${id}.inputs.pe_stretch`,
+      print_adjustment: `${id}.inputs.print_adjustment`,
+      prev_pe_adjust: `${id}.inputs.prev_pe_adjust`,
+    };
+    return {
+      PE_ADJUST: this.makeRef<"PE_ADJUST">(id, 0),
+      __id: id as OutputNodeId<ADE_AdjustPEFullStretchResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AdjustPEManual(inputs: ADE_AdjustPEManualInputs): ADE_AdjustPEManualOutputs & { __id: OutputNodeId<ADE_AdjustPEManualResult>; inputs: ADE_AdjustPEManualInputPaths } {
+    const id = this.addNode("ADE_AdjustPEManual", inputs);
+    const inputPaths = {
+      cap_initial_pe_length: `${id}.inputs.cap_initial_pe_length`,
+      interpolate_pe_to_length: `${id}.inputs.interpolate_pe_to_length`,
+      initial_pe_idx_offset: `${id}.inputs.initial_pe_idx_offset`,
+      final_pe_idx_offset: `${id}.inputs.final_pe_idx_offset`,
+      print_adjustment: `${id}.inputs.print_adjustment`,
+      prev_pe_adjust: `${id}.inputs.prev_pe_adjust`,
+    };
+    return {
+      PE_ADJUST: this.makeRef<"PE_ADJUST">(id, 0),
+      __id: id as OutputNodeId<ADE_AdjustPEManualResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AdjustPESweetspotStretch(inputs: ADE_AdjustPESweetspotStretchInputs): ADE_AdjustPESweetspotStretchOutputs & { __id: OutputNodeId<ADE_AdjustPESweetspotStretchResult>; inputs: ADE_AdjustPESweetspotStretchInputPaths } {
+    const id = this.addNode("ADE_AdjustPESweetspotStretch", inputs);
+    const inputPaths = {
+      sweetspot: `${id}.inputs.sweetspot`,
+      new_sweetspot: `${id}.inputs.new_sweetspot`,
+      print_adjustment: `${id}.inputs.print_adjustment`,
+      prev_pe_adjust: `${id}.inputs.prev_pe_adjust`,
+    };
+    return {
+      PE_ADJUST: this.makeRef<"PE_ADJUST">(id, 0),
+      __id: id as OutputNodeId<ADE_AdjustPESweetspotStretchResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AdjustWeightAllAdd(inputs: ADE_AdjustWeightAllAddInputs): ADE_AdjustWeightAllAddOutputs & { __id: OutputNodeId<ADE_AdjustWeightAllAddResult>; inputs: ADE_AdjustWeightAllAddInputPaths } {
+    const id = this.addNode("ADE_AdjustWeightAllAdd", inputs);
+    const inputPaths = {
+      all_ADD: `${id}.inputs.all_ADD`,
+      print_adjustment: `${id}.inputs.print_adjustment`,
+      prev_weight_adjust: `${id}.inputs.prev_weight_adjust`,
+    };
+    return {
+      WEIGHT_ADJUST: this.makeRef<"WEIGHT_ADJUST">(id, 0),
+      __id: id as OutputNodeId<ADE_AdjustWeightAllAddResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AdjustWeightAllMult(inputs: ADE_AdjustWeightAllMultInputs): ADE_AdjustWeightAllMultOutputs & { __id: OutputNodeId<ADE_AdjustWeightAllMultResult>; inputs: ADE_AdjustWeightAllMultInputPaths } {
+    const id = this.addNode("ADE_AdjustWeightAllMult", inputs);
+    const inputPaths = {
+      all_MULT: `${id}.inputs.all_MULT`,
+      print_adjustment: `${id}.inputs.print_adjustment`,
+      prev_weight_adjust: `${id}.inputs.prev_weight_adjust`,
+    };
+    return {
+      WEIGHT_ADJUST: this.makeRef<"WEIGHT_ADJUST">(id, 0),
+      __id: id as OutputNodeId<ADE_AdjustWeightAllMultResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AdjustWeightIndivAdd(inputs: ADE_AdjustWeightIndivAddInputs): ADE_AdjustWeightIndivAddOutputs & { __id: OutputNodeId<ADE_AdjustWeightIndivAddResult>; inputs: ADE_AdjustWeightIndivAddInputPaths } {
+    const id = this.addNode("ADE_AdjustWeightIndivAdd", inputs);
+    const inputPaths = {
+      pe_ADD: `${id}.inputs.pe_ADD`,
+      attn_ADD: `${id}.inputs.attn_ADD`,
+      other_ADD: `${id}.inputs.other_ADD`,
+      print_adjustment: `${id}.inputs.print_adjustment`,
+      prev_weight_adjust: `${id}.inputs.prev_weight_adjust`,
+    };
+    return {
+      WEIGHT_ADJUST: this.makeRef<"WEIGHT_ADJUST">(id, 0),
+      __id: id as OutputNodeId<ADE_AdjustWeightIndivAddResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AdjustWeightIndivAttnAdd(inputs: ADE_AdjustWeightIndivAttnAddInputs): ADE_AdjustWeightIndivAttnAddOutputs & { __id: OutputNodeId<ADE_AdjustWeightIndivAttnAddResult>; inputs: ADE_AdjustWeightIndivAttnAddInputPaths } {
+    const id = this.addNode("ADE_AdjustWeightIndivAttnAdd", inputs);
+    const inputPaths = {
+      pe_ADD: `${id}.inputs.pe_ADD`,
+      attn_ADD: `${id}.inputs.attn_ADD`,
+      attn_q_ADD: `${id}.inputs.attn_q_ADD`,
+      attn_k_ADD: `${id}.inputs.attn_k_ADD`,
+      attn_v_ADD: `${id}.inputs.attn_v_ADD`,
+      attn_out_weight_ADD: `${id}.inputs.attn_out_weight_ADD`,
+      attn_out_bias_ADD: `${id}.inputs.attn_out_bias_ADD`,
+      other_ADD: `${id}.inputs.other_ADD`,
+      print_adjustment: `${id}.inputs.print_adjustment`,
+      prev_weight_adjust: `${id}.inputs.prev_weight_adjust`,
+    };
+    return {
+      WEIGHT_ADJUST: this.makeRef<"WEIGHT_ADJUST">(id, 0),
+      __id: id as OutputNodeId<ADE_AdjustWeightIndivAttnAddResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AdjustWeightIndivAttnMult(inputs: ADE_AdjustWeightIndivAttnMultInputs): ADE_AdjustWeightIndivAttnMultOutputs & { __id: OutputNodeId<ADE_AdjustWeightIndivAttnMultResult>; inputs: ADE_AdjustWeightIndivAttnMultInputPaths } {
+    const id = this.addNode("ADE_AdjustWeightIndivAttnMult", inputs);
+    const inputPaths = {
+      pe_MULT: `${id}.inputs.pe_MULT`,
+      attn_MULT: `${id}.inputs.attn_MULT`,
+      attn_q_MULT: `${id}.inputs.attn_q_MULT`,
+      attn_k_MULT: `${id}.inputs.attn_k_MULT`,
+      attn_v_MULT: `${id}.inputs.attn_v_MULT`,
+      attn_out_weight_MULT: `${id}.inputs.attn_out_weight_MULT`,
+      attn_out_bias_MULT: `${id}.inputs.attn_out_bias_MULT`,
+      other_MULT: `${id}.inputs.other_MULT`,
+      print_adjustment: `${id}.inputs.print_adjustment`,
+      prev_weight_adjust: `${id}.inputs.prev_weight_adjust`,
+    };
+    return {
+      WEIGHT_ADJUST: this.makeRef<"WEIGHT_ADJUST">(id, 0),
+      __id: id as OutputNodeId<ADE_AdjustWeightIndivAttnMultResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AdjustWeightIndivMult(inputs: ADE_AdjustWeightIndivMultInputs): ADE_AdjustWeightIndivMultOutputs & { __id: OutputNodeId<ADE_AdjustWeightIndivMultResult>; inputs: ADE_AdjustWeightIndivMultInputPaths } {
+    const id = this.addNode("ADE_AdjustWeightIndivMult", inputs);
+    const inputPaths = {
+      pe_MULT: `${id}.inputs.pe_MULT`,
+      attn_MULT: `${id}.inputs.attn_MULT`,
+      other_MULT: `${id}.inputs.other_MULT`,
+      print_adjustment: `${id}.inputs.print_adjustment`,
+      prev_weight_adjust: `${id}.inputs.prev_weight_adjust`,
+    };
+    return {
+      WEIGHT_ADJUST: this.makeRef<"WEIGHT_ADJUST">(id, 0),
+      __id: id as OutputNodeId<ADE_AdjustWeightIndivMultResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AncestralOptions(inputs: ADE_AncestralOptionsInputs): ADE_AncestralOptionsOutputs & { __id: OutputNodeId<ADE_AncestralOptionsResult>; inputs: ADE_AncestralOptionsInputPaths } {
+    const id = this.addNode("ADE_AncestralOptions", inputs);
+    const inputPaths = {
+      noise_type: `${id}.inputs.noise_type`,
+      seed_offset: `${id}.inputs.seed_offset`,
+      seed_override: `${id}.inputs.seed_override`,
+    };
+    return {
+      ANCESTRAL_OPTS: this.makeRef<"ANCESTRAL_OPTS">(id, 0),
+      __id: id as OutputNodeId<ADE_AncestralOptionsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AnimateDiffCombine(inputs: ADE_AnimateDiffCombineInputs): ADE_AnimateDiffCombineOutputs & { __id: OutputNodeId<ADE_AnimateDiffCombineResult>; inputs: ADE_AnimateDiffCombineInputPaths } {
+    const id = this.addNode("ADE_AnimateDiffCombine", inputs);
+    const inputPaths = {
+      images: `${id}.inputs.images`,
+      frame_rate: `${id}.inputs.frame_rate`,
+      loop_count: `${id}.inputs.loop_count`,
+      filename_prefix: `${id}.inputs.filename_prefix`,
+      format: `${id}.inputs.format`,
+      pingpong: `${id}.inputs.pingpong`,
+      save_image: `${id}.inputs.save_image`,
+    };
+    return {
+      GIF: this.makeRef<"GIF">(id, 0),
+      __id: id as OutputNodeId<ADE_AnimateDiffCombineResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AnimateDiffKeyframe(inputs: ADE_AnimateDiffKeyframeInputs): ADE_AnimateDiffKeyframeOutputs & { __id: OutputNodeId<ADE_AnimateDiffKeyframeResult>; inputs: ADE_AnimateDiffKeyframeInputPaths } {
+    const id = this.addNode("ADE_AnimateDiffKeyframe", inputs);
+    const inputPaths = {
+      start_percent: `${id}.inputs.start_percent`,
+      prev_ad_keyframes: `${id}.inputs.prev_ad_keyframes`,
+      scale_multival: `${id}.inputs.scale_multival`,
+      effect_multival: `${id}.inputs.effect_multival`,
+      per_block_replace: `${id}.inputs.per_block_replace`,
+      inherit_missing: `${id}.inputs.inherit_missing`,
+      guarantee_steps: `${id}.inputs.guarantee_steps`,
+    };
+    return {
+      AD_KEYFRAMES: this.makeRef<"AD_KEYFRAMES">(id, 0),
+      __id: id as OutputNodeId<ADE_AnimateDiffKeyframeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AnimateDiffLoaderGen1(inputs: ADE_AnimateDiffLoaderGen1Inputs): ADE_AnimateDiffLoaderGen1Outputs & { __id: OutputNodeId<ADE_AnimateDiffLoaderGen1Result>; inputs: ADE_AnimateDiffLoaderGen1InputPaths } {
+    const id = this.addNode("ADE_AnimateDiffLoaderGen1", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      model_name: `${id}.inputs.model_name`,
+      beta_schedule: `${id}.inputs.beta_schedule`,
+      context_options: `${id}.inputs.context_options`,
+      motion_lora: `${id}.inputs.motion_lora`,
+      ad_settings: `${id}.inputs.ad_settings`,
+      ad_keyframes: `${id}.inputs.ad_keyframes`,
+      sample_settings: `${id}.inputs.sample_settings`,
+      scale_multival: `${id}.inputs.scale_multival`,
+      effect_multival: `${id}.inputs.effect_multival`,
+      per_block: `${id}.inputs.per_block`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      __id: id as OutputNodeId<ADE_AnimateDiffLoaderGen1Result>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AnimateDiffLoaderV1Advanced(inputs: ADE_AnimateDiffLoaderV1AdvancedInputs): ADE_AnimateDiffLoaderV1AdvancedOutputs & { __id: OutputNodeId<ADE_AnimateDiffLoaderV1AdvancedResult>; inputs: ADE_AnimateDiffLoaderV1AdvancedInputPaths } {
+    const id = this.addNode("ADE_AnimateDiffLoaderV1Advanced", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      latents: `${id}.inputs.latents`,
+      model_name: `${id}.inputs.model_name`,
+      unlimited_area_hack: `${id}.inputs.unlimited_area_hack`,
+      context_length: `${id}.inputs.context_length`,
+      context_stride: `${id}.inputs.context_stride`,
+      context_overlap: `${id}.inputs.context_overlap`,
+      context_schedule: `${id}.inputs.context_schedule`,
+      closed_loop: `${id}.inputs.closed_loop`,
+      beta_schedule: `${id}.inputs.beta_schedule`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      LATENT: this.makeRef<"LATENT">(id, 1),
+      __id: id as OutputNodeId<ADE_AnimateDiffLoaderV1AdvancedResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AnimateDiffLoaderWithContext(inputs: ADE_AnimateDiffLoaderWithContextInputs): ADE_AnimateDiffLoaderWithContextOutputs & { __id: OutputNodeId<ADE_AnimateDiffLoaderWithContextResult>; inputs: ADE_AnimateDiffLoaderWithContextInputPaths } {
+    const id = this.addNode("ADE_AnimateDiffLoaderWithContext", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      model_name: `${id}.inputs.model_name`,
+      beta_schedule: `${id}.inputs.beta_schedule`,
+      context_options: `${id}.inputs.context_options`,
+      motion_lora: `${id}.inputs.motion_lora`,
+      ad_settings: `${id}.inputs.ad_settings`,
+      sample_settings: `${id}.inputs.sample_settings`,
+      motion_scale: `${id}.inputs.motion_scale`,
+      apply_v2_models_properly: `${id}.inputs.apply_v2_models_properly`,
+      ad_keyframes: `${id}.inputs.ad_keyframes`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      __id: id as OutputNodeId<ADE_AnimateDiffLoaderWithContextResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AnimateDiffLoRALoader(inputs: ADE_AnimateDiffLoRALoaderInputs): ADE_AnimateDiffLoRALoaderOutputs & { __id: OutputNodeId<ADE_AnimateDiffLoRALoaderResult>; inputs: ADE_AnimateDiffLoRALoaderInputPaths } {
+    const id = this.addNode("ADE_AnimateDiffLoRALoader", inputs);
+    const inputPaths = {
+      name: `${id}.inputs.name`,
+      strength: `${id}.inputs.strength`,
+      prev_motion_lora: `${id}.inputs.prev_motion_lora`,
+    };
+    return {
+      MOTION_LORA: this.makeRef<"MOTION_LORA">(id, 0),
+      __id: id as OutputNodeId<ADE_AnimateDiffLoRALoaderResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AnimateDiffModelSettings(inputs: ADE_AnimateDiffModelSettingsInputs): ADE_AnimateDiffModelSettingsOutputs & { __id: OutputNodeId<ADE_AnimateDiffModelSettingsResult>; inputs: ADE_AnimateDiffModelSettingsInputPaths } {
+    const id = this.addNode("ADE_AnimateDiffModelSettings", inputs);
+    const inputPaths = {
+      pe_strength: `${id}.inputs.pe_strength`,
+      attn_strength: `${id}.inputs.attn_strength`,
+      other_strength: `${id}.inputs.other_strength`,
+      motion_pe_stretch: `${id}.inputs.motion_pe_stretch`,
+      cap_initial_pe_length: `${id}.inputs.cap_initial_pe_length`,
+      interpolate_pe_to_length: `${id}.inputs.interpolate_pe_to_length`,
+      initial_pe_idx_offset: `${id}.inputs.initial_pe_idx_offset`,
+      final_pe_idx_offset: `${id}.inputs.final_pe_idx_offset`,
+      mask_motion_scale: `${id}.inputs.mask_motion_scale`,
+      min_motion_scale: `${id}.inputs.min_motion_scale`,
+      max_motion_scale: `${id}.inputs.max_motion_scale`,
+    };
+    return {
+      AD_SETTINGS: this.makeRef<"AD_SETTINGS">(id, 0),
+      __id: id as OutputNodeId<ADE_AnimateDiffModelSettingsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AnimateDiffModelSettings_Release(inputs: ADE_AnimateDiffModelSettings_ReleaseInputs): ADE_AnimateDiffModelSettings_ReleaseOutputs & { __id: OutputNodeId<ADE_AnimateDiffModelSettings_ReleaseResult>; inputs: ADE_AnimateDiffModelSettings_ReleaseInputPaths } {
+    const id = this.addNode("ADE_AnimateDiffModelSettings_Release", inputs);
+    const inputPaths = {
+      min_motion_scale: `${id}.inputs.min_motion_scale`,
+      max_motion_scale: `${id}.inputs.max_motion_scale`,
+      mask_motion_scale: `${id}.inputs.mask_motion_scale`,
+    };
+    return {
+      AD_SETTINGS: this.makeRef<"AD_SETTINGS">(id, 0),
+      __id: id as OutputNodeId<ADE_AnimateDiffModelSettings_ReleaseResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AnimateDiffModelSettingsAdvancedAttnStrengths(inputs: ADE_AnimateDiffModelSettingsAdvancedAttnStrengthsInputs): ADE_AnimateDiffModelSettingsAdvancedAttnStrengthsOutputs & { __id: OutputNodeId<ADE_AnimateDiffModelSettingsAdvancedAttnStrengthsResult>; inputs: ADE_AnimateDiffModelSettingsAdvancedAttnStrengthsInputPaths } {
+    const id = this.addNode("ADE_AnimateDiffModelSettingsAdvancedAttnStrengths", inputs);
+    const inputPaths = {
+      pe_strength: `${id}.inputs.pe_strength`,
+      attn_strength: `${id}.inputs.attn_strength`,
+      attn_q_strength: `${id}.inputs.attn_q_strength`,
+      attn_k_strength: `${id}.inputs.attn_k_strength`,
+      attn_v_strength: `${id}.inputs.attn_v_strength`,
+      attn_out_weight_strength: `${id}.inputs.attn_out_weight_strength`,
+      attn_out_bias_strength: `${id}.inputs.attn_out_bias_strength`,
+      other_strength: `${id}.inputs.other_strength`,
+      motion_pe_stretch: `${id}.inputs.motion_pe_stretch`,
+      cap_initial_pe_length: `${id}.inputs.cap_initial_pe_length`,
+      interpolate_pe_to_length: `${id}.inputs.interpolate_pe_to_length`,
+      initial_pe_idx_offset: `${id}.inputs.initial_pe_idx_offset`,
+      final_pe_idx_offset: `${id}.inputs.final_pe_idx_offset`,
+      mask_motion_scale: `${id}.inputs.mask_motion_scale`,
+      min_motion_scale: `${id}.inputs.min_motion_scale`,
+      max_motion_scale: `${id}.inputs.max_motion_scale`,
+    };
+    return {
+      AD_SETTINGS: this.makeRef<"AD_SETTINGS">(id, 0),
+      __id: id as OutputNodeId<ADE_AnimateDiffModelSettingsAdvancedAttnStrengthsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AnimateDiffModelSettingsSimple(inputs: ADE_AnimateDiffModelSettingsSimpleInputs): ADE_AnimateDiffModelSettingsSimpleOutputs & { __id: OutputNodeId<ADE_AnimateDiffModelSettingsSimpleResult>; inputs: ADE_AnimateDiffModelSettingsSimpleInputPaths } {
+    const id = this.addNode("ADE_AnimateDiffModelSettingsSimple", inputs);
+    const inputPaths = {
+      motion_pe_stretch: `${id}.inputs.motion_pe_stretch`,
+      mask_motion_scale: `${id}.inputs.mask_motion_scale`,
+      min_motion_scale: `${id}.inputs.min_motion_scale`,
+      max_motion_scale: `${id}.inputs.max_motion_scale`,
+    };
+    return {
+      AD_SETTINGS: this.makeRef<"AD_SETTINGS">(id, 0),
+      __id: id as OutputNodeId<ADE_AnimateDiffModelSettingsSimpleResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AnimateDiffSamplingSettings(inputs: ADE_AnimateDiffSamplingSettingsInputs): ADE_AnimateDiffSamplingSettingsOutputs & { __id: OutputNodeId<ADE_AnimateDiffSamplingSettingsResult>; inputs: ADE_AnimateDiffSamplingSettingsInputPaths } {
+    const id = this.addNode("ADE_AnimateDiffSamplingSettings", inputs);
+    const inputPaths = {
+      batch_offset: `${id}.inputs.batch_offset`,
+      noise_type: `${id}.inputs.noise_type`,
+      seed_gen: `${id}.inputs.seed_gen`,
+      seed_offset: `${id}.inputs.seed_offset`,
+      noise_layers: `${id}.inputs.noise_layers`,
+      iteration_opts: `${id}.inputs.iteration_opts`,
+      seed_override: `${id}.inputs.seed_override`,
+      adapt_denoise_steps: `${id}.inputs.adapt_denoise_steps`,
+      custom_cfg: `${id}.inputs.custom_cfg`,
+      sigma_schedule: `${id}.inputs.sigma_schedule`,
+      image_inject: `${id}.inputs.image_inject`,
+      ancestral_opts: `${id}.inputs.ancestral_opts`,
+    };
+    return {
+      settings: this.makeRef<"SAMPLE_SETTINGS">(id, 0),
+      __id: id as OutputNodeId<ADE_AnimateDiffSamplingSettingsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AnimateDiffSettings(inputs: ADE_AnimateDiffSettingsInputs): ADE_AnimateDiffSettingsOutputs & { __id: OutputNodeId<ADE_AnimateDiffSettingsResult>; inputs: ADE_AnimateDiffSettingsInputPaths } {
+    const id = this.addNode("ADE_AnimateDiffSettings", inputs);
+    const inputPaths = {
+      pe_adjust: `${id}.inputs.pe_adjust`,
+      weight_adjust: `${id}.inputs.weight_adjust`,
+    };
+    return {
+      AD_SETTINGS: this.makeRef<"AD_SETTINGS">(id, 0),
+      __id: id as OutputNodeId<ADE_AnimateDiffSettingsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AnimateDiffUniformContextOptions(inputs: ADE_AnimateDiffUniformContextOptionsInputs): ADE_AnimateDiffUniformContextOptionsOutputs & { __id: OutputNodeId<ADE_AnimateDiffUniformContextOptionsResult>; inputs: ADE_AnimateDiffUniformContextOptionsInputPaths } {
+    const id = this.addNode("ADE_AnimateDiffUniformContextOptions", inputs);
+    const inputPaths = {
+      context_length: `${id}.inputs.context_length`,
+      context_stride: `${id}.inputs.context_stride`,
+      context_overlap: `${id}.inputs.context_overlap`,
+      context_schedule: `${id}.inputs.context_schedule`,
+      closed_loop: `${id}.inputs.closed_loop`,
+      fuse_method: `${id}.inputs.fuse_method`,
+      use_on_equal_length: `${id}.inputs.use_on_equal_length`,
+      start_percent: `${id}.inputs.start_percent`,
+      guarantee_steps: `${id}.inputs.guarantee_steps`,
+      prev_context: `${id}.inputs.prev_context`,
+      view_opts: `${id}.inputs.view_opts`,
+    };
+    return {
+      CONTEXT_OPTS: this.makeRef<"CONTEXT_OPTIONS">(id, 0),
+      __id: id as OutputNodeId<ADE_AnimateDiffUniformContextOptionsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AnimateDiffUnload(inputs: ADE_AnimateDiffUnloadInputs): ADE_AnimateDiffUnloadOutputs & { __id: OutputNodeId<ADE_AnimateDiffUnloadResult>; inputs: ADE_AnimateDiffUnloadInputPaths } {
+    const id = this.addNode("ADE_AnimateDiffUnload", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      __id: id as OutputNodeId<ADE_AnimateDiffUnloadResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ApplyAnimateDiffModel(inputs: ADE_ApplyAnimateDiffModelInputs): ADE_ApplyAnimateDiffModelOutputs & { __id: OutputNodeId<ADE_ApplyAnimateDiffModelResult>; inputs: ADE_ApplyAnimateDiffModelInputPaths } {
+    const id = this.addNode("ADE_ApplyAnimateDiffModel", inputs);
+    const inputPaths = {
+      motion_model: `${id}.inputs.motion_model`,
+      start_percent: `${id}.inputs.start_percent`,
+      end_percent: `${id}.inputs.end_percent`,
+      motion_lora: `${id}.inputs.motion_lora`,
+      scale_multival: `${id}.inputs.scale_multival`,
+      effect_multival: `${id}.inputs.effect_multival`,
+      ad_keyframes: `${id}.inputs.ad_keyframes`,
+      prev_m_models: `${id}.inputs.prev_m_models`,
+      per_block: `${id}.inputs.per_block`,
+    };
+    return {
+      M_MODELS: this.makeRef<"M_MODELS">(id, 0),
+      __id: id as OutputNodeId<ADE_ApplyAnimateDiffModelResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ApplyAnimateDiffModelSimple(inputs: ADE_ApplyAnimateDiffModelSimpleInputs): ADE_ApplyAnimateDiffModelSimpleOutputs & { __id: OutputNodeId<ADE_ApplyAnimateDiffModelSimpleResult>; inputs: ADE_ApplyAnimateDiffModelSimpleInputPaths } {
+    const id = this.addNode("ADE_ApplyAnimateDiffModelSimple", inputs);
+    const inputPaths = {
+      motion_model: `${id}.inputs.motion_model`,
+      motion_lora: `${id}.inputs.motion_lora`,
+      scale_multival: `${id}.inputs.scale_multival`,
+      effect_multival: `${id}.inputs.effect_multival`,
+      ad_keyframes: `${id}.inputs.ad_keyframes`,
+      per_block: `${id}.inputs.per_block`,
+    };
+    return {
+      M_MODELS: this.makeRef<"M_MODELS">(id, 0),
+      __id: id as OutputNodeId<ADE_ApplyAnimateDiffModelSimpleResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ApplyAnimateDiffModelWithCameraCtrl(inputs: ADE_ApplyAnimateDiffModelWithCameraCtrlInputs): ADE_ApplyAnimateDiffModelWithCameraCtrlOutputs & { __id: OutputNodeId<ADE_ApplyAnimateDiffModelWithCameraCtrlResult>; inputs: ADE_ApplyAnimateDiffModelWithCameraCtrlInputPaths } {
+    const id = this.addNode("ADE_ApplyAnimateDiffModelWithCameraCtrl", inputs);
+    const inputPaths = {
+      motion_model: `${id}.inputs.motion_model`,
+      cameractrl_poses: `${id}.inputs.cameractrl_poses`,
+      start_percent: `${id}.inputs.start_percent`,
+      end_percent: `${id}.inputs.end_percent`,
+      motion_lora: `${id}.inputs.motion_lora`,
+      scale_multival: `${id}.inputs.scale_multival`,
+      effect_multival: `${id}.inputs.effect_multival`,
+      cameractrl_multival: `${id}.inputs.cameractrl_multival`,
+      ad_keyframes: `${id}.inputs.ad_keyframes`,
+      prev_m_models: `${id}.inputs.prev_m_models`,
+      per_block: `${id}.inputs.per_block`,
+    };
+    return {
+      M_MODELS: this.makeRef<"M_MODELS">(id, 0),
+      __id: id as OutputNodeId<ADE_ApplyAnimateDiffModelWithCameraCtrlResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ApplyAnimateDiffModelWithPIA(inputs: ADE_ApplyAnimateDiffModelWithPIAInputs): ADE_ApplyAnimateDiffModelWithPIAOutputs & { __id: OutputNodeId<ADE_ApplyAnimateDiffModelWithPIAResult>; inputs: ADE_ApplyAnimateDiffModelWithPIAInputPaths } {
+    const id = this.addNode("ADE_ApplyAnimateDiffModelWithPIA", inputs);
+    const inputPaths = {
+      motion_model: `${id}.inputs.motion_model`,
+      image: `${id}.inputs.image`,
+      vae: `${id}.inputs.vae`,
+      start_percent: `${id}.inputs.start_percent`,
+      end_percent: `${id}.inputs.end_percent`,
+      pia_input: `${id}.inputs.pia_input`,
+      motion_lora: `${id}.inputs.motion_lora`,
+      scale_multival: `${id}.inputs.scale_multival`,
+      effect_multival: `${id}.inputs.effect_multival`,
+      ad_keyframes: `${id}.inputs.ad_keyframes`,
+      prev_m_models: `${id}.inputs.prev_m_models`,
+      per_block: `${id}.inputs.per_block`,
+    };
+    return {
+      M_MODELS: this.makeRef<"M_MODELS">(id, 0),
+      __id: id as OutputNodeId<ADE_ApplyAnimateDiffModelWithPIAResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ApplyAnimateLCMI2VModel(inputs: ADE_ApplyAnimateLCMI2VModelInputs): ADE_ApplyAnimateLCMI2VModelOutputs & { __id: OutputNodeId<ADE_ApplyAnimateLCMI2VModelResult>; inputs: ADE_ApplyAnimateLCMI2VModelInputPaths } {
+    const id = this.addNode("ADE_ApplyAnimateLCMI2VModel", inputs);
+    const inputPaths = {
+      motion_model: `${id}.inputs.motion_model`,
+      ref_latent: `${id}.inputs.ref_latent`,
+      ref_drift: `${id}.inputs.ref_drift`,
+      apply_ref_when_disabled: `${id}.inputs.apply_ref_when_disabled`,
+      start_percent: `${id}.inputs.start_percent`,
+      end_percent: `${id}.inputs.end_percent`,
+      motion_lora: `${id}.inputs.motion_lora`,
+      scale_multival: `${id}.inputs.scale_multival`,
+      effect_multival: `${id}.inputs.effect_multival`,
+      ad_keyframes: `${id}.inputs.ad_keyframes`,
+      prev_m_models: `${id}.inputs.prev_m_models`,
+      per_block: `${id}.inputs.per_block`,
+    };
+    return {
+      M_MODELS: this.makeRef<"M_MODELS">(id, 0),
+      __id: id as OutputNodeId<ADE_ApplyAnimateLCMI2VModelResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AttachLoraHookToCLIP(inputs: ADE_AttachLoraHookToCLIPInputs): ADE_AttachLoraHookToCLIPOutputs & { __id: OutputNodeId<ADE_AttachLoraHookToCLIPResult>; inputs: ADE_AttachLoraHookToCLIPInputPaths } {
+    const id = this.addNode("ADE_AttachLoraHookToCLIP", inputs);
+    const inputPaths = {
+      clip: `${id}.inputs.clip`,
+      lora_hook: `${id}.inputs.lora_hook`,
+    };
+    return {
+      hook_CLIP: this.makeRef<"CLIP">(id, 0),
+      __id: id as OutputNodeId<ADE_AttachLoraHookToCLIPResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_AttachLoraHookToConditioning(inputs: ADE_AttachLoraHookToConditioningInputs): ADE_AttachLoraHookToConditioningOutputs & { __id: OutputNodeId<ADE_AttachLoraHookToConditioningResult>; inputs: ADE_AttachLoraHookToConditioningInputPaths } {
+    const id = this.addNode("ADE_AttachLoraHookToConditioning", inputs);
+    const inputPaths = {
+      conditioning: `${id}.inputs.conditioning`,
+      lora_hook: `${id}.inputs.lora_hook`,
+    };
+    return {
+      CONDITIONING: this.makeRef<"CONDITIONING">(id, 0),
+      __id: id as OutputNodeId<ADE_AttachLoraHookToConditioningResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_BatchedContextOptions(inputs: ADE_BatchedContextOptionsInputs): ADE_BatchedContextOptionsOutputs & { __id: OutputNodeId<ADE_BatchedContextOptionsResult>; inputs: ADE_BatchedContextOptionsInputPaths } {
+    const id = this.addNode("ADE_BatchedContextOptions", inputs);
+    const inputPaths = {
+      context_length: `${id}.inputs.context_length`,
+      start_percent: `${id}.inputs.start_percent`,
+      guarantee_steps: `${id}.inputs.guarantee_steps`,
+      prev_context: `${id}.inputs.prev_context`,
+    };
+    return {
+      CONTEXT_OPTS: this.makeRef<"CONTEXT_OPTIONS">(id, 0),
+      __id: id as OutputNodeId<ADE_BatchedContextOptionsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_CameraCtrlAnimateDiffKeyframe(inputs: ADE_CameraCtrlAnimateDiffKeyframeInputs): ADE_CameraCtrlAnimateDiffKeyframeOutputs & { __id: OutputNodeId<ADE_CameraCtrlAnimateDiffKeyframeResult>; inputs: ADE_CameraCtrlAnimateDiffKeyframeInputPaths } {
+    const id = this.addNode("ADE_CameraCtrlAnimateDiffKeyframe", inputs);
+    const inputPaths = {
+      start_percent: `${id}.inputs.start_percent`,
+      prev_ad_keyframes: `${id}.inputs.prev_ad_keyframes`,
+      scale_multival: `${id}.inputs.scale_multival`,
+      effect_multival: `${id}.inputs.effect_multival`,
+      cameractrl_multival: `${id}.inputs.cameractrl_multival`,
+      inherit_missing: `${id}.inputs.inherit_missing`,
+      guarantee_steps: `${id}.inputs.guarantee_steps`,
+    };
+    return {
+      AD_KEYFRAMES: this.makeRef<"AD_KEYFRAMES">(id, 0),
+      __id: id as OutputNodeId<ADE_CameraCtrlAnimateDiffKeyframeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_CameraManualPoseAppend(inputs: ADE_CameraManualPoseAppendInputs): ADE_CameraManualPoseAppendOutputs & { __id: OutputNodeId<ADE_CameraManualPoseAppendResult>; inputs: ADE_CameraManualPoseAppendInputPaths } {
+    const id = this.addNode("ADE_CameraManualPoseAppend", inputs);
+    const inputPaths = {
+      poses_first: `${id}.inputs.poses_first`,
+      poses_last: `${id}.inputs.poses_last`,
+    };
+    return {
+      CAMERACTRL_POSES: this.makeRef<"CAMERACTRL_POSES">(id, 0),
+      __id: id as OutputNodeId<ADE_CameraManualPoseAppendResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_CameraPoseAdvanced(inputs: ADE_CameraPoseAdvancedInputs): ADE_CameraPoseAdvancedOutputs & { __id: OutputNodeId<ADE_CameraPoseAdvancedResult>; inputs: ADE_CameraPoseAdvancedInputPaths } {
+    const id = this.addNode("ADE_CameraPoseAdvanced", inputs);
+    const inputPaths = {
+      motion_type1: `${id}.inputs.motion_type1`,
+      strength1: `${id}.inputs.strength1`,
+      motion_type2: `${id}.inputs.motion_type2`,
+      strength2: `${id}.inputs.strength2`,
+      motion_type3: `${id}.inputs.motion_type3`,
+      strength3: `${id}.inputs.strength3`,
+      motion_type4: `${id}.inputs.motion_type4`,
+      strength4: `${id}.inputs.strength4`,
+      motion_type5: `${id}.inputs.motion_type5`,
+      strength5: `${id}.inputs.strength5`,
+      motion_type6: `${id}.inputs.motion_type6`,
+      strength6: `${id}.inputs.strength6`,
+      speed: `${id}.inputs.speed`,
+      frame_length: `${id}.inputs.frame_length`,
+      prev_poses: `${id}.inputs.prev_poses`,
+    };
+    return {
+      CAMERACTRL_POSES: this.makeRef<"CAMERACTRL_POSES">(id, 0),
+      __id: id as OutputNodeId<ADE_CameraPoseAdvancedResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_CameraPoseBasic(inputs: ADE_CameraPoseBasicInputs): ADE_CameraPoseBasicOutputs & { __id: OutputNodeId<ADE_CameraPoseBasicResult>; inputs: ADE_CameraPoseBasicInputPaths } {
+    const id = this.addNode("ADE_CameraPoseBasic", inputs);
+    const inputPaths = {
+      motion_type: `${id}.inputs.motion_type`,
+      speed: `${id}.inputs.speed`,
+      frame_length: `${id}.inputs.frame_length`,
+      prev_poses: `${id}.inputs.prev_poses`,
+    };
+    return {
+      CAMERACTRL_POSES: this.makeRef<"CAMERACTRL_POSES">(id, 0),
+      __id: id as OutputNodeId<ADE_CameraPoseBasicResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_CameraPoseCombo(inputs: ADE_CameraPoseComboInputs): ADE_CameraPoseComboOutputs & { __id: OutputNodeId<ADE_CameraPoseComboResult>; inputs: ADE_CameraPoseComboInputPaths } {
+    const id = this.addNode("ADE_CameraPoseCombo", inputs);
+    const inputPaths = {
+      motion_type1: `${id}.inputs.motion_type1`,
+      motion_type2: `${id}.inputs.motion_type2`,
+      motion_type3: `${id}.inputs.motion_type3`,
+      motion_type4: `${id}.inputs.motion_type4`,
+      motion_type5: `${id}.inputs.motion_type5`,
+      motion_type6: `${id}.inputs.motion_type6`,
+      speed: `${id}.inputs.speed`,
+      frame_length: `${id}.inputs.frame_length`,
+      prev_poses: `${id}.inputs.prev_poses`,
+    };
+    return {
+      CAMERACTRL_POSES: this.makeRef<"CAMERACTRL_POSES">(id, 0),
+      __id: id as OutputNodeId<ADE_CameraPoseComboResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_CFGExtrasPAG(inputs: ADE_CFGExtrasPAGInputs): ADE_CFGExtrasPAGOutputs & { __id: OutputNodeId<ADE_CFGExtrasPAGResult>; inputs: ADE_CFGExtrasPAGInputPaths } {
+    const id = this.addNode("ADE_CFGExtrasPAG", inputs);
+    const inputPaths = {
+      scale_multival: `${id}.inputs.scale_multival`,
+      prev_extras: `${id}.inputs.prev_extras`,
+    };
+    return {
+      CFG_EXTRAS: this.makeRef<"CFG_EXTRAS">(id, 0),
+      __id: id as OutputNodeId<ADE_CFGExtrasPAGResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_CFGExtrasPAGSimple(inputs: ADE_CFGExtrasPAGSimpleInputs): ADE_CFGExtrasPAGSimpleOutputs & { __id: OutputNodeId<ADE_CFGExtrasPAGSimpleResult>; inputs: ADE_CFGExtrasPAGSimpleInputPaths } {
+    const id = this.addNode("ADE_CFGExtrasPAGSimple", inputs);
+    const inputPaths = {
+      scale: `${id}.inputs.scale`,
+      prev_extras: `${id}.inputs.prev_extras`,
+    };
+    return {
+      CFG_EXTRAS: this.makeRef<"CFG_EXTRAS">(id, 0),
+      __id: id as OutputNodeId<ADE_CFGExtrasPAGSimpleResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_CFGExtrasRescaleCFG(inputs: ADE_CFGExtrasRescaleCFGInputs): ADE_CFGExtrasRescaleCFGOutputs & { __id: OutputNodeId<ADE_CFGExtrasRescaleCFGResult>; inputs: ADE_CFGExtrasRescaleCFGInputPaths } {
+    const id = this.addNode("ADE_CFGExtrasRescaleCFG", inputs);
+    const inputPaths = {
+      mult_multival: `${id}.inputs.mult_multival`,
+      prev_extras: `${id}.inputs.prev_extras`,
+    };
+    return {
+      CFG_EXTRAS: this.makeRef<"CFG_EXTRAS">(id, 0),
+      __id: id as OutputNodeId<ADE_CFGExtrasRescaleCFGResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_CFGExtrasRescaleCFGSimple(inputs: ADE_CFGExtrasRescaleCFGSimpleInputs): ADE_CFGExtrasRescaleCFGSimpleOutputs & { __id: OutputNodeId<ADE_CFGExtrasRescaleCFGSimpleResult>; inputs: ADE_CFGExtrasRescaleCFGSimpleInputPaths } {
+    const id = this.addNode("ADE_CFGExtrasRescaleCFGSimple", inputs);
+    const inputPaths = {
+      multiplier: `${id}.inputs.multiplier`,
+      prev_extras: `${id}.inputs.prev_extras`,
+    };
+    return {
+      CFG_EXTRAS: this.makeRef<"CFG_EXTRAS">(id, 0),
+      __id: id as OutputNodeId<ADE_CFGExtrasRescaleCFGSimpleResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_CombineLoraHooks(inputs: ADE_CombineLoraHooksInputs): ADE_CombineLoraHooksOutputs & { __id: OutputNodeId<ADE_CombineLoraHooksResult>; inputs: ADE_CombineLoraHooksInputPaths } {
+    const id = this.addNode("ADE_CombineLoraHooks", inputs);
+    const inputPaths = {
+      lora_hook_A: `${id}.inputs.lora_hook_A`,
+      lora_hook_B: `${id}.inputs.lora_hook_B`,
+    };
+    return {
+      HOOKS: this.makeRef<"HOOKS">(id, 0),
+      __id: id as OutputNodeId<ADE_CombineLoraHooksResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_CombineLoraHooksEight(inputs: ADE_CombineLoraHooksEightInputs): ADE_CombineLoraHooksEightOutputs & { __id: OutputNodeId<ADE_CombineLoraHooksEightResult>; inputs: ADE_CombineLoraHooksEightInputPaths } {
+    const id = this.addNode("ADE_CombineLoraHooksEight", inputs);
+    const inputPaths = {
+      lora_hook_A: `${id}.inputs.lora_hook_A`,
+      lora_hook_B: `${id}.inputs.lora_hook_B`,
+      lora_hook_C: `${id}.inputs.lora_hook_C`,
+      lora_hook_D: `${id}.inputs.lora_hook_D`,
+      lora_hook_E: `${id}.inputs.lora_hook_E`,
+      lora_hook_F: `${id}.inputs.lora_hook_F`,
+      lora_hook_G: `${id}.inputs.lora_hook_G`,
+      lora_hook_H: `${id}.inputs.lora_hook_H`,
+    };
+    return {
+      HOOKS: this.makeRef<"HOOKS">(id, 0),
+      __id: id as OutputNodeId<ADE_CombineLoraHooksEightResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_CombineLoraHooksFour(inputs: ADE_CombineLoraHooksFourInputs): ADE_CombineLoraHooksFourOutputs & { __id: OutputNodeId<ADE_CombineLoraHooksFourResult>; inputs: ADE_CombineLoraHooksFourInputPaths } {
+    const id = this.addNode("ADE_CombineLoraHooksFour", inputs);
+    const inputPaths = {
+      lora_hook_A: `${id}.inputs.lora_hook_A`,
+      lora_hook_B: `${id}.inputs.lora_hook_B`,
+      lora_hook_C: `${id}.inputs.lora_hook_C`,
+      lora_hook_D: `${id}.inputs.lora_hook_D`,
+    };
+    return {
+      HOOKS: this.makeRef<"HOOKS">(id, 0),
+      __id: id as OutputNodeId<ADE_CombineLoraHooksFourResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ConditionExtraction(inputs: ADE_ConditionExtractionInputs): ADE_ConditionExtractionOutputs & { __id: OutputNodeId<ADE_ConditionExtractionResult>; inputs: ADE_ConditionExtractionInputPaths } {
+    const id = this.addNode("ADE_ConditionExtraction", inputs);
+    const inputPaths = {
+      conditioning: `${id}.inputs.conditioning`,
+      index: `${id}.inputs.index`,
+    };
+    return {
+      CONDITIONING: this.makeRef<"CONDITIONING">(id, 0),
+      __id: id as OutputNodeId<ADE_ConditionExtractionResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ConditioningCombine(inputs: ADE_ConditioningCombineInputs): ADE_ConditioningCombineOutputs & { __id: OutputNodeId<ADE_ConditioningCombineResult>; inputs: ADE_ConditioningCombineInputPaths } {
+    const id = this.addNode("ADE_ConditioningCombine", inputs);
+    const inputPaths = {
+      cond_A: `${id}.inputs.cond_A`,
+      cond_B: `${id}.inputs.cond_B`,
+    };
+    return {
+      CONDITIONING: this.makeRef<"CONDITIONING">(id, 0),
+      __id: id as OutputNodeId<ADE_ConditioningCombineResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ConditioningSetMask(inputs: ADE_ConditioningSetMaskInputs): ADE_ConditioningSetMaskOutputs & { __id: OutputNodeId<ADE_ConditioningSetMaskResult>; inputs: ADE_ConditioningSetMaskInputPaths } {
+    const id = this.addNode("ADE_ConditioningSetMask", inputs);
+    const inputPaths = {
+      cond_ADD: `${id}.inputs.cond_ADD`,
+      strength: `${id}.inputs.strength`,
+      set_cond_area: `${id}.inputs.set_cond_area`,
+      opt_mask: `${id}.inputs.opt_mask`,
+      opt_lora_hook: `${id}.inputs.opt_lora_hook`,
+      opt_timesteps: `${id}.inputs.opt_timesteps`,
+    };
+    return {
+      CONDITIONING: this.makeRef<"CONDITIONING">(id, 0),
+      __id: id as OutputNodeId<ADE_ConditioningSetMaskResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ConditioningSetMaskAndCombine(inputs: ADE_ConditioningSetMaskAndCombineInputs): ADE_ConditioningSetMaskAndCombineOutputs & { __id: OutputNodeId<ADE_ConditioningSetMaskAndCombineResult>; inputs: ADE_ConditioningSetMaskAndCombineInputPaths } {
+    const id = this.addNode("ADE_ConditioningSetMaskAndCombine", inputs);
+    const inputPaths = {
+      cond: `${id}.inputs.cond`,
+      cond_ADD: `${id}.inputs.cond_ADD`,
+      strength: `${id}.inputs.strength`,
+      set_cond_area: `${id}.inputs.set_cond_area`,
+      opt_mask: `${id}.inputs.opt_mask`,
+      opt_lora_hook: `${id}.inputs.opt_lora_hook`,
+      opt_timesteps: `${id}.inputs.opt_timesteps`,
+    };
+    return {
+      CONDITIONING: this.makeRef<"CONDITIONING">(id, 0),
+      __id: id as OutputNodeId<ADE_ConditioningSetMaskAndCombineResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ConditioningSetUnmaskedAndCombine(inputs: ADE_ConditioningSetUnmaskedAndCombineInputs): ADE_ConditioningSetUnmaskedAndCombineOutputs & { __id: OutputNodeId<ADE_ConditioningSetUnmaskedAndCombineResult>; inputs: ADE_ConditioningSetUnmaskedAndCombineInputPaths } {
+    const id = this.addNode("ADE_ConditioningSetUnmaskedAndCombine", inputs);
+    const inputPaths = {
+      cond: `${id}.inputs.cond`,
+      cond_DEFAULT: `${id}.inputs.cond_DEFAULT`,
+      opt_lora_hook: `${id}.inputs.opt_lora_hook`,
+    };
+    return {
+      CONDITIONING: this.makeRef<"CONDITIONING">(id, 0),
+      __id: id as OutputNodeId<ADE_ConditioningSetUnmaskedAndCombineResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ContextExtras_ContextRef(inputs: ADE_ContextExtras_ContextRefInputs): ADE_ContextExtras_ContextRefOutputs & { __id: OutputNodeId<ADE_ContextExtras_ContextRefResult>; inputs: ADE_ContextExtras_ContextRefInputPaths } {
+    const id = this.addNode("ADE_ContextExtras_ContextRef", inputs);
+    const inputPaths = {
+      prev_extras: `${id}.inputs.prev_extras`,
+      strength_multival: `${id}.inputs.strength_multival`,
+      contextref_mode: `${id}.inputs.contextref_mode`,
+      contextref_tune: `${id}.inputs.contextref_tune`,
+      contextref_kf: `${id}.inputs.contextref_kf`,
+      start_percent: `${id}.inputs.start_percent`,
+      end_percent: `${id}.inputs.end_percent`,
+    };
+    return {
+      CONTEXT_EXTRAS: this.makeRef<"CONTEXT_EXTRAS">(id, 0),
+      __id: id as OutputNodeId<ADE_ContextExtras_ContextRefResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ContextExtras_ContextRef_Keyframe(inputs: ADE_ContextExtras_ContextRef_KeyframeInputs): ADE_ContextExtras_ContextRef_KeyframeOutputs & { __id: OutputNodeId<ADE_ContextExtras_ContextRef_KeyframeResult>; inputs: ADE_ContextExtras_ContextRef_KeyframeInputPaths } {
+    const id = this.addNode("ADE_ContextExtras_ContextRef_Keyframe", inputs);
+    const inputPaths = {
+      prev_kf: `${id}.inputs.prev_kf`,
+      mult_multival: `${id}.inputs.mult_multival`,
+      mode_replace: `${id}.inputs.mode_replace`,
+      tune_replace: `${id}.inputs.tune_replace`,
+      mult: `${id}.inputs.mult`,
+      start_percent: `${id}.inputs.start_percent`,
+      guarantee_steps: `${id}.inputs.guarantee_steps`,
+      inherit_missing: `${id}.inputs.inherit_missing`,
+    };
+    return {
+      CONTEXTREF_KF: this.makeRef<"CONTEXTREF_KEYFRAME">(id, 0),
+      __id: id as OutputNodeId<ADE_ContextExtras_ContextRef_KeyframeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ContextExtras_ContextRef_KeyframeFromList(inputs: ADE_ContextExtras_ContextRef_KeyframeFromListInputs): ADE_ContextExtras_ContextRef_KeyframeFromListOutputs & { __id: OutputNodeId<ADE_ContextExtras_ContextRef_KeyframeFromListResult>; inputs: ADE_ContextExtras_ContextRef_KeyframeFromListInputPaths } {
+    const id = this.addNode("ADE_ContextExtras_ContextRef_KeyframeFromList", inputs);
+    const inputPaths = {
+      mults_float: `${id}.inputs.mults_float`,
+      start_percent: `${id}.inputs.start_percent`,
+      end_percent: `${id}.inputs.end_percent`,
+      inherit_missing: `${id}.inputs.inherit_missing`,
+      print_keyframes: `${id}.inputs.print_keyframes`,
+      prev_kf: `${id}.inputs.prev_kf`,
+      mult_multival: `${id}.inputs.mult_multival`,
+      mode_replace: `${id}.inputs.mode_replace`,
+      tune_replace: `${id}.inputs.tune_replace`,
+    };
+    return {
+      CONTEXTREF_KF: this.makeRef<"CONTEXTREF_KEYFRAME">(id, 0),
+      __id: id as OutputNodeId<ADE_ContextExtras_ContextRef_KeyframeFromListResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ContextExtras_ContextRef_KeyframeInterpolation(inputs: ADE_ContextExtras_ContextRef_KeyframeInterpolationInputs): ADE_ContextExtras_ContextRef_KeyframeInterpolationOutputs & { __id: OutputNodeId<ADE_ContextExtras_ContextRef_KeyframeInterpolationResult>; inputs: ADE_ContextExtras_ContextRef_KeyframeInterpolationInputPaths } {
+    const id = this.addNode("ADE_ContextExtras_ContextRef_KeyframeInterpolation", inputs);
+    const inputPaths = {
+      start_percent: `${id}.inputs.start_percent`,
+      end_percent: `${id}.inputs.end_percent`,
+      mult_start: `${id}.inputs.mult_start`,
+      mult_end: `${id}.inputs.mult_end`,
+      interpolation: `${id}.inputs.interpolation`,
+      intervals: `${id}.inputs.intervals`,
+      inherit_missing: `${id}.inputs.inherit_missing`,
+      print_keyframes: `${id}.inputs.print_keyframes`,
+      prev_kf: `${id}.inputs.prev_kf`,
+      mult_multival: `${id}.inputs.mult_multival`,
+      mode_replace: `${id}.inputs.mode_replace`,
+      tune_replace: `${id}.inputs.tune_replace`,
+    };
+    return {
+      CONTEXTREF_KF: this.makeRef<"CONTEXTREF_KEYFRAME">(id, 0),
+      __id: id as OutputNodeId<ADE_ContextExtras_ContextRef_KeyframeInterpolationResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ContextExtras_ContextRef_ModeFirst(inputs: ADE_ContextExtras_ContextRef_ModeFirstInputs = {}): ADE_ContextExtras_ContextRef_ModeFirstOutputs & { __id: OutputNodeId<ADE_ContextExtras_ContextRef_ModeFirstResult>; inputs: ADE_ContextExtras_ContextRef_ModeFirstInputPaths } {
+    const id = this.addNode("ADE_ContextExtras_ContextRef_ModeFirst", inputs);
+    const inputPaths = {
+    };
+    return {
+      CONTEXTREF_MODE: this.makeRef<"CONTEXTREF_MODE">(id, 0),
+      __id: id as OutputNodeId<ADE_ContextExtras_ContextRef_ModeFirstResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ContextExtras_ContextRef_ModeIndexes(inputs: ADE_ContextExtras_ContextRef_ModeIndexesInputs): ADE_ContextExtras_ContextRef_ModeIndexesOutputs & { __id: OutputNodeId<ADE_ContextExtras_ContextRef_ModeIndexesResult>; inputs: ADE_ContextExtras_ContextRef_ModeIndexesInputPaths } {
+    const id = this.addNode("ADE_ContextExtras_ContextRef_ModeIndexes", inputs);
+    const inputPaths = {
+      switch_on_idxs: `${id}.inputs.switch_on_idxs`,
+      always_include_0: `${id}.inputs.always_include_0`,
+    };
+    return {
+      CONTEXTREF_MODE: this.makeRef<"CONTEXTREF_MODE">(id, 0),
+      __id: id as OutputNodeId<ADE_ContextExtras_ContextRef_ModeIndexesResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ContextExtras_ContextRef_ModeSliding(inputs: ADE_ContextExtras_ContextRef_ModeSlidingInputs): ADE_ContextExtras_ContextRef_ModeSlidingOutputs & { __id: OutputNodeId<ADE_ContextExtras_ContextRef_ModeSlidingResult>; inputs: ADE_ContextExtras_ContextRef_ModeSlidingInputPaths } {
+    const id = this.addNode("ADE_ContextExtras_ContextRef_ModeSliding", inputs);
+    const inputPaths = {
+      sliding_width: `${id}.inputs.sliding_width`,
+    };
+    return {
+      CONTEXTREF_MODE: this.makeRef<"CONTEXTREF_MODE">(id, 0),
+      __id: id as OutputNodeId<ADE_ContextExtras_ContextRef_ModeSlidingResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ContextExtras_ContextRef_TuneAttn(inputs: ADE_ContextExtras_ContextRef_TuneAttnInputs): ADE_ContextExtras_ContextRef_TuneAttnOutputs & { __id: OutputNodeId<ADE_ContextExtras_ContextRef_TuneAttnResult>; inputs: ADE_ContextExtras_ContextRef_TuneAttnInputPaths } {
+    const id = this.addNode("ADE_ContextExtras_ContextRef_TuneAttn", inputs);
+    const inputPaths = {
+      attn_style_fidelity: `${id}.inputs.attn_style_fidelity`,
+      attn_ref_weight: `${id}.inputs.attn_ref_weight`,
+      attn_strength: `${id}.inputs.attn_strength`,
+    };
+    return {
+      CONTEXTREF_TUNE: this.makeRef<"CONTEXTREF_TUNE">(id, 0),
+      __id: id as OutputNodeId<ADE_ContextExtras_ContextRef_TuneAttnResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ContextExtras_ContextRef_TuneAttnAdain(inputs: ADE_ContextExtras_ContextRef_TuneAttnAdainInputs): ADE_ContextExtras_ContextRef_TuneAttnAdainOutputs & { __id: OutputNodeId<ADE_ContextExtras_ContextRef_TuneAttnAdainResult>; inputs: ADE_ContextExtras_ContextRef_TuneAttnAdainInputPaths } {
+    const id = this.addNode("ADE_ContextExtras_ContextRef_TuneAttnAdain", inputs);
+    const inputPaths = {
+      attn_style_fidelity: `${id}.inputs.attn_style_fidelity`,
+      attn_ref_weight: `${id}.inputs.attn_ref_weight`,
+      attn_strength: `${id}.inputs.attn_strength`,
+      adain_style_fidelity: `${id}.inputs.adain_style_fidelity`,
+      adain_ref_weight: `${id}.inputs.adain_ref_weight`,
+      adain_strength: `${id}.inputs.adain_strength`,
+    };
+    return {
+      CONTEXTREF_TUNE: this.makeRef<"CONTEXTREF_TUNE">(id, 0),
+      __id: id as OutputNodeId<ADE_ContextExtras_ContextRef_TuneAttnAdainResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ContextExtras_NaiveReuse(inputs: ADE_ContextExtras_NaiveReuseInputs): ADE_ContextExtras_NaiveReuseOutputs & { __id: OutputNodeId<ADE_ContextExtras_NaiveReuseResult>; inputs: ADE_ContextExtras_NaiveReuseInputPaths } {
+    const id = this.addNode("ADE_ContextExtras_NaiveReuse", inputs);
+    const inputPaths = {
+      prev_extras: `${id}.inputs.prev_extras`,
+      strength_multival: `${id}.inputs.strength_multival`,
+      naivereuse_kf: `${id}.inputs.naivereuse_kf`,
+      start_percent: `${id}.inputs.start_percent`,
+      end_percent: `${id}.inputs.end_percent`,
+      weighted_mean: `${id}.inputs.weighted_mean`,
+    };
+    return {
+      CONTEXT_EXTRAS: this.makeRef<"CONTEXT_EXTRAS">(id, 0),
+      __id: id as OutputNodeId<ADE_ContextExtras_NaiveReuseResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ContextExtras_NaiveReuse_Keyframe(inputs: ADE_ContextExtras_NaiveReuse_KeyframeInputs): ADE_ContextExtras_NaiveReuse_KeyframeOutputs & { __id: OutputNodeId<ADE_ContextExtras_NaiveReuse_KeyframeResult>; inputs: ADE_ContextExtras_NaiveReuse_KeyframeInputPaths } {
+    const id = this.addNode("ADE_ContextExtras_NaiveReuse_Keyframe", inputs);
+    const inputPaths = {
+      prev_kf: `${id}.inputs.prev_kf`,
+      mult_multival: `${id}.inputs.mult_multival`,
+      mult: `${id}.inputs.mult`,
+      start_percent: `${id}.inputs.start_percent`,
+      guarantee_steps: `${id}.inputs.guarantee_steps`,
+      inherit_missing: `${id}.inputs.inherit_missing`,
+    };
+    return {
+      NAIVEREUSE_KF: this.makeRef<"NAIVEREUSE_KEYFRAME">(id, 0),
+      __id: id as OutputNodeId<ADE_ContextExtras_NaiveReuse_KeyframeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ContextExtras_NaiveReuse_KeyframeFromList(inputs: ADE_ContextExtras_NaiveReuse_KeyframeFromListInputs): ADE_ContextExtras_NaiveReuse_KeyframeFromListOutputs & { __id: OutputNodeId<ADE_ContextExtras_NaiveReuse_KeyframeFromListResult>; inputs: ADE_ContextExtras_NaiveReuse_KeyframeFromListInputPaths } {
+    const id = this.addNode("ADE_ContextExtras_NaiveReuse_KeyframeFromList", inputs);
+    const inputPaths = {
+      mults_float: `${id}.inputs.mults_float`,
+      start_percent: `${id}.inputs.start_percent`,
+      end_percent: `${id}.inputs.end_percent`,
+      inherit_missing: `${id}.inputs.inherit_missing`,
+      print_keyframes: `${id}.inputs.print_keyframes`,
+      prev_kf: `${id}.inputs.prev_kf`,
+      mult_multival: `${id}.inputs.mult_multival`,
+    };
+    return {
+      NAIVEREUSE_KF: this.makeRef<"NAIVEREUSE_KEYFRAME">(id, 0),
+      __id: id as OutputNodeId<ADE_ContextExtras_NaiveReuse_KeyframeFromListResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ContextExtras_NaiveReuse_KeyframeInterpolation(inputs: ADE_ContextExtras_NaiveReuse_KeyframeInterpolationInputs): ADE_ContextExtras_NaiveReuse_KeyframeInterpolationOutputs & { __id: OutputNodeId<ADE_ContextExtras_NaiveReuse_KeyframeInterpolationResult>; inputs: ADE_ContextExtras_NaiveReuse_KeyframeInterpolationInputPaths } {
+    const id = this.addNode("ADE_ContextExtras_NaiveReuse_KeyframeInterpolation", inputs);
+    const inputPaths = {
+      start_percent: `${id}.inputs.start_percent`,
+      end_percent: `${id}.inputs.end_percent`,
+      mult_start: `${id}.inputs.mult_start`,
+      mult_end: `${id}.inputs.mult_end`,
+      interpolation: `${id}.inputs.interpolation`,
+      intervals: `${id}.inputs.intervals`,
+      inherit_missing: `${id}.inputs.inherit_missing`,
+      print_keyframes: `${id}.inputs.print_keyframes`,
+      prev_kf: `${id}.inputs.prev_kf`,
+      mult_multival: `${id}.inputs.mult_multival`,
+    };
+    return {
+      NAIVEREUSE_KF: this.makeRef<"NAIVEREUSE_KEYFRAME">(id, 0),
+      __id: id as OutputNodeId<ADE_ContextExtras_NaiveReuse_KeyframeInterpolationResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ContextExtras_Set(inputs: ADE_ContextExtras_SetInputs): ADE_ContextExtras_SetOutputs & { __id: OutputNodeId<ADE_ContextExtras_SetResult>; inputs: ADE_ContextExtras_SetInputPaths } {
+    const id = this.addNode("ADE_ContextExtras_Set", inputs);
+    const inputPaths = {
+      context_opts: `${id}.inputs.context_opts`,
+      context_extras: `${id}.inputs.context_extras`,
+    };
+    return {
+      CONTEXT_OPTS: this.makeRef<"CONTEXT_OPTIONS">(id, 0),
+      __id: id as OutputNodeId<ADE_ContextExtras_SetResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_CustomCFG(inputs: ADE_CustomCFGInputs): ADE_CustomCFGOutputs & { __id: OutputNodeId<ADE_CustomCFGResult>; inputs: ADE_CustomCFGInputPaths } {
+    const id = this.addNode("ADE_CustomCFG", inputs);
+    const inputPaths = {
+      cfg_multival: `${id}.inputs.cfg_multival`,
+      cfg_extras: `${id}.inputs.cfg_extras`,
+    };
+    return {
+      CUSTOM_CFG: this.makeRef<"CUSTOM_CFG">(id, 0),
+      __id: id as OutputNodeId<ADE_CustomCFGResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_CustomCFGKeyframe(inputs: ADE_CustomCFGKeyframeInputs): ADE_CustomCFGKeyframeOutputs & { __id: OutputNodeId<ADE_CustomCFGKeyframeResult>; inputs: ADE_CustomCFGKeyframeInputPaths } {
+    const id = this.addNode("ADE_CustomCFGKeyframe", inputs);
+    const inputPaths = {
+      cfg_multival: `${id}.inputs.cfg_multival`,
+      start_percent: `${id}.inputs.start_percent`,
+      guarantee_steps: `${id}.inputs.guarantee_steps`,
+      prev_custom_cfg: `${id}.inputs.prev_custom_cfg`,
+      cfg_extras: `${id}.inputs.cfg_extras`,
+    };
+    return {
+      CUSTOM_CFG: this.makeRef<"CUSTOM_CFG">(id, 0),
+      __id: id as OutputNodeId<ADE_CustomCFGKeyframeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_CustomCFGKeyframeFromList(inputs: ADE_CustomCFGKeyframeFromListInputs): ADE_CustomCFGKeyframeFromListOutputs & { __id: OutputNodeId<ADE_CustomCFGKeyframeFromListResult>; inputs: ADE_CustomCFGKeyframeFromListInputPaths } {
+    const id = this.addNode("ADE_CustomCFGKeyframeFromList", inputs);
+    const inputPaths = {
+      cfgs_float: `${id}.inputs.cfgs_float`,
+      start_percent: `${id}.inputs.start_percent`,
+      end_percent: `${id}.inputs.end_percent`,
+      print_keyframes: `${id}.inputs.print_keyframes`,
+      prev_custom_cfg: `${id}.inputs.prev_custom_cfg`,
+      cfg_extras: `${id}.inputs.cfg_extras`,
+    };
+    return {
+      CUSTOM_CFG: this.makeRef<"CUSTOM_CFG">(id, 0),
+      __id: id as OutputNodeId<ADE_CustomCFGKeyframeFromListResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_CustomCFGKeyframeInterpolation(inputs: ADE_CustomCFGKeyframeInterpolationInputs): ADE_CustomCFGKeyframeInterpolationOutputs & { __id: OutputNodeId<ADE_CustomCFGKeyframeInterpolationResult>; inputs: ADE_CustomCFGKeyframeInterpolationInputPaths } {
+    const id = this.addNode("ADE_CustomCFGKeyframeInterpolation", inputs);
+    const inputPaths = {
+      start_percent: `${id}.inputs.start_percent`,
+      end_percent: `${id}.inputs.end_percent`,
+      cfg_start: `${id}.inputs.cfg_start`,
+      cfg_end: `${id}.inputs.cfg_end`,
+      interpolation: `${id}.inputs.interpolation`,
+      intervals: `${id}.inputs.intervals`,
+      print_keyframes: `${id}.inputs.print_keyframes`,
+      prev_custom_cfg: `${id}.inputs.prev_custom_cfg`,
+      cfg_extras: `${id}.inputs.cfg_extras`,
+    };
+    return {
+      CUSTOM_CFG: this.makeRef<"CUSTOM_CFG">(id, 0),
+      __id: id as OutputNodeId<ADE_CustomCFGKeyframeInterpolationResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_CustomCFGKeyframeSimple(inputs: ADE_CustomCFGKeyframeSimpleInputs): ADE_CustomCFGKeyframeSimpleOutputs & { __id: OutputNodeId<ADE_CustomCFGKeyframeSimpleResult>; inputs: ADE_CustomCFGKeyframeSimpleInputPaths } {
+    const id = this.addNode("ADE_CustomCFGKeyframeSimple", inputs);
+    const inputPaths = {
+      cfg: `${id}.inputs.cfg`,
+      start_percent: `${id}.inputs.start_percent`,
+      guarantee_steps: `${id}.inputs.guarantee_steps`,
+      prev_custom_cfg: `${id}.inputs.prev_custom_cfg`,
+      cfg_extras: `${id}.inputs.cfg_extras`,
+    };
+    return {
+      CUSTOM_CFG: this.makeRef<"CUSTOM_CFG">(id, 0),
+      __id: id as OutputNodeId<ADE_CustomCFGKeyframeSimpleResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_CustomCFGSimple(inputs: ADE_CustomCFGSimpleInputs): ADE_CustomCFGSimpleOutputs & { __id: OutputNodeId<ADE_CustomCFGSimpleResult>; inputs: ADE_CustomCFGSimpleInputPaths } {
+    const id = this.addNode("ADE_CustomCFGSimple", inputs);
+    const inputPaths = {
+      cfg: `${id}.inputs.cfg`,
+      cfg_extras: `${id}.inputs.cfg_extras`,
+    };
+    return {
+      CUSTOM_CFG: this.makeRef<"CUSTOM_CFG">(id, 0),
+      __id: id as OutputNodeId<ADE_CustomCFGSimpleResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_EmptyLatentImageLarge(inputs: ADE_EmptyLatentImageLargeInputs): ADE_EmptyLatentImageLargeOutputs & { __id: OutputNodeId<ADE_EmptyLatentImageLargeResult>; inputs: ADE_EmptyLatentImageLargeInputPaths } {
+    const id = this.addNode("ADE_EmptyLatentImageLarge", inputs);
+    const inputPaths = {
+      width: `${id}.inputs.width`,
+      height: `${id}.inputs.height`,
+      batch_size: `${id}.inputs.batch_size`,
+    };
+    return {
+      LATENT: this.makeRef<"LATENT">(id, 0),
+      __id: id as OutputNodeId<ADE_EmptyLatentImageLargeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_FloatToFloats(inputs: ADE_FloatToFloatsInputs): ADE_FloatToFloatsOutputs & { __id: OutputNodeId<ADE_FloatToFloatsResult>; inputs: ADE_FloatToFloatsInputPaths } {
+    const id = this.addNode("ADE_FloatToFloats", inputs);
+    const inputPaths = {
+      FLOAT: `${id}.inputs.FLOAT`,
+    };
+    return {
+      FLOATS: this.makeRef<"FLOATS">(id, 0),
+      __id: id as OutputNodeId<ADE_FloatToFloatsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_InjectI2VIntoAnimateDiffModel(inputs: ADE_InjectI2VIntoAnimateDiffModelInputs): ADE_InjectI2VIntoAnimateDiffModelOutputs & { __id: OutputNodeId<ADE_InjectI2VIntoAnimateDiffModelResult>; inputs: ADE_InjectI2VIntoAnimateDiffModelInputPaths } {
+    const id = this.addNode("ADE_InjectI2VIntoAnimateDiffModel", inputs);
+    const inputPaths = {
+      model_name: `${id}.inputs.model_name`,
+      motion_model: `${id}.inputs.motion_model`,
+      ad_settings: `${id}.inputs.ad_settings`,
+    };
+    return {
+      MOTION_MODEL: this.makeRef<"MOTION_MODEL_ADE">(id, 0),
+      __id: id as OutputNodeId<ADE_InjectI2VIntoAnimateDiffModelResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_InjectPIAIntoAnimateDiffModel(inputs: ADE_InjectPIAIntoAnimateDiffModelInputs): ADE_InjectPIAIntoAnimateDiffModelOutputs & { __id: OutputNodeId<ADE_InjectPIAIntoAnimateDiffModelResult>; inputs: ADE_InjectPIAIntoAnimateDiffModelInputPaths } {
+    const id = this.addNode("ADE_InjectPIAIntoAnimateDiffModel", inputs);
+    const inputPaths = {
+      model_name: `${id}.inputs.model_name`,
+      motion_model: `${id}.inputs.motion_model`,
+      ad_settings: `${id}.inputs.ad_settings`,
+    };
+    return {
+      MOTION_MODEL: this.makeRef<"MOTION_MODEL_ADE">(id, 0),
+      __id: id as OutputNodeId<ADE_InjectPIAIntoAnimateDiffModelResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_InputPIA_Multival(inputs: ADE_InputPIA_MultivalInputs): ADE_InputPIA_MultivalOutputs & { __id: OutputNodeId<ADE_InputPIA_MultivalResult>; inputs: ADE_InputPIA_MultivalInputPaths } {
+    const id = this.addNode("ADE_InputPIA_Multival", inputs);
+    const inputPaths = {
+      multival: `${id}.inputs.multival`,
+    };
+    return {
+      PIA_INPUT: this.makeRef<"PIA_INPUT">(id, 0),
+      __id: id as OutputNodeId<ADE_InputPIA_MultivalResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_InputPIA_PaperPresets(inputs: ADE_InputPIA_PaperPresetsInputs): ADE_InputPIA_PaperPresetsOutputs & { __id: OutputNodeId<ADE_InputPIA_PaperPresetsResult>; inputs: ADE_InputPIA_PaperPresetsInputPaths } {
+    const id = this.addNode("ADE_InputPIA_PaperPresets", inputs);
+    const inputPaths = {
+      preset: `${id}.inputs.preset`,
+      batch_index: `${id}.inputs.batch_index`,
+      mult_multival: `${id}.inputs.mult_multival`,
+      print_values: `${id}.inputs.print_values`,
+    };
+    return {
+      PIA_INPUT: this.makeRef<"PIA_INPUT">(id, 0),
+      __id: id as OutputNodeId<ADE_InputPIA_PaperPresetsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_IterationOptsDefault(inputs: ADE_IterationOptsDefaultInputs): ADE_IterationOptsDefaultOutputs & { __id: OutputNodeId<ADE_IterationOptsDefaultResult>; inputs: ADE_IterationOptsDefaultInputPaths } {
+    const id = this.addNode("ADE_IterationOptsDefault", inputs);
+    const inputPaths = {
+      iterations: `${id}.inputs.iterations`,
+      iter_batch_offset: `${id}.inputs.iter_batch_offset`,
+      iter_seed_offset: `${id}.inputs.iter_seed_offset`,
+    };
+    return {
+      ITERATION_OPTS: this.makeRef<"ITERATION_OPTS">(id, 0),
+      __id: id as OutputNodeId<ADE_IterationOptsDefaultResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_IterationOptsFreeInit(inputs: ADE_IterationOptsFreeInitInputs): ADE_IterationOptsFreeInitOutputs & { __id: OutputNodeId<ADE_IterationOptsFreeInitResult>; inputs: ADE_IterationOptsFreeInitInputPaths } {
+    const id = this.addNode("ADE_IterationOptsFreeInit", inputs);
+    const inputPaths = {
+      iterations: `${id}.inputs.iterations`,
+      filter: `${id}.inputs.filter`,
+      d_s: `${id}.inputs.d_s`,
+      d_t: `${id}.inputs.d_t`,
+      n_butterworth: `${id}.inputs.n_butterworth`,
+      sigma_step: `${id}.inputs.sigma_step`,
+      apply_to_1st_iter: `${id}.inputs.apply_to_1st_iter`,
+      init_type: `${id}.inputs.init_type`,
+      iter_batch_offset: `${id}.inputs.iter_batch_offset`,
+      iter_seed_offset: `${id}.inputs.iter_seed_offset`,
+    };
+    return {
+      ITERATION_OPTS: this.makeRef<"ITERATION_OPTS">(id, 0),
+      __id: id as OutputNodeId<ADE_IterationOptsFreeInitResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_LoadAnimateDiffModel(inputs: ADE_LoadAnimateDiffModelInputs): ADE_LoadAnimateDiffModelOutputs & { __id: OutputNodeId<ADE_LoadAnimateDiffModelResult>; inputs: ADE_LoadAnimateDiffModelInputPaths } {
+    const id = this.addNode("ADE_LoadAnimateDiffModel", inputs);
+    const inputPaths = {
+      model_name: `${id}.inputs.model_name`,
+      ad_settings: `${id}.inputs.ad_settings`,
+    };
+    return {
+      MOTION_MODEL: this.makeRef<"MOTION_MODEL_ADE">(id, 0),
+      __id: id as OutputNodeId<ADE_LoadAnimateDiffModelResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_LoadAnimateDiffModelWithCameraCtrl(inputs: ADE_LoadAnimateDiffModelWithCameraCtrlInputs): ADE_LoadAnimateDiffModelWithCameraCtrlOutputs & { __id: OutputNodeId<ADE_LoadAnimateDiffModelWithCameraCtrlResult>; inputs: ADE_LoadAnimateDiffModelWithCameraCtrlInputPaths } {
+    const id = this.addNode("ADE_LoadAnimateDiffModelWithCameraCtrl", inputs);
+    const inputPaths = {
+      model_name: `${id}.inputs.model_name`,
+      camera_ctrl: `${id}.inputs.camera_ctrl`,
+      ad_settings: `${id}.inputs.ad_settings`,
+    };
+    return {
+      MOTION_MODEL: this.makeRef<"MOTION_MODEL_ADE">(id, 0),
+      __id: id as OutputNodeId<ADE_LoadAnimateDiffModelWithCameraCtrlResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_LoadAnimateLCMI2VModel(inputs: ADE_LoadAnimateLCMI2VModelInputs): ADE_LoadAnimateLCMI2VModelOutputs & { __id: OutputNodeId<ADE_LoadAnimateLCMI2VModelResult>; inputs: ADE_LoadAnimateLCMI2VModelInputPaths } {
+    const id = this.addNode("ADE_LoadAnimateLCMI2VModel", inputs);
+    const inputPaths = {
+      model_name: `${id}.inputs.model_name`,
+      ad_settings: `${id}.inputs.ad_settings`,
+    };
+    return {
+      MOTION_MODEL: this.makeRef<"MOTION_MODEL_ADE">(id, 0),
+      encoder_only: this.makeRef<"MOTION_MODEL_ADE">(id, 1),
+      __id: id as OutputNodeId<ADE_LoadAnimateLCMI2VModelResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_LoadCameraPoses(inputs: ADE_LoadCameraPosesInputs): ADE_LoadCameraPosesOutputs & { __id: OutputNodeId<ADE_LoadCameraPosesResult>; inputs: ADE_LoadCameraPosesInputPaths } {
+    const id = this.addNode("ADE_LoadCameraPoses", inputs);
+    const inputPaths = {
+      pose_filename: `${id}.inputs.pose_filename`,
+    };
+    return {
+      CAMERACTRL_POSES: this.makeRef<"CAMERACTRL_POSES">(id, 0),
+      __id: id as OutputNodeId<ADE_LoadCameraPosesResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_LoadCameraPosesFromPath(inputs: ADE_LoadCameraPosesFromPathInputs): ADE_LoadCameraPosesFromPathOutputs & { __id: OutputNodeId<ADE_LoadCameraPosesFromPathResult>; inputs: ADE_LoadCameraPosesFromPathInputPaths } {
+    const id = this.addNode("ADE_LoadCameraPosesFromPath", inputs);
+    const inputPaths = {
+      file_path: `${id}.inputs.file_path`,
+    };
+    return {
+      CAMERACTRL_POSES: this.makeRef<"CAMERACTRL_POSES">(id, 0),
+      __id: id as OutputNodeId<ADE_LoadCameraPosesFromPathResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_LoopedUniformContextOptions(inputs: ADE_LoopedUniformContextOptionsInputs): ADE_LoopedUniformContextOptionsOutputs & { __id: OutputNodeId<ADE_LoopedUniformContextOptionsResult>; inputs: ADE_LoopedUniformContextOptionsInputPaths } {
+    const id = this.addNode("ADE_LoopedUniformContextOptions", inputs);
+    const inputPaths = {
+      context_length: `${id}.inputs.context_length`,
+      context_stride: `${id}.inputs.context_stride`,
+      context_overlap: `${id}.inputs.context_overlap`,
+      closed_loop: `${id}.inputs.closed_loop`,
+      fuse_method: `${id}.inputs.fuse_method`,
+      use_on_equal_length: `${id}.inputs.use_on_equal_length`,
+      start_percent: `${id}.inputs.start_percent`,
+      guarantee_steps: `${id}.inputs.guarantee_steps`,
+      prev_context: `${id}.inputs.prev_context`,
+      view_opts: `${id}.inputs.view_opts`,
+    };
+    return {
+      CONTEXT_OPTS: this.makeRef<"CONTEXT_OPTIONS">(id, 0),
+      __id: id as OutputNodeId<ADE_LoopedUniformContextOptionsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_LoopedUniformViewOptions(inputs: ADE_LoopedUniformViewOptionsInputs): ADE_LoopedUniformViewOptionsOutputs & { __id: OutputNodeId<ADE_LoopedUniformViewOptionsResult>; inputs: ADE_LoopedUniformViewOptionsInputPaths } {
+    const id = this.addNode("ADE_LoopedUniformViewOptions", inputs);
+    const inputPaths = {
+      view_length: `${id}.inputs.view_length`,
+      view_stride: `${id}.inputs.view_stride`,
+      view_overlap: `${id}.inputs.view_overlap`,
+      closed_loop: `${id}.inputs.closed_loop`,
+      fuse_method: `${id}.inputs.fuse_method`,
+      use_on_equal_length: `${id}.inputs.use_on_equal_length`,
+    };
+    return {
+      VIEW_OPTS: this.makeRef<"VIEW_OPTS">(id, 0),
+      __id: id as OutputNodeId<ADE_LoopedUniformViewOptionsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_LoraHookKeyframe(inputs: ADE_LoraHookKeyframeInputs): ADE_LoraHookKeyframeOutputs & { __id: OutputNodeId<ADE_LoraHookKeyframeResult>; inputs: ADE_LoraHookKeyframeInputPaths } {
+    const id = this.addNode("ADE_LoraHookKeyframe", inputs);
+    const inputPaths = {
+      strength_model: `${id}.inputs.strength_model`,
+      start_percent: `${id}.inputs.start_percent`,
+      guarantee_steps: `${id}.inputs.guarantee_steps`,
+      prev_hook_kf: `${id}.inputs.prev_hook_kf`,
+    };
+    return {
+      HOOK_KF: this.makeRef<"HOOK_KEYFRAMES">(id, 0),
+      __id: id as OutputNodeId<ADE_LoraHookKeyframeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_LoraHookKeyframeFromStrengthList(inputs: ADE_LoraHookKeyframeFromStrengthListInputs): ADE_LoraHookKeyframeFromStrengthListOutputs & { __id: OutputNodeId<ADE_LoraHookKeyframeFromStrengthListResult>; inputs: ADE_LoraHookKeyframeFromStrengthListInputPaths } {
+    const id = this.addNode("ADE_LoraHookKeyframeFromStrengthList", inputs);
+    const inputPaths = {
+      strengths_float: `${id}.inputs.strengths_float`,
+      start_percent: `${id}.inputs.start_percent`,
+      end_percent: `${id}.inputs.end_percent`,
+      print_keyframes: `${id}.inputs.print_keyframes`,
+      prev_hook_kf: `${id}.inputs.prev_hook_kf`,
+    };
+    return {
+      HOOK_KF: this.makeRef<"HOOK_KEYFRAMES">(id, 0),
+      __id: id as OutputNodeId<ADE_LoraHookKeyframeFromStrengthListResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_LoraHookKeyframeInterpolation(inputs: ADE_LoraHookKeyframeInterpolationInputs): ADE_LoraHookKeyframeInterpolationOutputs & { __id: OutputNodeId<ADE_LoraHookKeyframeInterpolationResult>; inputs: ADE_LoraHookKeyframeInterpolationInputPaths } {
+    const id = this.addNode("ADE_LoraHookKeyframeInterpolation", inputs);
+    const inputPaths = {
+      start_percent: `${id}.inputs.start_percent`,
+      end_percent: `${id}.inputs.end_percent`,
+      strength_start: `${id}.inputs.strength_start`,
+      strength_end: `${id}.inputs.strength_end`,
+      interpolation: `${id}.inputs.interpolation`,
+      intervals: `${id}.inputs.intervals`,
+      print_keyframes: `${id}.inputs.print_keyframes`,
+      prev_hook_kf: `${id}.inputs.prev_hook_kf`,
+    };
+    return {
+      HOOK_KF: this.makeRef<"HOOK_KEYFRAMES">(id, 0),
+      __id: id as OutputNodeId<ADE_LoraHookKeyframeInterpolationResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_MultivalConvertToMask(inputs: ADE_MultivalConvertToMaskInputs): ADE_MultivalConvertToMaskOutputs & { __id: OutputNodeId<ADE_MultivalConvertToMaskResult>; inputs: ADE_MultivalConvertToMaskInputPaths } {
+    const id = this.addNode("ADE_MultivalConvertToMask", inputs);
+    const inputPaths = {
+      multival: `${id}.inputs.multival`,
+    };
+    return {
+      MASK: this.makeRef<"MASK">(id, 0),
+      __id: id as OutputNodeId<ADE_MultivalConvertToMaskResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_MultivalDynamic(inputs: ADE_MultivalDynamicInputs): ADE_MultivalDynamicOutputs & { __id: OutputNodeId<ADE_MultivalDynamicResult>; inputs: ADE_MultivalDynamicInputPaths } {
+    const id = this.addNode("ADE_MultivalDynamic", inputs);
+    const inputPaths = {
+      float_val: `${id}.inputs.float_val`,
+      mask_optional: `${id}.inputs.mask_optional`,
+    };
+    return {
+      MULTIVAL: this.makeRef<"MULTIVAL">(id, 0),
+      __id: id as OutputNodeId<ADE_MultivalDynamicResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_MultivalDynamicFloatInput(inputs: ADE_MultivalDynamicFloatInputInputs): ADE_MultivalDynamicFloatInputOutputs & { __id: OutputNodeId<ADE_MultivalDynamicFloatInputResult>; inputs: ADE_MultivalDynamicFloatInputInputPaths } {
+    const id = this.addNode("ADE_MultivalDynamicFloatInput", inputs);
+    const inputPaths = {
+      float_val: `${id}.inputs.float_val`,
+      mask_optional: `${id}.inputs.mask_optional`,
+    };
+    return {
+      MULTIVAL: this.makeRef<"MULTIVAL">(id, 0),
+      __id: id as OutputNodeId<ADE_MultivalDynamicFloatInputResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_MultivalDynamicFloats(inputs: ADE_MultivalDynamicFloatsInputs): ADE_MultivalDynamicFloatsOutputs & { __id: OutputNodeId<ADE_MultivalDynamicFloatsResult>; inputs: ADE_MultivalDynamicFloatsInputPaths } {
+    const id = this.addNode("ADE_MultivalDynamicFloats", inputs);
+    const inputPaths = {
+      floats: `${id}.inputs.floats`,
+      mask_optional: `${id}.inputs.mask_optional`,
+    };
+    return {
+      MULTIVAL: this.makeRef<"MULTIVAL">(id, 0),
+      __id: id as OutputNodeId<ADE_MultivalDynamicFloatsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_MultivalScaledMask(inputs: ADE_MultivalScaledMaskInputs): ADE_MultivalScaledMaskOutputs & { __id: OutputNodeId<ADE_MultivalScaledMaskResult>; inputs: ADE_MultivalScaledMaskInputPaths } {
+    const id = this.addNode("ADE_MultivalScaledMask", inputs);
+    const inputPaths = {
+      min_float_val: `${id}.inputs.min_float_val`,
+      max_float_val: `${id}.inputs.max_float_val`,
+      mask: `${id}.inputs.mask`,
+      scaling: `${id}.inputs.scaling`,
+    };
+    return {
+      MULTIVAL: this.makeRef<"MULTIVAL">(id, 0),
+      __id: id as OutputNodeId<ADE_MultivalScaledMaskResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_NoisedImageInjection(inputs: ADE_NoisedImageInjectionInputs): ADE_NoisedImageInjectionOutputs & { __id: OutputNodeId<ADE_NoisedImageInjectionResult>; inputs: ADE_NoisedImageInjectionInputPaths } {
+    const id = this.addNode("ADE_NoisedImageInjection", inputs);
+    const inputPaths = {
+      image: `${id}.inputs.image`,
+      vae: `${id}.inputs.vae`,
+      mask_opt: `${id}.inputs.mask_opt`,
+      invert_mask: `${id}.inputs.invert_mask`,
+      resize_image: `${id}.inputs.resize_image`,
+      start_percent: `${id}.inputs.start_percent`,
+      guarantee_steps: `${id}.inputs.guarantee_steps`,
+      img_inject_opts: `${id}.inputs.img_inject_opts`,
+      strength_multival: `${id}.inputs.strength_multival`,
+      prev_image_inject: `${id}.inputs.prev_image_inject`,
+    };
+    return {
+      IMAGE_INJECT: this.makeRef<"IMAGE_INJECT">(id, 0),
+      __id: id as OutputNodeId<ADE_NoisedImageInjectionResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_NoisedImageInjectOptions(inputs: ADE_NoisedImageInjectOptionsInputs): ADE_NoisedImageInjectOptionsOutputs & { __id: OutputNodeId<ADE_NoisedImageInjectOptionsResult>; inputs: ADE_NoisedImageInjectOptionsInputPaths } {
+    const id = this.addNode("ADE_NoisedImageInjectOptions", inputs);
+    const inputPaths = {
+      composite_x: `${id}.inputs.composite_x`,
+      composite_y: `${id}.inputs.composite_y`,
+    };
+    return {
+      IMG_INJECT_OPTS: this.makeRef<"IMAGE_INJECT_OPTIONS">(id, 0),
+      __id: id as OutputNodeId<ADE_NoisedImageInjectOptionsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_NoiseLayerAdd(inputs: ADE_NoiseLayerAddInputs): ADE_NoiseLayerAddOutputs & { __id: OutputNodeId<ADE_NoiseLayerAddResult>; inputs: ADE_NoiseLayerAddInputPaths } {
+    const id = this.addNode("ADE_NoiseLayerAdd", inputs);
+    const inputPaths = {
+      batch_offset: `${id}.inputs.batch_offset`,
+      noise_type: `${id}.inputs.noise_type`,
+      seed_gen_override: `${id}.inputs.seed_gen_override`,
+      seed_offset: `${id}.inputs.seed_offset`,
+      noise_weight: `${id}.inputs.noise_weight`,
+      prev_noise_layers: `${id}.inputs.prev_noise_layers`,
+      mask_optional: `${id}.inputs.mask_optional`,
+      seed_override: `${id}.inputs.seed_override`,
+    };
+    return {
+      NOISE_LAYERS: this.makeRef<"NOISE_LAYERS">(id, 0),
+      __id: id as OutputNodeId<ADE_NoiseLayerAddResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_NoiseLayerAddWeighted(inputs: ADE_NoiseLayerAddWeightedInputs): ADE_NoiseLayerAddWeightedOutputs & { __id: OutputNodeId<ADE_NoiseLayerAddWeightedResult>; inputs: ADE_NoiseLayerAddWeightedInputPaths } {
+    const id = this.addNode("ADE_NoiseLayerAddWeighted", inputs);
+    const inputPaths = {
+      batch_offset: `${id}.inputs.batch_offset`,
+      noise_type: `${id}.inputs.noise_type`,
+      seed_gen_override: `${id}.inputs.seed_gen_override`,
+      seed_offset: `${id}.inputs.seed_offset`,
+      noise_weight: `${id}.inputs.noise_weight`,
+      balance_multiplier: `${id}.inputs.balance_multiplier`,
+      prev_noise_layers: `${id}.inputs.prev_noise_layers`,
+      mask_optional: `${id}.inputs.mask_optional`,
+      seed_override: `${id}.inputs.seed_override`,
+    };
+    return {
+      NOISE_LAYERS: this.makeRef<"NOISE_LAYERS">(id, 0),
+      __id: id as OutputNodeId<ADE_NoiseLayerAddWeightedResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_NoiseLayerNormalizedSum(inputs: ADE_NoiseLayerNormalizedSumInputs): ADE_NoiseLayerNormalizedSumOutputs & { __id: OutputNodeId<ADE_NoiseLayerNormalizedSumResult>; inputs: ADE_NoiseLayerNormalizedSumInputPaths } {
+    const id = this.addNode("ADE_NoiseLayerNormalizedSum", inputs);
+    const inputPaths = {
+      batch_offset: `${id}.inputs.batch_offset`,
+      noise_type: `${id}.inputs.noise_type`,
+      seed_gen_override: `${id}.inputs.seed_gen_override`,
+      seed_offset: `${id}.inputs.seed_offset`,
+      noise_weight: `${id}.inputs.noise_weight`,
+      prev_noise_layers: `${id}.inputs.prev_noise_layers`,
+      mask_optional: `${id}.inputs.mask_optional`,
+      seed_override: `${id}.inputs.seed_override`,
+    };
+    return {
+      NOISE_LAYERS: this.makeRef<"NOISE_LAYERS">(id, 0),
+      __id: id as OutputNodeId<ADE_NoiseLayerNormalizedSumResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_NoiseLayerReplace(inputs: ADE_NoiseLayerReplaceInputs): ADE_NoiseLayerReplaceOutputs & { __id: OutputNodeId<ADE_NoiseLayerReplaceResult>; inputs: ADE_NoiseLayerReplaceInputPaths } {
+    const id = this.addNode("ADE_NoiseLayerReplace", inputs);
+    const inputPaths = {
+      batch_offset: `${id}.inputs.batch_offset`,
+      noise_type: `${id}.inputs.noise_type`,
+      seed_gen_override: `${id}.inputs.seed_gen_override`,
+      seed_offset: `${id}.inputs.seed_offset`,
+      prev_noise_layers: `${id}.inputs.prev_noise_layers`,
+      mask_optional: `${id}.inputs.mask_optional`,
+      seed_override: `${id}.inputs.seed_override`,
+    };
+    return {
+      NOISE_LAYERS: this.makeRef<"NOISE_LAYERS">(id, 0),
+      __id: id as OutputNodeId<ADE_NoiseLayerReplaceResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_PairedConditioningCombine(inputs: ADE_PairedConditioningCombineInputs): ADE_PairedConditioningCombineOutputs & { __id: OutputNodeId<ADE_PairedConditioningCombineResult>; inputs: ADE_PairedConditioningCombineInputPaths } {
+    const id = this.addNode("ADE_PairedConditioningCombine", inputs);
+    const inputPaths = {
+      positive_A: `${id}.inputs.positive_A`,
+      negative_A: `${id}.inputs.negative_A`,
+      positive_B: `${id}.inputs.positive_B`,
+      negative_B: `${id}.inputs.negative_B`,
+    };
+    return {
+      positive: this.makeRef<"CONDITIONING">(id, 0),
+      negative: this.makeRef<"CONDITIONING">(id, 1),
+      __id: id as OutputNodeId<ADE_PairedConditioningCombineResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_PairedConditioningSetMask(inputs: ADE_PairedConditioningSetMaskInputs): ADE_PairedConditioningSetMaskOutputs & { __id: OutputNodeId<ADE_PairedConditioningSetMaskResult>; inputs: ADE_PairedConditioningSetMaskInputPaths } {
+    const id = this.addNode("ADE_PairedConditioningSetMask", inputs);
+    const inputPaths = {
+      positive_ADD: `${id}.inputs.positive_ADD`,
+      negative_ADD: `${id}.inputs.negative_ADD`,
+      strength: `${id}.inputs.strength`,
+      set_cond_area: `${id}.inputs.set_cond_area`,
+      opt_mask: `${id}.inputs.opt_mask`,
+      opt_lora_hook: `${id}.inputs.opt_lora_hook`,
+      opt_timesteps: `${id}.inputs.opt_timesteps`,
+    };
+    return {
+      positive: this.makeRef<"CONDITIONING">(id, 0),
+      negative: this.makeRef<"CONDITIONING">(id, 1),
+      __id: id as OutputNodeId<ADE_PairedConditioningSetMaskResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_PairedConditioningSetMaskAndCombine(inputs: ADE_PairedConditioningSetMaskAndCombineInputs): ADE_PairedConditioningSetMaskAndCombineOutputs & { __id: OutputNodeId<ADE_PairedConditioningSetMaskAndCombineResult>; inputs: ADE_PairedConditioningSetMaskAndCombineInputPaths } {
+    const id = this.addNode("ADE_PairedConditioningSetMaskAndCombine", inputs);
+    const inputPaths = {
+      positive: `${id}.inputs.positive`,
+      negative: `${id}.inputs.negative`,
+      positive_ADD: `${id}.inputs.positive_ADD`,
+      negative_ADD: `${id}.inputs.negative_ADD`,
+      strength: `${id}.inputs.strength`,
+      set_cond_area: `${id}.inputs.set_cond_area`,
+      opt_mask: `${id}.inputs.opt_mask`,
+      opt_lora_hook: `${id}.inputs.opt_lora_hook`,
+      opt_timesteps: `${id}.inputs.opt_timesteps`,
+    };
+    return {
+      positive: this.makeRef<"CONDITIONING">(id, 0),
+      negative: this.makeRef<"CONDITIONING">(id, 1),
+      __id: id as OutputNodeId<ADE_PairedConditioningSetMaskAndCombineResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_PairedConditioningSetUnmaskedAndCombine(inputs: ADE_PairedConditioningSetUnmaskedAndCombineInputs): ADE_PairedConditioningSetUnmaskedAndCombineOutputs & { __id: OutputNodeId<ADE_PairedConditioningSetUnmaskedAndCombineResult>; inputs: ADE_PairedConditioningSetUnmaskedAndCombineInputPaths } {
+    const id = this.addNode("ADE_PairedConditioningSetUnmaskedAndCombine", inputs);
+    const inputPaths = {
+      positive: `${id}.inputs.positive`,
+      negative: `${id}.inputs.negative`,
+      positive_DEFAULT: `${id}.inputs.positive_DEFAULT`,
+      negative_DEFAULT: `${id}.inputs.negative_DEFAULT`,
+      opt_lora_hook: `${id}.inputs.opt_lora_hook`,
+    };
+    return {
+      positive: this.makeRef<"CONDITIONING">(id, 0),
+      negative: this.makeRef<"CONDITIONING">(id, 1),
+      __id: id as OutputNodeId<ADE_PairedConditioningSetUnmaskedAndCombineResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_PerBlock_SD15_FromFloats(inputs: ADE_PerBlock_SD15_FromFloatsInputs): ADE_PerBlock_SD15_FromFloatsOutputs & { __id: OutputNodeId<ADE_PerBlock_SD15_FromFloatsResult>; inputs: ADE_PerBlock_SD15_FromFloatsInputPaths } {
+    const id = this.addNode("ADE_PerBlock_SD15_FromFloats", inputs);
+    const inputPaths = {
+      effect_21_floats: `${id}.inputs.effect_21_floats`,
+      scale_21_floats: `${id}.inputs.scale_21_floats`,
+    };
+    return {
+      PER_BLOCK: this.makeRef<"PER_BLOCK">(id, 0),
+      __id: id as OutputNodeId<ADE_PerBlock_SD15_FromFloatsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_PerBlock_SD15_LowLevel(inputs: ADE_PerBlock_SD15_LowLevelInputs): ADE_PerBlock_SD15_LowLevelOutputs & { __id: OutputNodeId<ADE_PerBlock_SD15_LowLevelResult>; inputs: ADE_PerBlock_SD15_LowLevelInputPaths } {
+    const id = this.addNode("ADE_PerBlock_SD15_LowLevel", inputs);
+    const inputPaths = {
+      down_0__0: `${id}.inputs.down_0__0`,
+      down_0__1: `${id}.inputs.down_0__1`,
+      down_1__0: `${id}.inputs.down_1__0`,
+      down_1__1: `${id}.inputs.down_1__1`,
+      down_2__0: `${id}.inputs.down_2__0`,
+      down_2__1: `${id}.inputs.down_2__1`,
+      down_3__0: `${id}.inputs.down_3__0`,
+      down_3__1: `${id}.inputs.down_3__1`,
+      mid: `${id}.inputs.mid`,
+      up_0__0: `${id}.inputs.up_0__0`,
+      up_0__1: `${id}.inputs.up_0__1`,
+      up_0__2: `${id}.inputs.up_0__2`,
+      up_1__0: `${id}.inputs.up_1__0`,
+      up_1__1: `${id}.inputs.up_1__1`,
+      up_1__2: `${id}.inputs.up_1__2`,
+      up_2__0: `${id}.inputs.up_2__0`,
+      up_2__1: `${id}.inputs.up_2__1`,
+      up_2__2: `${id}.inputs.up_2__2`,
+      up_3__0: `${id}.inputs.up_3__0`,
+      up_3__1: `${id}.inputs.up_3__1`,
+      up_3__2: `${id}.inputs.up_3__2`,
+    };
+    return {
+      PER_BLOCK: this.makeRef<"PER_BLOCK">(id, 0),
+      __id: id as OutputNodeId<ADE_PerBlock_SD15_LowLevelResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_PerBlock_SD15_MidLevel(inputs: ADE_PerBlock_SD15_MidLevelInputs): ADE_PerBlock_SD15_MidLevelOutputs & { __id: OutputNodeId<ADE_PerBlock_SD15_MidLevelResult>; inputs: ADE_PerBlock_SD15_MidLevelInputPaths } {
+    const id = this.addNode("ADE_PerBlock_SD15_MidLevel", inputs);
+    const inputPaths = {
+      down_0: `${id}.inputs.down_0`,
+      down_1: `${id}.inputs.down_1`,
+      down_2: `${id}.inputs.down_2`,
+      down_3: `${id}.inputs.down_3`,
+      mid: `${id}.inputs.mid`,
+      up_0: `${id}.inputs.up_0`,
+      up_1: `${id}.inputs.up_1`,
+      up_2: `${id}.inputs.up_2`,
+      up_3: `${id}.inputs.up_3`,
+    };
+    return {
+      PER_BLOCK: this.makeRef<"PER_BLOCK">(id, 0),
+      __id: id as OutputNodeId<ADE_PerBlock_SD15_MidLevelResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_PerBlock_SDXL_FromFloats(inputs: ADE_PerBlock_SDXL_FromFloatsInputs): ADE_PerBlock_SDXL_FromFloatsOutputs & { __id: OutputNodeId<ADE_PerBlock_SDXL_FromFloatsResult>; inputs: ADE_PerBlock_SDXL_FromFloatsInputPaths } {
+    const id = this.addNode("ADE_PerBlock_SDXL_FromFloats", inputs);
+    const inputPaths = {
+      effect_16_floats: `${id}.inputs.effect_16_floats`,
+      scale_16_floats: `${id}.inputs.scale_16_floats`,
+    };
+    return {
+      PER_BLOCK: this.makeRef<"PER_BLOCK">(id, 0),
+      __id: id as OutputNodeId<ADE_PerBlock_SDXL_FromFloatsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_PerBlock_SDXL_LowLevel(inputs: ADE_PerBlock_SDXL_LowLevelInputs): ADE_PerBlock_SDXL_LowLevelOutputs & { __id: OutputNodeId<ADE_PerBlock_SDXL_LowLevelResult>; inputs: ADE_PerBlock_SDXL_LowLevelInputPaths } {
+    const id = this.addNode("ADE_PerBlock_SDXL_LowLevel", inputs);
+    const inputPaths = {
+      down_0__0: `${id}.inputs.down_0__0`,
+      down_0__1: `${id}.inputs.down_0__1`,
+      down_1__0: `${id}.inputs.down_1__0`,
+      down_1__1: `${id}.inputs.down_1__1`,
+      down_2__0: `${id}.inputs.down_2__0`,
+      down_2__1: `${id}.inputs.down_2__1`,
+      mid: `${id}.inputs.mid`,
+      up_0__0: `${id}.inputs.up_0__0`,
+      up_0__1: `${id}.inputs.up_0__1`,
+      up_0__2: `${id}.inputs.up_0__2`,
+      up_1__0: `${id}.inputs.up_1__0`,
+      up_1__1: `${id}.inputs.up_1__1`,
+      up_1__2: `${id}.inputs.up_1__2`,
+      up_2__0: `${id}.inputs.up_2__0`,
+      up_2__1: `${id}.inputs.up_2__1`,
+      up_2__2: `${id}.inputs.up_2__2`,
+    };
+    return {
+      PER_BLOCK: this.makeRef<"PER_BLOCK">(id, 0),
+      __id: id as OutputNodeId<ADE_PerBlock_SDXL_LowLevelResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_PerBlock_SDXL_MidLevel(inputs: ADE_PerBlock_SDXL_MidLevelInputs): ADE_PerBlock_SDXL_MidLevelOutputs & { __id: OutputNodeId<ADE_PerBlock_SDXL_MidLevelResult>; inputs: ADE_PerBlock_SDXL_MidLevelInputPaths } {
+    const id = this.addNode("ADE_PerBlock_SDXL_MidLevel", inputs);
+    const inputPaths = {
+      down_0: `${id}.inputs.down_0`,
+      down_1: `${id}.inputs.down_1`,
+      down_2: `${id}.inputs.down_2`,
+      mid: `${id}.inputs.mid`,
+      up_0: `${id}.inputs.up_0`,
+      up_1: `${id}.inputs.up_1`,
+      up_2: `${id}.inputs.up_2`,
+    };
+    return {
+      PER_BLOCK: this.makeRef<"PER_BLOCK">(id, 0),
+      __id: id as OutputNodeId<ADE_PerBlock_SDXL_MidLevelResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_PerBlockHighLevel(inputs: ADE_PerBlockHighLevelInputs): ADE_PerBlockHighLevelOutputs & { __id: OutputNodeId<ADE_PerBlockHighLevelResult>; inputs: ADE_PerBlockHighLevelInputPaths } {
+    const id = this.addNode("ADE_PerBlockHighLevel", inputs);
+    const inputPaths = {
+      down: `${id}.inputs.down`,
+      mid: `${id}.inputs.mid`,
+      up: `${id}.inputs.up`,
+    };
+    return {
+      PER_BLOCK: this.makeRef<"PER_BLOCK">(id, 0),
+      __id: id as OutputNodeId<ADE_PerBlockHighLevelResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_PerturbedAttentionGuidanceMultival(inputs: ADE_PerturbedAttentionGuidanceMultivalInputs): ADE_PerturbedAttentionGuidanceMultivalOutputs & { __id: OutputNodeId<ADE_PerturbedAttentionGuidanceMultivalResult>; inputs: ADE_PerturbedAttentionGuidanceMultivalInputPaths } {
+    const id = this.addNode("ADE_PerturbedAttentionGuidanceMultival", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      scale_multival: `${id}.inputs.scale_multival`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      __id: id as OutputNodeId<ADE_PerturbedAttentionGuidanceMultivalResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_PIA_AnimateDiffKeyframe(inputs: ADE_PIA_AnimateDiffKeyframeInputs): ADE_PIA_AnimateDiffKeyframeOutputs & { __id: OutputNodeId<ADE_PIA_AnimateDiffKeyframeResult>; inputs: ADE_PIA_AnimateDiffKeyframeInputPaths } {
+    const id = this.addNode("ADE_PIA_AnimateDiffKeyframe", inputs);
+    const inputPaths = {
+      start_percent: `${id}.inputs.start_percent`,
+      prev_ad_keyframes: `${id}.inputs.prev_ad_keyframes`,
+      scale_multival: `${id}.inputs.scale_multival`,
+      effect_multival: `${id}.inputs.effect_multival`,
+      pia_input: `${id}.inputs.pia_input`,
+      inherit_missing: `${id}.inputs.inherit_missing`,
+      guarantee_steps: `${id}.inputs.guarantee_steps`,
+    };
+    return {
+      AD_KEYFRAMES: this.makeRef<"AD_KEYFRAMES">(id, 0),
+      __id: id as OutputNodeId<ADE_PIA_AnimateDiffKeyframeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_PromptScheduling(inputs: ADE_PromptSchedulingInputs): ADE_PromptSchedulingOutputs & { __id: OutputNodeId<ADE_PromptSchedulingResult>; inputs: ADE_PromptSchedulingInputPaths } {
+    const id = this.addNode("ADE_PromptScheduling", inputs);
+    const inputPaths = {
+      prompts: `${id}.inputs.prompts`,
+      clip: `${id}.inputs.clip`,
+      prepend_text: `${id}.inputs.prepend_text`,
+      append_text: `${id}.inputs.append_text`,
+      values_replace: `${id}.inputs.values_replace`,
+      print_schedule: `${id}.inputs.print_schedule`,
+      max_length: `${id}.inputs.max_length`,
+      tensor_interp: `${id}.inputs.tensor_interp`,
+    };
+    return {
+      CONDITIONING: this.makeRef<"CONDITIONING">(id, 0),
+      __id: id as OutputNodeId<ADE_PromptSchedulingResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_PromptSchedulingLatents(inputs: ADE_PromptSchedulingLatentsInputs): ADE_PromptSchedulingLatentsOutputs & { __id: OutputNodeId<ADE_PromptSchedulingLatentsResult>; inputs: ADE_PromptSchedulingLatentsInputPaths } {
+    const id = this.addNode("ADE_PromptSchedulingLatents", inputs);
+    const inputPaths = {
+      prompts: `${id}.inputs.prompts`,
+      clip: `${id}.inputs.clip`,
+      latent: `${id}.inputs.latent`,
+      prepend_text: `${id}.inputs.prepend_text`,
+      append_text: `${id}.inputs.append_text`,
+      values_replace: `${id}.inputs.values_replace`,
+      print_schedule: `${id}.inputs.print_schedule`,
+      tensor_interp: `${id}.inputs.tensor_interp`,
+    };
+    return {
+      CONDITIONING: this.makeRef<"CONDITIONING">(id, 0),
+      LATENT: this.makeRef<"LATENT">(id, 1),
+      __id: id as OutputNodeId<ADE_PromptSchedulingLatentsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_RawSigmaSchedule(inputs: ADE_RawSigmaScheduleInputs): ADE_RawSigmaScheduleOutputs & { __id: OutputNodeId<ADE_RawSigmaScheduleResult>; inputs: ADE_RawSigmaScheduleInputPaths } {
+    const id = this.addNode("ADE_RawSigmaSchedule", inputs);
+    const inputPaths = {
+      raw_beta_schedule: `${id}.inputs.raw_beta_schedule`,
+      linear_start: `${id}.inputs.linear_start`,
+      linear_end: `${id}.inputs.linear_end`,
+      sampling: `${id}.inputs.sampling`,
+      lcm_original_timesteps: `${id}.inputs.lcm_original_timesteps`,
+      zsnr: `${id}.inputs.zsnr`,
+    };
+    return {
+      SIGMA_SCHEDULE: this.makeRef<"SIGMA_SCHEDULE">(id, 0),
+      __id: id as OutputNodeId<ADE_RawSigmaScheduleResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_RegisterLoraHook(inputs: ADE_RegisterLoraHookInputs): ADE_RegisterLoraHookOutputs & { __id: OutputNodeId<ADE_RegisterLoraHookResult>; inputs: ADE_RegisterLoraHookInputPaths } {
+    const id = this.addNode("ADE_RegisterLoraHook", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      clip: `${id}.inputs.clip`,
+      lora_name: `${id}.inputs.lora_name`,
+      strength_model: `${id}.inputs.strength_model`,
+      strength_clip: `${id}.inputs.strength_clip`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      CLIP: this.makeRef<"CLIP">(id, 1),
+      HOOKS: this.makeRef<"HOOKS">(id, 2),
+      __id: id as OutputNodeId<ADE_RegisterLoraHookResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_RegisterLoraHookModelOnly(inputs: ADE_RegisterLoraHookModelOnlyInputs): ADE_RegisterLoraHookModelOnlyOutputs & { __id: OutputNodeId<ADE_RegisterLoraHookModelOnlyResult>; inputs: ADE_RegisterLoraHookModelOnlyInputPaths } {
+    const id = this.addNode("ADE_RegisterLoraHookModelOnly", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      lora_name: `${id}.inputs.lora_name`,
+      strength_model: `${id}.inputs.strength_model`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      HOOKS: this.makeRef<"HOOKS">(id, 1),
+      __id: id as OutputNodeId<ADE_RegisterLoraHookModelOnlyResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_RegisterModelAsLoraHook(inputs: ADE_RegisterModelAsLoraHookInputs): ADE_RegisterModelAsLoraHookOutputs & { __id: OutputNodeId<ADE_RegisterModelAsLoraHookResult>; inputs: ADE_RegisterModelAsLoraHookInputPaths } {
+    const id = this.addNode("ADE_RegisterModelAsLoraHook", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      clip: `${id}.inputs.clip`,
+      ckpt_name: `${id}.inputs.ckpt_name`,
+      strength_model: `${id}.inputs.strength_model`,
+      strength_clip: `${id}.inputs.strength_clip`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      CLIP: this.makeRef<"CLIP">(id, 1),
+      HOOKS: this.makeRef<"HOOKS">(id, 2),
+      __id: id as OutputNodeId<ADE_RegisterModelAsLoraHookResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_RegisterModelAsLoraHookModelOnly(inputs: ADE_RegisterModelAsLoraHookModelOnlyInputs): ADE_RegisterModelAsLoraHookModelOnlyOutputs & { __id: OutputNodeId<ADE_RegisterModelAsLoraHookModelOnlyResult>; inputs: ADE_RegisterModelAsLoraHookModelOnlyInputPaths } {
+    const id = this.addNode("ADE_RegisterModelAsLoraHookModelOnly", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      ckpt_name: `${id}.inputs.ckpt_name`,
+      strength_model: `${id}.inputs.strength_model`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      HOOKS: this.makeRef<"HOOKS">(id, 1),
+      __id: id as OutputNodeId<ADE_RegisterModelAsLoraHookModelOnlyResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ReplaceCameraParameters(inputs: ADE_ReplaceCameraParametersInputs): ADE_ReplaceCameraParametersOutputs & { __id: OutputNodeId<ADE_ReplaceCameraParametersResult>; inputs: ADE_ReplaceCameraParametersInputPaths } {
+    const id = this.addNode("ADE_ReplaceCameraParameters", inputs);
+    const inputPaths = {
+      poses: `${id}.inputs.poses`,
+      fx: `${id}.inputs.fx`,
+      fy: `${id}.inputs.fy`,
+      cx: `${id}.inputs.cx`,
+      cy: `${id}.inputs.cy`,
+    };
+    return {
+      CAMERACTRL_POSES: this.makeRef<"CAMERACTRL_POSES">(id, 0),
+      __id: id as OutputNodeId<ADE_ReplaceCameraParametersResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ReplaceOriginalPoseAspectRatio(inputs: ADE_ReplaceOriginalPoseAspectRatioInputs): ADE_ReplaceOriginalPoseAspectRatioOutputs & { __id: OutputNodeId<ADE_ReplaceOriginalPoseAspectRatioResult>; inputs: ADE_ReplaceOriginalPoseAspectRatioInputPaths } {
+    const id = this.addNode("ADE_ReplaceOriginalPoseAspectRatio", inputs);
+    const inputPaths = {
+      poses: `${id}.inputs.poses`,
+      orig_pose_width: `${id}.inputs.orig_pose_width`,
+      orig_pose_height: `${id}.inputs.orig_pose_height`,
+    };
+    return {
+      CAMERACTRL_POSES: this.makeRef<"CAMERACTRL_POSES">(id, 0),
+      __id: id as OutputNodeId<ADE_ReplaceOriginalPoseAspectRatioResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_RescaleCFGMultival(inputs: ADE_RescaleCFGMultivalInputs): ADE_RescaleCFGMultivalOutputs & { __id: OutputNodeId<ADE_RescaleCFGMultivalResult>; inputs: ADE_RescaleCFGMultivalInputPaths } {
+    const id = this.addNode("ADE_RescaleCFGMultival", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      mult_multival: `${id}.inputs.mult_multival`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      __id: id as OutputNodeId<ADE_RescaleCFGMultivalResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_SetLoraHookKeyframe(inputs: ADE_SetLoraHookKeyframeInputs): ADE_SetLoraHookKeyframeOutputs & { __id: OutputNodeId<ADE_SetLoraHookKeyframeResult>; inputs: ADE_SetLoraHookKeyframeInputPaths } {
+    const id = this.addNode("ADE_SetLoraHookKeyframe", inputs);
+    const inputPaths = {
+      lora_hook: `${id}.inputs.lora_hook`,
+      hook_kf: `${id}.inputs.hook_kf`,
+    };
+    return {
+      HOOKS: this.makeRef<"HOOKS">(id, 0),
+      __id: id as OutputNodeId<ADE_SetLoraHookKeyframeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_SigmaSchedule(inputs: ADE_SigmaScheduleInputs): ADE_SigmaScheduleOutputs & { __id: OutputNodeId<ADE_SigmaScheduleResult>; inputs: ADE_SigmaScheduleInputPaths } {
+    const id = this.addNode("ADE_SigmaSchedule", inputs);
+    const inputPaths = {
+      beta_schedule: `${id}.inputs.beta_schedule`,
+    };
+    return {
+      SIGMA_SCHEDULE: this.makeRef<"SIGMA_SCHEDULE">(id, 0),
+      __id: id as OutputNodeId<ADE_SigmaScheduleResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_SigmaScheduleSplitAndCombine(inputs: ADE_SigmaScheduleSplitAndCombineInputs): ADE_SigmaScheduleSplitAndCombineOutputs & { __id: OutputNodeId<ADE_SigmaScheduleSplitAndCombineResult>; inputs: ADE_SigmaScheduleSplitAndCombineInputPaths } {
+    const id = this.addNode("ADE_SigmaScheduleSplitAndCombine", inputs);
+    const inputPaths = {
+      schedule_Start: `${id}.inputs.schedule_Start`,
+      schedule_End: `${id}.inputs.schedule_End`,
+      idx_split_percent: `${id}.inputs.idx_split_percent`,
+    };
+    return {
+      SIGMA_SCHEDULE: this.makeRef<"SIGMA_SCHEDULE">(id, 0),
+      __id: id as OutputNodeId<ADE_SigmaScheduleSplitAndCombineResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_SigmaScheduleToSigmas(inputs: ADE_SigmaScheduleToSigmasInputs): ADE_SigmaScheduleToSigmasOutputs & { __id: OutputNodeId<ADE_SigmaScheduleToSigmasResult>; inputs: ADE_SigmaScheduleToSigmasInputPaths } {
+    const id = this.addNode("ADE_SigmaScheduleToSigmas", inputs);
+    const inputPaths = {
+      sigma_schedule: `${id}.inputs.sigma_schedule`,
+      scheduler: `${id}.inputs.scheduler`,
+      steps: `${id}.inputs.steps`,
+      denoise: `${id}.inputs.denoise`,
+    };
+    return {
+      SIGMAS: this.makeRef<"SIGMAS">(id, 0),
+      __id: id as OutputNodeId<ADE_SigmaScheduleToSigmasResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_SigmaScheduleWeightedAverage(inputs: ADE_SigmaScheduleWeightedAverageInputs): ADE_SigmaScheduleWeightedAverageOutputs & { __id: OutputNodeId<ADE_SigmaScheduleWeightedAverageResult>; inputs: ADE_SigmaScheduleWeightedAverageInputPaths } {
+    const id = this.addNode("ADE_SigmaScheduleWeightedAverage", inputs);
+    const inputPaths = {
+      schedule_A: `${id}.inputs.schedule_A`,
+      schedule_B: `${id}.inputs.schedule_B`,
+      weight_A: `${id}.inputs.weight_A`,
+    };
+    return {
+      SIGMA_SCHEDULE: this.makeRef<"SIGMA_SCHEDULE">(id, 0),
+      __id: id as OutputNodeId<ADE_SigmaScheduleWeightedAverageResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_SigmaScheduleWeightedAverageInterp(inputs: ADE_SigmaScheduleWeightedAverageInterpInputs): ADE_SigmaScheduleWeightedAverageInterpOutputs & { __id: OutputNodeId<ADE_SigmaScheduleWeightedAverageInterpResult>; inputs: ADE_SigmaScheduleWeightedAverageInterpInputPaths } {
+    const id = this.addNode("ADE_SigmaScheduleWeightedAverageInterp", inputs);
+    const inputPaths = {
+      schedule_A: `${id}.inputs.schedule_A`,
+      schedule_B: `${id}.inputs.schedule_B`,
+      weight_A_Start: `${id}.inputs.weight_A_Start`,
+      weight_A_End: `${id}.inputs.weight_A_End`,
+      interpolation: `${id}.inputs.interpolation`,
+    };
+    return {
+      SIGMA_SCHEDULE: this.makeRef<"SIGMA_SCHEDULE">(id, 0),
+      __id: id as OutputNodeId<ADE_SigmaScheduleWeightedAverageInterpResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_StandardStaticContextOptions(inputs: ADE_StandardStaticContextOptionsInputs): ADE_StandardStaticContextOptionsOutputs & { __id: OutputNodeId<ADE_StandardStaticContextOptionsResult>; inputs: ADE_StandardStaticContextOptionsInputPaths } {
+    const id = this.addNode("ADE_StandardStaticContextOptions", inputs);
+    const inputPaths = {
+      context_length: `${id}.inputs.context_length`,
+      context_overlap: `${id}.inputs.context_overlap`,
+      fuse_method: `${id}.inputs.fuse_method`,
+      use_on_equal_length: `${id}.inputs.use_on_equal_length`,
+      start_percent: `${id}.inputs.start_percent`,
+      guarantee_steps: `${id}.inputs.guarantee_steps`,
+      prev_context: `${id}.inputs.prev_context`,
+      view_opts: `${id}.inputs.view_opts`,
+    };
+    return {
+      CONTEXT_OPTS: this.makeRef<"CONTEXT_OPTIONS">(id, 0),
+      __id: id as OutputNodeId<ADE_StandardStaticContextOptionsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_StandardStaticViewOptions(inputs: ADE_StandardStaticViewOptionsInputs): ADE_StandardStaticViewOptionsOutputs & { __id: OutputNodeId<ADE_StandardStaticViewOptionsResult>; inputs: ADE_StandardStaticViewOptionsInputPaths } {
+    const id = this.addNode("ADE_StandardStaticViewOptions", inputs);
+    const inputPaths = {
+      view_length: `${id}.inputs.view_length`,
+      view_overlap: `${id}.inputs.view_overlap`,
+      fuse_method: `${id}.inputs.fuse_method`,
+    };
+    return {
+      VIEW_OPTS: this.makeRef<"VIEW_OPTS">(id, 0),
+      __id: id as OutputNodeId<ADE_StandardStaticViewOptionsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_StandardUniformContextOptions(inputs: ADE_StandardUniformContextOptionsInputs): ADE_StandardUniformContextOptionsOutputs & { __id: OutputNodeId<ADE_StandardUniformContextOptionsResult>; inputs: ADE_StandardUniformContextOptionsInputPaths } {
+    const id = this.addNode("ADE_StandardUniformContextOptions", inputs);
+    const inputPaths = {
+      context_length: `${id}.inputs.context_length`,
+      context_stride: `${id}.inputs.context_stride`,
+      context_overlap: `${id}.inputs.context_overlap`,
+      fuse_method: `${id}.inputs.fuse_method`,
+      use_on_equal_length: `${id}.inputs.use_on_equal_length`,
+      start_percent: `${id}.inputs.start_percent`,
+      guarantee_steps: `${id}.inputs.guarantee_steps`,
+      prev_context: `${id}.inputs.prev_context`,
+      view_opts: `${id}.inputs.view_opts`,
+    };
+    return {
+      CONTEXT_OPTS: this.makeRef<"CONTEXT_OPTIONS">(id, 0),
+      __id: id as OutputNodeId<ADE_StandardUniformContextOptionsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_StandardUniformViewOptions(inputs: ADE_StandardUniformViewOptionsInputs): ADE_StandardUniformViewOptionsOutputs & { __id: OutputNodeId<ADE_StandardUniformViewOptionsResult>; inputs: ADE_StandardUniformViewOptionsInputPaths } {
+    const id = this.addNode("ADE_StandardUniformViewOptions", inputs);
+    const inputPaths = {
+      view_length: `${id}.inputs.view_length`,
+      view_stride: `${id}.inputs.view_stride`,
+      view_overlap: `${id}.inputs.view_overlap`,
+      fuse_method: `${id}.inputs.fuse_method`,
+    };
+    return {
+      VIEW_OPTS: this.makeRef<"VIEW_OPTS">(id, 0),
+      __id: id as OutputNodeId<ADE_StandardUniformViewOptionsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_TimestepsConditioning(inputs: ADE_TimestepsConditioningInputs): ADE_TimestepsConditioningOutputs & { __id: OutputNodeId<ADE_TimestepsConditioningResult>; inputs: ADE_TimestepsConditioningInputPaths } {
+    const id = this.addNode("ADE_TimestepsConditioning", inputs);
+    const inputPaths = {
+      start_percent: `${id}.inputs.start_percent`,
+      end_percent: `${id}.inputs.end_percent`,
+    };
+    return {
+      TIMESTEPS_RANGE: this.makeRef<"TIMESTEPS_RANGE">(id, 0),
+      __id: id as OutputNodeId<ADE_TimestepsConditioningResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_UpscaleAndVAEEncode(inputs: ADE_UpscaleAndVAEEncodeInputs): ADE_UpscaleAndVAEEncodeOutputs & { __id: OutputNodeId<ADE_UpscaleAndVAEEncodeResult>; inputs: ADE_UpscaleAndVAEEncodeInputPaths } {
+    const id = this.addNode("ADE_UpscaleAndVAEEncode", inputs);
+    const inputPaths = {
+      image: `${id}.inputs.image`,
+      vae: `${id}.inputs.vae`,
+      latent_size: `${id}.inputs.latent_size`,
+      scale_method: `${id}.inputs.scale_method`,
+      crop: `${id}.inputs.crop`,
+    };
+    return {
+      LATENT: this.makeRef<"LATENT">(id, 0),
+      __id: id as OutputNodeId<ADE_UpscaleAndVAEEncodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_UseEvolvedSampling(inputs: ADE_UseEvolvedSamplingInputs): ADE_UseEvolvedSamplingOutputs & { __id: OutputNodeId<ADE_UseEvolvedSamplingResult>; inputs: ADE_UseEvolvedSamplingInputPaths } {
+    const id = this.addNode("ADE_UseEvolvedSampling", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      beta_schedule: `${id}.inputs.beta_schedule`,
+      m_models: `${id}.inputs.m_models`,
+      context_options: `${id}.inputs.context_options`,
+      sample_settings: `${id}.inputs.sample_settings`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      __id: id as OutputNodeId<ADE_UseEvolvedSamplingResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ValueScheduling(inputs: ADE_ValueSchedulingInputs): ADE_ValueSchedulingOutputs & { __id: OutputNodeId<ADE_ValueSchedulingResult>; inputs: ADE_ValueSchedulingInputPaths } {
+    const id = this.addNode("ADE_ValueScheduling", inputs);
+    const inputPaths = {
+      values: `${id}.inputs.values`,
+      print_schedule: `${id}.inputs.print_schedule`,
+      max_length: `${id}.inputs.max_length`,
+    };
+    return {
+      FLOAT: this.makeRef<"FLOAT">(id, 0),
+      FLOATS: this.makeRef<"FLOATS">(id, 1),
+      INT: this.makeRef<"INT">(id, 2),
+      INTS: this.makeRef<"INTS">(id, 3),
+      __id: id as OutputNodeId<ADE_ValueSchedulingResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ValueSchedulingLatents(inputs: ADE_ValueSchedulingLatentsInputs): ADE_ValueSchedulingLatentsOutputs & { __id: OutputNodeId<ADE_ValueSchedulingLatentsResult>; inputs: ADE_ValueSchedulingLatentsInputPaths } {
+    const id = this.addNode("ADE_ValueSchedulingLatents", inputs);
+    const inputPaths = {
+      values: `${id}.inputs.values`,
+      latent: `${id}.inputs.latent`,
+      print_schedule: `${id}.inputs.print_schedule`,
+    };
+    return {
+      FLOAT: this.makeRef<"FLOAT">(id, 0),
+      FLOATS: this.makeRef<"FLOATS">(id, 1),
+      INT: this.makeRef<"INT">(id, 2),
+      INTS: this.makeRef<"INTS">(id, 3),
+      __id: id as OutputNodeId<ADE_ValueSchedulingLatentsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ValuesReplace(inputs: ADE_ValuesReplaceInputs): ADE_ValuesReplaceOutputs & { __id: OutputNodeId<ADE_ValuesReplaceResult>; inputs: ADE_ValuesReplaceInputPaths } {
+    const id = this.addNode("ADE_ValuesReplace", inputs);
+    const inputPaths = {
+      value_key: `${id}.inputs.value_key`,
+      floats: `${id}.inputs.floats`,
+      prev_replace: `${id}.inputs.prev_replace`,
+    };
+    return {
+      VALUES_REPLACE: this.makeRef<"VALUES_REPLACE">(id, 0),
+      __id: id as OutputNodeId<ADE_ValuesReplaceResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_ViewsOnlyContextOptions(inputs: ADE_ViewsOnlyContextOptionsInputs): ADE_ViewsOnlyContextOptionsOutputs & { __id: OutputNodeId<ADE_ViewsOnlyContextOptionsResult>; inputs: ADE_ViewsOnlyContextOptionsInputPaths } {
+    const id = this.addNode("ADE_ViewsOnlyContextOptions", inputs);
+    const inputPaths = {
+      view_opts_req: `${id}.inputs.view_opts_req`,
+      start_percent: `${id}.inputs.start_percent`,
+      guarantee_steps: `${id}.inputs.guarantee_steps`,
+      prev_context: `${id}.inputs.prev_context`,
+    };
+    return {
+      CONTEXT_OPTS: this.makeRef<"CONTEXT_OPTIONS">(id, 0),
+      __id: id as OutputNodeId<ADE_ViewsOnlyContextOptionsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_VisualizeContextOptionsK(inputs: ADE_VisualizeContextOptionsKInputs): ADE_VisualizeContextOptionsKOutputs & { __id: OutputNodeId<ADE_VisualizeContextOptionsKResult>; inputs: ADE_VisualizeContextOptionsKInputPaths } {
+    const id = this.addNode("ADE_VisualizeContextOptionsK", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      sampler_name: `${id}.inputs.sampler_name`,
+      scheduler: `${id}.inputs.scheduler`,
+      context_opts: `${id}.inputs.context_opts`,
+      visual_width: `${id}.inputs.visual_width`,
+      latents_length: `${id}.inputs.latents_length`,
+      steps: `${id}.inputs.steps`,
+      denoise: `${id}.inputs.denoise`,
+    };
+    return {
+      IMAGE: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<ADE_VisualizeContextOptionsKResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_VisualizeContextOptionsKAdv(inputs: ADE_VisualizeContextOptionsKAdvInputs): ADE_VisualizeContextOptionsKAdvOutputs & { __id: OutputNodeId<ADE_VisualizeContextOptionsKAdvResult>; inputs: ADE_VisualizeContextOptionsKAdvInputPaths } {
+    const id = this.addNode("ADE_VisualizeContextOptionsKAdv", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      sampler_name: `${id}.inputs.sampler_name`,
+      scheduler: `${id}.inputs.scheduler`,
+      context_opts: `${id}.inputs.context_opts`,
+      visual_width: `${id}.inputs.visual_width`,
+      latents_length: `${id}.inputs.latents_length`,
+      steps: `${id}.inputs.steps`,
+      start_step: `${id}.inputs.start_step`,
+      end_step: `${id}.inputs.end_step`,
+    };
+    return {
+      IMAGE: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<ADE_VisualizeContextOptionsKAdvResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ADE_VisualizeContextOptionsSCustom(inputs: ADE_VisualizeContextOptionsSCustomInputs): ADE_VisualizeContextOptionsSCustomOutputs & { __id: OutputNodeId<ADE_VisualizeContextOptionsSCustomResult>; inputs: ADE_VisualizeContextOptionsSCustomInputPaths } {
+    const id = this.addNode("ADE_VisualizeContextOptionsSCustom", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      sigmas: `${id}.inputs.sigmas`,
+      context_opts: `${id}.inputs.context_opts`,
+      visual_width: `${id}.inputs.visual_width`,
+      latents_length: `${id}.inputs.latents_length`,
+    };
+    return {
+      IMAGE: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<ADE_VisualizeContextOptionsSCustomResult>,
       inputs: inputPaths
     };
   }
@@ -40689,6 +49628,24 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  AnimaLLLiteApply(inputs: AnimaLLLiteApplyInputs): AnimaLLLiteApplyOutputs & { __id: OutputNodeId<AnimaLLLiteApplyResult>; inputs: AnimaLLLiteApplyInputPaths } {
+    const id = this.addNode("AnimaLLLiteApply", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      model_patch: `${id}.inputs.model_patch`,
+      image: `${id}.inputs.image`,
+      strength: `${id}.inputs.strength`,
+      start_percent: `${id}.inputs.start_percent`,
+      end_percent: `${id}.inputs.end_percent`,
+      mask: `${id}.inputs.mask`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      __id: id as OutputNodeId<AnimaLLLiteApplyResult>,
+      inputs: inputPaths
+    };
+  }
+
   AnimalPosePreprocessor(inputs: AnimalPosePreprocessorInputs): AnimalPosePreprocessorOutputs & { __id: OutputNodeId<AnimalPosePreprocessorResult>; inputs: AnimalPosePreprocessorInputPaths } {
     const id = this.addNode("AnimalPosePreprocessor", inputs);
     const inputPaths = {
@@ -40701,6 +49658,23 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       IMAGE: this.makeRef<"IMAGE">(id, 0),
       POSE_KEYPOINT: this.makeRef<"POSE_KEYPOINT">(id, 1),
       __id: id as OutputNodeId<AnimalPosePreprocessorResult>,
+      inputs: inputPaths
+    };
+  }
+
+  AnimateDiffLoaderV1(inputs: AnimateDiffLoaderV1Inputs): AnimateDiffLoaderV1Outputs & { __id: OutputNodeId<AnimateDiffLoaderV1Result>; inputs: AnimateDiffLoaderV1InputPaths } {
+    const id = this.addNode("AnimateDiffLoaderV1", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      latents: `${id}.inputs.latents`,
+      model_name: `${id}.inputs.model_name`,
+      unlimited_area_hack: `${id}.inputs.unlimited_area_hack`,
+      beta_schedule: `${id}.inputs.beta_schedule`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      LATENT: this.makeRef<"LATENT">(id, 1),
+      __id: id as OutputNodeId<AnimateDiffLoaderV1Result>,
       inputs: inputPaths
     };
   }
@@ -40854,6 +49828,23 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  ApplyTextureToMesh(inputs: ApplyTextureToMeshInputs): ApplyTextureToMeshOutputs & { __id: OutputNodeId<ApplyTextureToMeshResult>; inputs: ApplyTextureToMeshInputPaths } {
+    const id = this.addNode("ApplyTextureToMesh", inputs);
+    const inputPaths = {
+      mesh: `${id}.inputs.mesh`,
+      base_color: `${id}.inputs.base_color`,
+      metallic: `${id}.inputs.metallic`,
+      roughness: `${id}.inputs.roughness`,
+      occlusion: `${id}.inputs.occlusion`,
+      normal_map: `${id}.inputs.normal_map`,
+    };
+    return {
+      mesh: this.makeRef<"MESH">(id, 0),
+      __id: id as OutputNodeId<ApplyTextureToMeshResult>,
+      inputs: inputPaths
+    };
+  }
+
   ARVideoI2V(inputs: ARVideoI2VInputs): ARVideoI2VOutputs & { __id: OutputNodeId<ARVideoI2VResult>; inputs: ARVideoI2VInputPaths } {
     const id = this.addNode("ARVideoI2V", inputs);
     const inputPaths = {
@@ -40982,6 +49973,57 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       IMAGE: this.makeRef<"IMAGE">(id, 0),
       __id: id as OutputNodeId<BAENormalMapPreprocessorResult>,
+      inputs: inputPaths
+    };
+  }
+
+  BakeAmbientOcclusion(inputs: BakeAmbientOcclusionInputs): BakeAmbientOcclusionOutputs & { __id: OutputNodeId<BakeAmbientOcclusionResult>; inputs: BakeAmbientOcclusionInputPaths } {
+    const id = this.addNode("BakeAmbientOcclusion", inputs);
+    const inputPaths = {
+      low_poly: `${id}.inputs.low_poly`,
+      high_poly: `${id}.inputs.high_poly`,
+      resolution: `${id}.inputs.resolution`,
+      samples: `${id}.inputs.samples`,
+      max_distance: `${id}.inputs.max_distance`,
+      strength: `${id}.inputs.strength`,
+      bias: `${id}.inputs.bias`,
+    };
+    return {
+      occlusion: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<BakeAmbientOcclusionResult>,
+      inputs: inputPaths
+    };
+  }
+
+  BakeNormalMapFromMesh(inputs: BakeNormalMapFromMeshInputs): BakeNormalMapFromMeshOutputs & { __id: OutputNodeId<BakeNormalMapFromMeshResult>; inputs: BakeNormalMapFromMeshInputPaths } {
+    const id = this.addNode("BakeNormalMapFromMesh", inputs);
+    const inputPaths = {
+      low_poly: `${id}.inputs.low_poly`,
+      high_poly: `${id}.inputs.high_poly`,
+      resolution: `${id}.inputs.resolution`,
+      cage_distance: `${id}.inputs.cage_distance`,
+      ignore_backfaces: `${id}.inputs.ignore_backfaces`,
+    };
+    return {
+      normal_map: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<BakeNormalMapFromMeshResult>,
+      inputs: inputPaths
+    };
+  }
+
+  BakeTextureFromVoxel(inputs: BakeTextureFromVoxelInputs): BakeTextureFromVoxelOutputs & { __id: OutputNodeId<BakeTextureFromVoxelResult>; inputs: BakeTextureFromVoxelInputPaths } {
+    const id = this.addNode("BakeTextureFromVoxel", inputs);
+    const inputPaths = {
+      mesh: `${id}.inputs.mesh`,
+      voxel_colors: `${id}.inputs.voxel_colors`,
+      texture_size: `${id}.inputs.texture_size`,
+      reference_mesh: `${id}.inputs.reference_mesh`,
+    };
+    return {
+      base_color: this.makeRef<"IMAGE">(id, 0),
+      metallic: this.makeRef<"IMAGE">(id, 1),
+      roughness: this.makeRef<"IMAGE">(id, 2),
+      __id: id as OutputNodeId<BakeTextureFromVoxelResult>,
       inputs: inputPaths
     };
   }
@@ -41369,6 +50411,57 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  BriaEraser(inputs: BriaEraserInputs): BriaEraserOutputs & { __id: OutputNodeId<BriaEraserResult>; inputs: BriaEraserInputPaths } {
+    const id = this.addNode("BriaEraser", inputs);
+    const inputPaths = {
+      image: `${id}.inputs.image`,
+      mask: `${id}.inputs.mask`,
+      mask_type: `${id}.inputs.mask_type`,
+      moderation: `${id}.inputs.moderation`,
+    };
+    return {
+      IMAGE: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<BriaEraserResult>,
+      inputs: inputPaths
+    };
+  }
+
+  BriaExpandImage(inputs: BriaExpandImageInputs): BriaExpandImageOutputs & { __id: OutputNodeId<BriaExpandImageResult>; inputs: BriaExpandImageInputPaths } {
+    const id = this.addNode("BriaExpandImage", inputs);
+    const inputPaths = {
+      image: `${id}.inputs.image`,
+      expand_mode: `${id}.inputs.expand_mode`,
+      prompt: `${id}.inputs.prompt`,
+      negative_prompt: `${id}.inputs.negative_prompt`,
+      seed: `${id}.inputs.seed`,
+      moderation: `${id}.inputs.moderation`,
+    };
+    return {
+      IMAGE: this.makeRef<"IMAGE">(id, 0),
+      prompt: this.makeRef<"STRING">(id, 1),
+      __id: id as OutputNodeId<BriaExpandImageResult>,
+      inputs: inputPaths
+    };
+  }
+
+  BriaGenFill(inputs: BriaGenFillInputs): BriaGenFillOutputs & { __id: OutputNodeId<BriaGenFillResult>; inputs: BriaGenFillInputPaths } {
+    const id = this.addNode("BriaGenFill", inputs);
+    const inputPaths = {
+      image: `${id}.inputs.image`,
+      mask: `${id}.inputs.mask`,
+      prompt: `${id}.inputs.prompt`,
+      negative_prompt: `${id}.inputs.negative_prompt`,
+      refine_prompt: `${id}.inputs.refine_prompt`,
+      seed: `${id}.inputs.seed`,
+      moderation: `${id}.inputs.moderation`,
+    };
+    return {
+      IMAGE: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<BriaGenFillResult>,
+      inputs: inputPaths
+    };
+  }
+
   BriaImageEditNode(inputs: BriaImageEditNodeInputs): BriaImageEditNodeOutputs & { __id: OutputNodeId<BriaImageEditNodeResult>; inputs: BriaImageEditNodeInputPaths } {
     const id = this.addNode("BriaImageEditNode", inputs);
     const inputPaths = {
@@ -41387,6 +50480,21 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       IMAGE: this.makeRef<"IMAGE">(id, 0),
       structured_prompt: this.makeRef<"STRING">(id, 1),
       __id: id as OutputNodeId<BriaImageEditNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  BriaIncreaseResolution(inputs: BriaIncreaseResolutionInputs): BriaIncreaseResolutionOutputs & { __id: OutputNodeId<BriaIncreaseResolutionResult>; inputs: BriaIncreaseResolutionInputPaths } {
+    const id = this.addNode("BriaIncreaseResolution", inputs);
+    const inputPaths = {
+      image: `${id}.inputs.image`,
+      desired_increase: `${id}.inputs.desired_increase`,
+      auto_downscale: `${id}.inputs.auto_downscale`,
+      moderation: `${id}.inputs.moderation`,
+    };
+    return {
+      IMAGE: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<BriaIncreaseResolutionResult>,
       inputs: inputPaths
     };
   }
@@ -41481,6 +50589,23 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  BuildPoseFile(inputs: BuildPoseFileInputs): BuildPoseFileOutputs & { __id: OutputNodeId<BuildPoseFileResult>; inputs: BuildPoseFileInputPaths } {
+    const id = this.addNode("BuildPoseFile", inputs);
+    const inputPaths = {
+      pose_data: `${id}.inputs.pose_data`,
+      format: `${id}.inputs.format`,
+      fps: `${id}.inputs.fps`,
+      camera_translation: `${id}.inputs.camera_translation`,
+      track_index: `${id}.inputs.track_index`,
+      sam3d_body_model: `${id}.inputs.sam3d_body_model`,
+    };
+    return {
+      model_3d: this.makeRef<"FILE_3D">(id, 0),
+      __id: id as OutputNodeId<BuildPoseFileResult>,
+      inputs: inputPaths
+    };
+  }
+
   ByteDance2FirstLastFrameNode(inputs: ByteDance2FirstLastFrameNodeInputs): ByteDance2FirstLastFrameNodeOutputs & { __id: OutputNodeId<ByteDance2FirstLastFrameNodeResult>; inputs: ByteDance2FirstLastFrameNodeInputPaths } {
     const id = this.addNode("ByteDance2FirstLastFrameNode", inputs);
     const inputPaths = {
@@ -41509,6 +50634,20 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       VIDEO: this.makeRef<"VIDEO">(id, 0),
       __id: id as OutputNodeId<ByteDance2ReferenceNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ByteDance2ReferenceNodeV2(inputs: ByteDance2ReferenceNodeV2Inputs): ByteDance2ReferenceNodeV2Outputs & { __id: OutputNodeId<ByteDance2ReferenceNodeV2Result>; inputs: ByteDance2ReferenceNodeV2InputPaths } {
+    const id = this.addNode("ByteDance2ReferenceNodeV2", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      seed: `${id}.inputs.seed`,
+      watermark: `${id}.inputs.watermark`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<ByteDance2ReferenceNodeV2Result>,
       inputs: inputPaths
     };
   }
@@ -41636,6 +50775,25 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  ByteDanceSeedAudio(inputs: ByteDanceSeedAudioInputs): ByteDanceSeedAudioOutputs & { __id: OutputNodeId<ByteDanceSeedAudioResult>; inputs: ByteDanceSeedAudioInputPaths } {
+    const id = this.addNode("ByteDanceSeedAudio", inputs);
+    const inputPaths = {
+      text_prompt: `${id}.inputs.text_prompt`,
+      reference_mode: `${id}.inputs.reference_mode`,
+      sample_rate: `${id}.inputs.sample_rate`,
+      speech_rate: `${id}.inputs.speech_rate`,
+      loudness_rate: `${id}.inputs.loudness_rate`,
+      pitch_rate: `${id}.inputs.pitch_rate`,
+      seed: `${id}.inputs.seed`,
+      model: `${id}.inputs.model`,
+    };
+    return {
+      AUDIO: this.makeRef<"AUDIO">(id, 0),
+      __id: id as OutputNodeId<ByteDanceSeedAudioResult>,
+      inputs: inputPaths
+    };
+  }
+
   ByteDanceSeedNode(inputs: ByteDanceSeedNodeInputs): ByteDanceSeedNodeOutputs & { __id: OutputNodeId<ByteDanceSeedNodeResult>; inputs: ByteDanceSeedNodeInputPaths } {
     const id = this.addNode("ByteDanceSeedNode", inputs);
     const inputPaths = {
@@ -41647,6 +50805,29 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       STRING: this.makeRef<"STRING">(id, 0),
       __id: id as OutputNodeId<ByteDanceSeedNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ByteDanceSeedreamLayerSeparationNode(inputs: ByteDanceSeedreamLayerSeparationNodeInputs): ByteDanceSeedreamLayerSeparationNodeOutputs & { __id: OutputNodeId<ByteDanceSeedreamLayerSeparationNodeResult>; inputs: ByteDanceSeedreamLayerSeparationNodeInputPaths } {
+    const id = this.addNode("ByteDanceSeedreamLayerSeparationNode", inputs);
+    const inputPaths = {
+      image: `${id}.inputs.image`,
+      prompt: `${id}.inputs.prompt`,
+      size: `${id}.inputs.size`,
+      seed: `${id}.inputs.seed`,
+      prompt_optimization: `${id}.inputs.prompt_optimization`,
+      watermark: `${id}.inputs.watermark`,
+      crop_layers: `${id}.inputs.crop_layers`,
+    };
+    return {
+      base_image: this.makeRef<"IMAGE">(id, 0),
+      base_mask: this.makeRef<"MASK">(id, 1),
+      layers: this.makeRef<"IMAGE">(id, 2),
+      masks: this.makeRef<"MASK">(id, 3),
+      bboxes: this.makeRef<"BOUNDING_BOX">(id, 4),
+      layer_stack: this.makeRef<"LAYERS">(id, 5),
+      __id: id as OutputNodeId<ByteDanceSeedreamLayerSeparationNodeResult>,
       inputs: inputPaths
     };
   }
@@ -41680,10 +50861,24 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       model: `${id}.inputs.model`,
       seed: `${id}.inputs.seed`,
       watermark: `${id}.inputs.watermark`,
+      thinking: `${id}.inputs.thinking`,
     };
     return {
       IMAGE: this.makeRef<"IMAGE">(id, 0),
       __id: id as OutputNodeId<ByteDanceSeedreamNodeV2Result>,
+      inputs: inputPaths
+    };
+  }
+
+  ByteDanceSeedreamNodeV3(inputs: ByteDanceSeedreamNodeV3Inputs): ByteDanceSeedreamNodeV3Outputs & { __id: OutputNodeId<ByteDanceSeedreamNodeV3Result>; inputs: ByteDanceSeedreamNodeV3InputPaths } {
+    const id = this.addNode("ByteDanceSeedreamNodeV3", inputs);
+    const inputPaths = {
+      prompt: `${id}.inputs.prompt`,
+      model: `${id}.inputs.model`,
+    };
+    return {
+      IMAGE: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<ByteDanceSeedreamNodeV3Result>,
       inputs: inputPaths
     };
   }
@@ -41704,6 +50899,22 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       VIDEO: this.makeRef<"VIDEO">(id, 0),
       __id: id as OutputNodeId<ByteDanceTextToVideoNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ByteDanceVideoEnhanceNode(inputs: ByteDanceVideoEnhanceNodeInputs): ByteDanceVideoEnhanceNodeOutputs & { __id: OutputNodeId<ByteDanceVideoEnhanceNodeResult>; inputs: ByteDanceVideoEnhanceNodeInputPaths } {
+    const id = this.addNode("ByteDanceVideoEnhanceNode", inputs);
+    const inputPaths = {
+      video: `${id}.inputs.video`,
+      tool_version: `${id}.inputs.tool_version`,
+      resolution: `${id}.inputs.resolution`,
+      fps: `${id}.inputs.fps`,
+      bitrate_level: `${id}.inputs.bitrate_level`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<ByteDanceVideoEnhanceNodeResult>,
       inputs: inputPaths
     };
   }
@@ -42037,6 +51248,23 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       CLIP: this.makeRef<"CLIP">(id, 1),
       VAE: this.makeRef<"VAE">(id, 2),
       __id: id as OutputNodeId<CheckpointLoaderSimpleResult>,
+      inputs: inputPaths
+    };
+  }
+
+  CheckpointLoaderSimpleWithNoiseSelect(inputs: CheckpointLoaderSimpleWithNoiseSelectInputs): CheckpointLoaderSimpleWithNoiseSelectOutputs & { __id: OutputNodeId<CheckpointLoaderSimpleWithNoiseSelectResult>; inputs: CheckpointLoaderSimpleWithNoiseSelectInputPaths } {
+    const id = this.addNode("CheckpointLoaderSimpleWithNoiseSelect", inputs);
+    const inputPaths = {
+      ckpt_name: `${id}.inputs.ckpt_name`,
+      beta_schedule: `${id}.inputs.beta_schedule`,
+      use_custom_scale_factor: `${id}.inputs.use_custom_scale_factor`,
+      scale_factor: `${id}.inputs.scale_factor`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      CLIP: this.makeRef<"CLIP">(id, 1),
+      VAE: this.makeRef<"VAE">(id, 2),
+      __id: id as OutputNodeId<CheckpointLoaderSimpleWithNoiseSelectResult>,
       inputs: inputPaths
     };
   }
@@ -42540,6 +51768,7 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       rgb_int: this.makeRef<"INT">(id, 0),
       hex: this.makeRef<"COLOR">(id, 1),
+      alpha: this.makeRef<"FLOAT">(id, 2),
       __id: id as OutputNodeId<ColorToRGBIntResult>,
       inputs: inputPaths
     };
@@ -42616,6 +51845,136 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       BOOLEAN: this.makeRef<"BOOLEAN">(id, 0),
       __id: id as OutputNodeId<ComfyAndNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ComfyCloudFlux2TextToImageNode(inputs: ComfyCloudFlux2TextToImageNodeInputs): ComfyCloudFlux2TextToImageNodeOutputs & { __id: OutputNodeId<ComfyCloudFlux2TextToImageNodeResult>; inputs: ComfyCloudFlux2TextToImageNodeInputPaths } {
+    const id = this.addNode("ComfyCloudFlux2TextToImageNode", inputs);
+    const inputPaths = {
+      prompt: `${id}.inputs.prompt`,
+      seed: `${id}.inputs.seed`,
+      aspect_ratio: `${id}.inputs.aspect_ratio`,
+      megapixels: `${id}.inputs.megapixels`,
+      turbo: `${id}.inputs.turbo`,
+    };
+    return {
+      IMAGE: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<ComfyCloudFlux2TextToImageNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ComfyCloudMageFlowTextToImageNode(inputs: ComfyCloudMageFlowTextToImageNodeInputs): ComfyCloudMageFlowTextToImageNodeOutputs & { __id: OutputNodeId<ComfyCloudMageFlowTextToImageNodeResult>; inputs: ComfyCloudMageFlowTextToImageNodeInputPaths } {
+    const id = this.addNode("ComfyCloudMageFlowTextToImageNode", inputs);
+    const inputPaths = {
+      prompt: `${id}.inputs.prompt`,
+      negative_prompt: `${id}.inputs.negative_prompt`,
+      seed: `${id}.inputs.seed`,
+      aspect_ratio: `${id}.inputs.aspect_ratio`,
+      megapixels: `${id}.inputs.megapixels`,
+    };
+    return {
+      IMAGE: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<ComfyCloudMageFlowTextToImageNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ComfyCloudMageFlowTurboTextToImageNode(inputs: ComfyCloudMageFlowTurboTextToImageNodeInputs): ComfyCloudMageFlowTurboTextToImageNodeOutputs & { __id: OutputNodeId<ComfyCloudMageFlowTurboTextToImageNodeResult>; inputs: ComfyCloudMageFlowTurboTextToImageNodeInputPaths } {
+    const id = this.addNode("ComfyCloudMageFlowTurboTextToImageNode", inputs);
+    const inputPaths = {
+      prompt: `${id}.inputs.prompt`,
+      negative_prompt: `${id}.inputs.negative_prompt`,
+      seed: `${id}.inputs.seed`,
+      aspect_ratio: `${id}.inputs.aspect_ratio`,
+      megapixels: `${id}.inputs.megapixels`,
+    };
+    return {
+      IMAGE: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<ComfyCloudMageFlowTurboTextToImageNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ComfyCloudMiniMaxH3FirstLastFrameToVideoNode(inputs: ComfyCloudMiniMaxH3FirstLastFrameToVideoNodeInputs): ComfyCloudMiniMaxH3FirstLastFrameToVideoNodeOutputs & { __id: OutputNodeId<ComfyCloudMiniMaxH3FirstLastFrameToVideoNodeResult>; inputs: ComfyCloudMiniMaxH3FirstLastFrameToVideoNodeInputPaths } {
+    const id = this.addNode("ComfyCloudMiniMaxH3FirstLastFrameToVideoNode", inputs);
+    const inputPaths = {
+      first_frame: `${id}.inputs.first_frame`,
+      prompt: `${id}.inputs.prompt`,
+      seed: `${id}.inputs.seed`,
+      aspect_ratio: `${id}.inputs.aspect_ratio`,
+      resolution: `${id}.inputs.resolution`,
+      duration_seconds: `${id}.inputs.duration_seconds`,
+      last_frame: `${id}.inputs.last_frame`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<ComfyCloudMiniMaxH3FirstLastFrameToVideoNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ComfyCloudMiniMaxH3ImageToVideoNode(inputs: ComfyCloudMiniMaxH3ImageToVideoNodeInputs): ComfyCloudMiniMaxH3ImageToVideoNodeOutputs & { __id: OutputNodeId<ComfyCloudMiniMaxH3ImageToVideoNodeResult>; inputs: ComfyCloudMiniMaxH3ImageToVideoNodeInputPaths } {
+    const id = this.addNode("ComfyCloudMiniMaxH3ImageToVideoNode", inputs);
+    const inputPaths = {
+      first_frame: `${id}.inputs.first_frame`,
+      prompt: `${id}.inputs.prompt`,
+      seed: `${id}.inputs.seed`,
+      aspect_ratio: `${id}.inputs.aspect_ratio`,
+      resolution: `${id}.inputs.resolution`,
+      duration_seconds: `${id}.inputs.duration_seconds`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<ComfyCloudMiniMaxH3ImageToVideoNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ComfyCloudMiniMaxH3TextToVideoNode(inputs: ComfyCloudMiniMaxH3TextToVideoNodeInputs): ComfyCloudMiniMaxH3TextToVideoNodeOutputs & { __id: OutputNodeId<ComfyCloudMiniMaxH3TextToVideoNodeResult>; inputs: ComfyCloudMiniMaxH3TextToVideoNodeInputPaths } {
+    const id = this.addNode("ComfyCloudMiniMaxH3TextToVideoNode", inputs);
+    const inputPaths = {
+      prompt: `${id}.inputs.prompt`,
+      seed: `${id}.inputs.seed`,
+      aspect_ratio: `${id}.inputs.aspect_ratio`,
+      resolution: `${id}.inputs.resolution`,
+      duration_seconds: `${id}.inputs.duration_seconds`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<ComfyCloudMiniMaxH3TextToVideoNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ComfyCloudMiniMaxMusic3TextToAudioNode(inputs: ComfyCloudMiniMaxMusic3TextToAudioNodeInputs): ComfyCloudMiniMaxMusic3TextToAudioNodeOutputs & { __id: OutputNodeId<ComfyCloudMiniMaxMusic3TextToAudioNodeResult>; inputs: ComfyCloudMiniMaxMusic3TextToAudioNodeInputPaths } {
+    const id = this.addNode("ComfyCloudMiniMaxMusic3TextToAudioNode", inputs);
+    const inputPaths = {
+      prompt: `${id}.inputs.prompt`,
+      lyrics: `${id}.inputs.lyrics`,
+      seed: `${id}.inputs.seed`,
+      max_duration: `${id}.inputs.max_duration`,
+      audio_quality: `${id}.inputs.audio_quality`,
+    };
+    return {
+      AUDIO: this.makeRef<"AUDIO">(id, 0),
+      __id: id as OutputNodeId<ComfyCloudMiniMaxMusic3TextToAudioNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ComfyCloudZImageTurboNode(inputs: ComfyCloudZImageTurboNodeInputs): ComfyCloudZImageTurboNodeOutputs & { __id: OutputNodeId<ComfyCloudZImageTurboNodeResult>; inputs: ComfyCloudZImageTurboNodeInputPaths } {
+    const id = this.addNode("ComfyCloudZImageTurboNode", inputs);
+    const inputPaths = {
+      prompt: `${id}.inputs.prompt`,
+      seed: `${id}.inputs.seed`,
+      aspect_ratio: `${id}.inputs.aspect_ratio`,
+      megapixels: `${id}.inputs.megapixels`,
+    };
+    return {
+      IMAGE: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<ComfyCloudZImageTurboNodeResult>,
       inputs: inputPaths
     };
   }
@@ -43176,7 +52535,7 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       STEPS: this.makeRef<"INT">(id, 9),
       STEP_REFINER: this.makeRef<"INT">(id, 10),
       CFG: this.makeRef<"FLOAT">(id, 11),
-      CKPT_NAME: this.makeRef<"JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors">(id, 12),
+      CKPT_NAME: this.makeRef<"JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors">(id, 12),
       SAMPLER: this.makeRef<"euler" | "euler_cfg_pp" | "euler_ancestral" | "euler_ancestral_cfg_pp" | "heun" | "heunpp2" | "exp_heun_2_x0" | "exp_heun_2_x0_sde" | "dpm_2" | "dpm_2_ancestral" | "lms" | "dpm_fast" | "dpm_adaptive" | "dpmpp_2s_ancestral" | "dpmpp_2s_ancestral_cfg_pp" | "dpmpp_sde" | "dpmpp_sde_gpu" | "dpmpp_2m" | "dpmpp_2m_cfg_pp" | "dpmpp_2m_sde" | "dpmpp_2m_sde_gpu" | "dpmpp_2m_sde_heun" | "dpmpp_2m_sde_heun_gpu" | "dpmpp_3m_sde" | "dpmpp_3m_sde_gpu" | "ddpm" | "lcm" | "ipndm" | "ipndm_v" | "deis" | "res_multistep" | "res_multistep_cfg_pp" | "res_multistep_ancestral" | "res_multistep_ancestral_cfg_pp" | "gradient_estimation" | "gradient_estimation_cfg_pp" | "er_sde" | "seeds_2" | "seeds_3" | "sa_solver" | "sa_solver_pece" | "ddim" | "uni_pc" | "uni_pc_bh2">(id, 13),
       SCHEDULER: this.makeRef<"simple" | "sgm_uniform" | "karras" | "exponential" | "ddim_uniform" | "beta" | "normal" | "linear_quadratic" | "kl_optimal">(id, 14),
       CLIP_WIDTH: this.makeRef<"INT">(id, 15),
@@ -43230,7 +52589,7 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       STEPS: this.makeRef<"INT">(id, 9),
       STEP_REFINER: this.makeRef<"INT">(id, 10),
       CFG: this.makeRef<"FLOAT">(id, 11),
-      CKPT_NAME: this.makeRef<"JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors">(id, 12),
+      CKPT_NAME: this.makeRef<"JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors">(id, 12),
       SAMPLER: this.makeRef<"euler" | "euler_cfg_pp" | "euler_ancestral" | "euler_ancestral_cfg_pp" | "heun" | "heunpp2" | "exp_heun_2_x0" | "exp_heun_2_x0_sde" | "dpm_2" | "dpm_2_ancestral" | "lms" | "dpm_fast" | "dpm_adaptive" | "dpmpp_2s_ancestral" | "dpmpp_2s_ancestral_cfg_pp" | "dpmpp_sde" | "dpmpp_sde_gpu" | "dpmpp_2m" | "dpmpp_2m_cfg_pp" | "dpmpp_2m_sde" | "dpmpp_2m_sde_gpu" | "dpmpp_2m_sde_heun" | "dpmpp_2m_sde_heun_gpu" | "dpmpp_3m_sde" | "dpmpp_3m_sde_gpu" | "ddpm" | "lcm" | "ipndm" | "ipndm_v" | "deis" | "res_multistep" | "res_multistep_cfg_pp" | "res_multistep_ancestral" | "res_multistep_ancestral_cfg_pp" | "gradient_estimation" | "gradient_estimation_cfg_pp" | "er_sde" | "seeds_2" | "seeds_3" | "sa_solver" | "sa_solver_pece" | "ddim" | "uni_pc" | "uni_pc_bh2">(id, 13),
       SCHEDULER: this.makeRef<"simple" | "sgm_uniform" | "karras" | "exponential" | "ddim_uniform" | "beta" | "normal" | "linear_quadratic" | "kl_optimal">(id, 14),
       CLIP_WIDTH: this.makeRef<"INT">(id, 15),
@@ -43284,7 +52643,7 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       STEPS: this.makeRef<"INT">(id, 9),
       STEP_REFINER: this.makeRef<"INT">(id, 10),
       CFG: this.makeRef<"FLOAT">(id, 11),
-      CKPT_NAME: this.makeRef<"JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors">(id, 12),
+      CKPT_NAME: this.makeRef<"JANKUTrainedChenkinNoobai_v777.safetensors" | "SD1.5\\dreamshaper_8.safetensors" | "SD1.5\\epicrealism_naturalSinRC1VAE.safetensors" | "SD1.5\\realisticVisionV60B1_v51VAE.safetensors" | "SD1.5\\revAnimated_v2Rebirth.safetensors" | "SDXL\\sd_xl_base_1.0.safetensors" | "aziibpixelmix_v10.safetensors" | "bluePencilFlux1_v021.safetensors" | "hunyuan3d-dit-v2-1.safetensors" | "hunyuan3d-dit-v2-mv.safetensors" | "illustriousXL_v01.safetensors" | "noobaiXLNAIXL_vPred10Version.safetensors" | "v1-5-pruned-emaonly-fp16.safetensors" | "waiIllustriousSDXL_v170.safetensors">(id, 12),
       SAMPLER: this.makeRef<"euler" | "euler_cfg_pp" | "euler_ancestral" | "euler_ancestral_cfg_pp" | "heun" | "heunpp2" | "exp_heun_2_x0" | "exp_heun_2_x0_sde" | "dpm_2" | "dpm_2_ancestral" | "lms" | "dpm_fast" | "dpm_adaptive" | "dpmpp_2s_ancestral" | "dpmpp_2s_ancestral_cfg_pp" | "dpmpp_sde" | "dpmpp_sde_gpu" | "dpmpp_2m" | "dpmpp_2m_cfg_pp" | "dpmpp_2m_sde" | "dpmpp_2m_sde_gpu" | "dpmpp_2m_sde_heun" | "dpmpp_2m_sde_heun_gpu" | "dpmpp_3m_sde" | "dpmpp_3m_sde_gpu" | "ddpm" | "lcm" | "ipndm" | "ipndm_v" | "deis" | "res_multistep" | "res_multistep_cfg_pp" | "res_multistep_ancestral" | "res_multistep_ancestral_cfg_pp" | "gradient_estimation" | "gradient_estimation_cfg_pp" | "er_sde" | "seeds_2" | "seeds_3" | "sa_solver" | "sa_solver_pece" | "ddim" | "uni_pc" | "uni_pc_bh2">(id, 13),
       SCHEDULER: this.makeRef<"simple" | "sgm_uniform" | "karras" | "exponential" | "ddim_uniform" | "beta" | "normal" | "linear_quadratic" | "kl_optimal">(id, 14),
       CLIP_WIDTH: this.makeRef<"INT">(id, 15),
@@ -43523,6 +52882,8 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       height: `${id}.inputs.height`,
       editor_state: `${id}.inputs.editor_state`,
       background: `${id}.inputs.background`,
+      bboxes: `${id}.inputs.bboxes`,
+      last_incoming: `${id}.inputs.last_incoming`,
     };
     return {
       preview: this.makeRef<"IMAGE">(id, 0),
@@ -43944,6 +53305,7 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       fps: `${id}.inputs.fps`,
       audio: `${id}.inputs.audio`,
       bit_depth: `${id}.inputs.bit_depth`,
+      color_space: `${id}.inputs.color_space`,
     };
     return {
       VIDEO: this.makeRef<"VIDEO">(id, 0),
@@ -44194,6 +53556,20 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       tensor: `${id}.inputs.tensor`,
     };
     return { __id: id as OutputNodeId<DebugTensorShapeResult>, inputs: inputPaths };
+  }
+
+  DecimateMesh(inputs: DecimateMeshInputs): DecimateMeshOutputs & { __id: OutputNodeId<DecimateMeshResult>; inputs: DecimateMeshInputPaths } {
+    const id = this.addNode("DecimateMesh", inputs);
+    const inputPaths = {
+      mesh: `${id}.inputs.mesh`,
+      target_face_count: `${id}.inputs.target_face_count`,
+      placement_mode: `${id}.inputs.placement_mode`,
+    };
+    return {
+      mesh: this.makeRef<"MESH">(id, 0),
+      __id: id as OutputNodeId<DecimateMeshResult>,
+      inputs: inputPaths
+    };
   }
 
   DecodeAndSaveVideo(inputs: DecodeAndSaveVideoInputs): { __id: OutputNodeId<DecodeAndSaveVideoResult>; inputs: DecodeAndSaveVideoInputPaths } {
@@ -45035,6 +54411,33 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  EmptyMiniMaxH3LatentAV(inputs: EmptyMiniMaxH3LatentAVInputs): EmptyMiniMaxH3LatentAVOutputs & { __id: OutputNodeId<EmptyMiniMaxH3LatentAVResult>; inputs: EmptyMiniMaxH3LatentAVInputPaths } {
+    const id = this.addNode("EmptyMiniMaxH3LatentAV", inputs);
+    const inputPaths = {
+      width: `${id}.inputs.width`,
+      height: `${id}.inputs.height`,
+      length: `${id}.inputs.length`,
+    };
+    return {
+      LATENT: this.makeRef<"LATENT">(id, 0),
+      __id: id as OutputNodeId<EmptyMiniMaxH3LatentAVResult>,
+      inputs: inputPaths
+    };
+  }
+
+  EmptyMiniMaxMusic3LatentAudio(inputs: EmptyMiniMaxMusic3LatentAudioInputs): EmptyMiniMaxMusic3LatentAudioOutputs & { __id: OutputNodeId<EmptyMiniMaxMusic3LatentAudioResult>; inputs: EmptyMiniMaxMusic3LatentAudioInputPaths } {
+    const id = this.addNode("EmptyMiniMaxMusic3LatentAudio", inputs);
+    const inputPaths = {
+      seconds: `${id}.inputs.seconds`,
+      batch_size: `${id}.inputs.batch_size`,
+    };
+    return {
+      LATENT: this.makeRef<"LATENT">(id, 0),
+      __id: id as OutputNodeId<EmptyMiniMaxMusic3LatentAudioResult>,
+      inputs: inputPaths
+    };
+  }
+
   EmptyMochiLatentVideo(inputs: EmptyMochiLatentVideoInputs): EmptyMochiLatentVideoOutputs & { __id: OutputNodeId<EmptyMochiLatentVideoResult>; inputs: EmptyMochiLatentVideoInputPaths } {
     const id = this.addNode("EmptyMochiLatentVideo", inputs);
     const inputPaths = {
@@ -45075,6 +54478,18 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       LATENT: this.makeRef<"LATENT">(id, 0),
       __id: id as OutputNodeId<EmptySD3LatentImageResult>,
+      inputs: inputPaths
+    };
+  }
+
+  EmptyTrellis2LatentStructure(inputs: EmptyTrellis2LatentStructureInputs): EmptyTrellis2LatentStructureOutputs & { __id: OutputNodeId<EmptyTrellis2LatentStructureResult>; inputs: EmptyTrellis2LatentStructureInputPaths } {
+    const id = this.addNode("EmptyTrellis2LatentStructure", inputs);
+    const inputPaths = {
+      batch_size: `${id}.inputs.batch_size`,
+    };
+    return {
+      LATENT: this.makeRef<"LATENT">(id, 0),
+      __id: id as OutputNodeId<EmptyTrellis2LatentStructureResult>,
       inputs: inputPaths
     };
   }
@@ -45367,6 +54782,22 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  FillHoles(inputs: FillHolesInputs): FillHolesOutputs & { __id: OutputNodeId<FillHolesResult>; inputs: FillHolesInputPaths } {
+    const id = this.addNode("FillHoles", inputs);
+    const inputPaths = {
+      mesh: `${id}.inputs.mesh`,
+      max_perimeter: `${id}.inputs.max_perimeter`,
+      weld_epsilon_rel: `${id}.inputs.weld_epsilon_rel`,
+      max_vertices: `${id}.inputs.max_vertices`,
+      fill_chains: `${id}.inputs.fill_chains`,
+    };
+    return {
+      mesh: this.makeRef<"MESH">(id, 0),
+      __id: id as OutputNodeId<FillHolesResult>,
+      inputs: inputPaths
+    };
+  }
+
   FilterZeroMasksAndCorrespondingImages(inputs: FilterZeroMasksAndCorrespondingImagesInputs): FilterZeroMasksAndCorrespondingImagesOutputs & { __id: OutputNodeId<FilterZeroMasksAndCorrespondingImagesResult>; inputs: FilterZeroMasksAndCorrespondingImagesInputPaths } {
     const id = this.addNode("FilterZeroMasksAndCorrespondingImages", inputs);
     const inputPaths = {
@@ -45379,6 +54810,61 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       zero_mask_images_out: this.makeRef<"IMAGE">(id, 2),
       zero_mask_images_out_indexes: this.makeRef<"INDEXES">(id, 3),
       __id: id as OutputNodeId<FilterZeroMasksAndCorrespondingImagesResult>,
+      inputs: inputPaths
+    };
+  }
+
+  FishAudioInstantVoiceClone(inputs: FishAudioInstantVoiceCloneInputs): FishAudioInstantVoiceCloneOutputs & { __id: OutputNodeId<FishAudioInstantVoiceCloneResult>; inputs: FishAudioInstantVoiceCloneInputPaths } {
+    const id = this.addNode("FishAudioInstantVoiceClone", inputs);
+    const inputPaths = {
+      files: `${id}.inputs.files`,
+      enhance_audio_quality: `${id}.inputs.enhance_audio_quality`,
+    };
+    return {
+      voice: this.makeRef<"FISHAUDIO_VOICE">(id, 0),
+      __id: id as OutputNodeId<FishAudioInstantVoiceCloneResult>,
+      inputs: inputPaths
+    };
+  }
+
+  FishAudioSpeechToText(inputs: FishAudioSpeechToTextInputs): FishAudioSpeechToTextOutputs & { __id: OutputNodeId<FishAudioSpeechToTextResult>; inputs: FishAudioSpeechToTextInputPaths } {
+    const id = this.addNode("FishAudioSpeechToText", inputs);
+    const inputPaths = {
+      audio: `${id}.inputs.audio`,
+      language: `${id}.inputs.language`,
+      precise_timestamps: `${id}.inputs.precise_timestamps`,
+    };
+    return {
+      text: this.makeRef<"STRING">(id, 0),
+      language_code: this.makeRef<"STRING">(id, 1),
+      segments_json: this.makeRef<"STRING">(id, 2),
+      __id: id as OutputNodeId<FishAudioSpeechToTextResult>,
+      inputs: inputPaths
+    };
+  }
+
+  FishAudioTextToSpeech(inputs: FishAudioTextToSpeechInputs): FishAudioTextToSpeechOutputs & { __id: OutputNodeId<FishAudioTextToSpeechResult>; inputs: FishAudioTextToSpeechInputPaths } {
+    const id = this.addNode("FishAudioTextToSpeech", inputs);
+    const inputPaths = {
+      text: `${id}.inputs.text`,
+      model: `${id}.inputs.model`,
+      seed: `${id}.inputs.seed`,
+    };
+    return {
+      AUDIO: this.makeRef<"AUDIO">(id, 0),
+      __id: id as OutputNodeId<FishAudioTextToSpeechResult>,
+      inputs: inputPaths
+    };
+  }
+
+  FishAudioVoiceSelector(inputs: FishAudioVoiceSelectorInputs): FishAudioVoiceSelectorOutputs & { __id: OutputNodeId<FishAudioVoiceSelectorResult>; inputs: FishAudioVoiceSelectorInputPaths } {
+    const id = this.addNode("FishAudioVoiceSelector", inputs);
+    const inputPaths = {
+      voice: `${id}.inputs.voice`,
+    };
+    return {
+      voice: this.makeRef<"FISHAUDIO_VOICE">(id, 0),
+      __id: id as OutputNodeId<FishAudioVoiceSelectorResult>,
       inputs: inputPaths
     };
   }
@@ -45507,6 +54993,63 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       SIGMAS: this.makeRef<"SIGMAS">(id, 0),
       __id: id as OutputNodeId<Flux2SchedulerResult>,
+      inputs: inputPaths
+    };
+  }
+
+  Flux3ImageToVideoNode(inputs: Flux3ImageToVideoNodeInputs): Flux3ImageToVideoNodeOutputs & { __id: OutputNodeId<Flux3ImageToVideoNodeResult>; inputs: Flux3ImageToVideoNodeInputPaths } {
+    const id = this.addNode("Flux3ImageToVideoNode", inputs);
+    const inputPaths = {
+      prompt: `${id}.inputs.prompt`,
+      keyframes: `${id}.inputs.keyframes`,
+      placement: `${id}.inputs.placement`,
+      aspect_ratio: `${id}.inputs.aspect_ratio`,
+      duration: `${id}.inputs.duration`,
+      resolution: `${id}.inputs.resolution`,
+      generate_audio: `${id}.inputs.generate_audio`,
+      safety_tolerance: `${id}.inputs.safety_tolerance`,
+      seed: `${id}.inputs.seed`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<Flux3ImageToVideoNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  Flux3TextToVideoNode(inputs: Flux3TextToVideoNodeInputs): Flux3TextToVideoNodeOutputs & { __id: OutputNodeId<Flux3TextToVideoNodeResult>; inputs: Flux3TextToVideoNodeInputPaths } {
+    const id = this.addNode("Flux3TextToVideoNode", inputs);
+    const inputPaths = {
+      prompt: `${id}.inputs.prompt`,
+      aspect_ratio: `${id}.inputs.aspect_ratio`,
+      duration: `${id}.inputs.duration`,
+      resolution: `${id}.inputs.resolution`,
+      generate_audio: `${id}.inputs.generate_audio`,
+      safety_tolerance: `${id}.inputs.safety_tolerance`,
+      seed: `${id}.inputs.seed`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<Flux3TextToVideoNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  Flux3VideoContinuationNode(inputs: Flux3VideoContinuationNodeInputs): Flux3VideoContinuationNodeOutputs & { __id: OutputNodeId<Flux3VideoContinuationNodeResult>; inputs: Flux3VideoContinuationNodeInputPaths } {
+    const id = this.addNode("Flux3VideoContinuationNode", inputs);
+    const inputPaths = {
+      video: `${id}.inputs.video`,
+      prompt: `${id}.inputs.prompt`,
+      aspect_ratio: `${id}.inputs.aspect_ratio`,
+      duration: `${id}.inputs.duration`,
+      resolution: `${id}.inputs.resolution`,
+      generate_audio: `${id}.inputs.generate_audio`,
+      safety_tolerance: `${id}.inputs.safety_tolerance`,
+      seed: `${id}.inputs.seed`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<Flux3VideoContinuationNodeResult>,
       inputs: inputPaths
     };
   }
@@ -45774,6 +55317,24 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  FluxVideoUpscaleNode(inputs: FluxVideoUpscaleNodeInputs): FluxVideoUpscaleNodeOutputs & { __id: OutputNodeId<FluxVideoUpscaleNodeResult>; inputs: FluxVideoUpscaleNodeInputPaths } {
+    const id = this.addNode("FluxVideoUpscaleNode", inputs);
+    const inputPaths = {
+      video: `${id}.inputs.video`,
+      upscale_factor: `${id}.inputs.upscale_factor`,
+      mode: `${id}.inputs.mode`,
+      prompt: `${id}.inputs.prompt`,
+      auto_downscale: `${id}.inputs.auto_downscale`,
+      safety_tolerance: `${id}.inputs.safety_tolerance`,
+      seed: `${id}.inputs.seed`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<FluxVideoUpscaleNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
   FluxVTONode(inputs: FluxVTONodeInputs): FluxVTONodeOutputs & { __id: OutputNodeId<FluxVTONodeResult>; inputs: FluxVTONodeInputPaths } {
     const id = this.addNode("FluxVTONode", inputs);
     const inputPaths = {
@@ -46007,6 +55568,19 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  GeminiVideoOmniV2(inputs: GeminiVideoOmniV2Inputs): GeminiVideoOmniV2Outputs & { __id: OutputNodeId<GeminiVideoOmniV2Result>; inputs: GeminiVideoOmniV2InputPaths } {
+    const id = this.addNode("GeminiVideoOmniV2", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      STRING: this.makeRef<"STRING">(id, 1),
+      __id: id as OutputNodeId<GeminiVideoOmniV2Result>,
+      inputs: inputPaths
+    };
+  }
+
   GenerateNoise(inputs: GenerateNoiseInputs): GenerateNoiseOutputs & { __id: OutputNodeId<GenerateNoiseResult>; inputs: GenerateNoiseInputPaths } {
     const id = this.addNode("GenerateNoise", inputs);
     const inputPaths = {
@@ -46228,6 +55802,19 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  GetMeshInfo(inputs: GetMeshInfoInputs): GetMeshInfoOutputs & { __id: OutputNodeId<GetMeshInfoResult>; inputs: GetMeshInfoInputPaths } {
+    const id = this.addNode("GetMeshInfo", inputs);
+    const inputPaths = {
+      mesh: `${id}.inputs.mesh`,
+    };
+    return {
+      mesh: this.makeRef<"MESH">(id, 0),
+      info: this.makeRef<"STRING">(id, 1),
+      __id: id as OutputNodeId<GetMeshInfoResult>,
+      inputs: inputPaths
+    };
+  }
+
   GetPreviewOverrideFramesKJ(inputs: GetPreviewOverrideFramesKJInputs): GetPreviewOverrideFramesKJOutputs & { __id: OutputNodeId<GetPreviewOverrideFramesKJResult>; inputs: GetPreviewOverrideFramesKJInputPaths } {
     const id = this.addNode("GetPreviewOverrideFramesKJ", inputs);
     const inputPaths = {
@@ -46277,7 +55864,8 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       images: this.makeRef<"IMAGE">(id, 0),
       audio: this.makeRef<"AUDIO">(id, 1),
       fps: this.makeRef<"FLOAT">(id, 2),
-      bit_depth: this.makeRef<"INT">(id, 3),
+      bit_depth: this.makeRef<"COMBO">(id, 3),
+      color_space: this.makeRef<"COMBO">(id, 4),
       __id: id as OutputNodeId<GetVideoComponentsResult>,
       inputs: inputPaths
     };
@@ -46443,6 +56031,7 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       number_of_images: `${id}.inputs.number_of_images`,
       seed: `${id}.inputs.seed`,
       resolution: `${id}.inputs.resolution`,
+      quality: `${id}.inputs.quality`,
     };
     return {
       IMAGE: this.makeRef<"IMAGE">(id, 0),
@@ -46632,6 +56221,88 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       IMAGE: this.makeRef<"IMAGE">(id, 0),
       __id: id as OutputNodeId<HEDPreprocessorResult>,
+      inputs: inputPaths
+    };
+  }
+
+  HeyGenAvatarVideoNode(inputs: HeyGenAvatarVideoNodeInputs): HeyGenAvatarVideoNodeOutputs & { __id: OutputNodeId<HeyGenAvatarVideoNodeResult>; inputs: HeyGenAvatarVideoNodeInputPaths } {
+    const id = this.addNode("HeyGenAvatarVideoNode", inputs);
+    const inputPaths = {
+      engine: `${id}.inputs.engine`,
+      speech: `${id}.inputs.speech`,
+      custom_avatar_id: `${id}.inputs.custom_avatar_id`,
+      resolution: `${id}.inputs.resolution`,
+      aspect_ratio: `${id}.inputs.aspect_ratio`,
+      background_color: `${id}.inputs.background_color`,
+      seed: `${id}.inputs.seed`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<HeyGenAvatarVideoNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  HeyGenCreateAvatarNode(inputs: HeyGenCreateAvatarNodeInputs): HeyGenCreateAvatarNodeOutputs & { __id: OutputNodeId<HeyGenCreateAvatarNodeResult>; inputs: HeyGenCreateAvatarNodeInputPaths } {
+    const id = this.addNode("HeyGenCreateAvatarNode", inputs);
+    const inputPaths = {
+      source: `${id}.inputs.source`,
+    };
+    return {
+      avatar_id: this.makeRef<"STRING">(id, 0),
+      preview: this.makeRef<"IMAGE">(id, 1),
+      __id: id as OutputNodeId<HeyGenCreateAvatarNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  HeyGenTalkingPhotoNode(inputs: HeyGenTalkingPhotoNodeInputs): HeyGenTalkingPhotoNodeOutputs & { __id: OutputNodeId<HeyGenTalkingPhotoNodeResult>; inputs: HeyGenTalkingPhotoNodeInputPaths } {
+    const id = this.addNode("HeyGenTalkingPhotoNode", inputs);
+    const inputPaths = {
+      image: `${id}.inputs.image`,
+      speech: `${id}.inputs.speech`,
+      resolution: `${id}.inputs.resolution`,
+      aspect_ratio: `${id}.inputs.aspect_ratio`,
+      expressiveness: `${id}.inputs.expressiveness`,
+      seed: `${id}.inputs.seed`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<HeyGenTalkingPhotoNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  HeyGenTextToSpeechNode(inputs: HeyGenTextToSpeechNodeInputs): HeyGenTextToSpeechNodeOutputs & { __id: OutputNodeId<HeyGenTextToSpeechNodeResult>; inputs: HeyGenTextToSpeechNodeInputPaths } {
+    const id = this.addNode("HeyGenTextToSpeechNode", inputs);
+    const inputPaths = {
+      text: `${id}.inputs.text`,
+      voice: `${id}.inputs.voice`,
+      custom_voice_id: `${id}.inputs.custom_voice_id`,
+      speed: `${id}.inputs.speed`,
+      ssml: `${id}.inputs.ssml`,
+      seed: `${id}.inputs.seed`,
+    };
+    return {
+      AUDIO: this.makeRef<"AUDIO">(id, 0),
+      __id: id as OutputNodeId<HeyGenTextToSpeechNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  HeyGenVideoTranslateNode(inputs: HeyGenVideoTranslateNodeInputs): HeyGenVideoTranslateNodeOutputs & { __id: OutputNodeId<HeyGenVideoTranslateNodeResult>; inputs: HeyGenVideoTranslateNodeInputPaths } {
+    const id = this.addNode("HeyGenVideoTranslateNode", inputs);
+    const inputPaths = {
+      video: `${id}.inputs.video`,
+      output_language: `${id}.inputs.output_language`,
+      mode: `${id}.inputs.mode`,
+      translate_audio_only: `${id}.inputs.translate_audio_only`,
+      speaker_count: `${id}.inputs.speaker_count`,
+      seed: `${id}.inputs.seed`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<HeyGenVideoTranslateNodeResult>,
       inputs: inputPaths
     };
   }
@@ -47026,40 +56697,20 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
-  IdeogramV1(inputs: IdeogramV1Inputs): IdeogramV1Outputs & { __id: OutputNodeId<IdeogramV1Result>; inputs: IdeogramV1InputPaths } {
-    const id = this.addNode("IdeogramV1", inputs);
+  IdeogramPImage(inputs: IdeogramPImageInputs): IdeogramPImageOutputs & { __id: OutputNodeId<IdeogramPImageResult>; inputs: IdeogramPImageInputPaths } {
+    const id = this.addNode("IdeogramPImage", inputs);
     const inputPaths = {
       prompt: `${id}.inputs.prompt`,
-      turbo: `${id}.inputs.turbo`,
-      aspect_ratio: `${id}.inputs.aspect_ratio`,
-      magic_prompt_option: `${id}.inputs.magic_prompt_option`,
-      seed: `${id}.inputs.seed`,
-      negative_prompt: `${id}.inputs.negative_prompt`,
-      num_images: `${id}.inputs.num_images`,
-    };
-    return {
-      IMAGE: this.makeRef<"IMAGE">(id, 0),
-      __id: id as OutputNodeId<IdeogramV1Result>,
-      inputs: inputPaths
-    };
-  }
-
-  IdeogramV2(inputs: IdeogramV2Inputs): IdeogramV2Outputs & { __id: OutputNodeId<IdeogramV2Result>; inputs: IdeogramV2InputPaths } {
-    const id = this.addNode("IdeogramV2", inputs);
-    const inputPaths = {
-      prompt: `${id}.inputs.prompt`,
-      turbo: `${id}.inputs.turbo`,
-      aspect_ratio: `${id}.inputs.aspect_ratio`,
+      quality: `${id}.inputs.quality`,
       resolution: `${id}.inputs.resolution`,
-      magic_prompt_option: `${id}.inputs.magic_prompt_option`,
+      aspect_ratio: `${id}.inputs.aspect_ratio`,
+      prompt_upsampling: `${id}.inputs.prompt_upsampling`,
       seed: `${id}.inputs.seed`,
-      style_type: `${id}.inputs.style_type`,
-      negative_prompt: `${id}.inputs.negative_prompt`,
-      num_images: `${id}.inputs.num_images`,
     };
     return {
       IMAGE: this.makeRef<"IMAGE">(id, 0),
-      __id: id as OutputNodeId<IdeogramV2Result>,
+      final_prompt: this.makeRef<"STRING">(id, 1),
+      __id: id as OutputNodeId<IdeogramPImageResult>,
       inputs: inputPaths
     };
   }
@@ -47519,6 +57170,20 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  ImageCompositor(inputs: ImageCompositorInputs): ImageCompositorOutputs & { __id: OutputNodeId<ImageCompositorResult>; inputs: ImageCompositorInputPaths } {
+    const id = this.addNode("ImageCompositor", inputs);
+    const inputPaths = {
+      layers: `${id}.inputs.layers`,
+      compositor: `${id}.inputs.compositor`,
+    };
+    return {
+      IMAGE: this.makeRef<"IMAGE">(id, 0),
+      MASK: this.makeRef<"MASK">(id, 1),
+      __id: id as OutputNodeId<ImageCompositorResult>,
+      inputs: inputPaths
+    };
+  }
+
   ImageConcanate(inputs: ImageConcanateInputs): ImageConcanateOutputs & { __id: OutputNodeId<ImageConcanateResult>; inputs: ImageConcanateInputPaths } {
     const id = this.addNode("ImageConcanate", inputs);
     const inputPaths = {
@@ -47648,6 +57313,24 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       images: this.makeRef<"IMAGE">(id, 0),
       masks: this.makeRef<"MASK">(id, 1),
       __id: id as OutputNodeId<ImageCropByMaskBatchResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ImageCropToMask(inputs: ImageCropToMaskInputs): ImageCropToMaskOutputs & { __id: OutputNodeId<ImageCropToMaskResult>; inputs: ImageCropToMaskInputPaths } {
+    const id = this.addNode("ImageCropToMask", inputs);
+    const inputPaths = {
+      images: `${id}.inputs.images`,
+      masks: `${id}.inputs.masks`,
+      width: `${id}.inputs.width`,
+      height: `${id}.inputs.height`,
+      pad_factor: `${id}.inputs.pad_factor`,
+      grow_mask: `${id}.inputs.grow_mask`,
+      background: `${id}.inputs.background`,
+    };
+    return {
+      images: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<ImageCropToMaskResult>,
       inputs: inputPaths
     };
   }
@@ -49477,79 +59160,6 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
-  KlingCameraControlI2VNode(inputs: KlingCameraControlI2VNodeInputs): KlingCameraControlI2VNodeOutputs & { __id: OutputNodeId<KlingCameraControlI2VNodeResult>; inputs: KlingCameraControlI2VNodeInputPaths } {
-    const id = this.addNode("KlingCameraControlI2VNode", inputs);
-    const inputPaths = {
-      start_frame: `${id}.inputs.start_frame`,
-      prompt: `${id}.inputs.prompt`,
-      negative_prompt: `${id}.inputs.negative_prompt`,
-      cfg_scale: `${id}.inputs.cfg_scale`,
-      aspect_ratio: `${id}.inputs.aspect_ratio`,
-      camera_control: `${id}.inputs.camera_control`,
-    };
-    return {
-      VIDEO: this.makeRef<"VIDEO">(id, 0),
-      video_id: this.makeRef<"STRING">(id, 1),
-      duration: this.makeRef<"STRING">(id, 2),
-      __id: id as OutputNodeId<KlingCameraControlI2VNodeResult>,
-      inputs: inputPaths
-    };
-  }
-
-  KlingCameraControls(inputs: KlingCameraControlsInputs): KlingCameraControlsOutputs & { __id: OutputNodeId<KlingCameraControlsResult>; inputs: KlingCameraControlsInputPaths } {
-    const id = this.addNode("KlingCameraControls", inputs);
-    const inputPaths = {
-      camera_control_type: `${id}.inputs.camera_control_type`,
-      horizontal_movement: `${id}.inputs.horizontal_movement`,
-      vertical_movement: `${id}.inputs.vertical_movement`,
-      pan: `${id}.inputs.pan`,
-      tilt: `${id}.inputs.tilt`,
-      roll: `${id}.inputs.roll`,
-      zoom: `${id}.inputs.zoom`,
-    };
-    return {
-      camera_control: this.makeRef<"CAMERA_CONTROL">(id, 0),
-      __id: id as OutputNodeId<KlingCameraControlsResult>,
-      inputs: inputPaths
-    };
-  }
-
-  KlingCameraControlT2VNode(inputs: KlingCameraControlT2VNodeInputs): KlingCameraControlT2VNodeOutputs & { __id: OutputNodeId<KlingCameraControlT2VNodeResult>; inputs: KlingCameraControlT2VNodeInputPaths } {
-    const id = this.addNode("KlingCameraControlT2VNode", inputs);
-    const inputPaths = {
-      prompt: `${id}.inputs.prompt`,
-      negative_prompt: `${id}.inputs.negative_prompt`,
-      cfg_scale: `${id}.inputs.cfg_scale`,
-      aspect_ratio: `${id}.inputs.aspect_ratio`,
-      camera_control: `${id}.inputs.camera_control`,
-    };
-    return {
-      VIDEO: this.makeRef<"VIDEO">(id, 0),
-      video_id: this.makeRef<"STRING">(id, 1),
-      duration: this.makeRef<"STRING">(id, 2),
-      __id: id as OutputNodeId<KlingCameraControlT2VNodeResult>,
-      inputs: inputPaths
-    };
-  }
-
-  KlingDualCharacterVideoEffectNode(inputs: KlingDualCharacterVideoEffectNodeInputs): KlingDualCharacterVideoEffectNodeOutputs & { __id: OutputNodeId<KlingDualCharacterVideoEffectNodeResult>; inputs: KlingDualCharacterVideoEffectNodeInputPaths } {
-    const id = this.addNode("KlingDualCharacterVideoEffectNode", inputs);
-    const inputPaths = {
-      image_left: `${id}.inputs.image_left`,
-      image_right: `${id}.inputs.image_right`,
-      effect_scene: `${id}.inputs.effect_scene`,
-      model_name: `${id}.inputs.model_name`,
-      mode: `${id}.inputs.mode`,
-      duration: `${id}.inputs.duration`,
-    };
-    return {
-      VIDEO: this.makeRef<"VIDEO">(id, 0),
-      duration: this.makeRef<"STRING">(id, 1),
-      __id: id as OutputNodeId<KlingDualCharacterVideoEffectNodeResult>,
-      inputs: inputPaths
-    };
-  }
-
   KlingFirstLastFrameNode(inputs: KlingFirstLastFrameNodeInputs): KlingFirstLastFrameNodeOutputs & { __id: OutputNodeId<KlingFirstLastFrameNodeResult>; inputs: KlingFirstLastFrameNodeInputPaths } {
     const id = this.addNode("KlingFirstLastFrameNode", inputs);
     const inputPaths = {
@@ -49794,23 +59404,6 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
-  KlingSingleImageVideoEffectNode(inputs: KlingSingleImageVideoEffectNodeInputs): KlingSingleImageVideoEffectNodeOutputs & { __id: OutputNodeId<KlingSingleImageVideoEffectNodeResult>; inputs: KlingSingleImageVideoEffectNodeInputPaths } {
-    const id = this.addNode("KlingSingleImageVideoEffectNode", inputs);
-    const inputPaths = {
-      image: `${id}.inputs.image`,
-      effect_scene: `${id}.inputs.effect_scene`,
-      model_name: `${id}.inputs.model_name`,
-      duration: `${id}.inputs.duration`,
-    };
-    return {
-      VIDEO: this.makeRef<"VIDEO">(id, 0),
-      video_id: this.makeRef<"STRING">(id, 1),
-      duration: this.makeRef<"STRING">(id, 2),
-      __id: id as OutputNodeId<KlingSingleImageVideoEffectNodeResult>,
-      inputs: inputPaths
-    };
-  }
-
   KlingStartEndFrameNode(inputs: KlingStartEndFrameNodeInputs): KlingStartEndFrameNodeOutputs & { __id: OutputNodeId<KlingStartEndFrameNodeResult>; inputs: KlingStartEndFrameNodeInputPaths } {
     const id = this.addNode("KlingStartEndFrameNode", inputs);
     const inputPaths = {
@@ -49895,20 +59488,6 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       VIDEO: this.makeRef<"VIDEO">(id, 0),
       __id: id as OutputNodeId<KlingVideoNodeResult>,
-      inputs: inputPaths
-    };
-  }
-
-  KlingVirtualTryOnNode(inputs: KlingVirtualTryOnNodeInputs): KlingVirtualTryOnNodeOutputs & { __id: OutputNodeId<KlingVirtualTryOnNodeResult>; inputs: KlingVirtualTryOnNodeInputPaths } {
-    const id = this.addNode("KlingVirtualTryOnNode", inputs);
-    const inputPaths = {
-      human_image: `${id}.inputs.human_image`,
-      cloth_image: `${id}.inputs.cloth_image`,
-      model_name: `${id}.inputs.model_name`,
-    };
-    return {
-      IMAGE: this.makeRef<"IMAGE">(id, 0),
-      __id: id as OutputNodeId<KlingVirtualTryOnNodeResult>,
       inputs: inputPaths
     };
   }
@@ -52036,6 +61615,24 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       yolo_plot_image: this.makeRef<"IMAGE">(id, 1),
       yolo_masks: this.makeRef<"MASK">(id, 2),
       __id: id as OutputNodeId<LayerMaskYoloV8DetectResult>,
+      inputs: inputPaths
+    };
+  }
+
+  LayersFromBoundingBoxes(inputs: LayersFromBoundingBoxesInputs): LayersFromBoundingBoxesOutputs & { __id: OutputNodeId<LayersFromBoundingBoxesResult>; inputs: LayersFromBoundingBoxesInputPaths } {
+    const id = this.addNode("LayersFromBoundingBoxes", inputs);
+    const inputPaths = {
+      image: `${id}.inputs.image`,
+      bboxes: `${id}.inputs.bboxes`,
+      mask: `${id}.inputs.mask`,
+      layers: `${id}.inputs.layers`,
+      crop_to_content: `${id}.inputs.crop_to_content`,
+      canvas_width: `${id}.inputs.canvas_width`,
+      canvas_height: `${id}.inputs.canvas_height`,
+    };
+    return {
+      LAYERS: this.makeRef<"LAYERS">(id, 0),
+      __id: id as OutputNodeId<LayersFromBoundingBoxesResult>,
       inputs: inputPaths
     };
   }
@@ -54491,6 +64088,18 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  LoadVideoDataSetFromFolder(inputs: LoadVideoDataSetFromFolderInputs): LoadVideoDataSetFromFolderOutputs & { __id: OutputNodeId<LoadVideoDataSetFromFolderResult>; inputs: LoadVideoDataSetFromFolderInputPaths } {
+    const id = this.addNode("LoadVideoDataSetFromFolder", inputs);
+    const inputPaths = {
+      folder: `${id}.inputs.folder`,
+    };
+    return {
+      videos: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<LoadVideoDataSetFromFolderResult>,
+      inputs: inputPaths
+    };
+  }
+
   LoadVideosFromFolder(inputs: LoadVideosFromFolderInputs): LoadVideosFromFolderOutputs & { __id: OutputNodeId<LoadVideosFromFolderResult>; inputs: LoadVideosFromFolderInputPaths } {
     const id = this.addNode("LoadVideosFromFolder", inputs);
     const inputPaths = {
@@ -54508,6 +64117,19 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       IMAGE: this.makeRef<"IMAGE">(id, 0),
       __id: id as OutputNodeId<LoadVideosFromFolderResult>,
+      inputs: inputPaths
+    };
+  }
+
+  LoadVideoTextDataSetFromFolder(inputs: LoadVideoTextDataSetFromFolderInputs): LoadVideoTextDataSetFromFolderOutputs & { __id: OutputNodeId<LoadVideoTextDataSetFromFolderResult>; inputs: LoadVideoTextDataSetFromFolderInputPaths } {
+    const id = this.addNode("LoadVideoTextDataSetFromFolder", inputs);
+    const inputPaths = {
+      folder: `${id}.inputs.folder`,
+    };
+    return {
+      videos: this.makeRef<"VIDEO">(id, 0),
+      texts: this.makeRef<"STRING">(id, 1),
+      __id: id as OutputNodeId<LoadVideoTextDataSetFromFolderResult>,
       inputs: inputPaths
     };
   }
@@ -54835,6 +64457,52 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  LtxApi25AudioToVideo(inputs: LtxApi25AudioToVideoInputs): LtxApi25AudioToVideoOutputs & { __id: OutputNodeId<LtxApi25AudioToVideoResult>; inputs: LtxApi25AudioToVideoInputPaths } {
+    const id = this.addNode("LtxApi25AudioToVideo", inputs);
+    const inputPaths = {
+      audio: `${id}.inputs.audio`,
+      model: `${id}.inputs.model`,
+      prompt: `${id}.inputs.prompt`,
+      seed: `${id}.inputs.seed`,
+      image: `${id}.inputs.image`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<LtxApi25AudioToVideoResult>,
+      inputs: inputPaths
+    };
+  }
+
+  LtxApi25ImageToVideo(inputs: LtxApi25ImageToVideoInputs): LtxApi25ImageToVideoOutputs & { __id: OutputNodeId<LtxApi25ImageToVideoResult>; inputs: LtxApi25ImageToVideoInputPaths } {
+    const id = this.addNode("LtxApi25ImageToVideo", inputs);
+    const inputPaths = {
+      image: `${id}.inputs.image`,
+      model: `${id}.inputs.model`,
+      prompt: `${id}.inputs.prompt`,
+      seed: `${id}.inputs.seed`,
+      last_frame: `${id}.inputs.last_frame`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<LtxApi25ImageToVideoResult>,
+      inputs: inputPaths
+    };
+  }
+
+  LtxApi25TextToVideo(inputs: LtxApi25TextToVideoInputs): LtxApi25TextToVideoOutputs & { __id: OutputNodeId<LtxApi25TextToVideoResult>; inputs: LtxApi25TextToVideoInputPaths } {
+    const id = this.addNode("LtxApi25TextToVideo", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      prompt: `${id}.inputs.prompt`,
+      seed: `${id}.inputs.seed`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<LtxApi25TextToVideoResult>,
+      inputs: inputPaths
+    };
+  }
+
   LTXAVTextEncoderLoader(inputs: LTXAVTextEncoderLoaderInputs): LTXAVTextEncoderLoaderOutputs & { __id: OutputNodeId<LTXAVTextEncoderLoaderResult>; inputs: LTXAVTextEncoderLoaderInputPaths } {
     const id = this.addNode("LTXAVTextEncoderLoader", inputs);
     const inputPaths = {
@@ -55081,6 +64749,40 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  LTXVDualCFGGuider(inputs: LTXVDualCFGGuiderInputs): LTXVDualCFGGuiderOutputs & { __id: OutputNodeId<LTXVDualCFGGuiderResult>; inputs: LTXVDualCFGGuiderInputPaths } {
+    const id = this.addNode("LTXVDualCFGGuider", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      positive: `${id}.inputs.positive`,
+      negative: `${id}.inputs.negative`,
+      video_cfg: `${id}.inputs.video_cfg`,
+      audio_cfg: `${id}.inputs.audio_cfg`,
+    };
+    return {
+      GUIDER: this.makeRef<"GUIDER">(id, 0),
+      __id: id as OutputNodeId<LTXVDualCFGGuiderResult>,
+      inputs: inputPaths
+    };
+  }
+
+  LTXVDurationPredictor(inputs: LTXVDurationPredictorInputs): LTXVDurationPredictorOutputs & { __id: OutputNodeId<LTXVDurationPredictorResult>; inputs: LTXVDurationPredictorInputPaths } {
+    const id = this.addNode("LTXVDurationPredictor", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      positive: `${id}.inputs.positive`,
+      duration_head: `${id}.inputs.duration_head`,
+      frame_rate: `${id}.inputs.frame_rate`,
+      min_seconds: `${id}.inputs.min_seconds`,
+      max_seconds: `${id}.inputs.max_seconds`,
+    };
+    return {
+      num_frames: this.makeRef<"INT">(id, 0),
+      seconds: this.makeRef<"FLOAT">(id, 1),
+      __id: id as OutputNodeId<LTXVDurationPredictorResult>,
+      inputs: inputPaths
+    };
+  }
+
   LTXVEmptyLatentAudio(inputs: LTXVEmptyLatentAudioInputs): LTXVEmptyLatentAudioOutputs & { __id: OutputNodeId<LTXVEmptyLatentAudioResult>; inputs: LTXVEmptyLatentAudioInputPaths } {
     const id = this.addNode("LTXVEmptyLatentAudio", inputs);
     const inputPaths = {
@@ -55176,6 +64878,21 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  LTXVModalityGuidance(inputs: LTXVModalityGuidanceInputs): LTXVModalityGuidanceOutputs & { __id: OutputNodeId<LTXVModalityGuidanceResult>; inputs: LTXVModalityGuidanceInputPaths } {
+    const id = this.addNode("LTXVModalityGuidance", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      modality_scale: `${id}.inputs.modality_scale`,
+      start_percent: `${id}.inputs.start_percent`,
+      end_percent: `${id}.inputs.end_percent`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      __id: id as OutputNodeId<LTXVModalityGuidanceResult>,
+      inputs: inputPaths
+    };
+  }
+
   LTXVPreprocess(inputs: LTXVPreprocessInputs): LTXVPreprocessOutputs & { __id: OutputNodeId<LTXVPreprocessResult>; inputs: LTXVPreprocessInputPaths } {
     const id = this.addNode("LTXVPreprocess", inputs);
     const inputPaths = {
@@ -55236,6 +64953,22 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       video_latent: this.makeRef<"LATENT">(id, 0),
       audio_latent: this.makeRef<"LATENT">(id, 1),
       __id: id as OutputNodeId<LTXVSeparateAVLatentResult>,
+      inputs: inputPaths
+    };
+  }
+
+  LTXVSpatioTemporalGuidance(inputs: LTXVSpatioTemporalGuidanceInputs): LTXVSpatioTemporalGuidanceOutputs & { __id: OutputNodeId<LTXVSpatioTemporalGuidanceResult>; inputs: LTXVSpatioTemporalGuidanceInputPaths } {
+    const id = this.addNode("LTXVSpatioTemporalGuidance", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      scale: `${id}.inputs.scale`,
+      blocks: `${id}.inputs.blocks`,
+      start_percent: `${id}.inputs.start_percent`,
+      end_percent: `${id}.inputs.end_percent`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      __id: id as OutputNodeId<LTXVSpatioTemporalGuidanceResult>,
       inputs: inputPaths
     };
   }
@@ -55898,12 +65631,16 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
-  MaskPreview(inputs: MaskPreviewInputs): { __id: OutputNodeId<MaskPreviewResult>; inputs: MaskPreviewInputPaths } {
+  MaskPreview(inputs: MaskPreviewInputs): MaskPreviewOutputs & { __id: OutputNodeId<MaskPreviewResult>; inputs: MaskPreviewInputPaths } {
     const id = this.addNode("MaskPreview", inputs);
     const inputPaths = {
       mask: `${id}.inputs.mask`,
     };
-    return { __id: id as OutputNodeId<MaskPreviewResult>, inputs: inputPaths };
+    return {
+      mask: this.makeRef<"MASK">(id, 0),
+      __id: id as OutputNodeId<MaskPreviewResult>,
+      inputs: inputPaths
+    };
   }
 
   /** Node: "MaskPreview+" */
@@ -56036,6 +65773,18 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  MergeMeshes(inputs: MergeMeshesInputs): MergeMeshesOutputs & { __id: OutputNodeId<MergeMeshesResult>; inputs: MergeMeshesInputPaths } {
+    const id = this.addNode("MergeMeshes", inputs);
+    const inputPaths = {
+      meshes: `${id}.inputs.meshes`,
+    };
+    return {
+      mesh: this.makeRef<"MESH">(id, 0),
+      __id: id as OutputNodeId<MergeMeshesResult>,
+      inputs: inputPaths
+    };
+  }
+
   MergeSplat(inputs: MergeSplatInputs): MergeSplatOutputs & { __id: OutputNodeId<MergeSplatResult>; inputs: MergeSplatInputPaths } {
     const id = this.addNode("MergeSplat", inputs);
     const inputPaths = {
@@ -56105,6 +65854,47 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  MeshSmoothNormals(inputs: MeshSmoothNormalsInputs): MeshSmoothNormalsOutputs & { __id: OutputNodeId<MeshSmoothNormalsResult>; inputs: MeshSmoothNormalsInputPaths } {
+    const id = this.addNode("MeshSmoothNormals", inputs);
+    const inputPaths = {
+      mesh: `${id}.inputs.mesh`,
+      crease_angle: `${id}.inputs.crease_angle`,
+    };
+    return {
+      mesh: this.makeRef<"MESH">(id, 0),
+      __id: id as OutputNodeId<MeshSmoothNormalsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  MeshTextureToImage(inputs: MeshTextureToImageInputs): MeshTextureToImageOutputs & { __id: OutputNodeId<MeshTextureToImageResult>; inputs: MeshTextureToImageInputPaths } {
+    const id = this.addNode("MeshTextureToImage", inputs);
+    const inputPaths = {
+      mesh: `${id}.inputs.mesh`,
+    };
+    return {
+      base_color: this.makeRef<"IMAGE">(id, 0),
+      metallic: this.makeRef<"IMAGE">(id, 1),
+      roughness: this.makeRef<"IMAGE">(id, 2),
+      occlusion: this.makeRef<"IMAGE">(id, 3),
+      normal_map: this.makeRef<"IMAGE">(id, 4),
+      __id: id as OutputNodeId<MeshTextureToImageResult>,
+      inputs: inputPaths
+    };
+  }
+
+  MeshToFile3D(inputs: MeshToFile3DInputs): MeshToFile3DOutputs & { __id: OutputNodeId<MeshToFile3DResult>; inputs: MeshToFile3DInputPaths } {
+    const id = this.addNode("MeshToFile3D", inputs);
+    const inputPaths = {
+      mesh: `${id}.inputs.mesh`,
+    };
+    return {
+      model_3d: this.makeRef<"FILE_3D_GLB">(id, 0),
+      __id: id as OutputNodeId<MeshToFile3DResult>,
+      inputs: inputPaths
+    };
+  }
+
   MeshyAnimateModelNode(inputs: MeshyAnimateModelNodeInputs): MeshyAnimateModelNodeOutputs & { __id: OutputNodeId<MeshyAnimateModelNodeResult>; inputs: MeshyAnimateModelNodeInputPaths } {
     const id = this.addNode("MeshyAnimateModelNode", inputs);
     const inputPaths = {
@@ -56130,6 +65920,7 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       should_texture: `${id}.inputs.should_texture`,
       pose_mode: `${id}.inputs.pose_mode`,
       seed: `${id}.inputs.seed`,
+      ultra_mode: `${id}.inputs.ultra_mode`,
     };
     return {
       model_file: this.makeRef<"STRING">(id, 0),
@@ -56169,6 +65960,7 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       meshy_task_id: `${id}.inputs.meshy_task_id`,
       enable_pbr: `${id}.inputs.enable_pbr`,
       texture_prompt: `${id}.inputs.texture_prompt`,
+      texture_resolution: `${id}.inputs.texture_resolution`,
       texture_image: `${id}.inputs.texture_image`,
     };
     return {
@@ -56208,6 +66000,7 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       symmetry_mode: `${id}.inputs.symmetry_mode`,
       pose_mode: `${id}.inputs.pose_mode`,
       seed: `${id}.inputs.seed`,
+      ultra_mode: `${id}.inputs.ultra_mode`,
     };
     return {
       model_file: this.makeRef<"STRING">(id, 0),
@@ -56215,6 +66008,26 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       GLB: this.makeRef<"FILE_3D_GLB">(id, 2),
       FBX: this.makeRef<"FILE_3D_FBX">(id, 3),
       __id: id as OutputNodeId<MeshyTextToModelNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  MeshyTextureMultiViewNode(inputs: MeshyTextureMultiViewNodeInputs): MeshyTextureMultiViewNodeOutputs & { __id: OutputNodeId<MeshyTextureMultiViewNodeResult>; inputs: MeshyTextureMultiViewNodeInputPaths } {
+    const id = this.addNode("MeshyTextureMultiViewNode", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      meshy_task_id: `${id}.inputs.meshy_task_id`,
+      multiview_images: `${id}.inputs.multiview_images`,
+      enable_original_uv: `${id}.inputs.enable_original_uv`,
+      pbr: `${id}.inputs.pbr`,
+      texture_resolution: `${id}.inputs.texture_resolution`,
+    };
+    return {
+      model_file: this.makeRef<"STRING">(id, 0),
+      meshy_task_id: this.makeRef<"MESHY_TASK_ID">(id, 1),
+      GLB: this.makeRef<"FILE_3D_GLB">(id, 2),
+      FBX: this.makeRef<"FILE_3D_FBX">(id, 3),
+      __id: id as OutputNodeId<MeshyTextureMultiViewNodeResult>,
       inputs: inputPaths
     };
   }
@@ -56227,14 +66040,39 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       enable_original_uv: `${id}.inputs.enable_original_uv`,
       pbr: `${id}.inputs.pbr`,
       text_style_prompt: `${id}.inputs.text_style_prompt`,
+      texture_resolution: `${id}.inputs.texture_resolution`,
       image_style: `${id}.inputs.image_style`,
     };
     return {
       model_file: this.makeRef<"STRING">(id, 0),
-      meshy_task_id: this.makeRef<"MODEL_TASK_ID">(id, 1),
+      meshy_task_id: this.makeRef<"MESHY_TASK_ID">(id, 1),
       GLB: this.makeRef<"FILE_3D_GLB">(id, 2),
       FBX: this.makeRef<"FILE_3D_FBX">(id, 3),
       __id: id as OutputNodeId<MeshyTextureNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  MetaMuseImageEditApi(inputs: MetaMuseImageEditApiInputs): MetaMuseImageEditApiOutputs & { __id: OutputNodeId<MetaMuseImageEditApiResult>; inputs: MetaMuseImageEditApiInputPaths } {
+    const id = this.addNode("MetaMuseImageEditApi", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+    };
+    return {
+      IMAGE: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<MetaMuseImageEditApiResult>,
+      inputs: inputPaths
+    };
+  }
+
+  MetaMuseImageTextToImageApi(inputs: MetaMuseImageTextToImageApiInputs): MetaMuseImageTextToImageApiOutputs & { __id: OutputNodeId<MetaMuseImageTextToImageApiResult>; inputs: MetaMuseImageTextToImageApiInputPaths } {
+    const id = this.addNode("MetaMuseImageTextToImageApi", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+    };
+    return {
+      IMAGE: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<MetaMuseImageTextToImageApiResult>,
       inputs: inputPaths
     };
   }
@@ -56335,6 +66173,156 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  MiniMaxH3AddGuide(inputs: MiniMaxH3AddGuideInputs): MiniMaxH3AddGuideOutputs & { __id: OutputNodeId<MiniMaxH3AddGuideResult>; inputs: MiniMaxH3AddGuideInputPaths } {
+    const id = this.addNode("MiniMaxH3AddGuide", inputs);
+    const inputPaths = {
+      positive: `${id}.inputs.positive`,
+      latent: `${id}.inputs.latent`,
+      frame_idx: `${id}.inputs.frame_idx`,
+      vae: `${id}.inputs.vae`,
+      audio_vae: `${id}.inputs.audio_vae`,
+      image: `${id}.inputs.image`,
+      audio: `${id}.inputs.audio`,
+    };
+    return {
+      positive: this.makeRef<"CONDITIONING">(id, 0),
+      __id: id as OutputNodeId<MiniMaxH3AddGuideResult>,
+      inputs: inputPaths
+    };
+  }
+
+  MiniMaxH3ImageToVideo(inputs: MiniMaxH3ImageToVideoInputs): MiniMaxH3ImageToVideoOutputs & { __id: OutputNodeId<MiniMaxH3ImageToVideoResult>; inputs: MiniMaxH3ImageToVideoInputPaths } {
+    const id = this.addNode("MiniMaxH3ImageToVideo", inputs);
+    const inputPaths = {
+      clip: `${id}.inputs.clip`,
+      vae: `${id}.inputs.vae`,
+      prompt: `${id}.inputs.prompt`,
+      width: `${id}.inputs.width`,
+      height: `${id}.inputs.height`,
+      length: `${id}.inputs.length`,
+      first_frame: `${id}.inputs.first_frame`,
+      last_frame: `${id}.inputs.last_frame`,
+    };
+    return {
+      positive: this.makeRef<"CONDITIONING">(id, 0),
+      LATENT: this.makeRef<"LATENT">(id, 1),
+      __id: id as OutputNodeId<MiniMaxH3ImageToVideoResult>,
+      inputs: inputPaths
+    };
+  }
+
+  MiniMaxH3ReferenceToVideo(inputs: MiniMaxH3ReferenceToVideoInputs): MiniMaxH3ReferenceToVideoOutputs & { __id: OutputNodeId<MiniMaxH3ReferenceToVideoResult>; inputs: MiniMaxH3ReferenceToVideoInputPaths } {
+    const id = this.addNode("MiniMaxH3ReferenceToVideo", inputs);
+    const inputPaths = {
+      clip: `${id}.inputs.clip`,
+      vae: `${id}.inputs.vae`,
+      audio_vae: `${id}.inputs.audio_vae`,
+      prompt: `${id}.inputs.prompt`,
+      width: `${id}.inputs.width`,
+      height: `${id}.inputs.height`,
+      length: `${id}.inputs.length`,
+      ref_image_size: `${id}.inputs.ref_image_size`,
+      ref_images: `${id}.inputs.ref_images`,
+      ref_videos: `${id}.inputs.ref_videos`,
+      ref_video_audios: `${id}.inputs.ref_video_audios`,
+      ref_audios: `${id}.inputs.ref_audios`,
+    };
+    return {
+      positive: this.makeRef<"CONDITIONING">(id, 0),
+      LATENT: this.makeRef<"LATENT">(id, 1),
+      __id: id as OutputNodeId<MiniMaxH3ReferenceToVideoResult>,
+      inputs: inputPaths
+    };
+  }
+
+  MiniMaxH3SigmaShift(inputs: MiniMaxH3SigmaShiftInputs): MiniMaxH3SigmaShiftOutputs & { __id: OutputNodeId<MiniMaxH3SigmaShiftResult>; inputs: MiniMaxH3SigmaShiftInputPaths } {
+    const id = this.addNode("MiniMaxH3SigmaShift", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      shift_video: `${id}.inputs.shift_video`,
+      shift_audio: `${id}.inputs.shift_audio`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      __id: id as OutputNodeId<MiniMaxH3SigmaShiftResult>,
+      inputs: inputPaths
+    };
+  }
+
+  MinimaxHailuo03ContextIRNode(inputs: MinimaxHailuo03ContextIRNodeInputs): MinimaxHailuo03ContextIRNodeOutputs & { __id: OutputNodeId<MinimaxHailuo03ContextIRNodeResult>; inputs: MinimaxHailuo03ContextIRNodeInputPaths } {
+    const id = this.addNode("MinimaxHailuo03ContextIRNode", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      first_frame: `${id}.inputs.first_frame`,
+      last_frame: `${id}.inputs.last_frame`,
+    };
+    return {
+      STRING: this.makeRef<"STRING">(id, 0),
+      __id: id as OutputNodeId<MinimaxHailuo03ContextIRNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  MinimaxHailuo03FirstLastFrameNode(inputs: MinimaxHailuo03FirstLastFrameNodeInputs): MinimaxHailuo03FirstLastFrameNodeOutputs & { __id: OutputNodeId<MinimaxHailuo03FirstLastFrameNodeResult>; inputs: MinimaxHailuo03FirstLastFrameNodeInputPaths } {
+    const id = this.addNode("MinimaxHailuo03FirstLastFrameNode", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      first_frame: `${id}.inputs.first_frame`,
+      seed: `${id}.inputs.seed`,
+      watermark: `${id}.inputs.watermark`,
+      last_frame: `${id}.inputs.last_frame`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<MinimaxHailuo03FirstLastFrameNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  MinimaxHailuo03ReferenceNode(inputs: MinimaxHailuo03ReferenceNodeInputs): MinimaxHailuo03ReferenceNodeOutputs & { __id: OutputNodeId<MinimaxHailuo03ReferenceNodeResult>; inputs: MinimaxHailuo03ReferenceNodeInputPaths } {
+    const id = this.addNode("MinimaxHailuo03ReferenceNode", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      seed: `${id}.inputs.seed`,
+      watermark: `${id}.inputs.watermark`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<MinimaxHailuo03ReferenceNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  MinimaxHailuo03RegenerateNode(inputs: MinimaxHailuo03RegenerateNodeInputs): MinimaxHailuo03RegenerateNodeOutputs & { __id: OutputNodeId<MinimaxHailuo03RegenerateNodeResult>; inputs: MinimaxHailuo03RegenerateNodeInputPaths } {
+    const id = this.addNode("MinimaxHailuo03RegenerateNode", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      video: `${id}.inputs.video`,
+      watermark: `${id}.inputs.watermark`,
+      first_frame: `${id}.inputs.first_frame`,
+      last_frame: `${id}.inputs.last_frame`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<MinimaxHailuo03RegenerateNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  MinimaxHailuo03TextToVideoNode(inputs: MinimaxHailuo03TextToVideoNodeInputs): MinimaxHailuo03TextToVideoNodeOutputs & { __id: OutputNodeId<MinimaxHailuo03TextToVideoNodeResult>; inputs: MinimaxHailuo03TextToVideoNodeInputPaths } {
+    const id = this.addNode("MinimaxHailuo03TextToVideoNode", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      seed: `${id}.inputs.seed`,
+      watermark: `${id}.inputs.watermark`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<MinimaxHailuo03TextToVideoNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
   MinimaxHailuoVideoNode(inputs: MinimaxHailuoVideoNodeInputs): MinimaxHailuoVideoNodeOutputs & { __id: OutputNodeId<MinimaxHailuoVideoNodeResult>; inputs: MinimaxHailuoVideoNodeInputPaths } {
     const id = this.addNode("MinimaxHailuoVideoNode", inputs);
     const inputPaths = {
@@ -56367,6 +66355,25 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  MiniMaxMusic3TextEncode(inputs: MiniMaxMusic3TextEncodeInputs): MiniMaxMusic3TextEncodeOutputs & { __id: OutputNodeId<MiniMaxMusic3TextEncodeResult>; inputs: MiniMaxMusic3TextEncodeInputPaths } {
+    const id = this.addNode("MiniMaxMusic3TextEncode", inputs);
+    const inputPaths = {
+      clip: `${id}.inputs.clip`,
+      caption: `${id}.inputs.caption`,
+      lyrics: `${id}.inputs.lyrics`,
+      seed: `${id}.inputs.seed`,
+      max_duration: `${id}.inputs.max_duration`,
+      cfg_scale: `${id}.inputs.cfg_scale`,
+      top_k: `${id}.inputs.top_k`,
+    };
+    return {
+      CONDITIONING: this.makeRef<"CONDITIONING">(id, 0),
+      seconds: this.makeRef<"FLOAT">(id, 1),
+      __id: id as OutputNodeId<MiniMaxMusic3TextEncodeResult>,
+      inputs: inputPaths
+    };
+  }
+
   MinimaxTextToVideoNode(inputs: MinimaxTextToVideoNodeInputs): MinimaxTextToVideoNodeOutputs & { __id: OutputNodeId<MinimaxTextToVideoNodeResult>; inputs: MinimaxTextToVideoNodeInputPaths } {
     const id = this.addNode("MinimaxTextToVideoNode", inputs);
     const inputPaths = {
@@ -56377,6 +66384,19 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       VIDEO: this.makeRef<"VIDEO">(id, 0),
       __id: id as OutputNodeId<MinimaxTextToVideoNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ModelAttentionBackend(inputs: ModelAttentionBackendInputs): ModelAttentionBackendOutputs & { __id: OutputNodeId<ModelAttentionBackendResult>; inputs: ModelAttentionBackendInputPaths } {
+    const id = this.addNode("ModelAttentionBackend", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      attention: `${id}.inputs.attention`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      __id: id as OutputNodeId<ModelAttentionBackendResult>,
       inputs: inputPaths
     };
   }
@@ -57551,6 +67571,21 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return { __id: id as OutputNodeId<ModelSaveKJResult>, inputs: inputPaths };
   }
 
+  MoGeGeometryToFOV(inputs: MoGeGeometryToFOVInputs): MoGeGeometryToFOVOutputs & { __id: OutputNodeId<MoGeGeometryToFOVResult>; inputs: MoGeGeometryToFOVInputPaths } {
+    const id = this.addNode("MoGeGeometryToFOV", inputs);
+    const inputPaths = {
+      moge_geometry: `${id}.inputs.moge_geometry`,
+      axis: `${id}.inputs.axis`,
+      unit: `${id}.inputs.unit`,
+    };
+    return {
+      fov: this.makeRef<"FLOAT">(id, 0),
+      focal_pixels: this.makeRef<"FLOAT">(id, 1),
+      __id: id as OutputNodeId<MoGeGeometryToFOVResult>,
+      inputs: inputPaths
+    };
+  }
+
   MoGeInference(inputs: MoGeInferenceInputs): MoGeInferenceOutputs & { __id: OutputNodeId<MoGeInferenceResult>; inputs: MoGeInferenceInputPaths } {
     const id = this.addNode("MoGeInference", inputs);
     const inputPaths = {
@@ -58045,6 +68080,19 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  PaintMesh(inputs: PaintMeshInputs): PaintMeshOutputs & { __id: OutputNodeId<PaintMeshResult>; inputs: PaintMeshInputPaths } {
+    const id = this.addNode("PaintMesh", inputs);
+    const inputPaths = {
+      mesh: `${id}.inputs.mesh`,
+      voxel_colors: `${id}.inputs.voxel_colors`,
+    };
+    return {
+      mesh: this.makeRef<"MESH">(id, 0),
+      __id: id as OutputNodeId<PaintMeshResult>,
+      inputs: inputPaths
+    };
+  }
+
   PairConditioningCombine(inputs: PairConditioningCombineInputs): PairConditioningCombineOutputs & { __id: OutputNodeId<PairConditioningCombineResult>; inputs: PairConditioningCombineInputPaths } {
     const id = this.addNode("PairConditioningCombine", inputs);
     const inputPaths = {
@@ -58307,6 +68355,21 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  Pixal3DConditioning(inputs: Pixal3DConditioningInputs): Pixal3DConditioningOutputs & { __id: OutputNodeId<Pixal3DConditioningResult>; inputs: Pixal3DConditioningInputPaths } {
+    const id = this.addNode("Pixal3DConditioning", inputs);
+    const inputPaths = {
+      clip_vision_model: `${id}.inputs.clip_vision_model`,
+      image: `${id}.inputs.image`,
+      camera_angle_x: `${id}.inputs.camera_angle_x`,
+    };
+    return {
+      positive: this.makeRef<"CONDITIONING">(id, 0),
+      negative: this.makeRef<"CONDITIONING">(id, 1),
+      __id: id as OutputNodeId<Pixal3DConditioningResult>,
+      inputs: inputPaths
+    };
+  }
+
   /** Node: "PixelOEPixelize+" */
   PixelOEPixelize(inputs: PixelOEPixelizeInputs): PixelOEPixelizeOutputs & { __id: OutputNodeId<PixelOEPixelizeResult>; inputs: PixelOEPixelizeInputPaths } {
     const id = this.addNode("PixelOEPixelize+", inputs);
@@ -58406,6 +68469,73 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       VIDEO: this.makeRef<"VIDEO">(id, 0),
       __id: id as OutputNodeId<PixverseTransitionVideoNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  PixverseV6ExtendVideoNode(inputs: PixverseV6ExtendVideoNodeInputs): PixverseV6ExtendVideoNodeOutputs & { __id: OutputNodeId<PixverseV6ExtendVideoNodeResult>; inputs: PixverseV6ExtendVideoNodeInputPaths } {
+    const id = this.addNode("PixverseV6ExtendVideoNode", inputs);
+    const inputPaths = {
+      video: `${id}.inputs.video`,
+      model: `${id}.inputs.model`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<PixverseV6ExtendVideoNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  PixverseV6FirstLastFrameNode(inputs: PixverseV6FirstLastFrameNodeInputs): PixverseV6FirstLastFrameNodeOutputs & { __id: OutputNodeId<PixverseV6FirstLastFrameNodeResult>; inputs: PixverseV6FirstLastFrameNodeInputPaths } {
+    const id = this.addNode("PixverseV6FirstLastFrameNode", inputs);
+    const inputPaths = {
+      first_frame: `${id}.inputs.first_frame`,
+      last_frame: `${id}.inputs.last_frame`,
+      model: `${id}.inputs.model`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<PixverseV6FirstLastFrameNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  PixverseV6FusionVideoNode(inputs: PixverseV6FusionVideoNodeInputs): PixverseV6FusionVideoNodeOutputs & { __id: OutputNodeId<PixverseV6FusionVideoNodeResult>; inputs: PixverseV6FusionVideoNodeInputPaths } {
+    const id = this.addNode("PixverseV6FusionVideoNode", inputs);
+    const inputPaths = {
+      subjects: `${id}.inputs.subjects`,
+      backgrounds: `${id}.inputs.backgrounds`,
+      videos: `${id}.inputs.videos`,
+      model: `${id}.inputs.model`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<PixverseV6FusionVideoNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  PixverseV6ImageToVideoNode(inputs: PixverseV6ImageToVideoNodeInputs): PixverseV6ImageToVideoNodeOutputs & { __id: OutputNodeId<PixverseV6ImageToVideoNodeResult>; inputs: PixverseV6ImageToVideoNodeInputPaths } {
+    const id = this.addNode("PixverseV6ImageToVideoNode", inputs);
+    const inputPaths = {
+      image: `${id}.inputs.image`,
+      model: `${id}.inputs.model`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<PixverseV6ImageToVideoNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  PixverseV6TextToVideoNode(inputs: PixverseV6TextToVideoNodeInputs): PixverseV6TextToVideoNodeOutputs & { __id: OutputNodeId<PixverseV6TextToVideoNodeResult>; inputs: PixverseV6TextToVideoNodeInputPaths } {
+    const id = this.addNode("PixverseV6TextToVideoNode", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<PixverseV6TextToVideoNodeResult>,
       inputs: inputPaths
     };
   }
@@ -58922,6 +69052,39 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  QwenImageEditApi(inputs: QwenImageEditApiInputs): QwenImageEditApiOutputs & { __id: OutputNodeId<QwenImageEditApiResult>; inputs: QwenImageEditApiInputPaths } {
+    const id = this.addNode("QwenImageEditApi", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      size: `${id}.inputs.size`,
+      n: `${id}.inputs.n`,
+      seed: `${id}.inputs.seed`,
+      prompt_extend: `${id}.inputs.prompt_extend`,
+      watermark: `${id}.inputs.watermark`,
+    };
+    return {
+      IMAGE: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<QwenImageEditApiResult>,
+      inputs: inputPaths
+    };
+  }
+
+  QwenImageTextToImageApi(inputs: QwenImageTextToImageApiInputs): QwenImageTextToImageApiOutputs & { __id: OutputNodeId<QwenImageTextToImageApiResult>; inputs: QwenImageTextToImageApiInputPaths } {
+    const id = this.addNode("QwenImageTextToImageApi", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      n: `${id}.inputs.n`,
+      seed: `${id}.inputs.seed`,
+      prompt_extend: `${id}.inputs.prompt_extend`,
+      watermark: `${id}.inputs.watermark`,
+    };
+    return {
+      IMAGE: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<QwenImageTextToImageApiResult>,
+      inputs: inputPaths
+    };
+  }
+
   RandomCropImages(inputs: RandomCropImagesInputs): RandomCropImagesOutputs & { __id: OutputNodeId<RandomCropImagesResult>; inputs: RandomCropImagesInputPaths } {
     const id = this.addNode("RandomCropImages", inputs);
     const inputPaths = {
@@ -59222,6 +69385,19 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  RecraftV4CreateStyleNode(inputs: RecraftV4CreateStyleNodeInputs): RecraftV4CreateStyleNodeOutputs & { __id: OutputNodeId<RecraftV4CreateStyleNodeResult>; inputs: RecraftV4CreateStyleNodeInputPaths } {
+    const id = this.addNode("RecraftV4CreateStyleNode", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      images: `${id}.inputs.images`,
+    };
+    return {
+      style_id: this.makeRef<"STRING">(id, 0),
+      __id: id as OutputNodeId<RecraftV4CreateStyleNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
   RecraftV4TextToImageNode(inputs: RecraftV4TextToImageNodeInputs): RecraftV4TextToImageNodeOutputs & { __id: OutputNodeId<RecraftV4TextToImageNodeResult>; inputs: RecraftV4TextToImageNodeInputPaths } {
     const id = this.addNode("RecraftV4TextToImageNode", inputs);
     const inputPaths = {
@@ -59231,9 +69407,13 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       n: `${id}.inputs.n`,
       seed: `${id}.inputs.seed`,
       recraft_controls: `${id}.inputs.recraft_controls`,
+      style_id: `${id}.inputs.style_id`,
+      style_match: `${id}.inputs.style_match`,
+      style_references: `${id}.inputs.style_references`,
     };
     return {
       IMAGE: this.makeRef<"IMAGE">(id, 0),
+      style_id: this.makeRef<"STRING">(id, 1),
       __id: id as OutputNodeId<RecraftV4TextToImageNodeResult>,
       inputs: inputPaths
     };
@@ -59248,9 +69428,13 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       n: `${id}.inputs.n`,
       seed: `${id}.inputs.seed`,
       recraft_controls: `${id}.inputs.recraft_controls`,
+      style_id: `${id}.inputs.style_id`,
+      style_match: `${id}.inputs.style_match`,
+      style_references: `${id}.inputs.style_references`,
     };
     return {
       SVG: this.makeRef<"SVG">(id, 0),
+      style_id: this.makeRef<"STRING">(id, 1),
       __id: id as OutputNodeId<RecraftV4TextToVectorNodeResult>,
       inputs: inputPaths
     };
@@ -59389,6 +69573,26 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  RemeshMesh(inputs: RemeshMeshInputs): RemeshMeshOutputs & { __id: OutputNodeId<RemeshMeshResult>; inputs: RemeshMeshInputPaths } {
+    const id = this.addNode("RemeshMesh", inputs);
+    const inputPaths = {
+      mesh: `${id}.inputs.mesh`,
+      resolution: `${id}.inputs.resolution`,
+      sign_mode: `${id}.inputs.sign_mode`,
+      band: `${id}.inputs.band`,
+      project_back: `${id}.inputs.project_back`,
+      fix_poles: `${id}.inputs.fix_poles`,
+      smooth_iters: `${id}.inputs.smooth_iters`,
+      drop_small_components: `${id}.inputs.drop_small_components`,
+      precluster_max_verts: `${id}.inputs.precluster_max_verts`,
+    };
+    return {
+      mesh: this.makeRef<"MESH">(id, 0),
+      __id: id as OutputNodeId<RemeshMeshResult>,
+      inputs: inputPaths
+    };
+  }
+
   RemoveBackground(inputs: RemoveBackgroundInputs): RemoveBackgroundOutputs & { __id: OutputNodeId<RemoveBackgroundResult>; inputs: RemoveBackgroundInputPaths } {
     const id = this.addNode("RemoveBackground", inputs);
     const inputPaths = {
@@ -59423,6 +69627,25 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       IMAGE: this.makeRef<"IMAGE">(id, 0),
       __id: id as OutputNodeId<RenderAnimalKpsResult>,
+      inputs: inputPaths
+    };
+  }
+
+  RenderMesh(inputs: RenderMeshInputs): RenderMeshOutputs & { __id: OutputNodeId<RenderMeshResult>; inputs: RenderMeshInputPaths } {
+    const id = this.addNode("RenderMesh", inputs);
+    const inputPaths = {
+      mesh: `${id}.inputs.mesh`,
+      mode: `${id}.inputs.mode`,
+      width: `${id}.inputs.width`,
+      height: `${id}.inputs.height`,
+      background: `${id}.inputs.background`,
+      model_3d_info: `${id}.inputs.model_3d_info`,
+      camera_info: `${id}.inputs.camera_info`,
+    };
+    return {
+      image: this.makeRef<"IMAGE">(id, 0),
+      mask: this.makeRef<"MASK">(id, 1),
+      __id: id as OutputNodeId<RenderMeshResult>,
       inputs: inputPaths
     };
   }
@@ -59462,6 +69685,19 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       image: this.makeRef<"IMAGE">(id, 0),
       mask: this.makeRef<"MASK">(id, 1),
       __id: id as OutputNodeId<RenderSplatResult>,
+      inputs: inputPaths
+    };
+  }
+
+  RenderUVAtlas(inputs: RenderUVAtlasInputs): RenderUVAtlasOutputs & { __id: OutputNodeId<RenderUVAtlasResult>; inputs: RenderUVAtlasInputPaths } {
+    const id = this.addNode("RenderUVAtlas", inputs);
+    const inputPaths = {
+      mesh: `${id}.inputs.mesh`,
+      resolution: `${id}.inputs.resolution`,
+    };
+    return {
+      image: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<RenderUVAtlasResult>,
       inputs: inputPaths
     };
   }
@@ -59883,6 +70119,19 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  RotateMesh(inputs: RotateMeshInputs): RotateMeshOutputs & { __id: OutputNodeId<RotateMeshResult>; inputs: RotateMeshInputPaths } {
+    const id = this.addNode("RotateMesh", inputs);
+    const inputPaths = {
+      mesh: `${id}.inputs.mesh`,
+      mode: `${id}.inputs.mode`,
+    };
+    return {
+      mesh: this.makeRef<"MESH">(id, 0),
+      __id: id as OutputNodeId<RotateMeshResult>,
+      inputs: inputPaths
+    };
+  }
+
   RoundMask(inputs: RoundMaskInputs): RoundMaskOutputs & { __id: OutputNodeId<RoundMaskResult>; inputs: RoundMaskInputPaths } {
     const id = this.addNode("RoundMask", inputs);
     const inputPaths = {
@@ -60102,6 +70351,89 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       track_data: this.makeRef<"SAM3_TRACK_DATA">(id, 0),
       __id: id as OutputNodeId<SAM3_VideoTrackResult>,
+      inputs: inputPaths
+    };
+  }
+
+  SAM3DBody_FaceExpression(inputs: SAM3DBody_FaceExpressionInputs): SAM3DBody_FaceExpressionOutputs & { __id: OutputNodeId<SAM3DBody_FaceExpressionResult>; inputs: SAM3DBody_FaceExpressionInputPaths } {
+    const id = this.addNode("SAM3DBody_FaceExpression", inputs);
+    const inputPaths = {
+      sam3d_body_model: `${id}.inputs.sam3d_body_model`,
+      mhr_pose_data: `${id}.inputs.mhr_pose_data`,
+      image: `${id}.inputs.image`,
+      strength: `${id}.inputs.strength`,
+      mouth_strength: `${id}.inputs.mouth_strength`,
+      eye_strength: `${id}.inputs.eye_strength`,
+      brow_strength: `${id}.inputs.brow_strength`,
+      input_threshold: `${id}.inputs.input_threshold`,
+      blendshape_smooth_window: `${id}.inputs.blendshape_smooth_window`,
+    };
+    return {
+      mhr_pose_data: this.makeRef<"MHR_POSE_DATA">(id, 0),
+      __id: id as OutputNodeId<SAM3DBody_FaceExpressionResult>,
+      inputs: inputPaths
+    };
+  }
+
+  SAM3DBody_Loader(inputs: SAM3DBody_LoaderInputs): SAM3DBody_LoaderOutputs & { __id: OutputNodeId<SAM3DBody_LoaderResult>; inputs: SAM3DBody_LoaderInputPaths } {
+    const id = this.addNode("SAM3DBody_Loader", inputs);
+    const inputPaths = {
+      model_file: `${id}.inputs.model_file`,
+    };
+    return {
+      sam3d_body_model: this.makeRef<"SAM3D_BODY_MODEL">(id, 0),
+      __id: id as OutputNodeId<SAM3DBody_LoaderResult>,
+      inputs: inputPaths
+    };
+  }
+
+  SAM3DBody_Predict(inputs: SAM3DBody_PredictInputs): SAM3DBody_PredictOutputs & { __id: OutputNodeId<SAM3DBody_PredictResult>; inputs: SAM3DBody_PredictInputPaths } {
+    const id = this.addNode("SAM3DBody_Predict", inputs);
+    const inputPaths = {
+      sam3d_body_model: `${id}.inputs.sam3d_body_model`,
+      image: `${id}.inputs.image`,
+      run_hand_refinement: `${id}.inputs.run_hand_refinement`,
+      fov: `${id}.inputs.fov`,
+      batch_size: `${id}.inputs.batch_size`,
+      track_data: `${id}.inputs.track_data`,
+      bboxes: `${id}.inputs.bboxes`,
+    };
+    return {
+      mhr_pose_data: this.makeRef<"MHR_POSE_DATA">(id, 0),
+      __id: id as OutputNodeId<SAM3DBody_PredictResult>,
+      inputs: inputPaths
+    };
+  }
+
+  SAM3DBody_Render(inputs: SAM3DBody_RenderInputs): SAM3DBody_RenderOutputs & { __id: OutputNodeId<SAM3DBody_RenderResult>; inputs: SAM3DBody_RenderInputPaths } {
+    const id = this.addNode("SAM3DBody_Render", inputs);
+    const inputPaths = {
+      pose_data: `${id}.inputs.pose_data`,
+      width: `${id}.inputs.width`,
+      height: `${id}.inputs.height`,
+      render_style: `${id}.inputs.render_style`,
+      background: `${id}.inputs.background`,
+      camera_info: `${id}.inputs.camera_info`,
+    };
+    return {
+      image: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<SAM3DBody_RenderResult>,
+      inputs: inputPaths
+    };
+  }
+
+  SAM3DBody_Smooth(inputs: SAM3DBody_SmoothInputs): SAM3DBody_SmoothOutputs & { __id: OutputNodeId<SAM3DBody_SmoothResult>; inputs: SAM3DBody_SmoothInputPaths } {
+    const id = this.addNode("SAM3DBody_Smooth", inputs);
+    const inputPaths = {
+      mhr_pose_data: `${id}.inputs.mhr_pose_data`,
+      strength: `${id}.inputs.strength`,
+      method: `${id}.inputs.method`,
+      window: `${id}.inputs.window`,
+      rotation_threshold_degrees: `${id}.inputs.rotation_threshold_degrees`,
+    };
+    return {
+      mhr_pose_data: this.makeRef<"MHR_POSE_DATA">(id, 0),
+      __id: id as OutputNodeId<SAM3DBody_SmoothResult>,
       inputs: inputPaths
     };
   }
@@ -60432,6 +70764,28 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  Save3DAdvanced(inputs: Save3DAdvancedInputs): Save3DAdvancedOutputs & { __id: OutputNodeId<Save3DAdvancedResult>; inputs: Save3DAdvancedInputPaths } {
+    const id = this.addNode("Save3DAdvanced", inputs);
+    const inputPaths = {
+      model_3d: `${id}.inputs.model_3d`,
+      filename_prefix: `${id}.inputs.filename_prefix`,
+      viewport_state: `${id}.inputs.viewport_state`,
+      width: `${id}.inputs.width`,
+      height: `${id}.inputs.height`,
+      model_3d_info: `${id}.inputs.model_3d_info`,
+      camera_info: `${id}.inputs.camera_info`,
+    };
+    return {
+      model_3d: this.makeRef<"FILE_3D">(id, 0),
+      model_3d_info: this.makeRef<"LOAD3D_MODEL_INFO">(id, 1),
+      camera_info: this.makeRef<"LOAD3D_CAMERA">(id, 2),
+      width: this.makeRef<"INT">(id, 3),
+      height: this.makeRef<"INT">(id, 4),
+      __id: id as OutputNodeId<Save3DAdvancedResult>,
+      inputs: inputPaths
+    };
+  }
+
   SaveAnimatedPNG(inputs: SaveAnimatedPNGInputs): SaveAnimatedPNGOutputs & { __id: OutputNodeId<SaveAnimatedPNGResult>; inputs: SaveAnimatedPNGInputPaths } {
     const id = this.addNode("SaveAnimatedPNG", inputs);
     const inputPaths = {
@@ -60515,6 +70869,28 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       audio: this.makeRef<"AUDIO">(id, 0),
       __id: id as OutputNodeId<SaveAudioOpusResult>,
+      inputs: inputPaths
+    };
+  }
+
+  SaveGaussianSplat(inputs: SaveGaussianSplatInputs): SaveGaussianSplatOutputs & { __id: OutputNodeId<SaveGaussianSplatResult>; inputs: SaveGaussianSplatInputPaths } {
+    const id = this.addNode("SaveGaussianSplat", inputs);
+    const inputPaths = {
+      model_3d: `${id}.inputs.model_3d`,
+      filename_prefix: `${id}.inputs.filename_prefix`,
+      viewport_state: `${id}.inputs.viewport_state`,
+      width: `${id}.inputs.width`,
+      height: `${id}.inputs.height`,
+      model_3d_info: `${id}.inputs.model_3d_info`,
+      camera_info: `${id}.inputs.camera_info`,
+    };
+    return {
+      model_3d: this.makeRef<"FILE_3D_SPLAT_ANY">(id, 0),
+      model_3d_info: this.makeRef<"LOAD3D_MODEL_INFO">(id, 1),
+      camera_info: this.makeRef<"LOAD3D_CAMERA">(id, 2),
+      width: this.makeRef<"INT">(id, 3),
+      height: this.makeRef<"INT">(id, 4),
+      __id: id as OutputNodeId<SaveGaussianSplatResult>,
       inputs: inputPaths
     };
   }
@@ -60635,6 +71011,28 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return { __id: id as OutputNodeId<SaveLoRAResult>, inputs: inputPaths };
   }
 
+  SavePointCloud(inputs: SavePointCloudInputs): SavePointCloudOutputs & { __id: OutputNodeId<SavePointCloudResult>; inputs: SavePointCloudInputPaths } {
+    const id = this.addNode("SavePointCloud", inputs);
+    const inputPaths = {
+      model_3d: `${id}.inputs.model_3d`,
+      filename_prefix: `${id}.inputs.filename_prefix`,
+      viewport_state: `${id}.inputs.viewport_state`,
+      width: `${id}.inputs.width`,
+      height: `${id}.inputs.height`,
+      model_3d_info: `${id}.inputs.model_3d_info`,
+      camera_info: `${id}.inputs.camera_info`,
+    };
+    return {
+      model_3d: this.makeRef<"FILE_3D_POINT_CLOUD_ANY">(id, 0),
+      model_3d_info: this.makeRef<"LOAD3D_MODEL_INFO">(id, 1),
+      camera_info: this.makeRef<"LOAD3D_CAMERA">(id, 2),
+      width: this.makeRef<"INT">(id, 3),
+      height: this.makeRef<"INT">(id, 4),
+      __id: id as OutputNodeId<SavePointCloudResult>,
+      inputs: inputPaths
+    };
+  }
+
   SavePoseKpsAsJsonFile(inputs: SavePoseKpsAsJsonFileInputs): { __id: OutputNodeId<SavePoseKpsAsJsonFileResult>; inputs: SavePoseKpsAsJsonFileInputPaths } {
     const id = this.addNode("SavePoseKpsAsJsonFile", inputs);
     const inputPaths = {
@@ -60668,6 +71066,20 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       svg: this.makeRef<"SVG">(id, 0),
       __id: id as OutputNodeId<SaveSVGNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  SaveText(inputs: SaveTextInputs): SaveTextOutputs & { __id: OutputNodeId<SaveTextResult>; inputs: SaveTextInputPaths } {
+    const id = this.addNode("SaveText", inputs);
+    const inputPaths = {
+      text: `${id}.inputs.text`,
+      filename_prefix: `${id}.inputs.filename_prefix`,
+      format: `${id}.inputs.format`,
+    };
+    return {
+      text: this.makeRef<"STRING">(id, 0),
+      __id: id as OutputNodeId<SaveTextResult>,
       inputs: inputPaths
     };
   }
@@ -61062,6 +71474,74 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  SeedVR2Conditioning(inputs: SeedVR2ConditioningInputs): SeedVR2ConditioningOutputs & { __id: OutputNodeId<SeedVR2ConditioningResult>; inputs: SeedVR2ConditioningInputPaths } {
+    const id = this.addNode("SeedVR2Conditioning", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      vae_conditioning: `${id}.inputs.vae_conditioning`,
+    };
+    return {
+      positive: this.makeRef<"CONDITIONING">(id, 0),
+      negative: this.makeRef<"CONDITIONING">(id, 1),
+      __id: id as OutputNodeId<SeedVR2ConditioningResult>,
+      inputs: inputPaths
+    };
+  }
+
+  SeedVR2PostProcessing(inputs: SeedVR2PostProcessingInputs): SeedVR2PostProcessingOutputs & { __id: OutputNodeId<SeedVR2PostProcessingResult>; inputs: SeedVR2PostProcessingInputPaths } {
+    const id = this.addNode("SeedVR2PostProcessing", inputs);
+    const inputPaths = {
+      images: `${id}.inputs.images`,
+      original_resized_images: `${id}.inputs.original_resized_images`,
+      color_correction_method: `${id}.inputs.color_correction_method`,
+    };
+    return {
+      images: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<SeedVR2PostProcessingResult>,
+      inputs: inputPaths
+    };
+  }
+
+  SeedVR2Preprocess(inputs: SeedVR2PreprocessInputs): SeedVR2PreprocessOutputs & { __id: OutputNodeId<SeedVR2PreprocessResult>; inputs: SeedVR2PreprocessInputPaths } {
+    const id = this.addNode("SeedVR2Preprocess", inputs);
+    const inputPaths = {
+      resized_images: `${id}.inputs.resized_images`,
+    };
+    return {
+      images: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<SeedVR2PreprocessResult>,
+      inputs: inputPaths
+    };
+  }
+
+  SeedVR2TemporalChunk(inputs: SeedVR2TemporalChunkInputs): SeedVR2TemporalChunkOutputs & { __id: OutputNodeId<SeedVR2TemporalChunkResult>; inputs: SeedVR2TemporalChunkInputPaths } {
+    const id = this.addNode("SeedVR2TemporalChunk", inputs);
+    const inputPaths = {
+      latent: `${id}.inputs.latent`,
+      temporal_overlap: `${id}.inputs.temporal_overlap`,
+      chunking_mode: `${id}.inputs.chunking_mode`,
+    };
+    return {
+      latents: this.makeRef<"LATENT">(id, 0),
+      temporal_overlap: this.makeRef<"INT">(id, 1),
+      __id: id as OutputNodeId<SeedVR2TemporalChunkResult>,
+      inputs: inputPaths
+    };
+  }
+
+  SeedVR2TemporalMerge(inputs: SeedVR2TemporalMergeInputs): SeedVR2TemporalMergeOutputs & { __id: OutputNodeId<SeedVR2TemporalMergeResult>; inputs: SeedVR2TemporalMergeInputPaths } {
+    const id = this.addNode("SeedVR2TemporalMerge", inputs);
+    const inputPaths = {
+      latents: `${id}.inputs.latents`,
+      temporal_overlap: `${id}.inputs.temporal_overlap`,
+    };
+    return {
+      latent: this.makeRef<"LATENT">(id, 0),
+      __id: id as OutputNodeId<SeedVR2TemporalMergeResult>,
+      inputs: inputPaths
+    };
+  }
+
   Segment(inputs: SegmentInputs): SegmentOutputs & { __id: OutputNodeId<SegmentResult>; inputs: SegmentInputPaths } {
     const id = this.addNode("Segment", inputs);
     const inputPaths = {
@@ -61298,6 +71778,34 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       IMAGE: this.makeRef<"IMAGE">(id, 0),
       __id: id as OutputNodeId<ShufflePreprocessorResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ShuffleVideoDataset(inputs: ShuffleVideoDatasetInputs): ShuffleVideoDatasetOutputs & { __id: OutputNodeId<ShuffleVideoDatasetResult>; inputs: ShuffleVideoDatasetInputPaths } {
+    const id = this.addNode("ShuffleVideoDataset", inputs);
+    const inputPaths = {
+      videos: `${id}.inputs.videos`,
+      seed: `${id}.inputs.seed`,
+    };
+    return {
+      videos: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<ShuffleVideoDatasetResult>,
+      inputs: inputPaths
+    };
+  }
+
+  ShuffleVideoTextDataset(inputs: ShuffleVideoTextDatasetInputs): ShuffleVideoTextDatasetOutputs & { __id: OutputNodeId<ShuffleVideoTextDatasetResult>; inputs: ShuffleVideoTextDatasetInputPaths } {
+    const id = this.addNode("ShuffleVideoTextDataset", inputs);
+    const inputPaths = {
+      videos: `${id}.inputs.videos`,
+      texts: `${id}.inputs.texts`,
+      seed: `${id}.inputs.seed`,
+    };
+    return {
+      videos: this.makeRef<"VIDEO">(id, 0),
+      texts: this.makeRef<"STRING">(id, 1),
+      __id: id as OutputNodeId<ShuffleVideoTextDatasetResult>,
       inputs: inputPaths
     };
   }
@@ -61683,142 +72191,6 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
-  StabilityAudioInpaint(inputs: StabilityAudioInpaintInputs): StabilityAudioInpaintOutputs & { __id: OutputNodeId<StabilityAudioInpaintResult>; inputs: StabilityAudioInpaintInputPaths } {
-    const id = this.addNode("StabilityAudioInpaint", inputs);
-    const inputPaths = {
-      model: `${id}.inputs.model`,
-      prompt: `${id}.inputs.prompt`,
-      audio: `${id}.inputs.audio`,
-      duration: `${id}.inputs.duration`,
-      seed: `${id}.inputs.seed`,
-      steps: `${id}.inputs.steps`,
-      mask_start: `${id}.inputs.mask_start`,
-      mask_end: `${id}.inputs.mask_end`,
-    };
-    return {
-      AUDIO: this.makeRef<"AUDIO">(id, 0),
-      __id: id as OutputNodeId<StabilityAudioInpaintResult>,
-      inputs: inputPaths
-    };
-  }
-
-  StabilityAudioToAudio(inputs: StabilityAudioToAudioInputs): StabilityAudioToAudioOutputs & { __id: OutputNodeId<StabilityAudioToAudioResult>; inputs: StabilityAudioToAudioInputPaths } {
-    const id = this.addNode("StabilityAudioToAudio", inputs);
-    const inputPaths = {
-      model: `${id}.inputs.model`,
-      prompt: `${id}.inputs.prompt`,
-      audio: `${id}.inputs.audio`,
-      duration: `${id}.inputs.duration`,
-      seed: `${id}.inputs.seed`,
-      steps: `${id}.inputs.steps`,
-      strength: `${id}.inputs.strength`,
-    };
-    return {
-      AUDIO: this.makeRef<"AUDIO">(id, 0),
-      __id: id as OutputNodeId<StabilityAudioToAudioResult>,
-      inputs: inputPaths
-    };
-  }
-
-  StabilityStableImageSD_3_5Node(inputs: StabilityStableImageSD_3_5NodeInputs): StabilityStableImageSD_3_5NodeOutputs & { __id: OutputNodeId<StabilityStableImageSD_3_5NodeResult>; inputs: StabilityStableImageSD_3_5NodeInputPaths } {
-    const id = this.addNode("StabilityStableImageSD_3_5Node", inputs);
-    const inputPaths = {
-      prompt: `${id}.inputs.prompt`,
-      model: `${id}.inputs.model`,
-      aspect_ratio: `${id}.inputs.aspect_ratio`,
-      style_preset: `${id}.inputs.style_preset`,
-      cfg_scale: `${id}.inputs.cfg_scale`,
-      seed: `${id}.inputs.seed`,
-      image: `${id}.inputs.image`,
-      negative_prompt: `${id}.inputs.negative_prompt`,
-      image_denoise: `${id}.inputs.image_denoise`,
-    };
-    return {
-      IMAGE: this.makeRef<"IMAGE">(id, 0),
-      __id: id as OutputNodeId<StabilityStableImageSD_3_5NodeResult>,
-      inputs: inputPaths
-    };
-  }
-
-  StabilityStableImageUltraNode(inputs: StabilityStableImageUltraNodeInputs): StabilityStableImageUltraNodeOutputs & { __id: OutputNodeId<StabilityStableImageUltraNodeResult>; inputs: StabilityStableImageUltraNodeInputPaths } {
-    const id = this.addNode("StabilityStableImageUltraNode", inputs);
-    const inputPaths = {
-      prompt: `${id}.inputs.prompt`,
-      aspect_ratio: `${id}.inputs.aspect_ratio`,
-      style_preset: `${id}.inputs.style_preset`,
-      seed: `${id}.inputs.seed`,
-      image: `${id}.inputs.image`,
-      negative_prompt: `${id}.inputs.negative_prompt`,
-      image_denoise: `${id}.inputs.image_denoise`,
-    };
-    return {
-      IMAGE: this.makeRef<"IMAGE">(id, 0),
-      __id: id as OutputNodeId<StabilityStableImageUltraNodeResult>,
-      inputs: inputPaths
-    };
-  }
-
-  StabilityTextToAudio(inputs: StabilityTextToAudioInputs): StabilityTextToAudioOutputs & { __id: OutputNodeId<StabilityTextToAudioResult>; inputs: StabilityTextToAudioInputPaths } {
-    const id = this.addNode("StabilityTextToAudio", inputs);
-    const inputPaths = {
-      model: `${id}.inputs.model`,
-      prompt: `${id}.inputs.prompt`,
-      duration: `${id}.inputs.duration`,
-      seed: `${id}.inputs.seed`,
-      steps: `${id}.inputs.steps`,
-    };
-    return {
-      AUDIO: this.makeRef<"AUDIO">(id, 0),
-      __id: id as OutputNodeId<StabilityTextToAudioResult>,
-      inputs: inputPaths
-    };
-  }
-
-  StabilityUpscaleConservativeNode(inputs: StabilityUpscaleConservativeNodeInputs): StabilityUpscaleConservativeNodeOutputs & { __id: OutputNodeId<StabilityUpscaleConservativeNodeResult>; inputs: StabilityUpscaleConservativeNodeInputPaths } {
-    const id = this.addNode("StabilityUpscaleConservativeNode", inputs);
-    const inputPaths = {
-      image: `${id}.inputs.image`,
-      prompt: `${id}.inputs.prompt`,
-      creativity: `${id}.inputs.creativity`,
-      seed: `${id}.inputs.seed`,
-      negative_prompt: `${id}.inputs.negative_prompt`,
-    };
-    return {
-      IMAGE: this.makeRef<"IMAGE">(id, 0),
-      __id: id as OutputNodeId<StabilityUpscaleConservativeNodeResult>,
-      inputs: inputPaths
-    };
-  }
-
-  StabilityUpscaleCreativeNode(inputs: StabilityUpscaleCreativeNodeInputs): StabilityUpscaleCreativeNodeOutputs & { __id: OutputNodeId<StabilityUpscaleCreativeNodeResult>; inputs: StabilityUpscaleCreativeNodeInputPaths } {
-    const id = this.addNode("StabilityUpscaleCreativeNode", inputs);
-    const inputPaths = {
-      image: `${id}.inputs.image`,
-      prompt: `${id}.inputs.prompt`,
-      creativity: `${id}.inputs.creativity`,
-      style_preset: `${id}.inputs.style_preset`,
-      seed: `${id}.inputs.seed`,
-      negative_prompt: `${id}.inputs.negative_prompt`,
-    };
-    return {
-      IMAGE: this.makeRef<"IMAGE">(id, 0),
-      __id: id as OutputNodeId<StabilityUpscaleCreativeNodeResult>,
-      inputs: inputPaths
-    };
-  }
-
-  StabilityUpscaleFastNode(inputs: StabilityUpscaleFastNodeInputs): StabilityUpscaleFastNodeOutputs & { __id: OutputNodeId<StabilityUpscaleFastNodeResult>; inputs: StabilityUpscaleFastNodeInputPaths } {
-    const id = this.addNode("StabilityUpscaleFastNode", inputs);
-    const inputPaths = {
-      image: `${id}.inputs.image`,
-    };
-    return {
-      IMAGE: this.makeRef<"IMAGE">(id, 0),
-      __id: id as OutputNodeId<StabilityUpscaleFastNodeResult>,
-      inputs: inputPaths
-    };
-  }
-
   StableCascade_EmptyLatentImage(inputs: StableCascade_EmptyLatentImageInputs): StableCascade_EmptyLatentImageOutputs & { __id: OutputNodeId<StableCascade_EmptyLatentImageResult>; inputs: StableCascade_EmptyLatentImageInputPaths } {
     const id = this.addNode("StableCascade_EmptyLatentImage", inputs);
     const inputPaths = {
@@ -62119,6 +72491,66 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  StyleAlignedBatchAlign(inputs: StyleAlignedBatchAlignInputs): StyleAlignedBatchAlignOutputs & { __id: OutputNodeId<StyleAlignedBatchAlignResult>; inputs: StyleAlignedBatchAlignInputPaths } {
+    const id = this.addNode("StyleAlignedBatchAlign", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      share_norm: `${id}.inputs.share_norm`,
+      share_attn: `${id}.inputs.share_attn`,
+      scale: `${id}.inputs.scale`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      __id: id as OutputNodeId<StyleAlignedBatchAlignResult>,
+      inputs: inputPaths
+    };
+  }
+
+  StyleAlignedReferenceSampler(inputs: StyleAlignedReferenceSamplerInputs): StyleAlignedReferenceSamplerOutputs & { __id: OutputNodeId<StyleAlignedReferenceSamplerResult>; inputs: StyleAlignedReferenceSamplerInputPaths } {
+    const id = this.addNode("StyleAlignedReferenceSampler", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      share_norm: `${id}.inputs.share_norm`,
+      share_attn: `${id}.inputs.share_attn`,
+      scale: `${id}.inputs.scale`,
+      batch_size: `${id}.inputs.batch_size`,
+      noise_seed: `${id}.inputs.noise_seed`,
+      cfg: `${id}.inputs.cfg`,
+      positive: `${id}.inputs.positive`,
+      negative: `${id}.inputs.negative`,
+      ref_positive: `${id}.inputs.ref_positive`,
+      sampler: `${id}.inputs.sampler`,
+      sigmas: `${id}.inputs.sigmas`,
+      ref_latents: `${id}.inputs.ref_latents`,
+    };
+    return {
+      output: this.makeRef<"LATENT">(id, 0),
+      denoised_output: this.makeRef<"LATENT">(id, 1),
+      __id: id as OutputNodeId<StyleAlignedReferenceSamplerResult>,
+      inputs: inputPaths
+    };
+  }
+
+  StyleAlignedSampleReferenceLatents(inputs: StyleAlignedSampleReferenceLatentsInputs): StyleAlignedSampleReferenceLatentsOutputs & { __id: OutputNodeId<StyleAlignedSampleReferenceLatentsResult>; inputs: StyleAlignedSampleReferenceLatentsInputPaths } {
+    const id = this.addNode("StyleAlignedSampleReferenceLatents", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      noise_seed: `${id}.inputs.noise_seed`,
+      cfg: `${id}.inputs.cfg`,
+      positive: `${id}.inputs.positive`,
+      negative: `${id}.inputs.negative`,
+      sampler: `${id}.inputs.sampler`,
+      sigmas: `${id}.inputs.sigmas`,
+      latent_image: `${id}.inputs.latent_image`,
+    };
+    return {
+      ref_latents: this.makeRef<"STEP_LATENTS">(id, 0),
+      noised_output: this.makeRef<"LATENT">(id, 1),
+      __id: id as OutputNodeId<StyleAlignedSampleReferenceLatentsResult>,
+      inputs: inputPaths
+    };
+  }
+
   StyleModelApply(inputs: StyleModelApplyInputs): StyleModelApplyOutputs & { __id: OutputNodeId<StyleModelApplyResult>; inputs: StyleModelApplyInputPaths } {
     const id = this.addNode("StyleModelApply", inputs);
     const inputPaths = {
@@ -62255,6 +72687,37 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       negative: this.makeRef<"CONDITIONING">(id, 1),
       latent: this.makeRef<"LATENT">(id, 2),
       __id: id as OutputNodeId<SVD_img2vid_ConditioningResult>,
+      inputs: inputPaths
+    };
+  }
+
+  SyncLipSyncNode(inputs: SyncLipSyncNodeInputs): SyncLipSyncNodeOutputs & { __id: OutputNodeId<SyncLipSyncNodeResult>; inputs: SyncLipSyncNodeInputPaths } {
+    const id = this.addNode("SyncLipSyncNode", inputs);
+    const inputPaths = {
+      video: `${id}.inputs.video`,
+      audio: `${id}.inputs.audio`,
+      seed: `${id}.inputs.seed`,
+      model: `${id}.inputs.model`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<SyncLipSyncNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  SyncTalkingImageNode(inputs: SyncTalkingImageNodeInputs): SyncTalkingImageNodeOutputs & { __id: OutputNodeId<SyncTalkingImageNodeResult>; inputs: SyncTalkingImageNodeInputPaths } {
+    const id = this.addNode("SyncTalkingImageNode", inputs);
+    const inputPaths = {
+      image: `${id}.inputs.image`,
+      audio: `${id}.inputs.audio`,
+      prompt: `${id}.inputs.prompt`,
+      seed: `${id}.inputs.seed`,
+      model: `${id}.inputs.model`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<SyncTalkingImageNodeResult>,
       inputs: inputPaths
     };
   }
@@ -62490,6 +72953,42 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  TextEncodeJoyImageEdit(inputs: TextEncodeJoyImageEditInputs): TextEncodeJoyImageEditOutputs & { __id: OutputNodeId<TextEncodeJoyImageEditResult>; inputs: TextEncodeJoyImageEditInputPaths } {
+    const id = this.addNode("TextEncodeJoyImageEdit", inputs);
+    const inputPaths = {
+      clip: `${id}.inputs.clip`,
+      prompt: `${id}.inputs.prompt`,
+      vae: `${id}.inputs.vae`,
+      images: `${id}.inputs.images`,
+    };
+    return {
+      CONDITIONING: this.makeRef<"CONDITIONING">(id, 0),
+      __id: id as OutputNodeId<TextEncodeJoyImageEditResult>,
+      inputs: inputPaths
+    };
+  }
+
+  TextEncodeMageFlowEdit(inputs: TextEncodeMageFlowEditInputs): TextEncodeMageFlowEditOutputs & { __id: OutputNodeId<TextEncodeMageFlowEditResult>; inputs: TextEncodeMageFlowEditInputPaths } {
+    const id = this.addNode("TextEncodeMageFlowEdit", inputs);
+    const inputPaths = {
+      clip: `${id}.inputs.clip`,
+      prompt: `${id}.inputs.prompt`,
+      negative_prompt: `${id}.inputs.negative_prompt`,
+      images: `${id}.inputs.images`,
+      width: `${id}.inputs.width`,
+      height: `${id}.inputs.height`,
+      batch_size: `${id}.inputs.batch_size`,
+      vae: `${id}.inputs.vae`,
+    };
+    return {
+      positive: this.makeRef<"CONDITIONING">(id, 0),
+      negative: this.makeRef<"CONDITIONING">(id, 1),
+      latent: this.makeRef<"LATENT">(id, 2),
+      __id: id as OutputNodeId<TextEncodeMageFlowEditResult>,
+      inputs: inputPaths
+    };
+  }
+
   TextEncodeQwenImageEdit(inputs: TextEncodeQwenImageEditInputs): TextEncodeQwenImageEditOutputs & { __id: OutputNodeId<TextEncodeQwenImageEditResult>; inputs: TextEncodeQwenImageEditInputPaths } {
     const id = this.addNode("TextEncodeQwenImageEdit", inputs);
     const inputPaths = {
@@ -62577,6 +73076,24 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       generated_text: this.makeRef<"STRING">(id, 0),
       __id: id as OutputNodeId<TextGenerateLTX2PromptResult>,
+      inputs: inputPaths
+    };
+  }
+
+  TextOverlay(inputs: TextOverlayInputs): TextOverlayOutputs & { __id: OutputNodeId<TextOverlayResult>; inputs: TextOverlayInputPaths } {
+    const id = this.addNode("TextOverlay", inputs);
+    const inputPaths = {
+      images: `${id}.inputs.images`,
+      text: `${id}.inputs.text`,
+      font_size: `${id}.inputs.font_size`,
+      color: `${id}.inputs.color`,
+      position: `${id}.inputs.position`,
+      align: `${id}.inputs.align`,
+      outline: `${id}.inputs.outline`,
+    };
+    return {
+      images: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<TextOverlayResult>,
       inputs: inputPaths
     };
   }
@@ -62682,6 +73199,21 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       IMAGE: this.makeRef<"IMAGE">(id, 0),
       __id: id as OutputNodeId<TopazImageEnhanceResult>,
+      inputs: inputPaths
+    };
+  }
+
+  TopazImageEnhanceV2(inputs: TopazImageEnhanceV2Inputs): TopazImageEnhanceV2Outputs & { __id: OutputNodeId<TopazImageEnhanceV2Result>; inputs: TopazImageEnhanceV2InputPaths } {
+    const id = this.addNode("TopazImageEnhanceV2", inputs);
+    const inputPaths = {
+      image: `${id}.inputs.image`,
+      model: `${id}.inputs.model`,
+      output_width: `${id}.inputs.output_width`,
+      output_height: `${id}.inputs.output_height`,
+    };
+    return {
+      IMAGE: this.makeRef<"IMAGE">(id, 0),
+      __id: id as OutputNodeId<TopazImageEnhanceV2Result>,
       inputs: inputPaths
     };
   }
@@ -63026,6 +73558,70 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  Trellis2Conditioning(inputs: Trellis2ConditioningInputs): Trellis2ConditioningOutputs & { __id: OutputNodeId<Trellis2ConditioningResult>; inputs: Trellis2ConditioningInputPaths } {
+    const id = this.addNode("Trellis2Conditioning", inputs);
+    const inputPaths = {
+      clip_vision_model: `${id}.inputs.clip_vision_model`,
+      image: `${id}.inputs.image`,
+    };
+    return {
+      positive: this.makeRef<"CONDITIONING">(id, 0),
+      negative: this.makeRef<"CONDITIONING">(id, 1),
+      __id: id as OutputNodeId<Trellis2ConditioningResult>,
+      inputs: inputPaths
+    };
+  }
+
+  Trellis2ShapeStage(inputs: Trellis2ShapeStageInputs): Trellis2ShapeStageOutputs & { __id: OutputNodeId<Trellis2ShapeStageResult>; inputs: Trellis2ShapeStageInputPaths } {
+    const id = this.addNode("Trellis2ShapeStage", inputs);
+    const inputPaths = {
+      positive: `${id}.inputs.positive`,
+      negative: `${id}.inputs.negative`,
+      voxel: `${id}.inputs.voxel`,
+    };
+    return {
+      positive: this.makeRef<"CONDITIONING">(id, 0),
+      negative: this.makeRef<"CONDITIONING">(id, 1),
+      LATENT: this.makeRef<"LATENT">(id, 2),
+      __id: id as OutputNodeId<Trellis2ShapeStageResult>,
+      inputs: inputPaths
+    };
+  }
+
+  Trellis2TextureStage(inputs: Trellis2TextureStageInputs): Trellis2TextureStageOutputs & { __id: OutputNodeId<Trellis2TextureStageResult>; inputs: Trellis2TextureStageInputPaths } {
+    const id = this.addNode("Trellis2TextureStage", inputs);
+    const inputPaths = {
+      positive: `${id}.inputs.positive`,
+      negative: `${id}.inputs.negative`,
+      shape_latent: `${id}.inputs.shape_latent`,
+    };
+    return {
+      positive: this.makeRef<"CONDITIONING">(id, 0),
+      negative: this.makeRef<"CONDITIONING">(id, 1),
+      LATENT: this.makeRef<"LATENT">(id, 2),
+      __id: id as OutputNodeId<Trellis2TextureStageResult>,
+      inputs: inputPaths
+    };
+  }
+
+  Trellis2UpsampleStage(inputs: Trellis2UpsampleStageInputs): Trellis2UpsampleStageOutputs & { __id: OutputNodeId<Trellis2UpsampleStageResult>; inputs: Trellis2UpsampleStageInputPaths } {
+    const id = this.addNode("Trellis2UpsampleStage", inputs);
+    const inputPaths = {
+      positive: `${id}.inputs.positive`,
+      negative: `${id}.inputs.negative`,
+      shape_latent: `${id}.inputs.shape_latent`,
+      vae: `${id}.inputs.vae`,
+      target_resolution: `${id}.inputs.target_resolution`,
+    };
+    return {
+      positive: this.makeRef<"CONDITIONING">(id, 0),
+      negative: this.makeRef<"CONDITIONING">(id, 1),
+      LATENT: this.makeRef<"LATENT">(id, 2),
+      __id: id as OutputNodeId<Trellis2UpsampleStageResult>,
+      inputs: inputPaths
+    };
+  }
+
   TrimAudioDuration(inputs: TrimAudioDurationInputs): TrimAudioDurationOutputs & { __id: OutputNodeId<TrimAudioDurationResult>; inputs: TrimAudioDurationInputPaths } {
     const id = this.addNode("TrimAudioDuration", inputs);
     const inputPaths = {
@@ -63081,7 +73677,7 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
-  TripoConversionNode(inputs: TripoConversionNodeInputs): { __id: OutputNodeId<TripoConversionNodeResult>; inputs: TripoConversionNodeInputPaths } {
+  TripoConversionNode(inputs: TripoConversionNodeInputs): TripoConversionNodeOutputs & { __id: OutputNodeId<TripoConversionNodeResult>; inputs: TripoConversionNodeInputPaths } {
     const id = this.addNode("TripoConversionNode", inputs);
     const inputPaths = {
       original_model_task_id: `${id}.inputs.original_model_task_id`,
@@ -63104,7 +73700,30 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       export_orientation: `${id}.inputs.export_orientation`,
       animate_in_place: `${id}.inputs.animate_in_place`,
     };
-    return { __id: id as OutputNodeId<TripoConversionNodeResult>, inputs: inputPaths };
+    return {
+      model_3d: this.makeRef<"FILE_3D">(id, 0),
+      __id: id as OutputNodeId<TripoConversionNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  TripoEditMultiviewNode(inputs: TripoEditMultiviewNodeInputs): TripoEditMultiviewNodeOutputs & { __id: OutputNodeId<TripoEditMultiviewNodeResult>; inputs: TripoEditMultiviewNodeInputPaths } {
+    const id = this.addNode("TripoEditMultiviewNode", inputs);
+    const inputPaths = {
+      multiview_task_id: `${id}.inputs.multiview_task_id`,
+      front_prompt: `${id}.inputs.front_prompt`,
+      left_prompt: `${id}.inputs.left_prompt`,
+      back_prompt: `${id}.inputs.back_prompt`,
+      right_prompt: `${id}.inputs.right_prompt`,
+    };
+    return {
+      front: this.makeRef<"IMAGE">(id, 0),
+      left: this.makeRef<"IMAGE">(id, 1),
+      back: this.makeRef<"IMAGE">(id, 2),
+      right: this.makeRef<"IMAGE">(id, 3),
+      __id: id as OutputNodeId<TripoEditMultiviewNodeResult>,
+      inputs: inputPaths
+    };
   }
 
   TripoImageToModelNode(inputs: TripoImageToModelNodeInputs): TripoImageToModelNodeOutputs & { __id: OutputNodeId<TripoImageToModelNodeResult>; inputs: TripoImageToModelNodeInputPaths } {
@@ -63123,12 +73742,31 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       face_limit: `${id}.inputs.face_limit`,
       quad: `${id}.inputs.quad`,
       geometry_quality: `${id}.inputs.geometry_quality`,
+      smart_low_poly: `${id}.inputs.smart_low_poly`,
+      auto_size: `${id}.inputs.auto_size`,
     };
     return {
       model_file: this.makeRef<"STRING">(id, 0),
       "model task_id": this.makeRef<"MODEL_TASK_ID">(id, 1),
       GLB: this.makeRef<"FILE_3D_GLB">(id, 2),
+      FBX: this.makeRef<"FILE_3D_FBX">(id, 3),
       __id: id as OutputNodeId<TripoImageToModelNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  TripoImageToMultiviewNode(inputs: TripoImageToMultiviewNodeInputs): TripoImageToMultiviewNodeOutputs & { __id: OutputNodeId<TripoImageToMultiviewNodeResult>; inputs: TripoImageToMultiviewNodeInputPaths } {
+    const id = this.addNode("TripoImageToMultiviewNode", inputs);
+    const inputPaths = {
+      image: `${id}.inputs.image`,
+    };
+    return {
+      "multiview task_id": this.makeRef<"MULTIVIEW_TASK_ID">(id, 0),
+      front: this.makeRef<"IMAGE">(id, 1),
+      left: this.makeRef<"IMAGE">(id, 2),
+      back: this.makeRef<"IMAGE">(id, 3),
+      right: this.makeRef<"IMAGE">(id, 4),
+      __id: id as OutputNodeId<TripoImageToMultiviewNodeResult>,
       inputs: inputPaths
     };
   }
@@ -63141,6 +73779,21 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       "model task_id": this.makeRef<"MODEL_TASK_ID">(id, 0),
       __id: id as OutputNodeId<TripoImportModelNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  TripoMeshCompleteNode(inputs: TripoMeshCompleteNodeInputs): TripoMeshCompleteNodeOutputs & { __id: OutputNodeId<TripoMeshCompleteNodeResult>; inputs: TripoMeshCompleteNodeInputPaths } {
+    const id = this.addNode("TripoMeshCompleteNode", inputs);
+    const inputPaths = {
+      segment_task_id: `${id}.inputs.segment_task_id`,
+      part_names: `${id}.inputs.part_names`,
+    };
+    return {
+      model_file: this.makeRef<"STRING">(id, 0),
+      "model task_id": this.makeRef<"MODEL_TASK_ID">(id, 1),
+      GLB: this.makeRef<"FILE_3D_GLB">(id, 2),
+      __id: id as OutputNodeId<TripoMeshCompleteNodeResult>,
       inputs: inputPaths
     };
   }
@@ -63163,11 +73816,14 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       face_limit: `${id}.inputs.face_limit`,
       quad: `${id}.inputs.quad`,
       geometry_quality: `${id}.inputs.geometry_quality`,
+      smart_low_poly: `${id}.inputs.smart_low_poly`,
+      auto_size: `${id}.inputs.auto_size`,
     };
     return {
       model_file: this.makeRef<"STRING">(id, 0),
       "model task_id": this.makeRef<"MODEL_TASK_ID">(id, 1),
       GLB: this.makeRef<"FILE_3D_GLB">(id, 2),
+      FBX: this.makeRef<"FILE_3D_FBX">(id, 3),
       __id: id as OutputNodeId<TripoMultiviewToModelNodeResult>,
       inputs: inputPaths
     };
@@ -63239,31 +73895,53 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
-  TripoRefineNode(inputs: TripoRefineNodeInputs): TripoRefineNodeOutputs & { __id: OutputNodeId<TripoRefineNodeResult>; inputs: TripoRefineNodeInputPaths } {
-    const id = this.addNode("TripoRefineNode", inputs);
-    const inputPaths = {
-      model_task_id: `${id}.inputs.model_task_id`,
-    };
-    return {
-      model_file: this.makeRef<"STRING">(id, 0),
-      "model task_id": this.makeRef<"MODEL_TASK_ID">(id, 1),
-      GLB: this.makeRef<"FILE_3D_GLB">(id, 2),
-      __id: id as OutputNodeId<TripoRefineNodeResult>,
-      inputs: inputPaths
-    };
-  }
-
   TripoRetargetNode(inputs: TripoRetargetNodeInputs): TripoRetargetNodeOutputs & { __id: OutputNodeId<TripoRetargetNodeResult>; inputs: TripoRetargetNodeInputPaths } {
     const id = this.addNode("TripoRetargetNode", inputs);
     const inputPaths = {
       original_model_task_id: `${id}.inputs.original_model_task_id`,
       animation: `${id}.inputs.animation`,
+      out_format: `${id}.inputs.out_format`,
+      export_with_geometry: `${id}.inputs.export_with_geometry`,
+      animate_in_place: `${id}.inputs.animate_in_place`,
     };
     return {
       model_file: this.makeRef<"STRING">(id, 0),
       "retarget task_id": this.makeRef<"RETARGET_TASK_ID">(id, 1),
       GLB: this.makeRef<"FILE_3D_GLB">(id, 2),
+      FBX: this.makeRef<"FILE_3D_FBX">(id, 3),
       __id: id as OutputNodeId<TripoRetargetNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  TripoRetopologyNode(inputs: TripoRetopologyNodeInputs): TripoRetopologyNodeOutputs & { __id: OutputNodeId<TripoRetopologyNodeResult>; inputs: TripoRetopologyNodeInputPaths } {
+    const id = this.addNode("TripoRetopologyNode", inputs);
+    const inputPaths = {
+      model_task_id: `${id}.inputs.model_task_id`,
+      face_limit: `${id}.inputs.face_limit`,
+      quad: `${id}.inputs.quad`,
+      bake: `${id}.inputs.bake`,
+      part_names: `${id}.inputs.part_names`,
+    };
+    return {
+      model_file: this.makeRef<"STRING">(id, 0),
+      "model task_id": this.makeRef<"MODEL_TASK_ID">(id, 1),
+      GLB: this.makeRef<"FILE_3D_GLB">(id, 2),
+      FBX: this.makeRef<"FILE_3D_FBX">(id, 3),
+      __id: id as OutputNodeId<TripoRetopologyNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  TripoRigCheckNode(inputs: TripoRigCheckNodeInputs): TripoRigCheckNodeOutputs & { __id: OutputNodeId<TripoRigCheckNodeResult>; inputs: TripoRigCheckNodeInputPaths } {
+    const id = this.addNode("TripoRigCheckNode", inputs);
+    const inputPaths = {
+      model_task_id: `${id}.inputs.model_task_id`,
+    };
+    return {
+      riggable: this.makeRef<"BOOLEAN">(id, 0),
+      rig_type: this.makeRef<"STRING">(id, 1),
+      __id: id as OutputNodeId<TripoRigCheckNodeResult>,
       inputs: inputPaths
     };
   }
@@ -63272,12 +73950,32 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     const id = this.addNode("TripoRigNode", inputs);
     const inputPaths = {
       original_model_task_id: `${id}.inputs.original_model_task_id`,
+      model_version: `${id}.inputs.model_version`,
+      rig_type: `${id}.inputs.rig_type`,
+      spec: `${id}.inputs.spec`,
+      out_format: `${id}.inputs.out_format`,
     };
     return {
       model_file: this.makeRef<"STRING">(id, 0),
       "rig task_id": this.makeRef<"RIG_TASK_ID">(id, 1),
       GLB: this.makeRef<"FILE_3D_GLB">(id, 2),
+      FBX: this.makeRef<"FILE_3D_FBX">(id, 3),
       __id: id as OutputNodeId<TripoRigNodeResult>,
+      inputs: inputPaths
+    };
+  }
+
+  TripoSegmentNode(inputs: TripoSegmentNodeInputs): TripoSegmentNodeOutputs & { __id: OutputNodeId<TripoSegmentNodeResult>; inputs: TripoSegmentNodeInputPaths } {
+    const id = this.addNode("TripoSegmentNode", inputs);
+    const inputPaths = {
+      model_task_id: `${id}.inputs.model_task_id`,
+    };
+    return {
+      model_file: this.makeRef<"STRING">(id, 0),
+      "segment task_id": this.makeRef<"SEGMENT_TASK_ID">(id, 1),
+      GLB: this.makeRef<"FILE_3D_GLB">(id, 2),
+      part_names: this.makeRef<"STRING">(id, 3),
+      __id: id as OutputNodeId<TripoSegmentNodeResult>,
       inputs: inputPaths
     };
   }
@@ -63347,11 +74045,14 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       face_limit: `${id}.inputs.face_limit`,
       quad: `${id}.inputs.quad`,
       geometry_quality: `${id}.inputs.geometry_quality`,
+      smart_low_poly: `${id}.inputs.smart_low_poly`,
+      auto_size: `${id}.inputs.auto_size`,
     };
     return {
       model_file: this.makeRef<"STRING">(id, 0),
       "model task_id": this.makeRef<"MODEL_TASK_ID">(id, 1),
       GLB: this.makeRef<"FILE_3D_GLB">(id, 2),
+      FBX: this.makeRef<"FILE_3D_FBX">(id, 3),
       __id: id as OutputNodeId<TripoTextToModelNodeResult>,
       inputs: inputPaths
     };
@@ -63367,11 +74068,16 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
       texture_quality: `${id}.inputs.texture_quality`,
       texture_alignment: `${id}.inputs.texture_alignment`,
       texture_prompt: `${id}.inputs.texture_prompt`,
+      model_version: `${id}.inputs.model_version`,
+      style_image: `${id}.inputs.style_image`,
+      reference: `${id}.inputs.reference`,
+      part_names: `${id}.inputs.part_names`,
     };
     return {
       model_file: this.makeRef<"STRING">(id, 0),
       "model task_id": this.makeRef<"MODEL_TASK_ID">(id, 1),
       GLB: this.makeRef<"FILE_3D_GLB">(id, 2),
+      FBX: this.makeRef<"FILE_3D_FBX">(id, 3),
       __id: id as OutputNodeId<TripoTextureNodeResult>,
       inputs: inputPaths
     };
@@ -63755,6 +74461,22 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return { __id: id as OutputNodeId<UniRigViewRiggingResult>, inputs: inputPaths };
   }
 
+  UnwrapMesh(inputs: UnwrapMeshInputs): UnwrapMeshOutputs & { __id: OutputNodeId<UnwrapMeshResult>; inputs: UnwrapMeshInputPaths } {
+    const id = this.addNode("UnwrapMesh", inputs);
+    const inputPaths = {
+      mesh: `${id}.inputs.mesh`,
+      segmenter: `${id}.inputs.segmenter`,
+      resolution: `${id}.inputs.resolution`,
+      padding: `${id}.inputs.padding`,
+      weld_distance: `${id}.inputs.weld_distance`,
+    };
+    return {
+      mesh: this.makeRef<"MESH">(id, 0),
+      __id: id as OutputNodeId<UnwrapMeshResult>,
+      inputs: inputPaths
+    };
+  }
+
   UpperBodyTrackingFromPoseKps(inputs: UpperBodyTrackingFromPoseKpsInputs): UpperBodyTrackingFromPoseKpsOutputs & { __id: OutputNodeId<UpperBodyTrackingFromPoseKpsResult>; inputs: UpperBodyTrackingFromPoseKpsInputPaths } {
     const id = this.addNode("UpperBodyTrackingFromPoseKps", inputs);
     const inputPaths = {
@@ -63869,6 +74591,48 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       IMAGE: this.makeRef<"IMAGE">(id, 0),
       __id: id as OutputNodeId<VAEDecodeLoopKJResult>,
+      inputs: inputPaths
+    };
+  }
+
+  VaeDecodeShapeTrellis(inputs: VaeDecodeShapeTrellisInputs): VaeDecodeShapeTrellisOutputs & { __id: OutputNodeId<VaeDecodeShapeTrellisResult>; inputs: VaeDecodeShapeTrellisInputPaths } {
+    const id = this.addNode("VaeDecodeShapeTrellis", inputs);
+    const inputPaths = {
+      samples: `${id}.inputs.samples`,
+      vae: `${id}.inputs.vae`,
+    };
+    return {
+      mesh: this.makeRef<"MESH">(id, 0),
+      shape_subdivides: this.makeRef<"SHAPE_SUBDIVIDES">(id, 1),
+      __id: id as OutputNodeId<VaeDecodeShapeTrellisResult>,
+      inputs: inputPaths
+    };
+  }
+
+  VaeDecodeStructureTrellis2(inputs: VaeDecodeStructureTrellis2Inputs): VaeDecodeStructureTrellis2Outputs & { __id: OutputNodeId<VaeDecodeStructureTrellis2Result>; inputs: VaeDecodeStructureTrellis2InputPaths } {
+    const id = this.addNode("VaeDecodeStructureTrellis2", inputs);
+    const inputPaths = {
+      samples: `${id}.inputs.samples`,
+      vae: `${id}.inputs.vae`,
+      resolution: `${id}.inputs.resolution`,
+    };
+    return {
+      voxel: this.makeRef<"VOXEL">(id, 0),
+      __id: id as OutputNodeId<VaeDecodeStructureTrellis2Result>,
+      inputs: inputPaths
+    };
+  }
+
+  VaeDecodeTextureTrellis(inputs: VaeDecodeTextureTrellisInputs): VaeDecodeTextureTrellisOutputs & { __id: OutputNodeId<VaeDecodeTextureTrellisResult>; inputs: VaeDecodeTextureTrellisInputPaths } {
+    const id = this.addNode("VaeDecodeTextureTrellis", inputs);
+    const inputPaths = {
+      samples: `${id}.inputs.samples`,
+      vae: `${id}.inputs.vae`,
+      shape_subdivides: `${id}.inputs.shape_subdivides`,
+    };
+    return {
+      voxel_colors: this.makeRef<"VOXEL">(id, 0),
+      __id: id as OutputNodeId<VaeDecodeTextureTrellisResult>,
       inputs: inputPaths
     };
   }
@@ -64041,26 +74805,6 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
-  VeoVideoGenerationNode(inputs: VeoVideoGenerationNodeInputs): VeoVideoGenerationNodeOutputs & { __id: OutputNodeId<VeoVideoGenerationNodeResult>; inputs: VeoVideoGenerationNodeInputPaths } {
-    const id = this.addNode("VeoVideoGenerationNode", inputs);
-    const inputPaths = {
-      prompt: `${id}.inputs.prompt`,
-      aspect_ratio: `${id}.inputs.aspect_ratio`,
-      negative_prompt: `${id}.inputs.negative_prompt`,
-      duration_seconds: `${id}.inputs.duration_seconds`,
-      enhance_prompt: `${id}.inputs.enhance_prompt`,
-      person_generation: `${id}.inputs.person_generation`,
-      seed: `${id}.inputs.seed`,
-      image: `${id}.inputs.image`,
-      model: `${id}.inputs.model`,
-    };
-    return {
-      VIDEO: this.makeRef<"VIDEO">(id, 0),
-      __id: id as OutputNodeId<VeoVideoGenerationNodeResult>,
-      inputs: inputPaths
-    };
-  }
-
   /** Node: "Video Slice" */
   VideoSlice(inputs: VideoSliceInputs): VideoSliceOutputs & { __id: OutputNodeId<VideoSliceResult>; inputs: VideoSliceInputPaths } {
     const id = this.addNode("Video Slice", inputs);
@@ -64077,6 +74821,21 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  VideoFrameSample(inputs: VideoFrameSampleInputs): VideoFrameSampleOutputs & { __id: OutputNodeId<VideoFrameSampleResult>; inputs: VideoFrameSampleInputPaths } {
+    const id = this.addNode("VideoFrameSample", inputs);
+    const inputPaths = {
+      video: `${id}.inputs.video`,
+      num_frames: `${id}.inputs.num_frames`,
+      strategy: `${id}.inputs.strategy`,
+      seed: `${id}.inputs.seed`,
+    };
+    return {
+      video: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<VideoFrameSampleResult>,
+      inputs: inputPaths
+    };
+  }
+
   VideoLinearCFGGuidance(inputs: VideoLinearCFGGuidanceInputs): VideoLinearCFGGuidanceOutputs & { __id: OutputNodeId<VideoLinearCFGGuidanceResult>; inputs: VideoLinearCFGGuidanceInputPaths } {
     const id = this.addNode("VideoLinearCFGGuidance", inputs);
     const inputPaths = {
@@ -64086,6 +74845,34 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       MODEL: this.makeRef<"MODEL">(id, 0),
       __id: id as OutputNodeId<VideoLinearCFGGuidanceResult>,
+      inputs: inputPaths
+    };
+  }
+
+  VideoRandomTemporalCrop(inputs: VideoRandomTemporalCropInputs): VideoRandomTemporalCropOutputs & { __id: OutputNodeId<VideoRandomTemporalCropResult>; inputs: VideoRandomTemporalCropInputPaths } {
+    const id = this.addNode("VideoRandomTemporalCrop", inputs);
+    const inputPaths = {
+      video: `${id}.inputs.video`,
+      length: `${id}.inputs.length`,
+      seed: `${id}.inputs.seed`,
+    };
+    return {
+      video: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<VideoRandomTemporalCropResult>,
+      inputs: inputPaths
+    };
+  }
+
+  VideoTemporalCrop(inputs: VideoTemporalCropInputs): VideoTemporalCropOutputs & { __id: OutputNodeId<VideoTemporalCropResult>; inputs: VideoTemporalCropInputPaths } {
+    const id = this.addNode("VideoTemporalCrop", inputs);
+    const inputPaths = {
+      video: `${id}.inputs.video`,
+      start_frame: `${id}.inputs.start_frame`,
+      length: `${id}.inputs.length`,
+    };
+    return {
+      video: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<VideoTemporalCropResult>,
       inputs: inputPaths
     };
   }
@@ -65343,6 +76130,84 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  Wan3ImageToVideoApi(inputs: Wan3ImageToVideoApiInputs): Wan3ImageToVideoApiOutputs & { __id: OutputNodeId<Wan3ImageToVideoApiResult>; inputs: Wan3ImageToVideoApiInputPaths } {
+    const id = this.addNode("Wan3ImageToVideoApi", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      first_frame: `${id}.inputs.first_frame`,
+      seed: `${id}.inputs.seed`,
+      watermark: `${id}.inputs.watermark`,
+      last_frame: `${id}.inputs.last_frame`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<Wan3ImageToVideoApiResult>,
+      inputs: inputPaths
+    };
+  }
+
+  Wan3ReferenceToVideoApi(inputs: Wan3ReferenceToVideoApiInputs): Wan3ReferenceToVideoApiOutputs & { __id: OutputNodeId<Wan3ReferenceToVideoApiResult>; inputs: Wan3ReferenceToVideoApiInputPaths } {
+    const id = this.addNode("Wan3ReferenceToVideoApi", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      seed: `${id}.inputs.seed`,
+      watermark: `${id}.inputs.watermark`,
+    };
+    return {
+      VIDEO: this.makeRef<"VIDEO">(id, 0),
+      __id: id as OutputNodeId<Wan3ReferenceToVideoApiResult>,
+      inputs: inputPaths
+    };
+  }
+
+  WanAnimate2Cache(inputs: WanAnimate2CacheInputs): WanAnimate2CacheOutputs & { __id: OutputNodeId<WanAnimate2CacheResult>; inputs: WanAnimate2CacheInputPaths } {
+    const id = this.addNode("WanAnimate2Cache", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      device: `${id}.inputs.device`,
+      dtype: `${id}.inputs.dtype`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      __id: id as OutputNodeId<WanAnimate2CacheResult>,
+      inputs: inputPaths
+    };
+  }
+
+  WanAnimate2ToVideo(inputs: WanAnimate2ToVideoInputs): WanAnimate2ToVideoOutputs & { __id: OutputNodeId<WanAnimate2ToVideoResult>; inputs: WanAnimate2ToVideoInputPaths } {
+    const id = this.addNode("WanAnimate2ToVideo", inputs);
+    const inputPaths = {
+      positive: `${id}.inputs.positive`,
+      negative: `${id}.inputs.negative`,
+      vae: `${id}.inputs.vae`,
+      width: `${id}.inputs.width`,
+      height: `${id}.inputs.height`,
+      length: `${id}.inputs.length`,
+      batch_size: `${id}.inputs.batch_size`,
+      video_frame_offset: `${id}.inputs.video_frame_offset`,
+      pose_strength: `${id}.inputs.pose_strength`,
+      pose_start_percent: `${id}.inputs.pose_start_percent`,
+      pose_end_percent: `${id}.inputs.pose_end_percent`,
+      reference_image_strength: `${id}.inputs.reference_image_strength`,
+      reference_image: `${id}.inputs.reference_image`,
+      pose_video: `${id}.inputs.pose_video`,
+      clip_vision_output: `${id}.inputs.clip_vision_output`,
+      positive_pose: `${id}.inputs.positive_pose`,
+      clip_vision_output_pose: `${id}.inputs.clip_vision_output_pose`,
+      continue_motion: `${id}.inputs.continue_motion`,
+    };
+    return {
+      positive: this.makeRef<"CONDITIONING">(id, 0),
+      negative: this.makeRef<"CONDITIONING">(id, 1),
+      latent: this.makeRef<"LATENT">(id, 2),
+      trim_latent: this.makeRef<"INT">(id, 3),
+      trim_image: this.makeRef<"INT">(id, 4),
+      video_frame_offset: this.makeRef<"INT">(id, 5),
+      __id: id as OutputNodeId<WanAnimate2ToVideoResult>,
+      inputs: inputPaths
+    };
+  }
+
   WanAnimateToVideo(inputs: WanAnimateToVideoInputs): WanAnimateToVideoOutputs & { __id: OutputNodeId<WanAnimateToVideoResult>; inputs: WanAnimateToVideoInputPaths } {
     const id = this.addNode("WanAnimateToVideo", inputs);
     const inputPaths = {
@@ -65999,6 +76864,24 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     };
   }
 
+  WanUni3CControlnetApply(inputs: WanUni3CControlnetApplyInputs): WanUni3CControlnetApplyOutputs & { __id: OutputNodeId<WanUni3CControlnetApplyResult>; inputs: WanUni3CControlnetApplyInputPaths } {
+    const id = this.addNode("WanUni3CControlnetApply", inputs);
+    const inputPaths = {
+      model: `${id}.inputs.model`,
+      model_patch: `${id}.inputs.model_patch`,
+      vae: `${id}.inputs.vae`,
+      render_video: `${id}.inputs.render_video`,
+      strength: `${id}.inputs.strength`,
+      start_percent: `${id}.inputs.start_percent`,
+      end_percent: `${id}.inputs.end_percent`,
+    };
+    return {
+      MODEL: this.makeRef<"MODEL">(id, 0),
+      __id: id as OutputNodeId<WanUni3CControlnetApplyResult>,
+      inputs: inputPaths
+    };
+  }
+
   WanVaceToVideo(inputs: WanVaceToVideoInputs): WanVaceToVideoOutputs & { __id: OutputNodeId<WanVaceToVideoResult>; inputs: WanVaceToVideoInputPaths } {
     const id = this.addNode("WanVaceToVideo", inputs);
     const inputPaths = {
@@ -66195,6 +77078,20 @@ export class WorkflowBuilder extends BaseWorkflowBuilder {
     return {
       FLOAT: this.makeRef<"FLOAT">(id, 0),
       __id: id as OutputNodeId<WeightScheduleExtendResult>,
+      inputs: inputPaths
+    };
+  }
+
+  WeldVertices(inputs: WeldVerticesInputs): WeldVerticesOutputs & { __id: OutputNodeId<WeldVerticesResult>; inputs: WeldVerticesInputPaths } {
+    const id = this.addNode("WeldVertices", inputs);
+    const inputPaths = {
+      mesh: `${id}.inputs.mesh`,
+      epsilon_rel: `${id}.inputs.epsilon_rel`,
+      epsilon_abs: `${id}.inputs.epsilon_abs`,
+    };
+    return {
+      mesh: this.makeRef<"MESH">(id, 0),
+      __id: id as OutputNodeId<WeldVerticesResult>,
       inputs: inputPaths
     };
   }
