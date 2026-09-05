@@ -38,8 +38,15 @@ import {
 } from "../lib/pixelate";
 import { FLIP, GEN_DIRS, MOTIONS, type Dir8, type GenDir } from "../motions";
 
-const VALUE_FLAGS = new Set(["--size", "--palette", "--bg-tolerance", "--bg", "--render"]);
-/** --contrast: the 2nd..98th luminance percentiles of the character land here (fractions of 255). */
+const VALUE_FLAGS = new Set([
+  "--size",
+  "--palette",
+  "--bg-tolerance",
+  "--bg",
+  "--render",
+  "--only",
+]);
+/** Levels: the 2nd..98th luminance percentiles of the character land here (fractions of 255). --no-contrast skips it. */
 const STRETCH = { lo: 0.02, hi: 0.98, outLo: 0.08, outHi: 0.92 };
 
 export const pxPath = (char: string, motion: string, dir: Dir8, frame: number): string =>
@@ -61,7 +68,7 @@ export async function run(argv: string[]): Promise<void> {
   const name = positional(argv, VALUE_FLAGS);
   if (!name) {
     console.error(
-      `usage: bun run px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb] [--render 00013] [--contrast]`,
+      `usage: bun run px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb] [--render 00013] [--only walk,run] [--no-contrast]`,
     );
     process.exit(1);
   }
@@ -73,6 +80,15 @@ export async function run(argv: string[]): Promise<void> {
   const size = Number(flag(argv, "size") ?? 64);
   /** ComfyUI's counter, to pixelate one specific run instead of the newest. */
   const render = flag(argv, "render");
+  // Motions to pixelate; the others neither widen the shared crop nor get written.
+  const only = flag(argv, "only")?.split(",");
+  const motions = only ? MOTIONS.filter((m) => only.includes(m.id)) : MOTIONS;
+  if (only && motions.length !== only.length) {
+    console.error(
+      `unknown --only ${only.join(",")}; expected ${MOTIONS.map((m) => m.id).join(", ")}`,
+    );
+    process.exit(1);
+  }
   const paletteName = flag(argv, "palette") ?? "apoc";
   const tolerance = Number(flag(argv, "bg-tolerance") ?? 40);
   let fixed: Rgb[] | undefined;
@@ -111,7 +127,7 @@ export async function run(argv: string[]): Promise<void> {
   }[] = [];
   let missing = 0;
   let blank = 0;
-  for (const m of MOTIONS)
+  for (const m of motions)
     for (const dir of GEN_DIRS)
       for (let i = 0; i < m.frames; i++) {
         const src = await latestRender(join(srcRoot, m.id, dir), i, render);
@@ -163,7 +179,7 @@ export async function run(argv: string[]): Promise<void> {
 
   // A smooth render is dark and low-contrast at 64px; without this most of
   // it quantizes onto the palette's darkest entries. One range for all frames.
-  if (argv.includes("--contrast")) {
+  if (!argv.includes("--no-contrast")) {
     const { lo, hi } = luminanceRange(
       placed.map((p) => p.small),
       STRETCH.lo,

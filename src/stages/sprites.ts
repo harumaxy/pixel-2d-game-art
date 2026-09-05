@@ -1,8 +1,8 @@
 // src/stages/sprites.ts
 /**
- * `px sprites <char> [--motion walk] [--dir down] [--seed n] [--strength 0.6] [--depth-strength 0.5]
+ * `px sprites <char> [--motion walk,run] [--dir down] [--seed n] [--strength 0.6] [--depth-strength 0.5]
  *                    [--ref out/hero/<char>.png] [--ref-weight 0.7] [--matte toonout|rmbg2|none]
- *                    [--batch] [--style-aligned] [--anim] [--dry]`
+ *                    [--batch] [--style-aligned] [--no-anim] [--dry]`
  *
  * One SD1.5 generation per (motion, dir, frame): character LoRA + IP-Adapter
  * reference (the hero image, so colours and outfit stay put between frames)
@@ -11,10 +11,11 @@
  * thing that changes between frames is the skeleton. The render is matted
  * on the server (RGBA), so pixelate can trust the alpha instead of keying.
  *
- * --batch renders every frame of a (motion, dir) in one batch instead; that
- * is what --style-aligned (shared attention) and --anim (AnimateDiff) need
- * to hold the frames together. Note frame i then gets noise seed+i, so a
- * batch and a per-frame run of the same seed are not the same images.
+ * By default every frame of a (motion, dir) is one AnimateDiff batch: the
+ * motion module is what keeps a run's head and a crouch's pose intact from
+ * frame to frame. --no-anim goes back to per-frame renders (--batch keeps
+ * the batch, --style-aligned shares attention across it). Note a batch gives
+ * frame i noise seed+i, so it never matches a per-frame run of the same seed.
  */
 
 import {
@@ -74,10 +75,10 @@ const MATTES = ["toonout", "rmbg2", "none"] as const;
 export const heroPath = (char: string): string => join(OUT_DIR, "hero", `${char}.png`);
 
 const usage = () =>
-  `usage: bun run px sprites <char> [--motion ${MOTIONS.map((m) => m.id).join("|")}] [--dir ${GEN_DIRS.join("|")}]\n` +
+  `usage: bun run px sprites <char> [--motion ${MOTIONS.map((m) => m.id).join(",")}] [--dir ${GEN_DIRS.join("|")}]\n` +
   `                          [--seed n] [--strength 0.6] [--depth-strength 0.5] [--ref out/hero/<char>.png] [--ref-weight 0.7]\n` +
   `                          [--ckpt file] [--steps 25] [--cfg 6] [--matte ${MATTES.join("|")}]\n` +
-  `                          [--batch] [--style-aligned] [--anim] [--dry]`;
+  `                          [--batch] [--style-aligned] [--no-anim] [--dry]`;
 
 /** Seed per (char, motion): base seed from --seed or random, plus a stable per-motion offset. */
 export const motionSeed = (base: number, motionIndex: number) =>
@@ -115,8 +116,9 @@ export async function run(argv: string[]): Promise<void> {
   }
 
   const motionFlag = flag(argv, "motion");
-  const motions = motionFlag ? MOTIONS.filter((m) => m.id === motionFlag) : MOTIONS;
-  if (!motions.length) {
+  const wanted = motionFlag?.split(",");
+  const motions = wanted ? MOTIONS.filter((m) => wanted.includes(m.id)) : MOTIONS;
+  if (!motions.length || (wanted && motions.length !== wanted.length)) {
     console.error(`unknown --motion ${motionFlag}\n${usage()}`);
     process.exit(1);
   }
@@ -187,7 +189,7 @@ export async function run(argv: string[]): Promise<void> {
   const steps = flag(argv, "steps") ? Number(flag(argv, "steps")) : undefined;
   const cfg = flag(argv, "cfg") ? Number(flag(argv, "cfg")) : undefined;
   const styleAligned = argv.includes("--style-aligned");
-  const animateDiff = argv.includes("--anim") ? SD15_ANIMATEDIFF : undefined;
+  const animateDiff = argv.includes("--no-anim") ? undefined : SD15_ANIMATEDIFF;
   // ToonOut is tuned on anime and keeps the motion module's wall stains as subject; Bria's does not.
   const matteFlag = (flag(argv, "matte") ??
     (animateDiff ? "rmbg2" : "toonout")) as (typeof MATTES)[number];
