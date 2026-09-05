@@ -23,7 +23,7 @@ export const usage = () => `usage: bun run px <${Object.keys(STAGES).join("|")}>
 
 if (import.meta.main) {
   const [stage, ...rest] = process.argv.slice(2);
-  if (stage === undefined || !(stage in STAGES)) {
+  if (stage === undefined || !Object.hasOwn(STAGES, stage)) {
     console.error(stage === undefined ? usage() : `unknown stage "${stage}"\n${usage()}`);
     process.exit(1);
   }

@@ -7,7 +7,6 @@
  * only thing that changes between frames is the skeleton.
  */
 
-import { basename } from "node:path";
 import {
   connect,
   flag,
@@ -40,7 +39,8 @@ const usage = () =>
   `                          [--seed n] [--strength 0.65] [--ckpt file] [--steps 25] [--cfg 6] [--dry]`;
 
 /** Seed per (char, motion): base seed from --seed or random, plus a stable per-motion offset. */
-const motionSeed = (base: number, motionIndex: number) => (base + motionIndex * 1000) % 2 ** 32;
+export const motionSeed = (base: number, motionIndex: number) =>
+  (base + motionIndex * 1000) % 2 ** 32;
 
 export async function run(argv: string[]): Promise<void> {
   const name = positional(argv, VALUE_FLAGS);
@@ -111,28 +111,29 @@ export async function run(argv: string[]): Promise<void> {
     for (const dir of dirs)
       for (let i = 0; i < m.frames; i++) {
         const pose = posePath(m.id, dir, i);
-        const image = api ? await uploadImage(api, pose) : basename(pose);
         const label = `${m.id}/${dir}/${i}`;
-        const workflow = buildSd15({
-          ckpt,
-          positive: `${char.trigger}, ${char.positive}, ${m.prompt}, ${SUFFIX}`,
-          negative: `${char.negative}, black background`,
-          width: 512,
-          height: 512,
-          count: 1,
-          seed,
-          steps,
-          cfg,
-          prefix: `sprites/${char.name}/${m.id}/${dir}/${i}`,
-          loras,
-          control: { image, strength },
-        });
-
-        if (dry) {
-          console.log(JSON.stringify(workflow.prompt, null, 2));
-          continue;
-        }
+        const poseName = `${m.id}_${dir}_${i}.png`;
         try {
+          const image = api ? await uploadImage(api, pose, poseName) : poseName;
+          const workflow = buildSd15({
+            ckpt,
+            positive: `${char.trigger}, ${char.positive}, ${m.prompt}, ${SUFFIX}`,
+            negative: `${char.negative}, black background`,
+            width: 512,
+            height: 512,
+            count: 1,
+            seed,
+            steps,
+            cfg,
+            prefix: `sprites/${char.name}/${m.id}/${dir}/${i}`,
+            loras,
+            control: { image, strength },
+          });
+
+          if (dry) {
+            console.log(JSON.stringify(workflow.prompt, null, 2));
+            continue;
+          }
           const files = await runWorkflow(api!, workflow, label);
           console.log(`\r  ${files.join(", ")}`);
           done++;

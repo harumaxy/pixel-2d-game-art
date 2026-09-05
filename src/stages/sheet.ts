@@ -1,11 +1,12 @@
 // src/stages/sheet.ts
 /**
- * `px sheet <char> [--size 64]` — out/px/<char> -> out/sheets/<char>.png + .json
- * Rows: MOTIONS order × DIRS8 order. Missing frames are skipped and reported.
+ * `px sheet <char>` — out/px/<char> -> out/sheets/<char>.png + .json
+ * Rows: MOTIONS order × DIRS8 order. Frame size is read off the first frame
+ * found. Missing frames are skipped and reported.
  */
 
 import { join } from "node:path";
-import { ensureDir, flag, positional } from "../lib/comfy";
+import { ensureDir, positional } from "../lib/comfy";
 import { loadChar } from "../lib/chars";
 import { OUT_DIR } from "../lib/paths";
 import { readRgba, writePng } from "../lib/pixelate";
@@ -14,16 +15,15 @@ import { DIRS8, MOTIONS } from "../motions";
 import { pxPath } from "./pixelate";
 
 export async function run(argv: string[]): Promise<void> {
-  const name = positional(argv, new Set(["--size"]));
+  const name = positional(argv, new Set<string>());
   if (!name) {
-    console.error(`usage: bun run px sheet <char> [--size 64]`);
+    console.error(`usage: bun run px sheet <char>`);
     process.exit(1);
   }
   const char = await loadChar(name).catch((e: Error) => {
     console.error(e.message);
     process.exit(1);
   });
-  const size = Number(flag(argv, "size") ?? 64);
 
   const rows: SheetRow[] = [];
   let missing = 0;
@@ -43,7 +43,16 @@ export async function run(argv: string[]): Promise<void> {
     process.exit(1);
   }
 
-  const { image, meta } = composeSheet(rows, size);
+  const frameSize = rows[0]!.frames[0]!.width;
+  let composed: ReturnType<typeof composeSheet>;
+  try {
+    composed = composeSheet(rows, frameSize);
+  } catch (e) {
+    console.error((e as Error).message);
+    process.exit(1);
+  }
+  const { image, meta } = composed;
+
   const dir = join(OUT_DIR, "sheets");
   await ensureDir(dir);
   await writePng(image, join(dir, `${char.name}.png`));

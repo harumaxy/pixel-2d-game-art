@@ -54,7 +54,7 @@ export async function run(argv: string[]): Promise<void> {
   const onlyFlag = flag(argv, "only");
   const selected =
     onlyFlag === undefined ? ids() : (onlyFlag.split(",").map((s) => s.trim()) as VariationId[]);
-  const unknown = selected.filter((v) => !(v in VARIATIONS));
+  const unknown = selected.filter((v) => !Object.hasOwn(VARIATIONS, v));
   if (unknown.length) {
     console.error(`unknown --only ${unknown.join(", ")}; expected ${ids().join(", ")}`);
     process.exit(1);
@@ -62,7 +62,17 @@ export async function run(argv: string[]): Promise<void> {
 
   const dry = argv.includes("--dry");
   const api = dry ? undefined : await connect();
-  const image = api ? await uploadImage(api, heroPath) : basename(heroPath);
+  let image: string;
+  if (api) {
+    try {
+      image = await uploadImage(api, heroPath);
+    } catch (e) {
+      console.error(`upload failed: ${(e as Error).message}`);
+      process.exit(1);
+    }
+  } else {
+    image = basename(heroPath);
+  }
   const baseSeed = resolveSeed(argv);
   const dir = join(OUT_DIR, "dataset", char.name);
 
@@ -78,11 +88,11 @@ export async function run(argv: string[]): Promise<void> {
   }
 
   let failed = 0;
-  for (const [i, id] of selected.entries()) {
+  for (const id of selected) {
     const workflow = buildQwenEdit({
       image,
       prompt: VARIATIONS[id].prompt,
-      seed: baseSeed + i,
+      seed: baseSeed + ids().indexOf(id),
       prefix: `dataset/${char.name}/${id}`,
     });
 
