@@ -1,11 +1,13 @@
 // src/stages/sprites.ts
 /**
- * `px sprites <char> [--motion walk] [--dir down] [--seed n] [--strength 0.6] [--depth-strength 0.5] [--dry]`
+ * `px sprites <char> [--motion walk] [--dir down] [--seed n] [--strength 0.6] [--depth-strength 0.5]
+ *                    [--ref out/hero/<char>.png] [--ref-weight 0.7] [--dry]`
  *
- * One SD1.5 generation per (motion, dir, frame): character LoRA + openpose
- * ControlNet + depth ControlNet, both hints pre-rendered by `px poses` from
- * Mixamo. The seed is fixed per (char, motion) so the only thing that changes
- * between frames is the skeleton.
+ * One SD1.5 generation per (motion, dir, frame): character LoRA + IP-Adapter
+ * reference (the hero image, so colours and outfit stay put between frames)
+ * + openpose ControlNet + depth ControlNet, both hints pre-rendered by
+ * `px poses` from Mixamo. The seed is fixed per (char, motion) so the only
+ * thing that changes between frames is the skeleton.
  */
 
 import {
@@ -17,8 +19,9 @@ import {
   runWorkflow,
   uploadImage,
 } from "../lib/comfy";
+import { join } from "node:path";
 import { loadChar } from "../lib/chars";
-import { genPrefix } from "../lib/paths";
+import { genPrefix, OUT_DIR } from "../lib/paths";
 import {
   buildSd15,
   SD15_CONTROLNET_DEPTH,
@@ -36,14 +39,20 @@ const VALUE_FLAGS = new Set([
   "--seed",
   "--strength",
   "--depth-strength",
+  "--ref",
+  "--ref-weight",
   "--ckpt",
   "--steps",
   "--cfg",
 ]);
 
+/** Where `px dataset` left the hero image; the default IP-Adapter reference. */
+export const heroPath = (char: string): string => join(OUT_DIR, "hero", `${char}.png`);
+
 const usage = () =>
   `usage: bun run px sprites <char> [--motion ${MOTIONS.map((m) => m.id).join("|")}] [--dir ${GEN_DIRS.join("|")}]\n` +
-  `                          [--seed n] [--strength 0.6] [--depth-strength 0.5] [--ckpt file] [--steps 25] [--cfg 6] [--dry]`;
+  `                          [--seed n] [--strength 0.6] [--depth-strength 0.5] [--ref out/hero/<char>.png] [--ref-weight 0.7]\n` +
+  `                          [--ckpt file] [--steps 25] [--cfg 6] [--dry]`;
 
 /** Seed per (char, motion): base seed from --seed or random, plus a stable per-motion offset. */
 export const motionSeed = (base: number, motionIndex: number) =>
@@ -95,10 +104,22 @@ export async function run(argv: string[]): Promise<void> {
 
   const strength = Number(flag(argv, "strength") ?? 0.6);
   const depthStrength = Number(flag(argv, "depth-strength") ?? 0.5);
-  if (Number.isNaN(strength) || Number.isNaN(depthStrength)) {
-    console.error(`--strength / --depth-strength must be numbers\n${usage()}`);
+  const refWeight = Number(flag(argv, "ref-weight") ?? 0.7);
+  if (Number.isNaN(strength) || Number.isNaN(depthStrength) || Number.isNaN(refWeight)) {
+    console.error(`--strength / --depth-strength / --ref-weight must be numbers\n${usage()}`);
     process.exit(1);
   }
+  // --ref-weight 0 turns the reference off; an explicit --ref must exist, the default may not.
+  const refFlag = flag(argv, "ref");
+  const refFile = refWeight > 0 ? (refFlag ?? heroPath(char.name)) : undefined;
+  if (refFile && !(await Bun.file(refFile).exists())) {
+    if (refFlag) {
+      console.error(`no such file: ${refFile}`);
+      process.exit(1);
+    }
+    console.error(`[sprites] no ${refFile}; generating without a reference image`);
+  }
+  const refPath = refFile && (await Bun.file(refFile).exists()) ? refFile : undefined;
 
   // Every hint must exist before we touch the server.
   for (const m of motions)
@@ -125,6 +146,16 @@ export async function run(argv: string[]): Promise<void> {
     console.error((e as Error).message);
     process.exit(1);
   }
+
+  // One upload for the whole run; every frame references the same image.
+  const ref = refPath
+    ? {
+        image: api
+          ? await uploadImage(api, refPath, `${char.name}_ref.png`)
+          : `${char.name}_ref.png`,
+        weight: refWeight,
+      }
+    : undefined;
 
   const baseSeed = resolveSeed(argv);
   const ckpt = flag(argv, "ckpt") ?? DEFAULT_CKPT;
@@ -169,6 +200,7 @@ export async function run(argv: string[]): Promise<void> {
             cfg,
             prefix: genPrefix("sprites", char.name, m.id, dir, String(i)),
             loras,
+            ref,
             controls,
           });
 

@@ -1,5 +1,11 @@
 import { describe, expect, test } from "bun:test";
-import { buildSd15, SD15_CONTROLNET_DEPTH, SD15_CONTROLNET_OPENPOSE } from "./sd15";
+import {
+  buildSd15,
+  SD15_CLIP_VISION,
+  SD15_CONTROLNET_DEPTH,
+  SD15_CONTROLNET_OPENPOSE,
+  SD15_IPADAPTER,
+} from "./sd15";
 
 const base = {
   ckpt: "aziibpixelmix_v10.safetensors",
@@ -92,6 +98,33 @@ describe("buildSd15", () => {
     ]);
     const ks = byType(wf, "KSampler")[0]!;
     expect((ks.inputs.positive as [string, number])[0]).toBe(applies[1]![0]);
+  });
+
+  test("ref image patches the model through IP-Adapter after the loras", () => {
+    const wf = buildSd15({
+      ...base,
+      loras: [{ name: "a.safetensors", strength: 0.8 }],
+      ref: { image: "scavenger_ref.png", weight: 0.7 },
+    });
+    const prompt = wf.prompt as Record<
+      string,
+      { class_type: string; inputs: Record<string, unknown> }
+    >;
+    const [loraId] = Object.entries(prompt).find(([, n]) => n.class_type === "LoraLoader")!;
+    const [ipaId, ipa] = Object.entries(prompt).find(
+      ([, n]) => n.class_type === "IPAdapterAdvanced",
+    )!;
+    expect(ipa.inputs.weight).toBe(0.7);
+    expect((ipa.inputs.model as [string, number])[0]).toBe(loraId);
+    expect(byType(wf, "IPAdapterModelLoader")[0]!.inputs.ipadapter_file).toBe(SD15_IPADAPTER);
+    expect(byType(wf, "CLIPVisionLoader")[0]!.inputs.clip_name).toBe(SD15_CLIP_VISION);
+    expect(byType(wf, "LoadImage").map((n) => n.inputs.image)).toContain("scavenger_ref.png");
+    const ks = byType(wf, "KSampler")[0]!;
+    expect((ks.inputs.model as [string, number])[0]).toBe(ipaId);
+  });
+
+  test("no ref means no IP-Adapter nodes", () => {
+    expect(byType(buildSd15(base), "IPAdapterAdvanced")).toHaveLength(0);
   });
 
   test("save prefix and batch size", () => {

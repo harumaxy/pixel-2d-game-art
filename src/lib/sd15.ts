@@ -1,12 +1,15 @@
 /**
  * SD1.5 as a graph builder: one checkpoint, optional LoRA chain, optional
- * ControlNet chain. Used by concept (plain) and sprites (LoRA + openpose + depth).
+ * IP-Adapter reference, optional ControlNet chain. Used by concept (plain)
+ * and sprites (LoRA + reference + openpose + depth).
  */
 
 import {
   WorkflowBuilder,
   type CheckpointLoaderSimpleInputs,
+  type CLIPVisionLoaderInputs,
   type ControlNetLoaderInputs,
+  type IPAdapterModelLoaderInputs,
   type KSamplerInputs,
   type LoadImageInputs,
   type LoraLoaderInputs,
@@ -15,6 +18,15 @@ import type { Lora } from "./comfy";
 
 export const SD15_CONTROLNET_OPENPOSE = "control_v11p_sd15_openpose_fp16.safetensors";
 export const SD15_CONTROLNET_DEPTH = "control_v11f1p_sd15_depth_fp16.safetensors";
+export const SD15_IPADAPTER = "ip-adapter-plus_sd15.safetensors";
+export const SD15_CLIP_VISION = "CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors";
+
+export interface Ref {
+  /** Reference image already in ComfyUI's input/ dir: what the character looks like. */
+  image: string;
+  /** IP-Adapter weight; ~0.7 keeps colours and outfit without freezing the pose. */
+  weight: number;
+}
 
 export interface Control {
   /** ControlNet filename as ControlNetLoader wants it. */
@@ -41,6 +53,11 @@ export interface Sd15Opts {
   steps?: number;
   cfg?: number;
   loras?: Lora[];
+  /**
+   * Pins appearance across frames: ControlNet says what the character is
+   * doing, the reference says who it is. Applied after the LoRAs.
+   */
+  ref?: Ref;
   /** Applied in order; each one conditions on the previous one's output. */
   controls?: Control[];
 }
@@ -66,6 +83,27 @@ export function buildSd15(o: Sd15Opts): ReturnType<WorkflowBuilder["build"]> {
     });
     model = loaded.MODEL;
     clip = loaded.CLIP;
+  }
+
+  if (o.ref) {
+    // Plus (ViT-H) variant: 16 image tokens, enough to carry outfit details.
+    // "linear" weights identity and colour, not just style.
+    model = w.IPAdapterAdvanced({
+      model,
+      ipadapter: w.IPAdapterModelLoader({
+        ipadapter_file: SD15_IPADAPTER as IPAdapterModelLoaderInputs["ipadapter_file"],
+      }).IPADAPTER,
+      clip_vision: w.CLIPVisionLoader({
+        clip_name: SD15_CLIP_VISION as CLIPVisionLoaderInputs["clip_name"],
+      }).CLIP_VISION,
+      image: w.LoadImage({ image: o.ref.image as LoadImageInputs["image"] }).IMAGE,
+      weight: o.ref.weight,
+      weight_type: "linear",
+      combine_embeds: "concat",
+      start_at: 0,
+      end_at: 1,
+      embeds_scaling: "V only",
+    }).MODEL;
   }
 
   const encoded = {

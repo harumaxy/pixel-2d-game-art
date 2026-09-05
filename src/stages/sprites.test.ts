@@ -1,6 +1,10 @@
 import { expect, test } from "bun:test";
 import { MOTIONS } from "../motions";
-import { motionSeed, spritePrompt } from "./sprites";
+import { heroPath, motionSeed, spritePrompt } from "./sprites";
+
+test("heroPath is where px dataset leaves the hero image", () => {
+  expect(heroPath("scavenger").replaceAll("\\", "/")).toEndWith("out/hero/scavenger.png");
+});
 
 test("motionSeed offsets by 1000 per motion index", () => {
   expect(motionSeed(42, 3)).toBe(3042);
