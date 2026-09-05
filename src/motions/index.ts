@@ -130,5 +130,48 @@ export interface Motion {
 export const clonePose = (p: Pose): Pose =>
   Object.fromEntries(JOINTS.map((j) => [j, { ...p[j] }])) as Pose;
 
-/** Filled in by Task 9; kept here so stages import one list. */
-export const MOTIONS: Motion[] = [];
+/**
+ * Swing one leg forward/back by `amt` (positive = forward). Forward is +x in
+ * profile and, when facing the viewer, a slightly lower ankle with a bent
+ * knee; the mix follows `facing`.
+ */
+export function swingLeg(p: Pose, side: "r" | "l", dir: Dir5, amt: number): void {
+  const f = facing(dir);
+  const depth = 1 - Math.abs(f); // 1 in profile, 0 front/back
+  const kne = p[`${side}kne`],
+    ank = p[`${side}ank`];
+  kne.x += depth * amt * 0.6;
+  ank.x += depth * amt * 1.2;
+  // Facing the viewer a forward leg reads as knee bend + shorter shin.
+  kne.y -= Math.abs(amt) * (1 - depth) * 0.08;
+  ank.y -= Math.abs(amt) * (1 - depth) * 0.04 * (amt > 0 ? 1 : 0);
+}
+
+/** Swing one arm like swingLeg; wrist leads. */
+export function swingArm(p: Pose, side: "r" | "l", dir: Dir5, amt: number): void {
+  const depth = 1 - Math.abs(facing(dir));
+  const elb = p[`${side}elb`],
+    wri = p[`${side}wri`];
+  elb.x += depth * amt * 0.5;
+  wri.x += depth * amt * 1.0;
+  wri.y -= Math.abs(amt) * 0.06;
+}
+
+/** Move every joint by (dx, dy). */
+export function shift(p: Pose, dx: number, dy: number): void {
+  for (const j of JOINTS) {
+    p[j].x += dx;
+    p[j].y += dy;
+  }
+}
+
+import { idle } from "./idle";
+import { walk } from "./walk";
+import { run } from "./run";
+import { attack } from "./attack";
+import { aim } from "./aim";
+import { dodge } from "./dodge";
+
+/** Sheet row order. */
+export const MOTIONS: Motion[] = [idle, walk, run, attack, aim, dodge];
+export const motionById = (id: string): Motion | undefined => MOTIONS.find((m) => m.id === id);
