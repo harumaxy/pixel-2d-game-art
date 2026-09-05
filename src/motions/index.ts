@@ -59,20 +59,20 @@ export const FLIP: Record<Dir5, [Dir8, Dir8?]> = {
 };
 
 /**
- * 2-3 heads tall on a square canvas: head fills the top third, legs are
- * short. Tune here, not per motion.
+ * 2-3 heads tall on a square canvas: the head (eyes/ears spread) takes the top ~40% of the figure,
+ * the legs are short. Tune here, not per motion.
  */
 export const BODY = {
-  headR: 0.11,
-  noseY: 0.24,
-  neckY: 0.36,
-  shoulderY: 0.4,
-  shoulderHalf: 0.12,
-  elbowDrop: 0.1,
-  wristDrop: 0.2,
-  hipY: 0.58,
-  hipHalf: 0.07,
-  kneeY: 0.74,
+  headR: 0.14,
+  noseY: 0.3,
+  neckY: 0.46,
+  shoulderY: 0.49,
+  shoulderHalf: 0.13,
+  elbowDrop: 0.09,
+  wristDrop: 0.17,
+  hipY: 0.66,
+  hipHalf: 0.08,
+  kneeY: 0.78,
   ankleY: 0.9,
   centerX: 0.5,
 } as const;
@@ -109,10 +109,10 @@ export function basePose(dir: Dir5): Pose {
     lhip: { x: lx(B.hipHalf), y: B.hipY },
     lkne: { x: lx(B.hipHalf), y: B.kneeY },
     lank: { x: lx(B.hipHalf), y: B.ankleY },
-    reye: { x: rx(0.04) + lean, y: B.noseY - 0.03 },
-    leye: { x: lx(0.04) + lean, y: B.noseY - 0.03 },
-    rear: { x: rx(B.headR * 0.9), y: B.noseY - 0.01 },
-    lear: { x: lx(B.headR * 0.9), y: B.noseY - 0.01 },
+    reye: { x: rx(0.04) + lean, y: B.noseY - 0.05 },
+    leye: { x: lx(0.04) + lean, y: B.noseY - 0.05 },
+    rear: { x: rx(B.headR * 0.9), y: B.noseY - 0.03 },
+    lear: { x: lx(B.headR * 0.9), y: B.noseY - 0.03 },
   };
 }
 
