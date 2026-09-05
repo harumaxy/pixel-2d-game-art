@@ -32,6 +32,7 @@ bun run px poses     [--only walk,run] [--size 512]  # 骨格 PNG (1 回)
 bun run px sprites  scavenger [--motion walk] [--dir down] [--seed n] [--strength 0.65]
 bun run px pixelate scavenger [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb]
 bun run px sheet    scavenger                              # -> out/sheets/scavenger.png + .json
+bun run px clean    [scavenger] [--all] [--dataset] [--dry]  # 生成物の削除。引数無しなら一覧表示のみ
 ```
 
 pixelate は各レンダーの四隅の色を背景キーとして自動検出する（checkpoint によって「灰色」の実際の色が違うため）。--bg で明示できる。

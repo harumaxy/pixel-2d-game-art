@@ -15,6 +15,7 @@ export const STAGES = {
   sprites: () => import("./stages/sprites"),
   pixelate: () => import("./stages/pixelate"),
   sheet: () => import("./stages/sheet"),
+  clean: () => import("./stages/clean"),
 } satisfies Record<string, () => Promise<{ run(argv: string[]): Promise<void> }>>;
 
 export type Stage = keyof typeof STAGES;
