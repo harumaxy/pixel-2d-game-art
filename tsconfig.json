@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    // DOM is what supplies fetch/Response/URLSearchParams; bun-types augments
+    // lib.dom when present and falls back to a thinner shim when it is not.
+    "lib": ["ESNext", "DOM"],
+    "module": "Preserve",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    // off: src/types/nodes.ts is codegen output and uses value-style type imports
+    "verbatimModuleSyntax": false,
+    "noEmit": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "types": ["bun"]
+  },
+  "include": ["src/**/*.ts"]
+}
