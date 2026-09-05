@@ -1,0 +1,15 @@
+# chars/scavenger.yaml
+name: scavenger
+trigger: sc4v_char
+# lora: scavenger        # 学習後にここへ追記する
+strength: 0.8
+positive: |
+  1boy, solo,
+  gas mask with two round filters,
+  hooded olive jacket, torn leather straps,
+  bandaged forearms, fingerless gloves,
+  tan cargo pants, worn boots,
+  post-apocalyptic wasteland scavenger
+negative: |
+  blurry, lowres, extra limbs, deformed hands,
+  text, watermark, signature
