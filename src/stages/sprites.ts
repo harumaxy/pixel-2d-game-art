@@ -95,6 +95,10 @@ export async function run(argv: string[]): Promise<void> {
 
   const strength = Number(flag(argv, "strength") ?? 0.6);
   const depthStrength = Number(flag(argv, "depth-strength") ?? 0.5);
+  if (Number.isNaN(strength) || Number.isNaN(depthStrength)) {
+    console.error(`--strength / --depth-strength must be numbers\n${usage()}`);
+    process.exit(1);
+  }
 
   // Every hint must exist before we touch the server.
   for (const m of motions)

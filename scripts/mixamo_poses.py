@@ -154,6 +154,15 @@ def joint_world(rig, name):
     return rig.matrix_world @ rig.pose.bones["mixamorig:" + name].head
 
 
+def base_yaw(rig):
+    """Degrees the character's facing deviates from world -Y, from the pelvis (left hip minus right hip)."""
+    left = joint_world(rig, "LeftUpLeg") - joint_world(rig, "RightUpLeg")
+    left.z = 0
+    left.normalize()
+    forward = left.cross(Vector((0, 0, 1)))  # left x up = forward (faces -Y for an unrotated Mixamo rig)
+    return math.degrees(math.atan2(forward.x, -forward.y))
+
+
 def head_frame(rig):
     """(origin, x, y, z) of the Head bone in world space, axes normalised (the rig is scaled 0.01)."""
     m = rig.matrix_world @ rig.pose.bones["mixamorig:Head"].matrix
@@ -191,6 +200,8 @@ def pose_json(scene, cam, rig, cam_dir):
 
 def main():
     self_check()
+    if bpy.app.version < (5, 0):
+        sys.exit(f"mixamo_poses.py needs Blender 5.0+ (found {bpy.app.version_string})")
     opts = parse_args()
     out_dir, fbx_dir = os.path.abspath(opts["out"]), os.path.abspath(opts["fbx-dir"])
     size, elev = int(opts["size"]), float(opts["elev"])
@@ -225,6 +236,11 @@ def main():
         start, end = action.frame_range
         times = frame_times(start, end, int(m["frames"]), bool(m["loop"]))
         log(f"{m['id']}: {m['fbx']} frames {start:.0f}..{end:.0f} -> {[round(t, 1) for t in times]}")
+        t0 = times[0]
+        scene.frame_set(int(t0), subframe=t0 - int(t0))
+        bpy.context.view_layer.update()
+        yaw = base_yaw(rig)
+        log(f"{m['id']}: base yaw {yaw:.0f} deg")
         for d in DIRS8:
             dest = os.path.join(out_dir, m["id"], d)
             os.makedirs(dest, exist_ok=True)
@@ -232,7 +248,7 @@ def main():
                 scene.frame_set(int(t), subframe=t - int(t))
                 bpy.context.view_layer.update()
                 hips = joint_world(rig, "Hips")
-                cam_dir = place_camera(cam, hips, AZIMUTH[d], elev)
+                cam_dir = place_camera(cam, hips, AZIMUTH[d] + yaw, elev)
                 bpy.context.view_layer.update()
                 with open(os.path.join(dest, f"{k}.json"), "w", encoding="utf-8") as f:
                     json.dump(pose_json(scene, cam, rig, cam_dir), f)

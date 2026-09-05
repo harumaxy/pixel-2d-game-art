@@ -105,7 +105,10 @@ export async function run(argv: string[]): Promise<void> {
           missing++;
           continue;
         }
-        const pose = poseFromJson(await src.json(), `${m.id}/${dir}/${i}`);
+        const raw = await src.json().catch(() => {
+          throw new Error(`${m.id}/${dir}/${i}: not valid JSON`);
+        });
+        const pose = poseFromJson(raw, `${m.id}/${dir}/${i}`);
         const dest = posePath(m.id, dir, i);
         await ensureDir(dirname(dest));
         await Bun.write(dest, await renderPose(pose, size));
