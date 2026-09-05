@@ -30,7 +30,7 @@ import {
   type Rgb,
   type Rgba,
 } from "../lib/pixelate";
-import { DIRS5, FLIP, MOTIONS, type Dir5, type Dir8 } from "../motions";
+import { FLIP, GEN_DIRS, MOTIONS, type Dir8, type GenDir } from "../motions";
 
 const VALUE_FLAGS = new Set(["--size", "--palette", "--bg-tolerance", "--bg"]);
 
@@ -90,7 +90,7 @@ export async function run(argv: string[]): Promise<void> {
   // size per group.
   const cut: {
     motion: string;
-    dir: Dir5;
+    dir: GenDir;
     frame: number;
     img: Rgba;
     box: ReturnType<typeof bbox>;
@@ -98,7 +98,7 @@ export async function run(argv: string[]): Promise<void> {
   let missing = 0;
   let blank = 0;
   for (const m of MOTIONS)
-    for (const dir of DIRS5)
+    for (const dir of GEN_DIRS)
       for (let i = 0; i < m.frames; i++) {
         const src = await latestRender(join(srcRoot, m.id, dir), i);
         if (!src) {

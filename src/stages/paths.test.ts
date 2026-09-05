@@ -6,7 +6,7 @@ import { GEN_DIR, genPrefix } from "../lib/paths";
 const norm = (p: string) => p.replaceAll("\\", "/");
 
 test("posePath", () => {
-  expect(norm(posePath("walk", "side", 3))).toEndWith("out/poses/walk/side/3.png");
+  expect(norm(posePath("walk", "right", 3))).toEndWith("out/poses/walk/right/3.png");
 });
 
 test("pxPath", () => {
