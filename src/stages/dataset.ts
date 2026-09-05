@@ -4,6 +4,7 @@
  *   bun run px dataset scavenger --hero out/concept/scavenger/scavenger_00002_.png
  *   bun run px dataset scavenger --hero hero.png --only side,back,portrait
  *   bun run px dataset scavenger --hero hero.png --dry
+ *   bun run px dataset scavenger --hero hero.png --engine klein9b   (FLUX.2 Klein instead of Qwen)
  *
  * Writes out/dataset/<char>/: source.png (the hero, copied), one image + one
  * same-named .txt per variation, and train.yaml. Training itself is manual.
@@ -22,9 +23,12 @@ import {
 import { loadChar } from "../lib/chars";
 import { caption, SOURCE_CAPTION, trainYaml, VARIATIONS, type VariationId } from "../lib/dataset";
 import { GEN_DIR, REPO_ROOT, genPrefix } from "../lib/paths";
+import { buildFlux2Edit, type KleinModel } from "../lib/flux2-edit";
 import { buildQwenEdit } from "../lib/qwen-edit";
 
-const VALUE_FLAGS = new Set(["--hero", "--only", "--seed"]);
+const VALUE_FLAGS = new Set(["--hero", "--only", "--seed", "--engine"]);
+type Engine = "qwen" | KleinModel;
+const ENGINES: Engine[] = ["qwen", "klein4b", "klein9b"];
 const ids = () => Object.keys(VARIATIONS) as VariationId[];
 
 const usage = () =>
@@ -60,6 +64,12 @@ export async function run(argv: string[]): Promise<void> {
     process.exit(1);
   }
 
+  const engine = (flag(argv, "engine") ?? "qwen") as Engine;
+  if (!ENGINES.includes(engine)) {
+    console.error(`unknown --engine ${engine}; expected ${ENGINES.join(", ")}`);
+    process.exit(1);
+  }
+
   const dry = argv.includes("--dry");
   const api = dry ? undefined : await connect();
   let image: string;
@@ -89,12 +99,15 @@ export async function run(argv: string[]): Promise<void> {
 
   let failed = 0;
   for (const id of selected) {
-    const workflow = buildQwenEdit({
+    const opts = {
       image,
       prompt: VARIATIONS[id].prompt,
       seed: baseSeed + ids().indexOf(id),
-      prefix: genPrefix("dataset", char.name, id),
-    });
+      // Non-default engines get a suffix so the two can sit side by side for comparison.
+      prefix: genPrefix("dataset", char.name, engine === "qwen" ? id : `${id}-${engine}`),
+    };
+    const workflow =
+      engine === "qwen" ? buildQwenEdit(opts) : buildFlux2Edit({ ...opts, model: engine });
 
     if (dry) {
       console.log(JSON.stringify(workflow.prompt, null, 2));
