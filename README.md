@@ -30,13 +30,13 @@ bun run px dataset  scavenger --hero out/concept/scavenger/scavenger_00002_.png
 #   -> chars/scavenger.yaml に lora: scavenger を追記
 bun run px poses                                     # 骨格 PNG (1 回)
 bun run px sprites  scavenger [--motion walk] [--dir down] [--seed n] [--strength 0.65]
-bun run px pixelate scavenger [--size 64] [--palette apoc|auto] [--bg #rrggbb] [--bg-tolerance 40]
-bun run px sheet    scavenger                        # -> out/sheets/scavenger.png + .json
+bun run px pixelate scavenger [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb] [--motion m]
+bun run px sheet    scavenger [--size 64]                  # -> out/sheets/scavenger.png + .json
 ```
 
 pixelate は各レンダーの四隅の色を背景キーとして自動検出する（checkpoint によって「灰色」の実際の色が違うため）。--bg で明示できる。
 
-どのコマンドも `--dry` でグラフ JSON だけ印字する（ComfyUI 不要）。
+ComfyUI を使う concept / dataset / sprites は `--dry` でグラフ JSON だけ印字する（サーバ不要）。poses / pixelate / sheet は ComfyUI を使わない。
 
 sprites は 1 キャラ 1 モーションで seed を固定し、フレーム間では骨格だけを変える。生成結果はアニメ間でサイズが揃うよう、pixelate が全モーション横断で 1 つのスケールを使う。
 
