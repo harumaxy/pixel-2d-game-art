@@ -133,13 +133,14 @@ export async function collectOutputs(files: string[]): Promise<string[]> {
 }
 
 /**
- * Enqueue a workflow whose output map has an `images` key, wait, copy results
- * into out/, return repo-relative paths. onFailed also fires on websocket
- * drops the job survives, so it is only fatal when nothing came back.
+ * Enqueue a workflow whose output map is SaveImage nodes, wait, copy results
+ * into out/, return repo-relative paths in output-map order. onFailed also
+ * fires on websocket drops the job survives, so it is only fatal when nothing
+ * came back.
  */
 export async function runWorkflow(
   api: ComfyApi,
-  workflow: PromptBuilder<never, "images", any, any>,
+  workflow: PromptBuilder<never, string, any, any>,
   label: string,
 ): Promise<string[]> {
   let failure: Error | undefined;
@@ -149,11 +150,9 @@ export async function runWorkflow(
     .onFailed((e) => (failure = e))
     .run();
 
-  const saved = result
-    ? (result.images as { images?: { filename: string; subfolder: string }[] })
-    : undefined;
-  const files = (saved?.images ?? []).map((f) =>
-    [f.subfolder, f.filename].filter(Boolean).join("/"),
+  type Saved = { images?: { filename: string; subfolder: string }[] };
+  const files = Object.values((result ?? {}) as Record<string, Saved>).flatMap((saved) =>
+    (saved?.images ?? []).map((f) => [f.subfolder, f.filename].filter(Boolean).join("/")),
   );
 
   if (!files.length) throw new Error(failure?.message ?? "no output");

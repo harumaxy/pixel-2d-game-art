@@ -5,6 +5,7 @@ import {
   SD15_CONTROLNET_DEPTH,
   SD15_CONTROLNET_OPENPOSE,
   SD15_IPADAPTER,
+  SD15_ANIMATEDIFF,
 } from "./sd15";
 
 const base = {
@@ -161,5 +162,71 @@ describe("buildSd15", () => {
     const wf = buildSd15({ ...base, count: 4 });
     expect(byType(wf, "SaveImage")[0]!.inputs.filename_prefix).toBe(base.prefix);
     expect(byType(wf, "EmptyLatentImage")[0]!.inputs.batch_size).toBe(4);
+  });
+});
+
+describe("buildSd15 batch", () => {
+  const prompt = (wf: ReturnType<typeof buildSd15>) =>
+    wf.prompt as Record<string, { class_type: string; inputs: Record<string, unknown> }>;
+  const batch = {
+    ...base,
+    count: 3,
+    prefix: ["p/0", "p/1", "p/2"],
+    controls: [
+      { model: SD15_CONTROLNET_OPENPOSE, image: ["a.png", "b.png", "c.png"], strength: 0.6 },
+    ],
+  };
+
+  test("hint list becomes one ImageBatch chain feeding a single ControlNet apply", () => {
+    const wf = buildSd15(batch);
+    expect(byType(wf, "LoadImage").map((n) => n.inputs.image)).toEqual(["a.png", "b.png", "c.png"]);
+    expect(byType(wf, "ImageBatch")).toHaveLength(2);
+    expect(byType(wf, "ControlNetApplyAdvanced")).toHaveLength(1);
+    expect(byType(wf, "EmptyLatentImage")[0]!.inputs.batch_size).toBe(3);
+  });
+
+  test("prefix list splits the batch into one SaveImage per frame, all in the output map", () => {
+    const wf = buildSd15({ ...batch, matte: "toonout" });
+    const p = prompt(wf);
+    const splits = byType(wf, "ImageFromBatch");
+    expect(splits.map((n) => n.inputs.batch_index)).toEqual([0, 1, 2]);
+    expect(splits.every((n) => n.inputs.length === 1)).toBe(true);
+    // the split happens after the matte, so every frame is RGBA
+    const [matteId] = Object.entries(p).find(([, n]) => n.class_type === "BiRefNetRMBG")!;
+    expect((splits[0]!.inputs.image as [string, number])[0]).toBe(matteId);
+    const saves = byType(wf, "SaveImage");
+    expect(saves.map((n) => n.inputs.filename_prefix)).toEqual(["p/0", "p/1", "p/2"]);
+    expect(Object.keys(wf.mapOutputKeys)).toHaveLength(3);
+  });
+
+  test("single prefix keeps the plain SaveImage", () => {
+    const wf = buildSd15(base);
+    expect(byType(wf, "ImageFromBatch")).toHaveLength(0);
+    expect(byType(wf, "ImageBatch")).toHaveLength(0);
+  });
+
+  test("styleAligned patches the model after the ref, before the sampler", () => {
+    const wf = buildSd15({ ...batch, ref: { image: "r.png", weight: 0.7 }, styleAligned: true });
+    const p = prompt(wf);
+    const [ipaId] = Object.entries(p).find(([, n]) => n.class_type === "IPAdapterAdvanced")!;
+    const [saId, sa] = Object.entries(p).find(
+      ([, n]) => n.class_type === "StyleAlignedBatchAlign",
+    )!;
+    expect(sa.inputs.share_norm).toBe("both");
+    expect(sa.inputs.share_attn).toBe("q+k+v");
+    expect((sa.inputs.model as [string, number])[0]).toBe(ipaId);
+    expect((byType(wf, "KSampler")[0]!.inputs.model as [string, number])[0]).toBe(saId);
+  });
+
+  test("animateDiff wraps the model in evolved sampling with the motion module", () => {
+    const wf = buildSd15({ ...batch, animateDiff: SD15_ANIMATEDIFF });
+    const p = prompt(wf);
+    expect(byType(wf, "ADE_LoadAnimateDiffModel")[0]!.inputs.model_name).toBe(SD15_ANIMATEDIFF);
+    const [evoId, evo] = Object.entries(p).find(
+      ([, n]) => n.class_type === "ADE_UseEvolvedSampling",
+    )!;
+    expect(evo.inputs.beta_schedule).toBe("autoselect");
+    expect(byType(wf, "ADE_ApplyAnimateDiffModelSimple")).toHaveLength(1);
+    expect((byType(wf, "KSampler")[0]!.inputs.model as [string, number])[0]).toBe(evoId);
   });
 });

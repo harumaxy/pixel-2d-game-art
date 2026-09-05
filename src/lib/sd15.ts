@@ -6,6 +6,7 @@
 
 import {
   WorkflowBuilder,
+  type ADE_LoadAnimateDiffModelInputs,
   type CheckpointLoaderSimpleInputs,
   type CLIPVisionLoaderInputs,
   type ControlNetLoaderInputs,
@@ -20,6 +21,7 @@ export const SD15_CONTROLNET_OPENPOSE = "control_v11p_sd15_openpose_fp16.safeten
 export const SD15_CONTROLNET_DEPTH = "control_v11f1p_sd15_depth_fp16.safetensors";
 export const SD15_IPADAPTER = "ip-adapter-plus_sd15.safetensors";
 export const SD15_CLIP_VISION = "CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors";
+export const SD15_ANIMATEDIFF = "mm_sd_v15_v2.ckpt";
 
 export interface Ref {
   /** Reference image already in ComfyUI's input/ dir: what the character looks like. */
@@ -33,9 +35,10 @@ export interface Control {
   model: string;
   /**
    * Hint image already in the model's input form (openpose stick figure, depth
-   * map) and already in ComfyUI's input/ dir. No preprocessor.
+   * map) and already in ComfyUI's input/ dir. No preprocessor. A list is one
+   * hint per frame of the batch, in order.
    */
-  image: string;
+  image: string | string[];
   strength: number;
   endPercent?: number;
 }
@@ -46,10 +49,15 @@ export interface Sd15Opts {
   negative: string;
   width: number;
   height: number;
+  /** Batch size; the frames of one motion when the batch is meant to cohere. */
   count: number;
   seed: number;
-  /** filename_prefix for SaveImage, i.e. the subpath under out/. */
-  prefix: string;
+  /**
+   * filename_prefix for SaveImage, i.e. the subpath under out/. A list is one
+   * prefix per frame of the batch, each saved on its own so the files land
+   * where the single-frame path puts them.
+   */
+  prefix: string | string[];
   steps?: number;
   cfg?: number;
   loras?: Lora[];
@@ -66,6 +74,14 @@ export interface Sd15Opts {
    * sees backdrop. toonout is BiRefNet tuned on anime; rmbg2 is Bria's.
    */
   matte?: Matte;
+  /**
+   * Share attention across the batch so every frame is rendered in the same
+   * style: the batch is one motion, and the IP-Adapter alone lets shading and
+   * palette drift from frame to frame.
+   */
+  styleAligned?: boolean;
+  /** AnimateDiff motion module filename; the batch becomes a clip. */
+  animateDiff?: string;
 }
 
 export type Matte = "toonout" | "rmbg2";
@@ -114,6 +130,32 @@ export function buildSd15(o: Sd15Opts): ReturnType<WorkflowBuilder["build"]> {
     }).MODEL;
   }
 
+  if (o.styleAligned)
+    model = w.StyleAlignedBatchAlign({
+      model,
+      share_norm: "both",
+      share_attn: "q+k+v",
+      scale: 1,
+    }).MODEL;
+
+  if (o.animateDiff) {
+    // No context options: the longest motion is under the module's 16-frame window.
+    const motion = w.ADE_LoadAnimateDiffModel({
+      model_name: o.animateDiff as ADE_LoadAnimateDiffModelInputs["model_name"],
+    }).MOTION_MODEL;
+    model = w.ADE_UseEvolvedSampling({
+      model,
+      beta_schedule: "autoselect",
+      m_models: w.ADE_ApplyAnimateDiffModelSimple({ motion_model: motion }).M_MODELS,
+    }).MODEL;
+  }
+
+  // One LoadImage per hint, folded into a batch so the apply sees frame i's hint for latent i.
+  const loadHints = (images: string | string[]) =>
+    (Array.isArray(images) ? images : [images])
+      .map((image) => w.LoadImage({ image: image as LoadImageInputs["image"] }).IMAGE)
+      .reduce((image1, image2) => w.ImageBatch({ image1, image2 }).IMAGE);
+
   const encoded = {
     positive: w.CLIPTextEncode({ clip, text: o.positive }),
     negative: w.CLIPTextEncode({ clip, text: o.negative }),
@@ -129,7 +171,7 @@ export function buildSd15(o: Sd15Opts): ReturnType<WorkflowBuilder["build"]> {
       control_net: w.ControlNetLoader({
         control_net_name: c.model as ControlNetLoaderInputs["control_net_name"],
       }).CONTROL_NET,
-      image: w.LoadImage({ image: c.image as LoadImageInputs["image"] }).IMAGE,
+      image: loadHints(c.image),
       strength: c.strength,
       start_percent: 0,
       // Releasing before the end lets the last steps clean up anatomy the
@@ -171,7 +213,14 @@ export function buildSd15(o: Sd15Opts): ReturnType<WorkflowBuilder["build"]> {
         ? w.BiRefNetRMBG({ ...matte, model: "BiRefNet_toonout" }).IMAGE
         : w.RMBG({ ...matte, model: "RMBG-2.0", sensitivity: 1, process_res: 1024 }).IMAGE;
   }
-  const save = w.SaveImage({ images: image, filename_prefix: o.prefix });
+  // Split after the matte so every frame is RGBA; a lone prefix saves the batch as is.
+  const prefixes = Array.isArray(o.prefix) ? o.prefix : [o.prefix];
+  const outputs: Record<string, string> = {};
+  prefixes.forEach((filename_prefix, i) => {
+    const images =
+      prefixes.length > 1 ? w.ImageFromBatch({ image, batch_index: i, length: 1 }).IMAGE : image;
+    outputs[i ? `images${i}` : "images"] = w.SaveImage({ images, filename_prefix }).__id;
+  });
 
-  return w.build({ outputs: { images: save.__id } });
+  return w.build({ outputs });
 }
