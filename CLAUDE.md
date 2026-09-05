@@ -18,7 +18,7 @@ bun test
 - `src/px.ts` サブコマンド dispatcher。ステージは `src/stages/*.ts` の `run(argv)`
 - ComfyUI まわりは `src/lib/comfy.ts`、グラフは `src/lib/sd15.ts` / `qwen-edit.ts`
 - 画像処理は `src/lib/pixelate.ts` / `skeleton.ts` / `sheet.ts` の純関数。テストは隣の `*.test.ts`
-- ステージ間は `out/` のパス規約で受け渡す（`posePath` / `pxPath` を使う）
+- ステージ間は `out/` のパス規約で受け渡す（`posePath` / `pxPath` / `GEN_DIR` を使う）。ComfyUI 生成物は `out/gen/`（ComfyUI output/px への junction、README 参照）
 
 ## 出力
 

@@ -3,7 +3,7 @@
 import { mkdir } from "node:fs/promises";
 import { basename, join, relative } from "node:path";
 import { CallWrapper, ComfyApi, type PromptBuilder } from "@saintno/comfyui-sdk";
-import { OUT_DIR, REPO_ROOT } from "./paths";
+import { GEN_DIR, GEN_PREFIX, REPO_ROOT } from "./paths";
 
 export const COMFY = process.env.COMFY_URL ?? "http://127.0.0.1:8188";
 
@@ -99,20 +99,34 @@ export async function resolveLoras(api: ComfyApi, specs: string[]): Promise<Lora
 
 // --- run -------------------------------------------------------------------
 
-/** Pull ComfyUI's outputs into out/ over HTTP, preserving the filename_prefix subfolder. */
+/**
+ * Resolve ComfyUI's outputs to paths under out/gen/, stripping the GEN_PREFIX
+ * namespace. When out/gen is a junction onto ComfyUI's output/px/ the file is
+ * already there and nothing is copied; otherwise it is fetched over HTTP into
+ * the same path, so callers never care which.
+ *
+ * Returns repo-relative paths.
+ */
 export async function collectOutputs(files: string[]): Promise<string[]> {
   const saved: string[] = [];
-  for (const file of files) {
+  for (const raw of files) {
+    // ComfyUI on Windows reports the subfolder with backslashes.
+    const file = raw.replaceAll("\\", "/");
     const cut = file.lastIndexOf("/");
     const subfolder = cut === -1 ? "" : file.slice(0, cut);
     const filename = cut === -1 ? file : file.slice(cut + 1);
 
-    const query = new URLSearchParams({ filename, subfolder, type: "output" });
-    const res = await fetch(`${COMFY}/view?${query}`);
-    if (!res.ok) throw new Error(`could not fetch ${file}: HTTP ${res.status}`);
+    const local = subfolder.startsWith(`${GEN_PREFIX}/`)
+      ? subfolder.slice(GEN_PREFIX.length + 1)
+      : subfolder;
+    const dest = join(GEN_DIR, local, filename);
 
-    const dest = join(OUT_DIR, subfolder, filename);
-    await Bun.write(dest, res);
+    if (!(await Bun.file(dest).exists())) {
+      const query = new URLSearchParams({ filename, subfolder, type: "output" });
+      const res = await fetch(`${COMFY}/view?${query}`);
+      if (!res.ok) throw new Error(`could not fetch ${file}: HTTP ${res.status}`);
+      await Bun.write(dest, res);
+    }
     saved.push(relative(REPO_ROOT, dest).replaceAll("\\", "/"));
   }
   return saved;

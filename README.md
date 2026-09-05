@@ -23,9 +23,9 @@ bun test
 ## 使い方
 
 ```bash
-bun run px concept  scavenger                        # 候補 4 枚 -> out/concept/scavenger/
-bun run px dataset  scavenger --hero out/concept/scavenger/scavenger_00002_.png
-                                                     # -> out/dataset/scavenger/ + train.yaml
+bun run px concept  scavenger                        # 候補 4 枚 -> out/gen/concept/scavenger/
+bun run px dataset  scavenger --hero out/gen/concept/scavenger/scavenger_00002_.png
+                                                     # -> out/gen/dataset/scavenger/ + train.yaml
 # 目視で不良画像を削除 -> ai-toolkit で学習 -> safetensors を ComfyUI の loras/ へ
 #   -> chars/scavenger.yaml に lora: scavenger を追記
 bun run px poses     [--only walk,run] [--size 512]  # 骨格 PNG (1 回)
@@ -42,3 +42,16 @@ ComfyUI を使う concept / dataset / sprites は `--dry` でグラフ JSON だ�
 sprites は 1 キャラ 1 モーションで seed を固定し、フレーム間では骨格だけを変える。生成結果はアニメ間でサイズが揃うよう、pixelate が全モーション横断で 1 つのスケールを使う。
 
 キャラ定義は `chars/<name>.yaml`。モーションは `src/motions/`、パレットは `palettes/`。
+
+## ComfyUI 出力との共有（junction）
+
+ComfyUI が生成した画像（concept / dataset / sprites）は `out/gen/` 配下に置く。`out/gen` を ComfyUI の `output/px/` への directory junction にしておくと、ファイルは 1 つだけ存在し、コピーが発生しない。
+
+```powershell
+$px = "C:\Users\harum\AppData\Local\Comfy-Desktop\ComfyUI-Shared\output\px"   # ComfyUI の output/px（無ければ作る）
+New-Item -ItemType Directory -Force $px | Out-Null
+New-Item -ItemType Junction -Path out\gen -Target $px
+```
+
+junction が無い環境では、各ステージが HTTP で同じパスにコピーするので動作は変わらない。
+`out/poses` `out/px` `out/sheets` は TS 側の生成物で、junction の外にそのまま置く。

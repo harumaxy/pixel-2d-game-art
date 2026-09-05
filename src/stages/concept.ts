@@ -11,6 +11,7 @@
  */
 
 import { connect, flag, positional, resolveSeed, runWorkflow } from "../lib/comfy";
+import { genPrefix } from "../lib/paths";
 import { loadChar } from "../lib/chars";
 import { buildSd15 } from "../lib/sd15";
 
@@ -47,7 +48,7 @@ export async function run(argv: string[]): Promise<void> {
     seed,
     steps: flag(argv, "steps") ? Number(flag(argv, "steps")) : undefined,
     cfg: flag(argv, "cfg") ? Number(flag(argv, "cfg")) : undefined,
-    prefix: `concept/${char.name}/${char.name}`,
+    prefix: genPrefix("concept", char.name, char.name),
   });
 
   if (argv.includes("--dry")) {

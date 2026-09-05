@@ -2,7 +2,7 @@
 /**
  * `px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb]`
  *
- * out/sprites -> out/px: remove the grey backdrop, pin feet, scale every frame
+ * out/gen/sprites -> out/px: remove the grey backdrop, pin feet, scale every frame
  * of the character by the same factor (measured across all motions and
  * directions), box-filter down, snap to the palette, and mirror the side-ish
  * directions into their left-facing twins. Always processes every motion, so
@@ -14,7 +14,7 @@ import { readdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { ensureDir, flag, positional } from "../lib/comfy";
 import { loadChar } from "../lib/chars";
-import { OUT_DIR } from "../lib/paths";
+import { GEN_DIR, OUT_DIR } from "../lib/paths";
 import {
   bbox,
   boxDownscale,
@@ -82,7 +82,7 @@ export async function run(argv: string[]): Promise<void> {
     bg = [(v >> 16) & 255, (v >> 8) & 255, v & 255];
   }
 
-  const srcRoot = join(OUT_DIR, "sprites", char.name);
+  const srcRoot = join(GEN_DIR, "sprites", char.name);
 
   // Pass 1: cut out every frame of every motion, so the scale factor below is
   // one number for the whole character run — a crouching motion or a profile
@@ -121,7 +121,7 @@ export async function run(argv: string[]): Promise<void> {
       );
     } else {
       console.error(
-        `${missing} frames had no render in out/sprites/${char.name}/ — run  bun run px sprites ${char.name}`,
+        `${missing} frames had no render in out/gen/sprites/${char.name}/ — run  bun run px sprites ${char.name}`,
       );
     }
     process.exitCode = 1;
@@ -169,7 +169,7 @@ export async function run(argv: string[]): Promise<void> {
   console.log(`${written} frames -> out/px/${char.name}/  (${size}px, palette ${paletteName})`);
   if (missing) {
     console.error(
-      `${missing} frames had no render in out/sprites/${char.name}/ — run  bun run px sprites ${char.name}`,
+      `${missing} frames had no render in out/gen/sprites/${char.name}/ — run  bun run px sprites ${char.name}`,
     );
     process.exitCode = 1;
   }

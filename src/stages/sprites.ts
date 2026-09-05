@@ -17,6 +17,7 @@ import {
   uploadImage,
 } from "../lib/comfy";
 import { loadChar } from "../lib/chars";
+import { genPrefix } from "../lib/paths";
 import { buildSd15 } from "../lib/sd15";
 import { DIRS5, MOTIONS, type Dir5 } from "../motions";
 import { posePath } from "./poses";
@@ -125,7 +126,7 @@ export async function run(argv: string[]): Promise<void> {
             seed,
             steps,
             cfg,
-            prefix: `sprites/${char.name}/${m.id}/${dir}/${i}`,
+            prefix: genPrefix("sprites", char.name, m.id, dir, String(i)),
             loras,
             control: { image, strength },
           });
@@ -146,7 +147,7 @@ export async function run(argv: string[]): Promise<void> {
 
   api?.destroy();
   if (dry) return;
-  console.log(`\n${done} frames -> out/sprites/${char.name}/  (base seed ${baseSeed})`);
+  console.log(`\n${done} frames -> out/gen/sprites/${char.name}/  (base seed ${baseSeed})`);
   if (failed) {
     console.error(`${failed}/${done + failed} frames failed`);
     process.exitCode = 1;

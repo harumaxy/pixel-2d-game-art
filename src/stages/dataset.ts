@@ -21,7 +21,7 @@ import {
 } from "../lib/comfy";
 import { loadChar } from "../lib/chars";
 import { caption, SOURCE_CAPTION, trainYaml, VARIATIONS, type VariationId } from "../lib/dataset";
-import { OUT_DIR, REPO_ROOT } from "../lib/paths";
+import { GEN_DIR, REPO_ROOT, genPrefix } from "../lib/paths";
 import { buildQwenEdit } from "../lib/qwen-edit";
 
 const VALUE_FLAGS = new Set(["--hero", "--only", "--seed"]);
@@ -74,7 +74,7 @@ export async function run(argv: string[]): Promise<void> {
     image = basename(heroPath);
   }
   const baseSeed = resolveSeed(argv);
-  const dir = join(OUT_DIR, "dataset", char.name);
+  const dir = join(GEN_DIR, "dataset", char.name);
 
   if (!dry) {
     await ensureDir(dir);
@@ -93,7 +93,7 @@ export async function run(argv: string[]): Promise<void> {
       image,
       prompt: VARIATIONS[id].prompt,
       seed: baseSeed + ids().indexOf(id),
-      prefix: `dataset/${char.name}/${id}`,
+      prefix: genPrefix("dataset", char.name, id),
     });
 
     if (dry) {
