@@ -3,6 +3,7 @@ import {
   bbox,
   boxDownscale,
   cornerKey,
+  hasAlpha,
   hflip,
   medianCut,
   placeOnSquare,
@@ -30,6 +31,16 @@ function img(
 }
 const px = (i: Rgba, x: number, y: number) =>
   Array.from(i.data.slice((y * i.width + x) * 4, (y * i.width + x) * 4 + 4));
+
+describe("hasAlpha", () => {
+  test("true when any pixel is not fully opaque", () => {
+    const i = img(4, 4, [...GREY, 255], [{ x: 0, y: 0, w: 1, h: 1, c: [0, 0, 0, 120] }]);
+    expect(hasAlpha(i)).toBe(true);
+  });
+  test("false for an all-opaque render", () => {
+    expect(hasAlpha(img(4, 4, [...GREY, 255]))).toBe(false);
+  });
+});
 
 describe("removeBackground", () => {
   test("clears the backdrop and enclosed key-coloured gaps alike", () => {

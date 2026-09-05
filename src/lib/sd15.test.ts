@@ -127,6 +127,36 @@ describe("buildSd15", () => {
     expect(byType(buildSd15(base), "IPAdapterAdvanced")).toHaveLength(0);
   });
 
+  test("matte cuts the decoded image out before saving", () => {
+    const wf = buildSd15({ ...base, matte: "toonout" });
+    const prompt = wf.prompt as Record<
+      string,
+      { class_type: string; inputs: Record<string, unknown> }
+    >;
+    const [decodeId] = Object.entries(prompt).find(([, n]) => n.class_type === "VAEDecode")!;
+    const [rmbgId, rmbg] = Object.entries(prompt).find(([, n]) => n.class_type === "BiRefNetRMBG")!;
+    expect(rmbg.inputs.model).toBe("BiRefNet_toonout");
+    expect(rmbg.inputs.background).toBe("Alpha");
+    // The node reads its optional widgets by key with no default: omit one and it raises.
+    expect(rmbg.inputs.mask_blur).toBe(0);
+    expect(rmbg.inputs.mask_offset).toBe(0);
+    expect(rmbg.inputs.refine_foreground).toBe(false);
+    expect((rmbg.inputs.image as [string, number])[0]).toBe(decodeId);
+    expect((byType(wf, "SaveImage")[0]!.inputs.images as [string, number])[0]).toBe(rmbgId);
+  });
+
+  test("matte rmbg2 uses the RMBG node", () => {
+    const wf = buildSd15({ ...base, matte: "rmbg2" });
+    expect(byType(wf, "RMBG")[0]!.inputs.model).toBe("RMBG-2.0");
+    expect(byType(wf, "BiRefNetRMBG")).toHaveLength(0);
+  });
+
+  test("no matte saves the decode directly", () => {
+    const wf = buildSd15(base);
+    expect(byType(wf, "BiRefNetRMBG")).toHaveLength(0);
+    expect(byType(wf, "RMBG")).toHaveLength(0);
+  });
+
   test("save prefix and batch size", () => {
     const wf = buildSd15({ ...base, count: 4 });
     expect(byType(wf, "SaveImage")[0]!.inputs.filename_prefix).toBe(base.prefix);

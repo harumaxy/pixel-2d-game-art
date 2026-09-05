@@ -31,13 +31,13 @@ bun run px dataset  scavenger --hero out/gen/concept/scavenger/scavenger_00002_.
 # 目視で不良画像を削除 -> ai-toolkit で学習 -> safetensors を ComfyUI の loras/ へ
 #   -> chars/scavenger.yaml に lora: scavenger を追記
 bun run px poses     [--only walk,run] [--size 512] [--elev 25] [--blender exe] [--skip-blender]  # Blender で骨格 + depth (1 回)
-bun run px sprites  scavenger [--motion walk] [--dir down] [--seed n] [--strength 0.6] [--depth-strength 0.5]
+bun run px sprites  scavenger [--motion walk] [--dir down] [--seed n] [--strength 0.6] [--depth-strength 0.5] [--matte toonout|rmbg2|none]
 bun run px pixelate scavenger [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb]
 bun run px sheet    scavenger                              # -> out/sheets/scavenger.png + .json
 bun run px clean    [scavenger] [--all] [--dataset] [--dry]  # 生成物の削除。引数無しなら一覧表示のみ
 ```
 
-pixelate は各レンダーの四隅の色を背景キーとして自動検出する（checkpoint によって「灰色」の実際の色が違うため）。--bg で明示できる。
+sprites は既定でサーバ側マッティング（BiRefNet ToonOut、`--matte rmbg2` で RMBG-2.0）を通し、RGBA で保存する。pixelate は入力に透明画素があればその alpha を信用し、無ければ（`--matte none`）四隅の色を背景キーとして自動検出して抜く（checkpoint によって「灰色」の実際の色が違うため。--bg で明示できる）。足元の影はどちらの場合も pixelate 側で除去する。
 pixelate は常に全モーションを処理する（スケールとパレットをキャラ全体で統一するため）。
 
 ComfyUI を使う concept / dataset / sprites は `--dry` でグラフ JSON だけ印字する（サーバ不要）。poses / pixelate / sheet は ComfyUI を使わない。

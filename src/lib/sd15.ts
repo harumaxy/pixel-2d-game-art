@@ -60,7 +60,15 @@ export interface Sd15Opts {
   ref?: Ref;
   /** Applied in order; each one conditions on the previous one's output. */
   controls?: Control[];
+  /**
+   * Cut the subject out on the server and save RGBA: a matting model sees a
+   * mask's eye-holes and the gap under a belt as subject, where a colour key
+   * sees backdrop. toonout is BiRefNet tuned on anime; rmbg2 is Bria's.
+   */
+  matte?: Matte;
 }
+
+export type Matte = "toonout" | "rmbg2";
 
 export function buildSd15(o: Sd15Opts): ReturnType<WorkflowBuilder["build"]> {
   const w = new WorkflowBuilder();
@@ -146,8 +154,24 @@ export function buildSd15(o: Sd15Opts): ReturnType<WorkflowBuilder["build"]> {
     denoise: 1,
   });
 
-  const decoded = w.VAEDecode({ samples: sampled.LATENT, vae: ckpt.VAE });
-  const save = w.SaveImage({ images: decoded.IMAGE, filename_prefix: o.prefix });
+  let image = w.VAEDecode({ samples: sampled.LATENT, vae: ckpt.VAE }).IMAGE;
+  if (o.matte) {
+    // comfyui-rmbg indexes its "optional" widgets without defaults, so every
+    // one is spelled out; the API path has no frontend to fill them in.
+    const matte = {
+      image,
+      mask_blur: 0,
+      mask_offset: 0,
+      invert_output: false,
+      refine_foreground: false,
+      background: "Alpha" as const,
+    };
+    image =
+      o.matte === "toonout"
+        ? w.BiRefNetRMBG({ ...matte, model: "BiRefNet_toonout" }).IMAGE
+        : w.RMBG({ ...matte, model: "RMBG-2.0", sensitivity: 1, process_res: 1024 }).IMAGE;
+  }
+  const save = w.SaveImage({ images: image, filename_prefix: o.prefix });
 
   return w.build({ outputs: { images: save.__id } });
 }

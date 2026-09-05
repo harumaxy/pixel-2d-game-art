@@ -2,7 +2,8 @@
 /**
  * `px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb]`
  *
- * out/gen/sprites -> out/px: remove the grey backdrop, pin feet, scale every frame
+ * out/gen/sprites -> out/px: remove the grey backdrop (unless the render is
+ * already matted RGBA from `px sprites`, whose alpha is trusted), pin feet, scale every frame
  * of the character by the same factor (measured across all motions and
  * directions), box-filter down, snap to the palette, and mirror the side-ish
  * directions into their left-facing twins. Always processes every motion, so
@@ -19,6 +20,7 @@ import {
   bbox,
   boxDownscale,
   cornerKey,
+  hasAlpha,
   hflip,
   loadPalette,
   medianCut,
@@ -108,7 +110,11 @@ export async function run(argv: string[]): Promise<void> {
         }
         const raw = await readRgba(src);
         const key = bg ?? cornerKey(raw);
-        const img = removeShadow(removeBackground(raw, key, tolerance), key);
+        // A matted render keeps the backdrop colour under alpha 0, so the corner
+        // key and the shadow flood still work; the matting model itself counts
+        // the ground shadow as subject and leaves it in.
+        const keyed = hasAlpha(raw) ? raw : removeBackground(raw, key, tolerance);
+        const img = removeShadow(keyed, key);
         const box = bbox(img);
         if (!box) blank++;
         cut.push({ motion: m.id, dir, frame: i, img, box });

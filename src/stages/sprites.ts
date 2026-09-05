@@ -1,13 +1,14 @@
 // src/stages/sprites.ts
 /**
  * `px sprites <char> [--motion walk] [--dir down] [--seed n] [--strength 0.6] [--depth-strength 0.5]
- *                    [--ref out/hero/<char>.png] [--ref-weight 0.7] [--dry]`
+ *                    [--ref out/hero/<char>.png] [--ref-weight 0.7] [--matte toonout|rmbg2|none] [--dry]`
  *
  * One SD1.5 generation per (motion, dir, frame): character LoRA + IP-Adapter
  * reference (the hero image, so colours and outfit stay put between frames)
  * + openpose ControlNet + depth ControlNet, both hints pre-rendered by
  * `px poses` from Mixamo. The seed is fixed per (char, motion) so the only
- * thing that changes between frames is the skeleton.
+ * thing that changes between frames is the skeleton. The render is matted
+ * on the server (RGBA), so pixelate can trust the alpha instead of keying.
  */
 
 import {
@@ -27,6 +28,7 @@ import {
   SD15_CONTROLNET_DEPTH,
   SD15_CONTROLNET_OPENPOSE,
   type Control,
+  type Matte,
 } from "../lib/sd15";
 import { GEN_DIRS, MOTIONS, type GenDir } from "../motions";
 import { depthPath, posePath } from "./poses";
@@ -44,7 +46,9 @@ const VALUE_FLAGS = new Set([
   "--ckpt",
   "--steps",
   "--cfg",
+  "--matte",
 ]);
+const MATTES = ["toonout", "rmbg2", "none"] as const;
 
 /** Where `px dataset` left the hero image; the default IP-Adapter reference. */
 export const heroPath = (char: string): string => join(OUT_DIR, "hero", `${char}.png`);
@@ -52,7 +56,7 @@ export const heroPath = (char: string): string => join(OUT_DIR, "hero", `${char}
 const usage = () =>
   `usage: bun run px sprites <char> [--motion ${MOTIONS.map((m) => m.id).join("|")}] [--dir ${GEN_DIRS.join("|")}]\n` +
   `                          [--seed n] [--strength 0.6] [--depth-strength 0.5] [--ref out/hero/<char>.png] [--ref-weight 0.7]\n` +
-  `                          [--ckpt file] [--steps 25] [--cfg 6] [--dry]`;
+  `                          [--ckpt file] [--steps 25] [--cfg 6] [--matte ${MATTES.join("|")}] [--dry]`;
 
 /** Seed per (char, motion): base seed from --seed or random, plus a stable per-motion offset. */
 export const motionSeed = (base: number, motionIndex: number) =>
@@ -161,6 +165,12 @@ export async function run(argv: string[]): Promise<void> {
   const ckpt = flag(argv, "ckpt") ?? DEFAULT_CKPT;
   const steps = flag(argv, "steps") ? Number(flag(argv, "steps")) : undefined;
   const cfg = flag(argv, "cfg") ? Number(flag(argv, "cfg")) : undefined;
+  const matteFlag = (flag(argv, "matte") ?? "toonout") as (typeof MATTES)[number];
+  if (!MATTES.includes(matteFlag)) {
+    console.error(`unknown --matte ${matteFlag}\n${usage()}`);
+    process.exit(1);
+  }
+  const matte: Matte | undefined = matteFlag === "none" ? undefined : matteFlag;
 
   let done = 0,
     failed = 0;
@@ -202,6 +212,7 @@ export async function run(argv: string[]): Promise<void> {
             loras,
             ref,
             controls,
+            matte,
           });
 
           if (dry) {

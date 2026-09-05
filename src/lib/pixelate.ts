@@ -54,6 +54,12 @@ export async function loadPalette(name: string): Promise<Rgb[]> {
   });
 }
 
+/** A matted render already carries its own cut-out; a flat-backdrop render is all alpha 255. */
+export const hasAlpha = (img: Rgba): boolean => {
+  for (let i = 3; i < img.data.length; i += 4) if (img.data[i] !== 255) return true;
+  return false;
+};
+
 const dist2 = (a: Rgb, r: number, g: number, b: number) =>
   (a[0] - r) ** 2 + (a[1] - g) ** 2 + (a[2] - b) ** 2;
 
