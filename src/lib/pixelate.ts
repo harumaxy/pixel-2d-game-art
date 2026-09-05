@@ -225,6 +225,46 @@ export function boxDownscale(img: Rgba, size: number): Rgba {
   return out;
 }
 
+const luma = (r: number, g: number, b: number) => 0.299 * r + 0.587 * g + 0.114 * b;
+
+/**
+ * Luminance at the `lo`..`hi` quantiles (0..1) over the opaque pixels of all
+ * the images together: one measurement for the whole character, so every
+ * frame gets the same stretch and nothing flickers.
+ */
+export function luminanceRange(imgs: Rgba[], lo: number, hi: number): { lo: number; hi: number } {
+  const ys: number[] = [];
+  for (const img of imgs)
+    for (let o = 0; o < img.data.length; o += 4)
+      if (img.data[o + 3]! > 0) ys.push(luma(img.data[o]!, img.data[o + 1]!, img.data[o + 2]!));
+  ys.sort((a, b) => a - b);
+  const at = (q: number) => ys[Math.min(ys.length - 1, Math.floor(q * ys.length))] ?? 0;
+  return { lo: at(lo), hi: at(hi) };
+}
+
+/**
+ * Linear levels: luminance `lo`..`hi` becomes `outLo`..`outHi` (fractions of
+ * 255), each channel scaled the same so hue survives. A dark render then
+ * spreads across the palette instead of collapsing onto its darkest entries.
+ */
+export function stretchLevels(
+  img: Rgba,
+  lo: number,
+  hi: number,
+  outLo: number,
+  outHi: number,
+): Rgba {
+  const out: Rgba = { width: img.width, height: img.height, data: new Uint8Array(img.data) };
+  const gain = ((outHi - outLo) * 255) / Math.max(1, hi - lo);
+  const offset = outLo * 255 - lo * gain;
+  for (let o = 0; o < out.data.length; o += 4) {
+    if (out.data[o + 3] === 0) continue;
+    for (let c = 0; c < 3; c++)
+      out.data[o + c] = Math.max(0, Math.min(255, Math.round(out.data[o + c]! * gain + offset)));
+  }
+  return out;
+}
+
 export function quantize(img: Rgba, palette: Rgb[]): Rgba {
   const out = { ...img, data: new Uint8Array(img.data) };
   for (let i = 0; i < img.width * img.height; i++) {

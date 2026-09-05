@@ -23,12 +23,14 @@ import {
   hasAlpha,
   hflip,
   loadPalette,
+  luminanceRange,
   medianCut,
   placeOnSquare,
   quantize,
   readRgba,
   removeBackground,
   removeShadow,
+  stretchLevels,
   unionBox,
   writePng,
   type Rgb,
@@ -37,6 +39,8 @@ import {
 import { FLIP, GEN_DIRS, MOTIONS, type Dir8, type GenDir } from "../motions";
 
 const VALUE_FLAGS = new Set(["--size", "--palette", "--bg-tolerance", "--bg", "--render"]);
+/** --contrast: the 2nd..98th luminance percentiles of the character land here (fractions of 255). */
+const STRETCH = { lo: 0.02, hi: 0.98, outLo: 0.08, outHi: 0.92 };
 
 export const pxPath = (char: string, motion: string, dir: Dir8, frame: number): string =>
   join(OUT_DIR, "px", char, motion, dir, `${frame}.png`);
@@ -57,7 +61,7 @@ export async function run(argv: string[]): Promise<void> {
   const name = positional(argv, VALUE_FLAGS);
   if (!name) {
     console.error(
-      `usage: bun run px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb] [--render 00013]`,
+      `usage: bun run px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb] [--render 00013] [--contrast]`,
     );
     process.exit(1);
   }
@@ -153,9 +157,23 @@ export async function run(argv: string[]): Promise<void> {
 
   // Pass 2: place + downscale every frame first, so `--palette auto` builds
   // ONE palette for the whole character before any frame is quantized.
-  const placed = cut
+  let placed = cut
     .filter((c) => c.box !== undefined)
     .map((c) => ({ ...c, small: boxDownscale(placeOnSquare(c.img, crop, work, scale), size) }));
+
+  // A smooth render is dark and low-contrast at 64px; without this most of
+  // it quantizes onto the palette's darkest entries. One range for all frames.
+  if (argv.includes("--contrast")) {
+    const { lo, hi } = luminanceRange(
+      placed.map((p) => p.small),
+      STRETCH.lo,
+      STRETCH.hi,
+    );
+    placed = placed.map((p) => ({
+      ...p,
+      small: stretchLevels(p.small, lo, hi, STRETCH.outLo, STRETCH.outHi),
+    }));
+  }
 
   let pal: Rgb[];
   if (fixed) {

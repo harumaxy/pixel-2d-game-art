@@ -6,7 +6,9 @@ import {
   hasAlpha,
   hflip,
   medianCut,
+  luminanceRange,
   placeOnSquare,
+  stretchLevels,
   unionBox,
   quantize,
   removeBackground,
@@ -111,6 +113,35 @@ test("bbox of opaque pixels", () => {
   const i = img(8, 8, [0, 0, 0, 0], [{ x: 2, y: 3, w: 3, h: 2, c: [1, 2, 3, 255] }]);
   expect(bbox(i)).toEqual({ x0: 2, y0: 3, x1: 5, y1: 5 });
   expect(bbox(img(2, 2, [0, 0, 0, 0]))).toBeUndefined();
+});
+
+test("luminanceRange ignores transparent pixels", () => {
+  const i = img(
+    4,
+    1,
+    [255, 255, 255, 0],
+    [
+      { x: 0, y: 0, w: 1, h: 1, c: [20, 20, 20, 255] },
+      { x: 1, y: 0, w: 1, h: 1, c: [100, 100, 100, 255] },
+    ],
+  );
+  expect(luminanceRange([i], 0, 1)).toEqual({ lo: 20, hi: 100 });
+});
+
+test("stretchLevels maps lo..hi onto the output range and clamps", () => {
+  const i = img(
+    3,
+    1,
+    [0, 0, 0, 255],
+    [
+      { x: 1, y: 0, w: 1, h: 1, c: [100, 100, 100, 255] },
+      { x: 2, y: 0, w: 1, h: 1, c: [200, 200, 200, 255] },
+    ],
+  );
+  const out = stretchLevels(i, 100, 200, 0.1, 0.9);
+  expect(px(out, 0, 0)).toEqual([0, 0, 0, 255]); // below lo clamps to 0
+  expect(px(out, 1, 0).slice(0, 3)).toEqual([26, 26, 26]);
+  expect(px(out, 2, 0).slice(0, 3)).toEqual([230, 230, 230]);
 });
 
 test("unionBox spans every box", () => {
