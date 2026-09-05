@@ -3,8 +3,10 @@
  * `px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb] [--motion m]`
  *
  * out/sprites -> out/px: remove the grey backdrop, pin feet, scale every frame
- * of a motion by the same factor, box-filter down, snap to the palette, and
- * mirror the side-ish directions into their left-facing twins.
+ * of the character by the same factor (measured across all motions and
+ * directions, even those not selected by --motion), box-filter down, snap to
+ * the palette, and mirror the side-ish directions into their left-facing
+ * twins.
  */
 
 import { readdir } from "node:fs/promises";
@@ -71,54 +73,72 @@ export async function run(argv: string[]): Promise<void> {
     bg = [(v >> 16) & 255, (v >> 8) & 255, v & 255];
   }
   const motionFlag = flag(argv, "motion");
-  const motions = motionFlag ? MOTIONS.filter((m) => m.id === motionFlag) : MOTIONS;
+  const selectedIds = new Set(
+    (motionFlag ? MOTIONS.filter((m) => m.id === motionFlag) : MOTIONS).map((m) => m.id),
+  );
 
   const srcRoot = join(OUT_DIR, "sprites", char.name);
-  let written = 0,
-    missing = 0;
 
-  for (const m of motions)
-    for (const dir of DIRS5) {
-      // Pass 1: cut out every frame, remember the tallest box.
-      const cut: { frame: number; img: Rgba; box: ReturnType<typeof bbox> }[] = [];
+  // Pass 1: cut out every frame of EVERY motion (not just the one --motion
+  // selects), so the scale factor below is one number for the whole
+  // character run — a crouching motion or a profile view must come out the
+  // same size as a standing front view, not its own size per group.
+  const cut: {
+    motion: string;
+    dir: Dir5;
+    frame: number;
+    img: Rgba;
+    box: ReturnType<typeof bbox>;
+  }[] = [];
+  let missing = 0;
+  for (const m of MOTIONS)
+    for (const dir of DIRS5)
       for (let i = 0; i < m.frames; i++) {
         const src = await latestRender(join(srcRoot, m.id, dir), i);
         if (!src) {
-          missing++;
+          if (selectedIds.has(m.id)) missing++;
           continue;
         }
         const raw = await readRgba(src);
         const img = removeBackground(raw, bg ?? cornerKey(raw), tolerance);
-        cut.push({ frame: i, img, box: bbox(img) });
+        cut.push({ motion: m.id, dir, frame: i, img, box: bbox(img) });
       }
-      const tallest = Math.max(0, ...cut.map((c) => (c.box ? c.box.y1 - c.box.y0 : 0)));
-      if (!tallest) continue;
-      // Leave 4% headroom on the working canvas; one scale for the whole motion.
-      const work = 512;
-      const scale = (work * 0.96) / tallest;
 
-      // Pass 2: place, downscale, quantize, write + mirror.
-      for (const c of cut) {
-        if (!c.box) {
-          missing++;
-          continue;
-        }
-        const placed = placeOnSquare(c.img, c.box, work, scale);
-        const small = boxDownscale(placed, size);
-        const pal = fixed ?? medianCut(small, 16);
-        const final = quantize(small, pal);
-        const [main, mirror] = FLIP[dir as Dir5];
-        for (const [d8, img] of [
-          [main, final],
-          ...(mirror ? [[mirror, hflip(final)] as const] : []),
-        ] as const) {
-          const dest = pxPath(char.name, m.id, d8, c.frame);
-          await ensureDir(dirname(dest));
-          await writePng(img, dest);
-          written++;
-        }
-      }
+  const tallest = Math.max(0, ...cut.map((c) => (c.box ? c.box.y1 - c.box.y0 : 0)));
+  if (!tallest) {
+    console.error(
+      `${missing} frames had no render in out/sprites/${char.name}/ — run  bun run px sprites ${char.name}`,
+    );
+    process.exitCode = 1;
+    return;
+  }
+  // Leave 4% headroom on the working canvas; one scale for the whole character.
+  const work = 512;
+  const scale = (work * 0.96) / tallest;
+
+  // Pass 2: place, downscale, quantize, write + mirror — selected motions only.
+  let written = 0;
+  for (const c of cut) {
+    if (!selectedIds.has(c.motion)) continue;
+    if (!c.box) {
+      missing++;
+      continue;
     }
+    const placed = placeOnSquare(c.img, c.box, work, scale);
+    const small = boxDownscale(placed, size);
+    const pal = fixed ?? medianCut(small, 16);
+    const final = quantize(small, pal);
+    const [main, mirror] = FLIP[c.dir];
+    for (const [d8, img] of [
+      [main, final],
+      ...(mirror ? [[mirror, hflip(final)] as const] : []),
+    ] as const) {
+      const dest = pxPath(char.name, c.motion, d8, c.frame);
+      await ensureDir(dirname(dest));
+      await writePng(img, dest);
+      written++;
+    }
+  }
 
   console.log(`${written} frames -> out/px/${char.name}/  (${size}px, palette ${paletteName})`);
   if (missing) {
