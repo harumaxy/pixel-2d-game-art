@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { basePose, DIRS5, facing, JOINTS } from "./index";
+import { basePose, DIRS5, DIRS8, facing, FLIP, JOINTS } from "./index";
 
 describe("basePose", () => {
   test("every joint inside 0..1 for every dir", () => {
@@ -31,4 +31,9 @@ describe("basePose", () => {
     expect(p.nose.y).toBeLessThan(p.rhip.y);
     expect(p.rhip.y).toBeLessThan(p.rank.y);
   });
+});
+
+test("FLIP covers every Dir8 exactly once", () => {
+  const covered = Object.values(FLIP).flat().filter(Boolean);
+  expect(covered.slice().sort()).toEqual([...DIRS8].sort());
 });
