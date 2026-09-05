@@ -8,6 +8,7 @@ import {
   placeOnSquare,
   quantize,
   removeBackground,
+  removeShadow,
   type Rgba,
 } from "./pixelate";
 
@@ -31,8 +32,8 @@ const px = (i: Rgba, x: number, y: number) =>
   Array.from(i.data.slice((y * i.width + x) * 4, (y * i.width + x) * 4 + 4));
 
 describe("removeBackground", () => {
-  test("clears the backdrop but keeps enclosed grey", () => {
-    // 8x8 grey, red 4x4 box in the middle with a grey pixel inside it
+  test("clears the backdrop and enclosed key-coloured gaps alike", () => {
+    // 8x8 grey, red 4x4 box in the middle with a grey pixel inside it (a gap between legs)
     const i = img(
       8,
       8,
@@ -46,12 +47,51 @@ describe("removeBackground", () => {
     expect(px(out, 0, 0)[3]).toBe(0);
     expect(px(out, 7, 7)[3]).toBe(0);
     expect(px(out, 2, 2)).toEqual([255, 0, 0, 255]);
-    expect(px(out, 3, 3)[3]).toBe(255); // enclosed grey survives
+    expect(px(out, 3, 3)[3]).toBe(0); // enclosed grey goes too — it flickers white after quantize
   });
   test("tolerance", () => {
     const i = img(4, 4, [140, 130, 120, 255]);
     expect(px(removeBackground(i, GREY, 40), 0, 0)[3]).toBe(0);
     expect(px(removeBackground(i, GREY, 5), 0, 0)[3]).toBe(255);
+  });
+});
+
+describe("removeShadow", () => {
+  const KEY: [number, number, number] = [207, 198, 186]; // warm light grey backdrop
+  const SHADOW = [140, 133, 125, 255]; // same hue, darker
+  test("drops a shadow touching the cleared backdrop under the feet", () => {
+    // 10x20 transparent backdrop, brown boot at rows 12-15, shadow blob at rows 16-17 touching it
+    const i = img(
+      10,
+      20,
+      [...KEY, 0],
+      [
+        { x: 4, y: 12, w: 2, h: 4, c: [90, 60, 40, 255] },
+        { x: 2, y: 16, w: 6, h: 2, c: SHADOW },
+      ],
+    );
+    const out = removeShadow(i, KEY);
+    expect(px(out, 3, 16)[3]).toBe(0);
+    expect(px(out, 7, 17)[3]).toBe(0);
+    expect(px(out, 4, 13)).toEqual([90, 60, 40, 255]); // boot stays
+  });
+  test("leaves a neutral grey part in the upper body alone", () => {
+    // grey gas-mask pixel at row 3, adjacent to the transparent backdrop
+    const i = img(10, 20, [...KEY, 0], [{ x: 4, y: 3, w: 2, h: 2, c: SHADOW }]);
+    const out = removeShadow(i, KEY);
+    expect(px(out, 4, 3)[3]).toBe(255);
+  });
+  test("leaves a shadow-coloured pixel that is not connected to the backdrop", () => {
+    const i = img(
+      10,
+      20,
+      [...KEY, 0],
+      [
+        { x: 2, y: 14, w: 6, h: 4, c: [90, 60, 40, 255] },
+        { x: 4, y: 16, w: 1, h: 1, c: SHADOW }, // enclosed by boot
+      ],
+    );
+    expect(px(removeShadow(i, KEY), 4, 16)[3]).toBe(255);
   });
 });
 

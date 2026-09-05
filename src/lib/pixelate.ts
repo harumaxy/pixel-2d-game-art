@@ -58,32 +58,65 @@ const dist2 = (a: Rgb, r: number, g: number, b: number) =>
   (a[0] - r) ** 2 + (a[1] - g) ** 2 + (a[2] - b) ** 2;
 
 /**
- * Flood fill from the four corners through every pixel within `tolerance`
- * (euclidean RGB) of `key`, setting alpha 0. Pixels of the key colour that
- * are enclosed by the character are never reached, so they survive.
+ * Every pixel within `tolerance` (euclidean RGB) of `key` becomes alpha 0,
+ * enclosed or not: backdrop showing between the legs or under an arm would
+ * otherwise survive and quantize to a flickering white blob.
  */
 export function removeBackground(img: Rgba, key: Rgb, tolerance: number): Rgba {
+  const out = { ...img, data: new Uint8Array(img.data) };
+  const tol2 = tolerance * tolerance;
+  for (let i = 0; i < img.width * img.height; i++) {
+    const o = i * 4;
+    if (dist2(key, out.data[o]!, out.data[o + 1]!, out.data[o + 2]!) <= tol2) out.data[o + 3] = 0;
+  }
+  return out;
+}
+
+/** Rows from here down are "the feet": the only place a ground shadow can be. */
+const SHADOW_BAND = 0.65;
+/** A shadow is the backdrop colour at 40..92% brightness with the same chroma (±20). */
+const SHADOW_LIGHT = [0.4, 0.92] as const;
+const SHADOW_CHROMA = 20;
+
+/**
+ * Drop the ground shadow the checkpoints like to paint under the feet: a
+ * darker copy of the backdrop colour, touching already-transparent backdrop,
+ * in the bottom part of the frame. Flood from transparent pixels so neutral
+ * greys inside the character (a gas mask, a buckle) are never reached, and
+ * stay above SHADOW_BAND rows untouched so a grey torso is safe too.
+ */
+export function removeShadow(img: Rgba, key: Rgb): Rgba {
   const { width: w, height: h } = img;
   const out = { ...img, data: new Uint8Array(img.data) };
-  const seen = new Uint8Array(w * h);
-  const tol2 = tolerance * tolerance;
-  const stack: number[] = [0, w - 1, (h - 1) * w, h * w - 1];
+  const keyLight = (key[0] + key[1] + key[2]) / 3;
+  const keyChroma = [key[0] - key[1], key[1] - key[2]];
+  const yMin = Math.floor(h * SHADOW_BAND);
 
-  const isKey = (i: number) => {
+  const isShadow = (i: number) => {
     const o = i * 4;
-    return dist2(key, out.data[o]!, out.data[o + 1]!, out.data[o + 2]!) <= tol2;
+    if (out.data[o + 3] === 0) return false;
+    const r = out.data[o]!,
+      g = out.data[o + 1]!,
+      b = out.data[o + 2]!;
+    const light = (r + g + b) / 3;
+    if (light < keyLight * SHADOW_LIGHT[0] || light > keyLight * SHADOW_LIGHT[1]) return false;
+    return Math.abs(r - g - keyChroma[0]!) + Math.abs(g - b - keyChroma[1]!) <= SHADOW_CHROMA;
   };
 
+  // Seed with every transparent pixel in the band; grow only through shadow.
+  const stack: number[] = [];
+  for (let i = yMin * w; i < w * h; i++) if (out.data[i * 4 + 3] === 0) stack.push(i);
+  const seen = new Uint8Array(w * h);
   while (stack.length) {
     const i = stack.pop()!;
-    if (seen[i] || !isKey(i)) continue;
-    seen[i] = 1;
-    out.data[i * 4 + 3] = 0;
     const x = i % w;
-    if (x > 0) stack.push(i - 1);
-    if (x < w - 1) stack.push(i + 1);
-    if (i >= w) stack.push(i - w);
-    if (i < (h - 1) * w) stack.push(i + w);
+    for (const j of [x > 0 ? i - 1 : -1, x < w - 1 ? i + 1 : -1, i - w, i + w]) {
+      if (j < yMin * w || j >= w * h || seen[j]) continue;
+      seen[j] = 1;
+      if (!isShadow(j)) continue;
+      out.data[j * 4 + 3] = 0;
+      stack.push(j);
+    }
   }
   return out;
 }

@@ -26,6 +26,7 @@ import {
   quantize,
   readRgba,
   removeBackground,
+  removeShadow,
   writePng,
   type Rgb,
   type Rgba,
@@ -106,7 +107,8 @@ export async function run(argv: string[]): Promise<void> {
           continue;
         }
         const raw = await readRgba(src);
-        const img = removeBackground(raw, bg ?? cornerKey(raw), tolerance);
+        const key = bg ?? cornerKey(raw);
+        const img = removeShadow(removeBackground(raw, key, tolerance), key);
         const box = bbox(img);
         if (!box) blank++;
         cut.push({ motion: m.id, dir, frame: i, img, box });
