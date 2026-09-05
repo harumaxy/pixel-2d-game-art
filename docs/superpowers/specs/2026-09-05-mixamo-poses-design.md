@@ -97,7 +97,7 @@ export const FLIP: Record<GenDir, [Dir8, Dir8?]> = {
 
 手順:
 
-1. `bpy.ops.wm.read_factory_settings(use_empty=True)` でシーンを空にする。
+1. 既定シーンのオブジェクトを全部削除する（`read_factory_settings` は FBX importer の context を壊す）。
 2. `Y Bot.fbx` を import（mesh 2 個 + armature）。armature を `rig` とする。
 3. 各 motion:
    1. `<fbx>` を import。armature のみ入る。その `animation_data.action` を取り、`rig.animation_data.action` に assign。import した armature は削除。
@@ -123,7 +123,7 @@ export const FLIP: Record<GenDir, [Dir8, Dir8?]> = {
         | rear / lear | 同 前 0.0 m、上 0.07 m、左右 ∓0.07 m |
         オフセットは Y Bot の頭のサイズ（約 0.2 m）に合わせた定数。Head の前方向とカメラ方向の内積が負（後ろ向き）なら nose / reye / leye を `visible: false`、同様に片耳が頭で隠れる向き（内積の符号で判定）はその耳を `visible: false`。
       - JSON: `{ "<joint>": { "x": 0.5, "y": 0.3, "visible": true }, ... }` を `<out>/<id>/<dir>/<k>.json` に書く。
-      - Depth: Workbench レンダ、`view_layer.use_pass_z = True`、compositor で `Render Layers.Depth → Normalize → Invert → Composite`。近い面ほど白、背景（無限遠）は黒。`<out>/<id>/<dir>/<k>.depth.png`（512²、グレースケール PNG）。Normalize はフレーム毎に min/max が変わるが、CN 用途では問題ない。
+      - Depth: Workbench レンダ、`view_layer.use_pass_z = True`、compositor で `Render Layers.Depth → Map Range (From カメラ距離 ±0.8 m → To 1..0, clamp) → Group Output`。近い面ほど白、背景（無限遠）は黒。`<out>/<id>/<dir>/<k>.depth.png`（512²、グレースケール PNG）。カメラ距離を基準にした固定レンジなので、フレーム間・方向間で絶対深度が揃う。
 4. 件数を stdout に出して終了。FBX が無ければ最初に列挙して exit 1。
 
 ## `px poses`（`src/stages/poses.ts`）
@@ -173,6 +173,6 @@ export const FLIP: Record<GenDir, [Dir8, Dir8?]> = {
 
 - Y Bot に顔ボーンが無いため nose / eyes / ears は Head からの固定オフセット。頭の傾きには追従する。
 - 反転で作る左向きは、左右非対称モーション（sneak 等）では厳密には鏡像になる。許容。
-- Depth の Normalize はフレーム毎。絶対深度が必要になったら Map Range に変える。
+- Depth は Map Range（カメラ距離 ±0.8 m 固定、clamp）。フレーム間・方向間で絶対深度が揃う。
 - Blender は通常インストール版 5.2.1（`C:\Program Files\Blender Foundation\Blender 5.2\blender.exe`）。`px poses` は `--blender` → `BLENDER` → PATH → `C:\Program Files\Blender Foundation\Blender *` の順で探す。MS Store 版は exe が ACL で起動できず launcher も stdout を返さないので非対応。
-- 実装時の変更: depth は `Normalize` ではなく Map Range（カメラ距離 ±0.8 m 固定、clamp）。`frameTimes` の TS 複製は作らず Python 側の assert 自己チェックのみ。Blender は通常インストール版のみ対応（MS Store 版は exe が起動不可・launcher が stdout を返さない）。
+- 実装時の変更: `frameTimes` の TS 複製は作らず Python 側の assert 自己チェックのみ。
