@@ -47,8 +47,14 @@ import { depthPath, posePath } from "./poses";
  */
 const DEFAULT_CKPT = "SD1.5\\realisticVisionV60B1_v51VAE.safetensors";
 const SUFFIX = "full body, flat grey background, no shadow, centered";
-/** Photoreal checkpoints like to litter the ground; the matte would keep every pebble. */
-const NEGATIVE = "black background, debris, rocks, objects on ground";
+/**
+ * Photoreal checkpoints like to litter the ground, and the motion module
+ * explains an airborne pose with a rope and paints a stained wall behind;
+ * the matte would keep every pebble, rope and stain.
+ */
+const NEGATIVE =
+  "black background, debris, rocks, objects on ground, (rope:1.5), (wire:1.5), (harness:1.5), (cable:1.5), " +
+  "textured wall, stained wall, cliff, shadow";
 const VALUE_FLAGS = new Set([
   "--motion",
   "--dir",
@@ -180,14 +186,16 @@ export async function run(argv: string[]): Promise<void> {
   const ckpt = flag(argv, "ckpt") ?? DEFAULT_CKPT;
   const steps = flag(argv, "steps") ? Number(flag(argv, "steps")) : undefined;
   const cfg = flag(argv, "cfg") ? Number(flag(argv, "cfg")) : undefined;
-  const matteFlag = (flag(argv, "matte") ?? "toonout") as (typeof MATTES)[number];
+  const styleAligned = argv.includes("--style-aligned");
+  const animateDiff = argv.includes("--anim") ? SD15_ANIMATEDIFF : undefined;
+  // ToonOut is tuned on anime and keeps the motion module's wall stains as subject; Bria's does not.
+  const matteFlag = (flag(argv, "matte") ??
+    (animateDiff ? "rmbg2" : "toonout")) as (typeof MATTES)[number];
   if (!MATTES.includes(matteFlag)) {
     console.error(`unknown --matte ${matteFlag}\n${usage()}`);
     process.exit(1);
   }
   const matte: Matte | undefined = matteFlag === "none" ? undefined : matteFlag;
-  const styleAligned = argv.includes("--style-aligned");
-  const animateDiff = argv.includes("--anim") ? SD15_ANIMATEDIFF : undefined;
   const batch = argv.includes("--batch") || styleAligned || !!animateDiff;
 
   const upload = async (path: string, name: string) => (api ? uploadImage(api, path, name) : name);
