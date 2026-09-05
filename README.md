@@ -28,13 +28,14 @@ bun run px dataset  scavenger --hero out/concept/scavenger/scavenger_00002_.png
                                                      # -> out/dataset/scavenger/ + train.yaml
 # 目視で不良画像を削除 -> ai-toolkit で学習 -> safetensors を ComfyUI の loras/ へ
 #   -> chars/scavenger.yaml に lora: scavenger を追記
-bun run px poses                                     # 骨格 PNG (1 回)
+bun run px poses     [--only walk,run] [--size 512]  # 骨格 PNG (1 回)
 bun run px sprites  scavenger [--motion walk] [--dir down] [--seed n] [--strength 0.65]
-bun run px pixelate scavenger [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb] [--motion m]
-bun run px sheet    scavenger [--size 64]                  # -> out/sheets/scavenger.png + .json
+bun run px pixelate scavenger [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb]
+bun run px sheet    scavenger                              # -> out/sheets/scavenger.png + .json
 ```
 
 pixelate は各レンダーの四隅の色を背景キーとして自動検出する（checkpoint によって「灰色」の実際の色が違うため）。--bg で明示できる。
+pixelate は常に全モーションを処理する（スケールとパレットをキャラ全体で統一するため）。
 
 ComfyUI を使う concept / dataset / sprites は `--dry` でグラフ JSON だけ印字する（サーバ不要）。poses / pixelate / sheet は ComfyUI を使わない。
 
