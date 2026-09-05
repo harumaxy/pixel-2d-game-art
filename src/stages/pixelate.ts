@@ -35,15 +35,19 @@ import {
 } from "../lib/pixelate";
 import { FLIP, GEN_DIRS, MOTIONS, type Dir8, type GenDir } from "../motions";
 
-const VALUE_FLAGS = new Set(["--size", "--palette", "--bg-tolerance", "--bg"]);
+const VALUE_FLAGS = new Set(["--size", "--palette", "--bg-tolerance", "--bg", "--render"]);
 
 export const pxPath = (char: string, motion: string, dir: Dir8, frame: number): string =>
   join(OUT_DIR, "px", char, motion, dir, `${frame}.png`);
 
-/** Newest `<frame>_*.png` ComfyUI wrote for this frame, or undefined. */
-async function latestRender(dir: string, frame: number): Promise<string | undefined> {
+/** Newest `<frame>_*.png` ComfyUI wrote for this frame, or the `<frame>_<render>_.png` asked for; undefined if none. */
+async function latestRender(
+  dir: string,
+  frame: number,
+  render?: string,
+): Promise<string | undefined> {
   const files = (await readdir(dir).catch(() => [] as string[]))
-    .filter((f) => f.startsWith(`${frame}_`) && f.endsWith(".png"))
+    .filter((f) => f.startsWith(`${frame}_`) && f.endsWith(render ? `_${render}_.png` : ".png"))
     .sort();
   return files.length ? join(dir, files[files.length - 1]!) : undefined;
 }
@@ -52,7 +56,7 @@ export async function run(argv: string[]): Promise<void> {
   const name = positional(argv, VALUE_FLAGS);
   if (!name) {
     console.error(
-      `usage: bun run px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb]`,
+      `usage: bun run px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb] [--render 00013]`,
     );
     process.exit(1);
   }
@@ -62,6 +66,8 @@ export async function run(argv: string[]): Promise<void> {
   });
 
   const size = Number(flag(argv, "size") ?? 64);
+  /** ComfyUI's counter, to pixelate one specific run instead of the newest. */
+  const render = flag(argv, "render");
   const paletteName = flag(argv, "palette") ?? "apoc";
   const tolerance = Number(flag(argv, "bg-tolerance") ?? 40);
   let fixed: Rgb[] | undefined;
@@ -103,7 +109,7 @@ export async function run(argv: string[]): Promise<void> {
   for (const m of MOTIONS)
     for (const dir of GEN_DIRS)
       for (let i = 0; i < m.frames; i++) {
-        const src = await latestRender(join(srcRoot, m.id, dir), i);
+        const src = await latestRender(join(srcRoot, m.id, dir), i, render);
         if (!src) {
           missing++;
           continue;
