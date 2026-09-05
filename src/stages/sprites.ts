@@ -1,10 +1,11 @@
 // src/stages/sprites.ts
 /**
- * `px sprites <char> [--motion walk] [--dir down] [--seed n] [--strength 0.65] [--dry]`
+ * `px sprites <char> [--motion walk] [--dir down] [--seed n] [--strength 0.6] [--depth-strength 0.5] [--dry]`
  *
- * One SD1.5 generation per (motion, dir, frame): character LoRA + the
- * pre-rendered openpose skeleton. The seed is fixed per (char, motion) so the
- * only thing that changes between frames is the skeleton.
+ * One SD1.5 generation per (motion, dir, frame): character LoRA + openpose
+ * ControlNet + depth ControlNet, both hints pre-rendered by `px poses` from
+ * Mixamo. The seed is fixed per (char, motion) so the only thing that changes
+ * between frames is the skeleton.
  */
 
 import {
@@ -18,30 +19,45 @@ import {
 } from "../lib/comfy";
 import { loadChar } from "../lib/chars";
 import { genPrefix } from "../lib/paths";
-import { buildSd15 } from "../lib/sd15";
-import { DIRS5, MOTIONS, type Dir5 } from "../motions";
-import { posePath } from "./poses";
+import {
+  buildSd15,
+  SD15_CONTROLNET_DEPTH,
+  SD15_CONTROLNET_OPENPOSE,
+  type Control,
+} from "../lib/sd15";
+import { GEN_DIRS, MOTIONS, type GenDir } from "../motions";
+import { depthPath, posePath } from "./poses";
 
 const DEFAULT_CKPT = "aziibpixelmix_v10.safetensors";
-const SUFFIX =
-  "full body, chibi, 2 heads tall, flat grey background, no shadow, centered, pixel art style";
+const SUFFIX = "full body, flat grey background, no shadow, centered, pixel art style";
 const VALUE_FLAGS = new Set([
   "--motion",
   "--dir",
   "--seed",
   "--strength",
+  "--depth-strength",
   "--ckpt",
   "--steps",
   "--cfg",
 ]);
 
 const usage = () =>
-  `usage: bun run px sprites <char> [--motion ${MOTIONS.map((m) => m.id).join("|")}] [--dir ${DIRS5.join("|")}]\n` +
-  `                          [--seed n] [--strength 0.65] [--ckpt file] [--steps 25] [--cfg 6] [--dry]`;
+  `usage: bun run px sprites <char> [--motion ${MOTIONS.map((m) => m.id).join("|")}] [--dir ${GEN_DIRS.join("|")}]\n` +
+  `                          [--seed n] [--strength 0.6] [--depth-strength 0.5] [--ckpt file] [--steps 25] [--cfg 6] [--dry]`;
 
 /** Seed per (char, motion): base seed from --seed or random, plus a stable per-motion offset. */
 export const motionSeed = (base: number, motionIndex: number) =>
   (base + motionIndex * 1000) % 2 ** 32;
+
+/** The skeleton carries no face when seen from behind, so the prompt has to say it. */
+export function spritePrompt(
+  char: { trigger: string; positive: string },
+  motionPrompt: string,
+  dir: GenDir,
+): string {
+  const view = dir === "up" || dir === "upright" ? ", from behind, back view" : "";
+  return `${char.trigger}, ${char.positive}, ${motionPrompt}${view}, ${SUFFIX}`;
+}
 
 export async function run(argv: string[]): Promise<void> {
   const name = positional(argv, VALUE_FLAGS);
@@ -70,21 +86,28 @@ export async function run(argv: string[]): Promise<void> {
     console.error(`unknown --motion ${motionFlag}\n${usage()}`);
     process.exit(1);
   }
-  const dirFlag = flag(argv, "dir") as Dir5 | undefined;
-  const dirs: readonly Dir5[] = dirFlag ? [dirFlag] : DIRS5;
-  if (dirFlag && !DIRS5.includes(dirFlag)) {
+  const dirFlag = flag(argv, "dir") as GenDir | undefined;
+  const dirs: readonly GenDir[] = dirFlag ? [dirFlag] : GEN_DIRS;
+  if (dirFlag && !GEN_DIRS.includes(dirFlag)) {
     console.error(`unknown --dir ${dirFlag}\n${usage()}`);
     process.exit(1);
   }
 
-  // Every skeleton must exist before we touch the server.
+  const strength = Number(flag(argv, "strength") ?? 0.6);
+  const depthStrength = Number(flag(argv, "depth-strength") ?? 0.5);
+
+  // Every hint must exist before we touch the server.
   for (const m of motions)
     for (const dir of dirs)
       for (let i = 0; i < m.frames; i++)
-        if (!(await Bun.file(posePath(m.id, dir, i)).exists())) {
-          console.error(`missing ${posePath(m.id, dir, i)} — run  bun run px poses  first`);
-          process.exit(1);
-        }
+        for (const p of [
+          posePath(m.id, dir, i),
+          ...(depthStrength > 0 ? [depthPath(m.id, dir, i)] : []),
+        ])
+          if (!(await Bun.file(p).exists())) {
+            console.error(`missing ${p} — run  bun run px poses  first`);
+            process.exit(1);
+          }
 
   const dry = argv.includes("--dry");
   const api = dry ? undefined : await connect();
@@ -100,7 +123,6 @@ export async function run(argv: string[]): Promise<void> {
   }
 
   const baseSeed = resolveSeed(argv);
-  const strength = Number(flag(argv, "strength") ?? 0.65);
   const ckpt = flag(argv, "ckpt") ?? DEFAULT_CKPT;
   const steps = flag(argv, "steps") ? Number(flag(argv, "steps")) : undefined;
   const cfg = flag(argv, "cfg") ? Number(flag(argv, "cfg")) : undefined;
@@ -111,14 +133,29 @@ export async function run(argv: string[]): Promise<void> {
     const seed = motionSeed(baseSeed, MOTIONS.indexOf(m));
     for (const dir of dirs)
       for (let i = 0; i < m.frames; i++) {
-        const pose = posePath(m.id, dir, i);
         const label = `${m.id}/${dir}/${i}`;
-        const poseName = `${m.id}_${dir}_${i}.png`;
+        const stem = `${m.id}_${dir}_${i}`;
         try {
-          const image = api ? await uploadImage(api, pose, poseName) : poseName;
+          const controls: Control[] = [
+            {
+              model: SD15_CONTROLNET_OPENPOSE,
+              image: api
+                ? await uploadImage(api, posePath(m.id, dir, i), `${stem}.png`)
+                : `${stem}.png`,
+              strength,
+            },
+          ];
+          if (depthStrength > 0)
+            controls.push({
+              model: SD15_CONTROLNET_DEPTH,
+              image: api
+                ? await uploadImage(api, depthPath(m.id, dir, i), `${stem}.depth.png`)
+                : `${stem}.depth.png`,
+              strength: depthStrength,
+            });
           const workflow = buildSd15({
             ckpt,
-            positive: `${char.trigger}, ${char.positive}, ${m.prompt}, ${SUFFIX}`,
+            positive: spritePrompt(char, m.prompt, dir),
             negative: `${char.negative}, black background`,
             width: 512,
             height: 512,
@@ -128,7 +165,7 @@ export async function run(argv: string[]): Promise<void> {
             cfg,
             prefix: genPrefix("sprites", char.name, m.id, dir, String(i)),
             loras,
-            control: { image, strength },
+            controls,
           });
 
           if (dry) {
