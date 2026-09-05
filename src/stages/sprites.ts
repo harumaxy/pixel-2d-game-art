@@ -33,8 +33,15 @@ import {
 import { GEN_DIRS, MOTIONS, type GenDir } from "../motions";
 import { depthPath, posePath } from "./poses";
 
-const DEFAULT_CKPT = "aziibpixelmix_v10.safetensors";
-const SUFFIX = "full body, flat grey background, no shadow, centered, pixel art style";
+/**
+ * A smooth, photoreal-ish fine-tune, not a pixel-art one: pixelate does the
+ * pixelating, and a pseudo-pixel render only fights the 64px grid. Fine-tunes
+ * also hold a ControlNet pose better than base 1.5 once the hint releases.
+ */
+const DEFAULT_CKPT = "SD1.5\\realisticVisionV60B1_v51VAE.safetensors";
+const SUFFIX = "full body, flat grey background, no shadow, centered";
+/** Photoreal checkpoints like to litter the ground; the matte would keep every pebble. */
+const NEGATIVE = "black background, debris, rocks, objects on ground";
 const VALUE_FLAGS = new Set([
   "--motion",
   "--dir",
@@ -201,7 +208,7 @@ export async function run(argv: string[]): Promise<void> {
           const workflow = buildSd15({
             ckpt,
             positive: spritePrompt(char, m.prompt, dir),
-            negative: `${char.negative}, black background`,
+            negative: `${char.negative}, ${NEGATIVE}`,
             width: 512,
             height: 512,
             count: 1,

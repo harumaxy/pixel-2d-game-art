@@ -24,6 +24,12 @@ test("prompt is trigger, character, motion, suffix", () => {
   expect(p).not.toContain("from behind");
 });
 
+test("prompt asks for a smooth render: pixelate does the pixel art", () => {
+  const p = spritePrompt(char, "walking", "down");
+  expect(p).not.toContain("pixel art");
+  expect(p).toContain("flat grey background");
+});
+
 test("back views say so, since the skeleton has no face to show it", () => {
   expect(spritePrompt(char, "walking", "up")).toContain("from behind");
   expect(spritePrompt(char, "walking", "upright")).toContain("from behind");
