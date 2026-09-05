@@ -7,7 +7,14 @@ import { OUT_DIR, REPO_ROOT } from "./paths";
 
 export const COMFY = process.env.COMFY_URL ?? "http://127.0.0.1:8188";
 
-export const connect = () => new ComfyApi(COMFY).init().waitForReady();
+export async function connect(): Promise<ComfyApi> {
+  try {
+    return await new ComfyApi(COMFY).init().waitForReady();
+  } catch (e) {
+    console.error(`ComfyUI unreachable at ${COMFY}: ${(e as Error).message}`);
+    process.exit(1);
+  }
+}
 
 export const ensureDir = (path: string) => mkdir(path, { recursive: true }).then(() => {});
 
@@ -16,10 +23,6 @@ export function flag(argv: string[], name: string, alias?: string): string | und
   const i = argv.findIndex((a) => a === `--${name}` || (alias !== undefined && a === `-${alias}`));
   return i === -1 ? undefined : argv[i + 1];
 }
-
-/** Every value of a repeatable flag, in order: `--lora a --lora b` -> ["a", "b"]. */
-export const flags = (argv: string[], name: string): string[] =>
-  argv.flatMap((a, i) => (a === `--${name}` && argv[i + 1] !== undefined ? [argv[i + 1]!] : []));
 
 /**
  * First argv token that is neither a flag nor a flag's value. `valueFlags` is
@@ -36,8 +39,8 @@ export function resolveSeed(argv: string[]): number {
 }
 
 /** Push a local file into ComfyUI's input/ dir; returns the name LoadImage wants. */
-export async function uploadImage(api: ComfyApi, path: string): Promise<string> {
-  const upload = await api.uploadImage(await Bun.file(path).arrayBuffer(), basename(path), {
+export async function uploadImage(api: ComfyApi, path: string, name?: string): Promise<string> {
+  const upload = await api.uploadImage(await Bun.file(path).arrayBuffer(), name ?? basename(path), {
     override: true,
   });
   if (!upload) throw new Error(`upload failed: ${path}`);
@@ -120,7 +123,6 @@ export async function collectOutputs(files: string[]): Promise<string[]> {
  * into out/, return repo-relative paths. onFailed also fires on websocket
  * drops the job survives, so it is only fatal when nothing came back.
  */
-// oxlint-disable-next-line
 export async function runWorkflow(
   api: ComfyApi,
   workflow: PromptBuilder<never, "images", any, any>,

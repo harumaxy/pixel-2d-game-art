@@ -1,15 +1,10 @@
 import { describe, expect, test } from "bun:test";
-import { flag, flags, matchLora, parseLora, positional, resolveSeed } from "./comfy";
+import { flag, matchLora, parseLora, positional, resolveSeed } from "./comfy";
 
 describe("flag", () => {
   test("reads --name value", () => expect(flag(["--size", "64"], "size")).toBe("64"));
   test("reads alias", () => expect(flag(["-n", "4"], "count", "n")).toBe("4"));
   test("absent is undefined", () => expect(flag(["--size", "64"], "seed")).toBeUndefined());
-});
-
-test("flags collects every repeat", () => {
-  expect(flags(["--lora", "a", "--lora", "b"], "lora")).toEqual(["a", "b"]);
-  expect(flags(["--lora"], "lora")).toEqual([]);
 });
 
 describe("positional", () => {
