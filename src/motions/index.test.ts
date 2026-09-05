@@ -1,39 +1,37 @@
 import { describe, expect, test } from "bun:test";
-import { basePose, DIRS5, DIRS8, facing, FLIP, JOINTS } from "./index";
+import { DIRS8, FLIP, GEN_DIRS, JOINTS, MOTIONS } from "./index";
 
-describe("basePose", () => {
-  test("every joint inside 0..1 for every dir", () => {
-    for (const dir of DIRS5) {
-      const p = basePose(dir);
-      for (const j of JOINTS) {
-        expect(p[j].x).toBeGreaterThanOrEqual(0);
-        expect(p[j].x).toBeLessThanOrEqual(1);
-        expect(p[j].y).toBeGreaterThanOrEqual(0);
-        expect(p[j].y).toBeLessThanOrEqual(1);
-      }
-    }
-  });
-  test("front view: character's right shoulder is on the viewer's left", () => {
-    const p = basePose("down");
-    expect(p.rsho.x).toBeLessThan(p.lsho.x);
-  });
-  test("back view mirrors", () => {
-    const p = basePose("up");
-    expect(p.rsho.x).toBeGreaterThan(p.lsho.x);
-  });
-  test("side view collapses shoulders onto one x", () => {
-    const p = basePose("side");
-    expect(p.rsho.x).toBeCloseTo(p.lsho.x, 5);
-    expect(facing("side")).toBe(0);
-  });
-  test("head above hips above ankles", () => {
-    const p = basePose("down");
-    expect(p.nose.y).toBeLessThan(p.rhip.y);
-    expect(p.rhip.y).toBeLessThan(p.rank.y);
-  });
+test("JOINTS is COCO-18 in openpose order", () => {
+  expect(JOINTS).toHaveLength(18);
+  expect(JOINTS[0]).toBe("nose");
+  expect(JOINTS[1]).toBe("neck");
+  expect(JOINTS[17]).toBe("lear");
 });
 
 test("FLIP covers every Dir8 exactly once", () => {
   const covered = Object.values(FLIP).flat().filter(Boolean);
   expect(covered.slice().sort()).toEqual([...DIRS8].sort());
+});
+
+test("GEN_DIRS are a subset of DIRS8 and the keys of FLIP", () => {
+  for (const d of GEN_DIRS) expect(DIRS8).toContain(d);
+  expect(Object.keys(FLIP).sort()).toEqual([...GEN_DIRS].sort());
+});
+
+describe("MOTIONS", () => {
+  test("ids are unique", () => {
+    const ids = MOTIONS.map((m) => m.id);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+  test("every motion names an .fbx and at least one frame", () => {
+    for (const m of MOTIONS) {
+      expect(m.fbx).toMatch(/\.fbx$/);
+      expect(m.frames).toBeGreaterThanOrEqual(1);
+      expect(m.fps).toBeGreaterThan(0);
+      expect(m.prompt.length).toBeGreaterThan(0);
+    }
+  });
+  test("sheet order starts with idle, walk, run", () => {
+    expect(MOTIONS.slice(0, 3).map((m) => m.id)).toEqual(["idle", "walk", "run"]);
+  });
 });
