@@ -44,6 +44,7 @@ HEAD_OFFSETS = {
     "rear": (-0.07, 0.07, 0.0), "lear": (0.07, 0.07, 0.0),
 }
 EAR_HIDE_DOT = 0.8  # |head.x · camera| above this = profile view, far ear hidden
+FACE_HIDE_DOT = -0.3  # head.forward · camera below this = seen from behind, face hidden
 
 
 def log(msg):
@@ -174,7 +175,11 @@ def pose_json(scene, cam, rig, cam_dir):
     for joint, (ox, oy, oz) in HEAD_OFFSETS.items():
         x, y = project(origin + ax * ox + ay * oy + az * oz)
         visible = True
-        if joint in ("nose", "reye", "leye") and facing < 0:
+        if joint == "nose" and facing < FACE_HIDE_DOT:
+            visible = False
+        if joint == "reye" and (facing < FACE_HIDE_DOT or side > EAR_HIDE_DOT):
+            visible = False
+        if joint == "leye" and (facing < FACE_HIDE_DOT or side < -EAR_HIDE_DOT):
             visible = False
         if joint == "rear" and side > EAR_HIDE_DOT:
             visible = False
