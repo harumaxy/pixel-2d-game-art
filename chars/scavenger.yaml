@@ -1,7 +1,7 @@
 # chars/scavenger.yaml
 name: scavenger
 trigger: sc4v_char
-# lora: scavenger        # 学習後にここへ追記する
+lora: scavenger
 strength: 0.8
 positive: |
   1boy, solo,
