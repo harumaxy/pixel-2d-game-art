@@ -29,6 +29,7 @@ import {
   readRgba,
   removeBackground,
   removeShadow,
+  unionBox,
   writePng,
   type Rgb,
   type Rgba,
@@ -126,9 +127,14 @@ export async function run(argv: string[]): Promise<void> {
         cut.push({ motion: m.id, dir, frame: i, img, box });
       }
 
-  const tallest = Math.max(0, ...cut.map((c) => (c.box ? c.box.y1 - c.box.y0 : 0)));
-  const widest = Math.max(0, ...cut.map((c) => (c.box ? c.box.x1 - c.box.x0 : 0)));
-  if (!tallest) {
+  // One crop for every frame: the hints keep the ground line and the hips'
+  // x fixed, so a run's flight phase rises and a crouch sinks instead of each
+  // frame being re-anchored on its own lowest pixel.
+  // ponytail: a stray matte blob in one frame widens the crop for all; clip outliers if it bites.
+  const crop = unionBox(cut.flatMap((c) => (c.box ? [c.box] : [])));
+  const tallest = crop ? crop.y1 - crop.y0 : 0;
+  const widest = crop ? crop.x1 - crop.x0 : 0;
+  if (!crop || !tallest) {
     if (blank) {
       console.error(
         `${blank} frames were fully transparent after background removal — check --bg / --bg-tolerance`,
@@ -149,7 +155,7 @@ export async function run(argv: string[]): Promise<void> {
   // ONE palette for the whole character before any frame is quantized.
   const placed = cut
     .filter((c) => c.box !== undefined)
-    .map((c) => ({ ...c, small: boxDownscale(placeOnSquare(c.img, c.box!, work, scale), size) }));
+    .map((c) => ({ ...c, small: boxDownscale(placeOnSquare(c.img, crop, work, scale), size) }));
 
   let pal: Rgb[];
   if (fixed) {

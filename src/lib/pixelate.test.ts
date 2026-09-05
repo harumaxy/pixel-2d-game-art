@@ -7,6 +7,7 @@ import {
   hflip,
   medianCut,
   placeOnSquare,
+  unionBox,
   quantize,
   removeBackground,
   removeShadow,
@@ -110,6 +111,16 @@ test("bbox of opaque pixels", () => {
   const i = img(8, 8, [0, 0, 0, 0], [{ x: 2, y: 3, w: 3, h: 2, c: [1, 2, 3, 255] }]);
   expect(bbox(i)).toEqual({ x0: 2, y0: 3, x1: 5, y1: 5 });
   expect(bbox(img(2, 2, [0, 0, 0, 0]))).toBeUndefined();
+});
+
+test("unionBox spans every box", () => {
+  expect(
+    unionBox([
+      { x0: 2, y0: 3, x1: 5, y1: 5 },
+      { x0: 1, y0: 4, x1: 4, y1: 9 },
+    ]),
+  ).toEqual({ x0: 1, y0: 3, x1: 5, y1: 9 });
+  expect(unionBox([])).toBeUndefined();
 });
 
 test("placeOnSquare anchors the box's bottom-centre", () => {

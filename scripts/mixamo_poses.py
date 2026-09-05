@@ -224,6 +224,10 @@ def main():
     cam = setup_camera(scene, size)
     setup_depth_compositor(scene)
     cam.data.ortho_scale = rest_height(rig) * 1.15
+    # The camera follows the hips across the ground but not up and down: a
+    # crouch then sinks and a jump rises inside the frame, and the feet of a
+    # walk stay on one line instead of the hips. Rest height = standing height.
+    ground_hips_z = (rig.matrix_world @ rig.data.bones["mixamorig:Hips"].head_local).z
     log(f"blender {bpy.app.version_string}, rig height {rest_height(rig):.2f} m, {len(motions)} motions, elev {elev}")
 
     written = 0
@@ -248,7 +252,8 @@ def main():
                 scene.frame_set(int(t), subframe=t - int(t))
                 bpy.context.view_layer.update()
                 hips = joint_world(rig, "Hips")
-                cam_dir = place_camera(cam, hips, AZIMUTH[d] + yaw, elev)
+                target = Vector((hips.x, hips.y, ground_hips_z))
+                cam_dir = place_camera(cam, target, AZIMUTH[d] + yaw, elev)
                 bpy.context.view_layer.update()
                 with open(os.path.join(dest, f"{k}.json"), "w", encoding="utf-8") as f:
                     json.dump(pose_json(scene, cam, rig, cam_dir), f)

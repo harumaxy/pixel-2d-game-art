@@ -128,6 +128,17 @@ export function removeShadow(img: Rgba, key: Rgb): Rgba {
 }
 
 /** Bounding box of alpha > 0; undefined when the image is fully transparent. x1/y1 exclusive. */
+/** Smallest box holding every box; undefined when there are none. */
+export function unionBox(boxes: Box[]): Box | undefined {
+  if (!boxes.length) return undefined;
+  return {
+    x0: Math.min(...boxes.map((b) => b.x0)),
+    y0: Math.min(...boxes.map((b) => b.y0)),
+    x1: Math.max(...boxes.map((b) => b.x1)),
+    y1: Math.max(...boxes.map((b) => b.y1)),
+  };
+}
+
 export function bbox(img: Rgba): Box | undefined {
   let x0 = img.width,
     y0 = img.height,
