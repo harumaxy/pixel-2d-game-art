@@ -37,7 +37,7 @@ export function buildQwenEdit(o: QwenEditOpts): ReturnType<WorkflowBuilder["buil
   const scaled = w.ImageScaleToTotalPixels({
     image: src.IMAGE,
     upscale_method: "lanczos",
-    megapixels: 1,
+    megapixels: 0.5,
     resolution_steps: 16,
   });
 

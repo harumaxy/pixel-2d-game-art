@@ -36,7 +36,7 @@ describe("buildQwenEdit", () => {
     const wf = buildQwenEdit(base);
     expect(byType(wf, "LoadImage")[0]!.inputs.image).toBe(base.image);
     const scaled = byType(wf, "ImageScaleToTotalPixels")[0]!;
-    expect(scaled.inputs.megapixels).toBe(1);
+    expect(scaled.inputs.megapixels).toBe(0.5);
     expect(scaled.inputs.resolution_steps).toBe(16);
     expect(byType(wf, "VAEEncode")).toHaveLength(1);
     expect(byType(wf, "VAEDecode")).toHaveLength(1);
