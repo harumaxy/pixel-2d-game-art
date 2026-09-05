@@ -174,4 +174,3 @@ import { dodge } from "./dodge";
 
 /** Sheet row order. */
 export const MOTIONS: Motion[] = [idle, walk, run, attack, aim, dodge];
-export const motionById = (id: string): Motion | undefined => MOTIONS.find((m) => m.id === id);
