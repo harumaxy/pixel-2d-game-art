@@ -4,7 +4,7 @@
  *   bun run px dataset scavenger --hero out/concept/scavenger/scavenger_00002_.png
  *   bun run px dataset scavenger --hero hero.png --only side,back,portrait
  *   bun run px dataset scavenger --hero hero.png --dry
- *   bun run px dataset scavenger --hero hero.png --engine klein9b   (FLUX.2 Klein instead of Qwen)
+ *   bun run px dataset scavenger --hero hero.png --engine qwen      (Qwen Image Edit instead of FLUX.2 Klein 9B)
  *
  * Writes out/dataset/<char>/: source.png (the hero, copied), one image + one
  * same-named .txt per variation, and train.yaml. Training itself is manual.
@@ -29,6 +29,8 @@ import { buildQwenEdit } from "../lib/qwen-edit";
 const VALUE_FLAGS = new Set(["--hero", "--only", "--seed", "--engine"]);
 type Engine = "qwen" | KleinModel;
 const ENGINES: Engine[] = ["qwen", "klein4b", "klein9b"];
+// klein9b: ~5x faster than qwen at near-equal quality (measured 2026-09-05). klein4b breaks poses.
+const DEFAULT_ENGINE: Engine = "klein9b";
 const ids = () => Object.keys(VARIATIONS) as VariationId[];
 
 const usage = () =>
@@ -64,7 +66,7 @@ export async function run(argv: string[]): Promise<void> {
     process.exit(1);
   }
 
-  const engine = (flag(argv, "engine") ?? "qwen") as Engine;
+  const engine = (flag(argv, "engine") ?? DEFAULT_ENGINE) as Engine;
   if (!ENGINES.includes(engine)) {
     console.error(`unknown --engine ${engine}; expected ${ENGINES.join(", ")}`);
     process.exit(1);
@@ -104,7 +106,7 @@ export async function run(argv: string[]): Promise<void> {
       prompt: VARIATIONS[id].prompt,
       seed: baseSeed + ids().indexOf(id),
       // Non-default engines get a suffix so the two can sit side by side for comparison.
-      prefix: genPrefix("dataset", char.name, engine === "qwen" ? id : `${id}-${engine}`),
+      prefix: genPrefix("dataset", char.name, engine === DEFAULT_ENGINE ? id : `${id}-${engine}`),
     };
     const workflow =
       engine === "qwen" ? buildQwenEdit(opts) : buildFlux2Edit({ ...opts, model: engine });
