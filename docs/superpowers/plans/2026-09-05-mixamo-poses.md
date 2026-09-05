@@ -6,7 +6,7 @@
 
 **Architecture:** `px poses` が `scripts/mixamo_poses.py` を Blender に渡して `out/poses/<motion>/<dir8>/<k>.json` と `<k>.depth.png` を作らせ、JSON を既存 `renderPose` で openpose PNG に描く。`src/motions/index.ts` は宣言だけ（`{id, fbx, frames, loop, fps, prompt}`）になり、`sd15.ts` の ControlNet は配列で chain する。生成方向は `GEN_DIRS`（5 方向）+ pixelate の反転で 8 方向。
 
-**Tech Stack:** bun / TypeScript、sharp、Blender 5.2.1 LTS（MS Store 版、Python 3.11 + numpy 内蔵）、ComfyUI SD1.5 + `control_v11p_sd15_openpose_fp16` + `control_v11f1p_sd15_depth_fp16`。
+**Tech Stack:** bun / TypeScript、sharp、Blender 5.2.1 LTS（通常インストール版、Python 3.11 + numpy 内蔵）、ComfyUI SD1.5 + `control_v11p_sd15_openpose_fp16` + `control_v11f1p_sd15_depth_fp16`。
 
 Spec: `docs/superpowers/specs/2026-09-05-mixamo-poses-design.md`
 

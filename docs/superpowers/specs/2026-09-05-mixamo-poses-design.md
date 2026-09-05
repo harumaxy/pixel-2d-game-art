@@ -105,8 +105,9 @@ export const FLIP: Record<GenDir, [Dir8, Dir8?]> = {
       - loop: `s + k * (e - s) / N`
       - 非 loop: `s + k * (e - s) / (N - 1)`（N = 1 なら s）
       `scene.frame_set(round(t))`（Mixamo は 30fps、丸め誤差は許容）。
-   3. 各方向 d (0..7、`DIRS8` 順) × 各フレーム:
-      - Hips ボーンのワールド位置 `h` を求め、カメラを `h` を注視点として方位 `azimuth(d)`、仰角 `elev` に置く（root motion をキャンセルし、キャラを常に画面中央に置く）。方位は `down` = キャラの正面（Mixamo の +Z 前方をカメラが見る）、以降時計回りに 45° ずつ。
+   3. 最初にサンプルするフレームで骨盤の左右ベクトル（LeftUpLeg − RightUpLeg）から初期向き（world −Y からの偏差、度）を求め、その motion 全体で定数として使う（clip ごとに 1 回のみ計算）。`crouched sneaking right.fbx` のように rest 向きが −Y でない clip があるため、方位に加算して補正する。
+   4. 各方向 d (0..7、`DIRS8` 順) × 各フレーム:
+      - Hips ボーンのワールド位置 `h` を求め、カメラを `h` を注視点として方位 `azimuth(d) + 初期向き`、仰角 `elev` に置く（root motion をキャンセルし、キャラを常に画面中央に置く）。方位は `down` = キャラの正面（Mixamo の +Z 前方をカメラが見る）、以降時計回りに 45° ずつ。
       - 正射影、`ortho_scale = 身長 × 1.15`（身長は rest pose の HeadTop_End − 足元。全フレーム共通で固定し、フレーム間でスケールが変わらないようにする）。
       - 関節: 以下の対応で 3D 点を取り、`bpy_extras.object_utils.world_to_camera_view` で (x, y) ∈ [0,1]² にし、`y` を反転（画像座標）。
         | openpose | Mixamo |
@@ -121,7 +122,7 @@ export const FLIP: Record<GenDir, [Dir8, Dir8?]> = {
         | nose | `Head` の local 空間で前 0.10 m、上 0.05 m |
         | reye / leye | 同 前 0.09 m、上 0.08 m、左右 ∓0.03 m |
         | rear / lear | 同 前 0.0 m、上 0.07 m、左右 ∓0.07 m |
-        オフセットは Y Bot の頭のサイズ（約 0.2 m）に合わせた定数。Head の前方向とカメラ方向の内積が負（後ろ向き）なら nose / reye / leye を `visible: false`、同様に片耳が頭で隠れる向き（内積の符号で判定）はその耳を `visible: false`。
+        オフセットは Y Bot の頭のサイズ（約 0.2 m）に合わせた定数。Head の前方向とカメラ方向の内積が −0.3（`FACE_HIDE_DOT`）未満なら後ろ向きとみなし nose / eyes を `visible: false`。真横（Head の左方向とカメラ方向の内積の絶対値が 0.8 超、`EAR_HIDE_DOT`）では遠い側の eye と ear も `visible: false`。
       - JSON: `{ "<joint>": { "x": 0.5, "y": 0.3, "visible": true }, ... }` を `<out>/<id>/<dir>/<k>.json` に書く。
       - Depth: Workbench レンダ、`view_layer.use_pass_z = True`、compositor で `Render Layers.Depth → Map Range (From カメラ距離 ±0.8 m → To 1..0, clamp) → Group Output`。近い面ほど白、背景（無限遠）は黒。`<out>/<id>/<dir>/<k>.depth.png`（512²、グレースケール PNG）。カメラ距離を基準にした固定レンジなので、フレーム間・方向間で絶対深度が揃う。
 4. 件数を stdout に出して終了。FBX が無ければ最初に列挙して exit 1。
@@ -176,3 +177,4 @@ export const FLIP: Record<GenDir, [Dir8, Dir8?]> = {
 - Depth は Map Range（カメラ距離 ±0.8 m 固定、clamp）。フレーム間・方向間で絶対深度が揃う。
 - Blender は通常インストール版 5.2.1（`C:\Program Files\Blender Foundation\Blender 5.2\blender.exe`）。`px poses` は `--blender` → `BLENDER` → PATH → `C:\Program Files\Blender Foundation\Blender *` の順で探す。MS Store 版は exe が ACL で起動できず launcher も stdout を返さないので非対応。
 - 実装時の変更: `frameTimes` の TS 複製は作らず Python 側の assert 自己チェックのみ。
+- 実装時の変更: 全 clip が world −Y を向いている前提は誤りだった（`crouched sneaking right.fbx` は逆向き）。骨盤の左右ベクトルから初期向きを求め、方位に加算して補正するようにした（`base_yaw`、clip ごとに 1 回のみ計算）。
