@@ -1,12 +1,13 @@
 // src/stages/pixelate.ts
 /**
- * `px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb] [--motion m]`
+ * `px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb]`
  *
  * out/sprites -> out/px: remove the grey backdrop, pin feet, scale every frame
  * of the character by the same factor (measured across all motions and
- * directions, even those not selected by --motion), box-filter down, snap to
- * the palette, and mirror the side-ish directions into their left-facing
- * twins.
+ * directions), box-filter down, snap to the palette, and mirror the side-ish
+ * directions into their left-facing twins. Always processes every motion, so
+ * a single scale factor — and, with `--palette auto`, a single palette — stay
+ * consistent across the whole character, even on a partial re-run.
  */
 
 import { readdir } from "node:fs/promises";
@@ -31,7 +32,7 @@ import {
 } from "../lib/pixelate";
 import { DIRS5, FLIP, MOTIONS, type Dir5, type Dir8 } from "../motions";
 
-const VALUE_FLAGS = new Set(["--size", "--palette", "--bg-tolerance", "--bg", "--motion"]);
+const VALUE_FLAGS = new Set(["--size", "--palette", "--bg-tolerance", "--bg"]);
 
 export const pxPath = (char: string, motion: string, dir: Dir8, frame: number): string =>
   join(OUT_DIR, "px", char, motion, dir, `${frame}.png`);
@@ -48,7 +49,7 @@ export async function run(argv: string[]): Promise<void> {
   const name = positional(argv, VALUE_FLAGS);
   if (!name) {
     console.error(
-      `usage: bun run px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb] [--motion m]`,
+      `usage: bun run px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb]`,
     );
     process.exit(1);
   }
@@ -60,7 +61,15 @@ export async function run(argv: string[]): Promise<void> {
   const size = Number(flag(argv, "size") ?? 64);
   const paletteName = flag(argv, "palette") ?? "apoc";
   const tolerance = Number(flag(argv, "bg-tolerance") ?? 40);
-  const fixed = paletteName === "auto" ? undefined : await loadPalette(paletteName);
+  let fixed: Rgb[] | undefined;
+  if (paletteName !== "auto") {
+    try {
+      fixed = await loadPalette(paletteName);
+    } catch (e) {
+      console.error((e as Error).message);
+      process.exit(1);
+    }
+  }
   const bgFlag = flag(argv, "bg");
   let bg: Rgb | undefined;
   if (bgFlag !== undefined) {
@@ -72,17 +81,13 @@ export async function run(argv: string[]): Promise<void> {
     const v = parseInt(m[1]!, 16);
     bg = [(v >> 16) & 255, (v >> 8) & 255, v & 255];
   }
-  const motionFlag = flag(argv, "motion");
-  const selectedIds = new Set(
-    (motionFlag ? MOTIONS.filter((m) => m.id === motionFlag) : MOTIONS).map((m) => m.id),
-  );
 
   const srcRoot = join(OUT_DIR, "sprites", char.name);
 
-  // Pass 1: cut out every frame of EVERY motion (not just the one --motion
-  // selects), so the scale factor below is one number for the whole
-  // character run — a crouching motion or a profile view must come out the
-  // same size as a standing front view, not its own size per group.
+  // Pass 1: cut out every frame of every motion, so the scale factor below is
+  // one number for the whole character run — a crouching motion or a profile
+  // view must come out the same size as a standing front view, not its own
+  // size per group.
   const cut: {
     motion: string;
     dir: Dir5;
@@ -91,43 +96,64 @@ export async function run(argv: string[]): Promise<void> {
     box: ReturnType<typeof bbox>;
   }[] = [];
   let missing = 0;
+  let blank = 0;
   for (const m of MOTIONS)
     for (const dir of DIRS5)
       for (let i = 0; i < m.frames; i++) {
         const src = await latestRender(join(srcRoot, m.id, dir), i);
         if (!src) {
-          if (selectedIds.has(m.id)) missing++;
+          missing++;
           continue;
         }
         const raw = await readRgba(src);
         const img = removeBackground(raw, bg ?? cornerKey(raw), tolerance);
-        cut.push({ motion: m.id, dir, frame: i, img, box: bbox(img) });
+        const box = bbox(img);
+        if (!box) blank++;
+        cut.push({ motion: m.id, dir, frame: i, img, box });
       }
 
   const tallest = Math.max(0, ...cut.map((c) => (c.box ? c.box.y1 - c.box.y0 : 0)));
+  const widest = Math.max(0, ...cut.map((c) => (c.box ? c.box.x1 - c.box.x0 : 0)));
   if (!tallest) {
-    console.error(
-      `${missing} frames had no render in out/sprites/${char.name}/ — run  bun run px sprites ${char.name}`,
-    );
+    if (blank) {
+      console.error(
+        `${blank} frames were fully transparent after background removal — check --bg / --bg-tolerance`,
+      );
+    } else {
+      console.error(
+        `${missing} frames had no render in out/sprites/${char.name}/ — run  bun run px sprites ${char.name}`,
+      );
+    }
     process.exitCode = 1;
     return;
   }
   // Leave 4% headroom on the working canvas; one scale for the whole character.
   const work = 512;
-  const scale = (work * 0.96) / tallest;
+  const scale = Math.min((work * 0.96) / tallest, (work * 0.96) / widest);
 
-  // Pass 2: place, downscale, quantize, write + mirror — selected motions only.
+  // Pass 2: place + downscale every frame first, so `--palette auto` builds
+  // ONE palette for the whole character before any frame is quantized.
+  const placed = cut
+    .filter((c) => c.box !== undefined)
+    .map((c) => ({ ...c, small: boxDownscale(placeOnSquare(c.img, c.box!, work, scale), size) }));
+
+  let pal: Rgb[];
+  if (fixed) {
+    pal = fixed;
+  } else {
+    const count = placed.length;
+    const combined: Rgba = {
+      width: size,
+      height: size * count,
+      data: new Uint8Array(size * size * count * 4),
+    };
+    placed.forEach((p, i) => combined.data.set(p.small.data, i * size * size * 4));
+    pal = medianCut(combined, 16);
+  }
+
   let written = 0;
-  for (const c of cut) {
-    if (!selectedIds.has(c.motion)) continue;
-    if (!c.box) {
-      missing++;
-      continue;
-    }
-    const placed = placeOnSquare(c.img, c.box, work, scale);
-    const small = boxDownscale(placed, size);
-    const pal = fixed ?? medianCut(small, 16);
-    const final = quantize(small, pal);
+  for (const c of placed) {
+    const final = quantize(c.small, pal);
     const [main, mirror] = FLIP[c.dir];
     for (const [d8, img] of [
       [main, final],
@@ -144,6 +170,12 @@ export async function run(argv: string[]): Promise<void> {
   if (missing) {
     console.error(
       `${missing} frames had no render in out/sprites/${char.name}/ — run  bun run px sprites ${char.name}`,
+    );
+    process.exitCode = 1;
+  }
+  if (blank) {
+    console.error(
+      `${blank} frames were fully transparent after background removal — check --bg / --bg-tolerance`,
     );
     process.exitCode = 1;
   }
