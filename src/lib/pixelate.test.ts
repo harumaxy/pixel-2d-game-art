@@ -2,11 +2,15 @@ import { describe, expect, test } from "bun:test";
 import {
   bbox,
   boxDownscale,
+  contrastDownscale,
   cornerKey,
+  despeckle,
   hasAlpha,
   hflip,
   medianCut,
   luminanceRange,
+  oklab,
+  outline,
   placeOnSquare,
   stretchLevels,
   unionBox,
@@ -210,4 +214,95 @@ test("hflip mirrors x", () => {
 test("cornerKey takes the corner colour, ignoring one odd corner", () => {
   const i = img(4, 4, [200, 190, 180, 255], [{ x: 0, y: 0, w: 1, h: 1, c: [0, 0, 0, 255] }]);
   expect(cornerKey(i)).toEqual([200, 190, 180]);
+});
+
+describe("contrastDownscale", () => {
+  const KHAKI = [150, 140, 100, 255];
+  test("a thin dark line keeps its cell dark where the box mean would wash it out", () => {
+    // 16x16 khaki with a 2px dark belt across rows 6-7: cells (y=0) cover rows 0-7
+    const i = img(16, 16, KHAKI, [{ x: 0, y: 6, w: 16, h: 2, c: [30, 25, 20, 255] }]);
+    const c = contrastDownscale(i, 2);
+    const b = boxDownscale(i, 2);
+    expect(px(c, 0, 0)[0]).toBeLessThan(60);
+    expect(px(b, 0, 0)[0]).toBeGreaterThan(100);
+    expect(px(c, 0, 1)).toEqual(KHAKI); // no line in the lower cells
+  });
+  test("half-cover alpha rule matches boxDownscale", () => {
+    // rows 0-5 clear: the top cells are empty, the bottom cells are exactly half covered
+    const i = img(8, 8, KHAKI, [{ x: 0, y: 0, w: 8, h: 6, c: [0, 0, 0, 0] }]);
+    const c = contrastDownscale(i, 2);
+    expect(px(c, 0, 0)[3]).toBe(0);
+    expect(px(c, 0, 1)).toEqual(KHAKI);
+  });
+});
+
+test("oklab: black, white and a grey are on the L axis, red is not", () => {
+  expect(oklab(0, 0, 0)[0]).toBeCloseTo(0, 3);
+  expect(oklab(255, 255, 255)[0]).toBeCloseTo(1, 3);
+  const g = oklab(128, 128, 128);
+  expect(Math.abs(g[1]) + Math.abs(g[2])).toBeLessThan(0.001);
+  expect(oklab(255, 0, 0)[1]).toBeGreaterThan(0.2);
+});
+
+test("quantize picks the perceptually nearest palette entry", () => {
+  // dark brown vs dark grey: RGB distance would tie-ish, Oklab keeps the hue
+  const pal: [number, number, number][] = [
+    [58, 58, 58],
+    [74, 64, 56],
+  ];
+  const i = img(1, 1, [70, 58, 48, 255]);
+  expect(px(quantize(i, pal), 0, 0)).toEqual([74, 64, 56, 255]);
+});
+
+describe("despeckle", () => {
+  test("drops a crumb blob and recolours a lone odd pixel", () => {
+    const RED = [255, 0, 0, 255],
+      BLUE = [0, 0, 255, 255];
+    const i = img(
+      8,
+      8,
+      [0, 0, 0, 0],
+      [
+        { x: 1, y: 1, w: 3, h: 3, c: RED },
+        { x: 2, y: 2, w: 1, h: 1, c: BLUE }, // blue speck inside red
+        { x: 5, y: 5, w: 3, h: 1, c: BLUE }, // 3px crumb, off the body
+      ],
+    );
+    const o = despeckle(i);
+    expect(px(o, 2, 2)).toEqual(RED);
+    expect(px(o, 6, 5)[3]).toBe(0);
+    expect(px(o, 1, 1)).toEqual(RED);
+  });
+  test("keeps a blob of CRUMB pixels", () => {
+    const i = img(8, 8, [0, 0, 0, 0], [{ x: 1, y: 1, w: 4, h: 1, c: [1, 2, 3, 255] }]);
+    expect(px(despeckle(i), 4, 1)[3]).toBe(255);
+  });
+  test("leaves a 2px run of its own colour alone when it is part of the body", () => {
+    const i = img(
+      6,
+      6,
+      [0, 0, 0, 0],
+      [
+        { x: 0, y: 0, w: 6, h: 6, c: [9, 9, 9, 255] },
+        { x: 1, y: 1, w: 2, h: 1, c: [1, 2, 3, 255] },
+      ],
+    );
+    expect(px(despeckle(i), 1, 1)).toEqual([1, 2, 3, 255]);
+  });
+});
+
+test("outline paints the 4-neighbourhood of the opaque area", () => {
+  const i = img(5, 5, [0, 0, 0, 0], [{ x: 2, y: 2, w: 1, h: 1, c: [9, 9, 9, 255] }]);
+  const o = outline(i, [1, 1, 1]);
+  expect(px(o, 2, 1)).toEqual([1, 1, 1, 255]);
+  expect(px(o, 1, 2)).toEqual([1, 1, 1, 255]);
+  expect(px(o, 1, 1)[3]).toBe(0); // diagonal untouched
+  expect(px(o, 2, 2)).toEqual([9, 9, 9, 255]);
+});
+
+test("placeOnSquare leaves `bottom` rows clear", () => {
+  const i = img(4, 4, [1, 2, 3, 255]);
+  const o = placeOnSquare(i, { x0: 0, y0: 0, x1: 4, y1: 4 }, 8, 1, 2);
+  expect(px(o, 4, 5)[3]).toBe(255);
+  expect(px(o, 4, 6)[3]).toBe(0);
 });

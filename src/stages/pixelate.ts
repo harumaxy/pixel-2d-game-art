@@ -1,12 +1,15 @@
 // src/stages/pixelate.ts
 /**
- * `px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb]`
+ * `px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb]
+ *                     [--render NNNNN] [--only walk,run] [--no-contrast] [--box] [--outline]`
  *
  * out/gen/sprites -> out/px: remove the grey backdrop (unless the render is
  * already matted RGBA from `px sprites`, whose alpha is trusted), pin feet, scale every frame
  * of the character by the same factor (measured across all motions and
- * directions), box-filter down, snap to the palette, and mirror the side-ish
- * directions into their left-facing twins. Always processes every motion, so
+ * directions), downscale contrast-aware (--box: plain box mean), stretch the
+ * levels, snap to the palette in Oklab, despeckle, and mirror the side-ish
+ * directions into their left-facing twins. --outline draws the palette's
+ * darkest colour around the sprite. Always processes every motion, so
  * a single scale factor — and, with `--palette auto`, a single palette — stay
  * consistent across the whole character, even on a partial re-run.
  */
@@ -19,12 +22,16 @@ import { GEN_DIR, OUT_DIR } from "../lib/paths";
 import {
   bbox,
   boxDownscale,
+  contrastDownscale,
   cornerKey,
+  despeckle,
   hasAlpha,
   hflip,
   loadPalette,
   luminanceRange,
   medianCut,
+  oklab,
+  outline,
   placeOnSquare,
   quantize,
   readRgba,
@@ -46,8 +53,8 @@ const VALUE_FLAGS = new Set([
   "--render",
   "--only",
 ]);
-/** Levels: the 2nd..98th luminance percentiles of the character land here (fractions of 255). --no-contrast skips it. */
-const STRETCH = { lo: 0.02, hi: 0.98, outLo: 0.08, outHi: 0.92 };
+/** Levels: the 2nd..98th luminance percentiles of the character land here (fractions of 255); 0.85 keeps a pale hood off white. --no-contrast skips it. */
+const STRETCH = { lo: 0.02, hi: 0.98, outLo: 0.08, outHi: 0.85 };
 
 export const pxPath = (char: string, motion: string, dir: Dir8, frame: number): string =>
   join(OUT_DIR, "px", char, motion, dir, `${frame}.png`);
@@ -68,7 +75,7 @@ export async function run(argv: string[]): Promise<void> {
   const name = positional(argv, VALUE_FLAGS);
   if (!name) {
     console.error(
-      `usage: bun run px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb] [--render 00013] [--only walk,run] [--no-contrast]`,
+      `usage: bun run px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb] [--render 00013] [--only walk,run] [--no-contrast] [--box] [--outline]`,
     );
     process.exit(1);
   }
@@ -168,14 +175,21 @@ export async function run(argv: string[]): Promise<void> {
     return;
   }
   // Leave 4% headroom on the working canvas; one scale for the whole character.
+  // An outline needs one sprite pixel clear below the feet too.
   const work = 512;
-  const scale = Math.min((work * 0.96) / tallest, (work * 0.96) / widest);
+  const withOutline = argv.includes("--outline");
+  const bottom = withOutline ? work / size : 0;
+  const scale = Math.min((work * 0.96 - bottom) / tallest, (work * 0.96) / widest);
+  const downscale = argv.includes("--box") ? boxDownscale : contrastDownscale;
 
   // Pass 2: place + downscale every frame first, so `--palette auto` builds
   // ONE palette for the whole character before any frame is quantized.
   let placed = cut
     .filter((c) => c.box !== undefined)
-    .map((c) => ({ ...c, small: boxDownscale(placeOnSquare(c.img, crop, work, scale), size) }));
+    .map((c) => ({
+      ...c,
+      small: downscale(placeOnSquare(c.img, crop, work, scale, bottom), size),
+    }));
 
   // A smooth render is dark and low-contrast at 64px; without this most of
   // it quantizes onto the palette's darkest entries. One range for all frames.
@@ -205,9 +219,12 @@ export async function run(argv: string[]): Promise<void> {
     pal = medianCut(combined, 16);
   }
 
+  // Outline in the palette's darkest colour.
+  const darkest = pal.reduce((a, b) => (oklab(...b)[0] < oklab(...a)[0] ? b : a));
   let written = 0;
   for (const c of placed) {
-    const final = quantize(c.small, pal);
+    let final = despeckle(quantize(c.small, pal));
+    if (withOutline) final = outline(final, darkest);
     const [main, mirror] = FLIP[c.dir];
     for (const [d8, img] of [
       [main, final],

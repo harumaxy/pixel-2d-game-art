@@ -157,15 +157,23 @@ export function bbox(img: Rgba): Box | undefined {
 
 /**
  * Copy `box` out of `img` onto a `canvas`×`canvas` transparent square, scaled
- * by `scale` (nearest), with the box's bottom-centre pinned to the canvas's
- * bottom-centre. Frames of one motion share one `scale`, so feet stay put.
+ * by `scale` (nearest), with the box's bottom-centre pinned `bottom` rows
+ * above the canvas's bottom-centre. Frames of one motion share one `scale`,
+ * so feet stay put.
  */
-export function placeOnSquare(img: Rgba, box: Box, canvas: number, scale: number): Rgba {
+export function placeOnSquare(
+  img: Rgba,
+  box: Box,
+  canvas: number,
+  scale: number,
+  bottom = 0,
+): Rgba {
   const out = blank(canvas, canvas);
   const bw = Math.round((box.x1 - box.x0) * scale);
   const bh = Math.round((box.y1 - box.y0) * scale);
   const ox = Math.round(canvas / 2 - bw / 2);
-  const oy = canvas - bh;
+  // `bottom` rows are left clear under the feet (room for an outline).
+  const oy = canvas - bottom - bh;
   for (let y = 0; y < bh; y++) {
     const sy = box.y0 + Math.floor(y / scale);
     const dy = oy + y;
@@ -227,6 +235,72 @@ export function boxDownscale(img: Rgba, size: number): Rgba {
 
 const luma = (r: number, g: number, b: number) => 0.299 * r + 0.587 * g + 0.114 * b;
 
+/** Quantiles of a cell's luminance that stand in for its min / max (an outlier-safe extremum). */
+const EDGE_Q = 0.15;
+/** The dark (or bright) side has to reach this much further from the mean than the other to win the cell. */
+const EDGE_BIAS = 2.5;
+
+/**
+ * Contrast-aware downscale of a square image to `size`: a cell's colour is
+ * not the mean of what it covers but the side of its luminance spread that
+ * sticks out — a belt or a strap that is a thin dark line on a lighter coat
+ * keeps the cell dark, where a box mean melts it into the coat. A cell with
+ * no strong tail takes its median band. Alpha is the same half-cover rule as
+ * boxDownscale. ponytail: PixelOE does this with an outline-expansion pass
+ * first; add one if thin bright highlights still vanish.
+ */
+export function contrastDownscale(img: Rgba, size: number): Rgba {
+  const out = blank(size, size);
+  const fx = img.width / size,
+    fy = img.height / size;
+  for (let y = 0; y < size; y++)
+    for (let x = 0; x < size; x++) {
+      const x0 = Math.floor(x * fx),
+        x1 = Math.max(x0 + 1, Math.floor((x + 1) * fx));
+      const y0 = Math.floor(y * fy),
+        y1 = Math.max(y0 + 1, Math.floor((y + 1) * fy));
+      const cell: { o: number; l: number }[] = [];
+      let a = 0,
+        n = 0;
+      for (let sy = y0; sy < y1; sy++)
+        for (let sx = x0; sx < x1; sx++) {
+          const o = (sy * img.width + sx) * 4;
+          const al = img.data[o + 3]!;
+          a += al;
+          n++;
+          if (al >= 128)
+            cell.push({ o, l: luma(img.data[o]!, img.data[o + 1]!, img.data[o + 2]!) });
+        }
+      if (!cell.length || a < n * 127.5) continue;
+      cell.sort((p, q) => p.l - q.l);
+      const at = (q: number) => cell[Math.min(cell.length - 1, Math.floor(q * cell.length))]!.l;
+      const mean = cell.reduce((s, p) => s + p.l, 0) / cell.length;
+      const dark = mean - at(EDGE_Q),
+        bright = at(1 - EDGE_Q) - mean;
+      // The band of pixels averaged for the cell's colour.
+      const [lo, hi] =
+        dark > bright * EDGE_BIAS ? [0, 0.3] : bright > dark * EDGE_BIAS ? [0.7, 1] : [0.25, 0.75];
+      const from = Math.floor(lo * cell.length),
+        to = Math.max(from + 1, Math.ceil(hi * cell.length));
+      let r = 0,
+        g = 0,
+        b = 0;
+      for (let i = from; i < to; i++) {
+        const o = cell[i]!.o;
+        r += img.data[o]!;
+        g += img.data[o + 1]!;
+        b += img.data[o + 2]!;
+      }
+      const d = (y * size + x) * 4;
+      const k = to - from;
+      out.data[d] = Math.round(r / k);
+      out.data[d + 1] = Math.round(g / k);
+      out.data[d + 2] = Math.round(b / k);
+      out.data[d + 3] = 255;
+    }
+  return out;
+}
+
 /**
  * Luminance at the `lo`..`hi` quantiles (0..1) over the opaque pixels of all
  * the images together: one measurement for the whole character, so every
@@ -265,15 +339,40 @@ export function stretchLevels(
   return out;
 }
 
+/** sRGB 0..255 -> Oklab (L, a, b): euclidean distance here tracks what the eye calls "close". */
+export function oklab(r: number, g: number, b: number): [number, number, number] {
+  const lin = (c: number) => {
+    const v = c / 255;
+    return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+  };
+  const [rl, gl, bl] = [lin(r), lin(g), lin(b)];
+  const l = Math.cbrt(0.4122214708 * rl + 0.5363325363 * gl + 0.0514459929 * bl);
+  const m = Math.cbrt(0.2119034982 * rl + 0.6806995451 * gl + 0.1073969566 * bl);
+  const s = Math.cbrt(0.0883024619 * rl + 0.2817188376 * gl + 0.6299787005 * bl);
+  return [
+    0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s,
+    1.9779984951 * l - 2.428592205 * m + 0.4505937099 * s,
+    0.0259040371 * l + 0.7827717662 * m - 0.808675766 * s,
+  ];
+}
+
+/**
+ * Snap every opaque pixel to its nearest palette entry, measured in Oklab: RGB
+ * distance lets a dark brown fall onto a dark grey and a khaki onto a pink
+ * because the numbers are close, where the eye sees a hue change.
+ */
 export function quantize(img: Rgba, palette: Rgb[]): Rgba {
   const out = { ...img, data: new Uint8Array(img.data) };
+  const lab = palette.map((c) => oklab(c[0], c[1], c[2]));
   for (let i = 0; i < img.width * img.height; i++) {
     const o = i * 4;
     if (out.data[o + 3] === 0) continue;
+    const [L, A, B] = oklab(out.data[o]!, out.data[o + 1]!, out.data[o + 2]!);
     let best = 0,
       bd = Infinity;
-    for (let p = 0; p < palette.length; p++) {
-      const d = dist2(palette[p]!, out.data[o]!, out.data[o + 1]!, out.data[o + 2]!);
+    for (let p = 0; p < lab.length; p++) {
+      const [l, a, b] = lab[p]!;
+      const d = (l - L) ** 2 + (a - A) ** 2 + (b - B) ** 2;
       if (d < bd) {
         bd = d;
         best = p;
@@ -284,6 +383,79 @@ export function quantize(img: Rgba, palette: Rgb[]): Rgba {
     out.data[o + 1] = c[1];
     out.data[o + 2] = c[2];
   }
+  return out;
+}
+
+/** Opaque 4-connected blobs smaller than this are matte crumbs, not character. */
+const CRUMB = 4;
+
+/**
+ * One pass of pixel-art hygiene on a quantized sprite: an opaque blob of
+ * fewer than CRUMB pixels is a matte crumb (a wall stain the matte kept) and
+ * goes transparent; a pixel whose 4-neighbours all differ from it takes
+ * their commonest colour. Reads the input, writes a copy, so the pass is
+ * order-independent.
+ */
+export function despeckle(img: Rgba): Rgba {
+  const { width: w, height: h } = img;
+  const out = { ...img, data: new Uint8Array(img.data) };
+  const key = (o: number) => (img.data[o]! << 16) | (img.data[o + 1]! << 8) | img.data[o + 2]!;
+  const neighbours = (i: number) => {
+    const x = i % w,
+      y = (i - x) / w;
+    return [
+      x > 0 ? i - 1 : -1,
+      x < w - 1 ? i + 1 : -1,
+      y > 0 ? i - w : -1,
+      y < h - 1 ? i + w : -1,
+    ].filter((j) => j >= 0 && img.data[j * 4 + 3]! > 0);
+  };
+  // Flood each opaque blob; clear the small ones.
+  const seen = new Uint8Array(w * h);
+  for (let s = 0; s < w * h; s++) {
+    if (seen[s] || img.data[s * 4 + 3] === 0) continue;
+    const blob = [s];
+    seen[s] = 1;
+    for (let k = 0; k < blob.length; k++)
+      for (const j of neighbours(blob[k]!))
+        if (!seen[j]) {
+          seen[j] = 1;
+          blob.push(j);
+        }
+    if (blob.length < CRUMB) for (const i of blob) out.data[i * 4 + 3] = 0;
+  }
+  for (let i = 0; i < w * h; i++) {
+    const o = i * 4;
+    if (out.data[o + 3] === 0) continue;
+    const around = neighbours(i).map((j) => j * 4);
+    if (!around.length) continue;
+    const me = key(o);
+    if (around.some((p) => key(p) === me)) continue;
+    const votes = new Map<number, number>();
+    let top = around[0]!;
+    for (const p of around) {
+      const v = (votes.get(key(p)) ?? 0) + 1;
+      votes.set(key(p), v);
+      if (v > (votes.get(key(top)) ?? 0)) top = p;
+    }
+    out.data.set(img.data.subarray(top, top + 3), o);
+  }
+  return out;
+}
+
+/** Paint `colour` on every transparent pixel that 4-touches an opaque one: a 1px outline. */
+export function outline(img: Rgba, colour: Rgb): Rgba {
+  const { width: w, height: h } = img;
+  const out = { ...img, data: new Uint8Array(img.data) };
+  const opaque = (x: number, y: number) =>
+    x >= 0 && x < w && y >= 0 && y < h && img.data[(y * w + x) * 4 + 3]! > 0;
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
+      const o = (y * w + x) * 4;
+      if (img.data[o + 3] !== 0) continue;
+      if (opaque(x - 1, y) || opaque(x + 1, y) || opaque(x, y - 1) || opaque(x, y + 1))
+        out.data.set([...colour, 255], o);
+    }
   return out;
 }
 
