@@ -264,18 +264,22 @@ def main():
     log(f"blender {bpy.app.version_string}, rig {opts['rig']} height {height:.2f} m, {len(motions)} motions, elev {elev}")
 
     written = 0
+    # Actions per library FBX, imported once: a second import would rename them (.001).
+    libraries = {RIG["base"]: base_actions}
     for m in motions:
-        if "action" in m and m["fbx"] == RIG["base"]:
-            # Clip lives in the base file, e.g. "Armature|Armature|Walk_Loop".
-            action = next(a for a in base_actions if a.name.split("|")[-1] == m["action"])
+        if "action" in m:
+            if m["fbx"] not in libraries:
+                before = set(bpy.data.actions)
+                _, new = import_armature(os.path.join(fbx_dir, m["fbx"]))
+                libraries[m["fbx"]] = [a for a in bpy.data.actions if a not in before]
+                for o in new:
+                    bpy.data.objects.remove(o, do_unlink=True)
+            # e.g. "Armature|Armature|Walk_Loop".
+            action = next(a for a in libraries[m["fbx"]] if a.name.split("|")[-1] == m["action"])
         else:
-            # Own file: one Mixamo clip, or another same-rig library (UAL2) picked by action name.
-            before = set(bpy.data.actions)
+            # Own file: one Mixamo clip.
             anim, new = import_armature(os.path.join(fbx_dir, m["fbx"]))
-            if "action" in m:
-                action = next(a for a in bpy.data.actions if a not in before and a.name.split("|")[-1] == m["action"])
-            else:
-                action = anim.animation_data.action
+            action = anim.animation_data.action
             for o in new:
                 bpy.data.objects.remove(o, do_unlink=True)
         rig.animation_data.action = action
