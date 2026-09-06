@@ -1,6 +1,6 @@
-# mixamo/
+# motions/mixamo/
 
-`px poses` が読む Mixamo の FBX。git には入れない（`mixamo/*.fbx` は ignore）。
+`px poses` が読む Mixamo の FBX。git には入れない（`motions/**/*.fbx` は ignore）。
 
 入手: https://www.mixamo.com/ で Character = **Y Bot** を選び、
 - `Y Bot.fbx`: Character を Format FBX Binary, Pose T-pose でダウンロード

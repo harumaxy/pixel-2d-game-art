@@ -12,7 +12,7 @@ SD1.5 + openpose / depth ControlNet（Mixamo の骨格を Blender で書き出�
 - モデル: `SD1.5\realisticVisionV60B1_v51VAE`（sprites 既定。滑らかな fine-tune の方が ControlNet のポーズ追従が安定し、ピクセル化は pixelate 側で行う）, `control_v11p_sd15_openpose_fp16`, `control_v11f1p_sd15_depth_fp16`, `ip-adapter-plus_sd15` + `CLIP-ViT-H-14`, AnimateDiff v3 `v3_sd15_mm.ckpt` + `v3_sd15_adapter.ckpt`（`animatediff_models/` と `loras/`）, RMBG-2.0 / BiRefNet ToonOut（comfyui-rmbg が自動 DL）, Qwen-Image-Edit 2511 (GGUF Q5) + Lightning LoRA
 - LoRA 学習用に ai-toolkit（別途 checkout。`px dataset` が出力する `train.yaml` を `python run.py` に渡す）
 - Blender 5.0 以上（5.2 LTS で検証）の通常インストール版（MS Store 版は不可。PATH か `C:\Program Files\Blender Foundation\` から自動で見つける。別の場所なら `--blender <exe>` か環境変数 `BLENDER`）
-- `mixamo/` に Y Bot と Action Adventure Pack の FBX（`mixamo/README.md` 参照）
+- `motions/mixamo/` に Y Bot と Action Adventure Pack の FBX（`motions/mixamo/README.md` 参照）
 
 ## セットアップ
 

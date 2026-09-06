@@ -67,10 +67,22 @@ export const FLIP: Record<GenDir, [Dir8, Dir8?]> = {
  */
 export const HINT_STEP = 2;
 
+/**
+ * Where a clip's FBX lives (motions/<source>/) and which rig it drives.
+ * mixamo: one Mixamo clip per file, applied to Y Bot. quaternius: the
+ * Universal Animation Library (CC0), one FBX holding mesh + every action.
+ */
+export const SOURCES = ["mixamo", "quaternius"] as const;
+export type Source = (typeof SOURCES)[number];
+
 export interface Motion {
   id: string;
-  /** File name under mixamo/. */
+  /** Default mixamo. */
+  source?: Source;
+  /** File name under motions/<source>/. */
   fbx: string;
+  /** quaternius only: action name inside the FBX (e.g. Walk_Loop, Jog_Fwd_Loop, Jump_Start, Crouch_Fwd_Loop). */
+  action?: string;
   frames: number;
   /** true: the last frame stops just before the clip wraps (walk cycles). false: the last frame is the clip's end (jump). */
   loop: boolean;
@@ -82,7 +94,16 @@ export interface Motion {
 
 /** Sheet row order. */
 export const MOTIONS: Motion[] = [
-  { id: "idle", fbx: "idle.fbx", frames: 4, loop: true, fps: 4, prompt: "standing idle" },
+  {
+    id: "idle",
+    source: "quaternius",
+    fbx: "UAL1_Standard.fbx",
+    action: "Idle_Loop",
+    frames: 4,
+    loop: true,
+    fps: 4,
+    prompt: "standing idle",
+  },
   { id: "walk", fbx: "walking.fbx", frames: 8, loop: true, fps: 8, prompt: "walking" },
   { id: "run", fbx: "running.fbx", frames: 8, loop: true, fps: 10, prompt: "running" },
   { id: "jump", fbx: "jumping up.fbx", frames: 6, loop: false, fps: 8, prompt: "jumping up" },

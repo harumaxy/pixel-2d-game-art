@@ -1,7 +1,8 @@
 /**
  * `px poses [--only walk,run] [--size 512] [--elev 25] [--blender exe] [--skip-blender]`
  *
- * Character-independent; run once, rerun after editing MOTIONS or mixamo/.
+ * Character-independent; run once, rerun after editing MOTIONS or motions/.
+ * Blender runs once per clip source (Mixamo Y Bot, Quaternius mannequin).
  * Step 1 drives Blender (scripts/mixamo_poses.py) to write joint JSON + depth
  * PNGs for every motion x 8 directions x frames * HINT_STEP; step 2 draws the
  * openpose PNGs from the JSON. `--skip-blender` reruns only step 2.
@@ -11,11 +12,10 @@ import { dirname, join } from "node:path";
 import { ensureDir, flag } from "../lib/comfy";
 import { OUT_DIR, REPO_ROOT } from "../lib/paths";
 import { poseFromJson, renderPose } from "../lib/skeleton";
-import { DIRS8, HINT_STEP, MOTIONS, type Dir8 } from "../motions";
+import { DIRS8, HINT_STEP, MOTIONS, SOURCES, type Dir8, type Motion } from "../motions";
 
 const POSES_DIR = join(OUT_DIR, "poses");
 const SCRIPT = join(REPO_ROOT, "scripts", "mixamo_poses.py");
-const FBX_DIR = join(REPO_ROOT, "mixamo");
 
 export const posePath = (motion: string, dir: Dir8, frame: number): string =>
   join(POSES_DIR, motion, dir, `${frame}.png`);
@@ -56,49 +56,56 @@ export async function run(argv: string[]): Promise<void> {
   }
 
   if (!argv.includes("--skip-blender")) {
-    await ensureDir(POSES_DIR);
-    const motionsJson = join(POSES_DIR, "motions.json");
-    await Bun.write(
-      motionsJson,
-      JSON.stringify(
-        selected.map(({ id, fbx, frames, loop }) => ({
-          id,
-          fbx,
-          frames: frames * HINT_STEP,
-          loop,
-        })),
-      ),
-    );
     const exe = await findBlender(flag(argv, "blender"));
     if (!exe) {
       console.error(`blender not found — install it, pass --blender <exe>, or set BLENDER`);
       process.exit(1);
     }
-    console.log(`[poses] ${selected.map((m) => m.id).join(", ")} via ${exe} ...`);
-    const proc = Bun.spawn(
-      [
-        exe,
-        "--background",
-        "--python",
-        SCRIPT,
-        "--",
-        "--out",
-        POSES_DIR,
-        "--motions",
+    await ensureDir(POSES_DIR);
+    for (const source of SOURCES) {
+      const batch = selected.filter((m) => (m.source ?? "mixamo") === source);
+      if (!batch.length) continue;
+      const motionsJson = join(POSES_DIR, `motions.${source}.json`);
+      await Bun.write(
         motionsJson,
-        "--fbx-dir",
-        FBX_DIR,
-        "--size",
-        String(size),
-        "--elev",
-        String(elev),
-      ],
-      { stdout: "inherit", stderr: "inherit" },
-    );
-    const code = await proc.exited;
-    if (code !== 0) {
-      console.error(`[poses] blender exited ${code}`);
-      process.exit(1);
+        JSON.stringify(
+          batch.map(({ id, fbx, action, frames, loop }: Motion) => ({
+            id,
+            fbx,
+            ...(action ? { action } : {}),
+            frames: frames * HINT_STEP,
+            loop,
+          })),
+        ),
+      );
+      console.log(`[poses] ${source}: ${batch.map((m) => m.id).join(", ")} via ${exe} ...`);
+      const proc = Bun.spawn(
+        [
+          exe,
+          "--background",
+          "--python",
+          SCRIPT,
+          "--",
+          "--out",
+          POSES_DIR,
+          "--motions",
+          motionsJson,
+          "--fbx-dir",
+          join(REPO_ROOT, "motions", source),
+          "--rig",
+          source,
+          "--size",
+          String(size),
+          "--elev",
+          String(elev),
+        ],
+        { stdout: "inherit", stderr: "inherit" },
+      );
+      const code = await proc.exited;
+      if (code !== 0) {
+        console.error(`[poses] blender exited ${code}`);
+        process.exit(1);
+      }
     }
   }
 

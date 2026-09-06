@@ -3,8 +3,11 @@ Render openpose joints + depth maps for every motion / direction / frame from
 Mixamo FBX clips. Runs inside Blender:
 
   blender --background --python scripts/mixamo_poses.py -- \
-      --out out/poses --motions out/poses/motions.json --fbx-dir mixamo --size 512 --elev 25
+      --out out/poses --motions out/poses/motions.json --fbx-dir motions/mixamo \
+      [--rig mixamo|quaternius] --size 512 --elev 25
 
+A motion entry names either a per-clip FBX (Mixamo) or an "action" inside the
+rig's base FBX (Quaternius: one file holds mesh + every clip).
 Writes <out>/<id>/<dir>/<k>.json and <k>.depth.png. Progress goes to stdout.
 Blender exits 0 even on an uncaught exception, so main() is wrapped and exits
 1 on failure.
@@ -29,14 +32,36 @@ AZIMUTH = {"down": 0, "downright": 315, "right": 270, "upright": 225,
 CAM_DIST = 10.0
 DEPTH_RANGE = 0.8  # metres either side of the hips that map to white..black
 
-# openpose joint -> mixamorig bone whose head is the joint.
-BONES = {
-    "neck": "Neck",
-    "rsho": "RightArm", "relb": "RightForeArm", "rwri": "RightHand",
-    "lsho": "LeftArm", "lelb": "LeftForeArm", "lwri": "LeftHand",
-    "rhip": "RightUpLeg", "rkne": "RightLeg", "rank": "RightFoot",
-    "lhip": "LeftUpLeg", "lkne": "LeftLeg", "lank": "LeftFoot",
+# Per rig: the base FBX (mesh + skeleton), bone-name prefix, and the bone whose
+# head is each openpose joint. Both rigs' Head bones share the same axes
+# (x = character's left, y = up, z = forward), checked in Blender.
+RIGS = {
+    "mixamo": {
+        "base": "Y Bot.fbx",
+        "prefix": "mixamorig:",
+        "hips": "Hips", "lhip": "LeftUpLeg", "rhip": "RightUpLeg", "head": "Head",
+        "bones": {
+            "neck": "Neck",
+            "rsho": "RightArm", "relb": "RightForeArm", "rwri": "RightHand",
+            "lsho": "LeftArm", "lelb": "LeftForeArm", "lwri": "LeftHand",
+            "rhip": "RightUpLeg", "rkne": "RightLeg", "rank": "RightFoot",
+            "lhip": "LeftUpLeg", "lkne": "LeftLeg", "lank": "LeftFoot",
+        },
+    },
+    "quaternius": {
+        "base": "UAL1_Standard.fbx",
+        "prefix": "",
+        "hips": "pelvis", "lhip": "thigh_l", "rhip": "thigh_r", "head": "Head",
+        "bones": {
+            "neck": "neck_01",
+            "rsho": "upperarm_r", "relb": "lowerarm_r", "rwri": "hand_r",
+            "lsho": "upperarm_l", "lelb": "lowerarm_l", "lwri": "hand_l",
+            "rhip": "thigh_r", "rkne": "calf_r", "rank": "foot_r",
+            "lhip": "thigh_l", "lkne": "calf_l", "lank": "foot_l",
+        },
+    },
 }
+RIG = RIGS["mixamo"]  # set from --rig in main()
 # Face points as offsets in the Head bone's frame (x = character's left, y = up, z = forward), metres.
 HEAD_OFFSETS = {
     "nose": (0.0, 0.05, 0.10),
@@ -68,7 +93,7 @@ def self_check():
 
 def parse_args():
     argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
-    opts = {"size": "512", "elev": "25"}
+    opts = {"size": "512", "elev": "25", "rig": "mixamo"}
     key = None
     for a in argv:
         if a.startswith("--"):
@@ -80,6 +105,8 @@ def parse_args():
     for k in ("out", "motions", "fbx-dir"):
         if k not in opts or opts[k] is True:
             raise SystemExit(f"missing --{k}")
+    if opts["rig"] not in RIGS:
+        raise SystemExit(f"--rig must be one of {', '.join(RIGS)}")
     return opts
 
 
@@ -142,21 +169,25 @@ def place_camera(cam, target, az_deg, el_deg):
     return d
 
 
-def rest_height(rig):
+def rest_height(rig, objects):
+    """Standing height: bones plus any mesh (the Quaternius skeleton stops below the scalp)."""
     zs = []
     for b in rig.data.bones:
         zs.append((rig.matrix_world @ b.head_local).z)
         zs.append((rig.matrix_world @ b.tail_local).z)
+    for o in objects:
+        if o.type == "MESH":
+            zs.extend((o.matrix_world @ Vector(c)).z for c in o.bound_box)
     return max(zs) - min(zs)
 
 
 def joint_world(rig, name):
-    return rig.matrix_world @ rig.pose.bones["mixamorig:" + name].head
+    return rig.matrix_world @ rig.pose.bones[RIG["prefix"] + name].head
 
 
 def base_yaw(rig):
     """Degrees the character's facing deviates from world -Y, from the pelvis (left hip minus right hip)."""
-    left = joint_world(rig, "LeftUpLeg") - joint_world(rig, "RightUpLeg")
+    left = joint_world(rig, RIG["lhip"]) - joint_world(rig, RIG["rhip"])
     left.z = 0
     left.normalize()
     forward = left.cross(Vector((0, 0, 1)))  # left x up = forward (faces -Y for an unrotated Mixamo rig)
@@ -165,7 +196,7 @@ def base_yaw(rig):
 
 def head_frame(rig):
     """(origin, x, y, z) of the Head bone in world space, axes normalised (the rig is scaled 0.01)."""
-    m = rig.matrix_world @ rig.pose.bones["mixamorig:Head"].matrix
+    m = rig.matrix_world @ rig.pose.bones[RIG["prefix"] + RIG["head"]].matrix
     return (m.translation.copy(), m.col[0].xyz.normalized(), m.col[1].xyz.normalized(), m.col[2].xyz.normalized())
 
 
@@ -175,7 +206,7 @@ def pose_json(scene, cam, rig, cam_dir):
         return round(v.x, 4), round(1 - v.y, 4)
 
     pose = {}
-    for joint, bone in BONES.items():
+    for joint, bone in RIG["bones"].items():
         x, y = project(joint_world(rig, bone))
         pose[joint] = {"x": x, "y": y, "visible": True}
     origin, ax, ay, az = head_frame(rig)
@@ -202,44 +233,55 @@ def main():
     self_check()
     if bpy.app.version < (5, 0):
         sys.exit(f"mixamo_poses.py needs Blender 5.0+ (found {bpy.app.version_string})")
+    global RIG
     opts = parse_args()
+    RIG = RIGS[opts["rig"]]
     out_dir, fbx_dir = os.path.abspath(opts["out"]), os.path.abspath(opts["fbx-dir"])
     size, elev = int(opts["size"]), float(opts["elev"])
     os.makedirs(out_dir, exist_ok=True)
     with open(opts["motions"], encoding="utf-8") as f:
         motions = json.load(f)
 
-    missing = [m["fbx"] for m in motions if not os.path.exists(os.path.join(fbx_dir, m["fbx"]))]
-    ybot = os.path.join(fbx_dir, "Y Bot.fbx")
-    if not os.path.exists(ybot):
-        missing.append("Y Bot.fbx")
+    needed = {m["fbx"] for m in motions} | {RIG["base"]}
+    missing = sorted(f for f in needed if not os.path.exists(os.path.join(fbx_dir, f)))
     if missing:
         sys.stderr.write("missing in " + fbx_dir + ": " + ", ".join(missing) + "\n")
         sys.exit(1)
 
     scene = bpy.context.scene
     clear_scene()
-    rig, _ = import_armature(ybot)
+    rig, base_objects = import_armature(os.path.join(fbx_dir, RIG["base"]))
     rig.animation_data_create()
+    base_actions = list(bpy.data.actions)
     cam = setup_camera(scene, size)
     setup_depth_compositor(scene)
-    cam.data.ortho_scale = rest_height(rig) * 1.15
+    height = rest_height(rig, base_objects)
+    cam.data.ortho_scale = height * 1.15
     # The camera follows the hips across the ground but not up and down: a
     # crouch then sinks and a jump rises inside the frame, and the feet of a
     # walk stay on one line instead of the hips. Rest height = standing height.
-    ground_hips_z = (rig.matrix_world @ rig.data.bones["mixamorig:Hips"].head_local).z
-    log(f"blender {bpy.app.version_string}, rig height {rest_height(rig):.2f} m, {len(motions)} motions, elev {elev}")
+    ground_hips_z = (rig.matrix_world @ rig.data.bones[RIG["prefix"] + RIG["hips"]].head_local).z
+    log(f"blender {bpy.app.version_string}, rig {opts['rig']} height {height:.2f} m, {len(motions)} motions, elev {elev}")
 
     written = 0
     for m in motions:
-        anim, new = import_armature(os.path.join(fbx_dir, m["fbx"]))
-        action = anim.animation_data.action
+        if "action" in m and m["fbx"] == RIG["base"]:
+            # Clip lives in the base file, e.g. "Armature|Armature|Walk_Loop".
+            action = next(a for a in base_actions if a.name.split("|")[-1] == m["action"])
+        else:
+            # Own file: one Mixamo clip, or another same-rig library (UAL2) picked by action name.
+            before = set(bpy.data.actions)
+            anim, new = import_armature(os.path.join(fbx_dir, m["fbx"]))
+            if "action" in m:
+                action = next(a for a in bpy.data.actions if a not in before and a.name.split("|")[-1] == m["action"])
+            else:
+                action = anim.animation_data.action
+            for o in new:
+                bpy.data.objects.remove(o, do_unlink=True)
         rig.animation_data.action = action
-        for o in new:
-            bpy.data.objects.remove(o, do_unlink=True)
         start, end = action.frame_range
         times = frame_times(start, end, int(m["frames"]), bool(m["loop"]))
-        log(f"{m['id']}: {m['fbx']} frames {start:.0f}..{end:.0f} -> {[round(t, 1) for t in times]}")
+        log(f"{m['id']}: {m.get('action', m['fbx'])} frames {start:.0f}..{end:.0f} -> {[round(t, 1) for t in times]}")
         t0 = times[0]
         scene.frame_set(int(t0), subframe=t0 - int(t0))
         bpy.context.view_layer.update()
@@ -251,7 +293,7 @@ def main():
             for k, t in enumerate(times):
                 scene.frame_set(int(t), subframe=t - int(t))
                 bpy.context.view_layer.update()
-                hips = joint_world(rig, "Hips")
+                hips = joint_world(rig, RIG["hips"])
                 target = Vector((hips.x, hips.y, ground_hips_z))
                 cam_dir = place_camera(cam, target, AZIMUTH[d] + yaw, elev)
                 bpy.context.view_layer.update()

@@ -4,4 +4,4 @@ node_modules
 .env
 .scratch
 *.local.md
-mixamo/*.fbx
+motions/**/*.fbx
