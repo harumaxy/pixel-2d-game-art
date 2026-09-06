@@ -2,7 +2,8 @@
 /**
  * `px sprites <char> [--motion walk,run] [--dir down] [--seed n] [--strength 0.6] [--depth-strength 0.5]
  *                    [--ref out/hero/<char>.png] [--ref-weight 0.7] [--matte toonout|rmbg2|none]
- *                    [--batch] [--style-aligned] [--no-anim] [--dry]`
+ *                    [--pose-end 0.85] [--batch] [--style-aligned] [--no-anim] [--x1]
+ *                    [--anim-model file] [--lora name:0.5,...] [--dry]`
  *
  * One SD1.5 generation per (motion, dir, frame): character LoRA + IP-Adapter
  * reference (the hero image, so colours and outfit stay put between frames)
@@ -16,11 +17,16 @@
  * frame to frame. --no-anim goes back to per-frame renders (--batch keeps
  * the batch, --style-aligned shares attention across it). Note a batch gives
  * frame i noise seed+i, so it never matches a per-frame run of the same seed.
+ *
+ * With AnimateDiff the clip is generated at HINT_STEP x the frame count (the
+ * module's native 16) and only every HINT_STEP-th frame is saved; --x1 feeds
+ * it the kept frames only.
  */
 
 import {
   connect,
   flag,
+  parseLora,
   positional,
   resolveLoras,
   resolveSeed,
@@ -38,7 +44,7 @@ import {
   type Control,
   type Matte,
 } from "../lib/sd15";
-import { GEN_DIRS, MOTIONS, type GenDir } from "../motions";
+import { GEN_DIRS, HINT_STEP, MOTIONS, type GenDir } from "../motions";
 import { depthPath, posePath } from "./poses";
 
 /**
@@ -68,6 +74,9 @@ const VALUE_FLAGS = new Set([
   "--steps",
   "--cfg",
   "--matte",
+  "--anim-model",
+  "--lora",
+  "--pose-end",
 ]);
 const MATTES = ["toonout", "rmbg2", "none"] as const;
 
@@ -78,7 +87,8 @@ const usage = () =>
   `usage: bun run px sprites <char> [--motion ${MOTIONS.map((m) => m.id).join(",")}] [--dir ${GEN_DIRS.join("|")}]\n` +
   `                          [--seed n] [--strength 0.6] [--depth-strength 0.5] [--ref out/hero/<char>.png] [--ref-weight 0.7]\n` +
   `                          [--ckpt file] [--steps 25] [--cfg 6] [--matte ${MATTES.join("|")}]\n` +
-  `                          [--batch] [--style-aligned] [--no-anim] [--dry]`;
+  `                          [--pose-end 0.85] [--batch] [--style-aligned] [--no-anim] [--x1]\n` +
+  `                          [--anim-model mm_sd_v15_v2.ckpt] [--lora name:0.5,...] [--dry]`;
 
 /** Seed per (char, motion): base seed from --seed or random, plus a stable per-motion offset. */
 export const motionSeed = (base: number, motionIndex: number) =>
@@ -132,8 +142,12 @@ export async function run(argv: string[]): Promise<void> {
   const strength = Number(flag(argv, "strength") ?? 0.6);
   const depthStrength = Number(flag(argv, "depth-strength") ?? 0.5);
   const refWeight = Number(flag(argv, "ref-weight") ?? 0.7);
-  if (Number.isNaN(strength) || Number.isNaN(depthStrength) || Number.isNaN(refWeight)) {
-    console.error(`--strength / --depth-strength / --ref-weight must be numbers\n${usage()}`);
+  // When the openpose hint lets go (fraction of the steps); depth keeps the builder's default.
+  const poseEnd = flag(argv, "pose-end") ? Number(flag(argv, "pose-end")) : undefined;
+  if ([strength, depthStrength, refWeight, poseEnd].some((n) => Number.isNaN(n))) {
+    console.error(
+      `--strength / --depth-strength / --ref-weight / --pose-end must be numbers\n${usage()}`,
+    );
     process.exit(1);
   }
   // --ref-weight 0 turns the reference off; an explicit --ref must exist, the default may not.
@@ -148,13 +162,31 @@ export async function run(argv: string[]): Promise<void> {
   }
   const refPath = refFile && (await Bun.file(refFile).exists()) ? refFile : undefined;
 
+  const styleAligned = argv.includes("--style-aligned");
+  const animateDiff = argv.includes("--no-anim")
+    ? undefined
+    : (flag(argv, "anim-model") ?? SD15_ANIMATEDIFF);
+  // ToonOut is tuned on anime and keeps the motion module's wall stains as subject; Bria's does not.
+  const matteFlag = (flag(argv, "matte") ??
+    (animateDiff ? "rmbg2" : "toonout")) as (typeof MATTES)[number];
+  if (!MATTES.includes(matteFlag)) {
+    console.error(`unknown --matte ${matteFlag}\n${usage()}`);
+    process.exit(1);
+  }
+  const matte: Matte | undefined = matteFlag === "none" ? undefined : matteFlag;
+  const batch = argv.includes("--batch") || styleAligned || !!animateDiff;
+  // Hint frames per motion: every rendered one for the motion module, else just the kept ones.
+  const dense = !!animateDiff && !argv.includes("--x1");
+  const hintFrames = (m: { frames: number }) =>
+    [...Array(m.frames * (dense ? HINT_STEP : 1)).keys()].map((k) => (dense ? k : k * HINT_STEP));
+
   // Every hint must exist before we touch the server.
   for (const m of motions)
     for (const dir of dirs)
-      for (let i = 0; i < m.frames; i++)
+      for (const k of hintFrames(m))
         for (const p of [
-          posePath(m.id, dir, i),
-          ...(depthStrength > 0 ? [depthPath(m.id, dir, i)] : []),
+          posePath(m.id, dir, k),
+          ...(depthStrength > 0 ? [depthPath(m.id, dir, k)] : []),
         ])
           if (!(await Bun.file(p).exists())) {
             console.error(`missing ${p} — run  bun run px poses  first`);
@@ -164,11 +196,16 @@ export async function run(argv: string[]): Promise<void> {
   const dry = argv.includes("--dry");
   const api = dry ? undefined : await connect();
 
+  // --lora name:strength[,name:strength] adds to the character LoRA (e.g. AnimateDiff v3's adapter).
+  const loraSpecs = [`${char.lora}:${char.strength}`, ...(flag(argv, "lora")?.split(",") ?? [])];
   let loras;
   try {
     loras = api
-      ? await resolveLoras(api, [`${char.lora}:${char.strength}`])
-      : [{ name: char.lora, strength: char.strength }];
+      ? await resolveLoras(api, loraSpecs)
+      : loraSpecs.map((s) => {
+          const { query, strength } = parseLora(s);
+          return { name: query, strength };
+        });
   } catch (e) {
     console.error((e as Error).message);
     process.exit(1);
@@ -188,17 +225,6 @@ export async function run(argv: string[]): Promise<void> {
   const ckpt = flag(argv, "ckpt") ?? DEFAULT_CKPT;
   const steps = flag(argv, "steps") ? Number(flag(argv, "steps")) : undefined;
   const cfg = flag(argv, "cfg") ? Number(flag(argv, "cfg")) : undefined;
-  const styleAligned = argv.includes("--style-aligned");
-  const animateDiff = argv.includes("--no-anim") ? undefined : SD15_ANIMATEDIFF;
-  // ToonOut is tuned on anime and keeps the motion module's wall stains as subject; Bria's does not.
-  const matteFlag = (flag(argv, "matte") ??
-    (animateDiff ? "rmbg2" : "toonout")) as (typeof MATTES)[number];
-  if (!MATTES.includes(matteFlag)) {
-    console.error(`unknown --matte ${matteFlag}\n${usage()}`);
-    process.exit(1);
-  }
-  const matte: Matte | undefined = matteFlag === "none" ? undefined : matteFlag;
-  const batch = argv.includes("--batch") || styleAligned || !!animateDiff;
 
   const upload = async (path: string, name: string) => (api ? uploadImage(api, path, name) : name);
 
@@ -206,13 +232,15 @@ export async function run(argv: string[]): Promise<void> {
     failed = 0;
   for (const m of motions) {
     const seed = motionSeed(baseSeed, MOTIONS.indexOf(m));
-    const all = [...Array(m.frames).keys()];
+    const all = hintFrames(m);
     // Per-frame runs, or the whole motion as one batch.
     const groups = batch ? [all] : all.map((i) => [i]);
     for (const dir of dirs)
       for (const frames of groups) {
-        const label = batch ? `${m.id}/${dir}` : `${m.id}/${dir}/${frames[0]}`;
+        const label = batch ? `${m.id}/${dir}` : `${m.id}/${dir}/${frames[0]! / HINT_STEP}`;
         const stem = (i: number) => `${m.id}_${dir}_${i}`;
+        // Saved sprite frames; the in-betweens are dropped on the server.
+        const kept = frames.filter((k) => k % HINT_STEP === 0);
         try {
           const controls: Control[] = [
             {
@@ -221,6 +249,7 @@ export async function run(argv: string[]): Promise<void> {
                 frames.map((i) => upload(posePath(m.id, dir, i), `${stem(i)}.png`)),
               ),
               strength,
+              endPercent: poseEnd,
             },
           ];
           if (depthStrength > 0)
@@ -241,7 +270,11 @@ export async function run(argv: string[]): Promise<void> {
             seed,
             steps,
             cfg,
-            prefix: frames.map((i) => genPrefix("sprites", char.name, m.id, dir, String(i))),
+            prefix: frames.map((k) =>
+              k % HINT_STEP
+                ? undefined
+                : genPrefix("sprites", char.name, m.id, dir, String(k / HINT_STEP)),
+            ),
             loras,
             ref,
             controls,
@@ -256,10 +289,10 @@ export async function run(argv: string[]): Promise<void> {
           }
           const files = await runWorkflow(api!, workflow, label);
           console.log(`\r  ${files.join(", ")}`);
-          done += frames.length;
+          done += kept.length;
         } catch (e) {
           console.error(`\r[${label}] failed: ${(e as Error).message}`);
-          failed += frames.length;
+          failed += kept.length;
         }
       }
   }

@@ -60,6 +60,13 @@ export const FLIP: Record<GenDir, [Dir8, Dir8?]> = {
   upright: ["upright", "upleft"],
 };
 
+/**
+ * Hints are rendered at HINT_STEP x a motion's frame count: the motion module
+ * was trained on 16-frame clips, so an 8-frame walk is generated as 16 and
+ * every other frame is kept. Sprite frame i is hint frame i * HINT_STEP.
+ */
+export const HINT_STEP = 2;
+
 export interface Motion {
   id: string;
   /** File name under mixamo/. */

@@ -1,17 +1,17 @@
 /**
- * `px poses [--only walk,run] [--size 512] [--elev 25] [--blender exe] [--skip-blender]`
+ * `px poses [--only walk,run] [--size 512] [--elev 25] [--face all|nose|none] [--blender exe] [--skip-blender]`
  *
  * Character-independent; run once, rerun after editing MOTIONS or mixamo/.
  * Step 1 drives Blender (scripts/mixamo_poses.py) to write joint JSON + depth
- * PNGs for every motion x 8 directions x frames; step 2 draws the openpose PNGs
- * from the JSON. `--skip-blender` reruns only step 2.
+ * PNGs for every motion x 8 directions x frames * HINT_STEP; step 2 draws the
+ * openpose PNGs from the JSON. `--skip-blender` reruns only step 2.
  */
 
 import { dirname, join } from "node:path";
 import { ensureDir, flag } from "../lib/comfy";
 import { OUT_DIR, REPO_ROOT } from "../lib/paths";
-import { poseFromJson, renderPose } from "../lib/skeleton";
-import { DIRS8, MOTIONS, type Dir8 } from "../motions";
+import { FACES, poseFromJson, renderPose, type Face } from "../lib/skeleton";
+import { DIRS8, HINT_STEP, MOTIONS, type Dir8 } from "../motions";
 
 const POSES_DIR = join(OUT_DIR, "poses");
 const SCRIPT = join(REPO_ROOT, "scripts", "mixamo_poses.py");
@@ -43,6 +43,11 @@ export async function findBlender(explicit: string | undefined): Promise<string 
 export async function run(argv: string[]): Promise<void> {
   const size = Number(flag(argv, "size") ?? 512);
   const elev = Number(flag(argv, "elev") ?? 25);
+  const face = (flag(argv, "face") ?? "all") as Face;
+  if (!FACES.includes(face)) {
+    console.error(`unknown --face ${face}; expected ${FACES.join(", ")}`);
+    process.exit(1);
+  }
   const only = flag(argv, "only")
     ?.split(",")
     .map((s) => s.trim());
@@ -60,7 +65,14 @@ export async function run(argv: string[]): Promise<void> {
     const motionsJson = join(POSES_DIR, "motions.json");
     await Bun.write(
       motionsJson,
-      JSON.stringify(selected.map(({ id, fbx, frames, loop }) => ({ id, fbx, frames, loop }))),
+      JSON.stringify(
+        selected.map(({ id, fbx, frames, loop }) => ({
+          id,
+          fbx,
+          frames: frames * HINT_STEP,
+          loop,
+        })),
+      ),
     );
     const exe = await findBlender(flag(argv, "blender"));
     if (!exe) {
@@ -99,7 +111,7 @@ export async function run(argv: string[]): Promise<void> {
   let missing = 0;
   for (const m of selected)
     for (const dir of DIRS8)
-      for (let i = 0; i < m.frames; i++) {
+      for (let i = 0; i < m.frames * HINT_STEP; i++) {
         const src = Bun.file(jsonPath(m.id, dir, i));
         if (!(await src.exists())) {
           missing++;
@@ -111,7 +123,7 @@ export async function run(argv: string[]): Promise<void> {
         const pose = poseFromJson(raw, `${m.id}/${dir}/${i}`);
         const dest = posePath(m.id, dir, i);
         await ensureDir(dirname(dest));
-        await Bun.write(dest, await renderPose(pose, size));
+        await Bun.write(dest, await renderPose(pose, size, face));
         n++;
       }
   console.log(`${n} poses -> out/poses/`);

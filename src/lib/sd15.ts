@@ -55,9 +55,10 @@ export interface Sd15Opts {
   /**
    * filename_prefix for SaveImage, i.e. the subpath under out/. A list is one
    * prefix per frame of the batch, each saved on its own so the files land
-   * where the single-frame path puts them.
+   * where the single-frame path puts them; undefined drops that frame (an
+   * in-between generated only to give the motion module its full clip).
    */
-  prefix: string | string[];
+  prefix: string | (string | undefined)[];
   steps?: number;
   cfg?: number;
   loras?: Lora[];
@@ -217,6 +218,7 @@ export function buildSd15(o: Sd15Opts): ReturnType<WorkflowBuilder["build"]> {
   const prefixes = Array.isArray(o.prefix) ? o.prefix : [o.prefix];
   const outputs: Record<string, string> = {};
   prefixes.forEach((filename_prefix, i) => {
+    if (filename_prefix === undefined) return;
     const images =
       prefixes.length > 1 ? w.ImageFromBatch({ image, batch_index: i, length: 1 }).IMAGE : image;
     outputs[i ? `images${i}` : "images"] = w.SaveImage({ images, filename_prefix }).__id;

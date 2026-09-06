@@ -199,6 +199,13 @@ describe("buildSd15 batch", () => {
     expect(Object.keys(wf.mapOutputKeys)).toHaveLength(3);
   });
 
+  test("an undefined prefix drops that frame: no split, no save", () => {
+    const wf = buildSd15({ ...batch, prefix: ["p/0", undefined, "p/1"] });
+    expect(byType(wf, "ImageFromBatch").map((n) => n.inputs.batch_index)).toEqual([0, 2]);
+    expect(byType(wf, "SaveImage").map((n) => n.inputs.filename_prefix)).toEqual(["p/0", "p/1"]);
+    expect(byType(wf, "EmptyLatentImage")[0]!.inputs.batch_size).toBe(3);
+  });
+
   test("single prefix keeps the plain SaveImage", () => {
     const wf = buildSd15(base);
     expect(byType(wf, "ImageFromBatch")).toHaveLength(0);
