@@ -1,5 +1,5 @@
 /**
- * `px poses [--only walk,run] [--size 512] [--elev 25] [--face all|nose|none] [--blender exe] [--skip-blender]`
+ * `px poses [--only walk,run] [--size 512] [--elev 25] [--blender exe] [--skip-blender]`
  *
  * Character-independent; run once, rerun after editing MOTIONS or mixamo/.
  * Step 1 drives Blender (scripts/mixamo_poses.py) to write joint JSON + depth
@@ -10,7 +10,7 @@
 import { dirname, join } from "node:path";
 import { ensureDir, flag } from "../lib/comfy";
 import { OUT_DIR, REPO_ROOT } from "../lib/paths";
-import { FACES, poseFromJson, renderPose, type Face } from "../lib/skeleton";
+import { poseFromJson, renderPose } from "../lib/skeleton";
 import { DIRS8, HINT_STEP, MOTIONS, type Dir8 } from "../motions";
 
 const POSES_DIR = join(OUT_DIR, "poses");
@@ -43,11 +43,6 @@ export async function findBlender(explicit: string | undefined): Promise<string 
 export async function run(argv: string[]): Promise<void> {
   const size = Number(flag(argv, "size") ?? 512);
   const elev = Number(flag(argv, "elev") ?? 25);
-  const face = (flag(argv, "face") ?? "all") as Face;
-  if (!FACES.includes(face)) {
-    console.error(`unknown --face ${face}; expected ${FACES.join(", ")}`);
-    process.exit(1);
-  }
   const only = flag(argv, "only")
     ?.split(",")
     .map((s) => s.trim());
@@ -123,7 +118,7 @@ export async function run(argv: string[]): Promise<void> {
         const pose = poseFromJson(raw, `${m.id}/${dir}/${i}`);
         const dest = posePath(m.id, dir, i);
         await ensureDir(dirname(dest));
-        await Bun.write(dest, await renderPose(pose, size, face));
+        await Bun.write(dest, await renderPose(pose, size));
         n++;
       }
   console.log(`${n} poses -> out/poses/`);

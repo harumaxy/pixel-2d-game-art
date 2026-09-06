@@ -52,20 +52,11 @@ const COLORS = [
 
 const rgb = (i: number) => `rgb(${COLORS[i]!.join(",")})`;
 
-/** Which face joints to draw: all five, the nose alone, or none (the neck stays). */
-export type Face = "all" | "nose" | "none";
-export const FACES: readonly Face[] = ["all", "nose", "none"];
-const FACE_JOINTS = new Set<string>(["nose", "reye", "leye", "rear", "lear"]);
-
-export function poseSvg(pose: Pose, size: number, face: Face = "all"): string {
-  // A small figure's five face points collapse into one blob the ControlNet
-  // reads as a tiny boxy head; fewer points leave the head to depth + reference.
-  const drawn = (j: string) =>
-    !FACE_JOINTS.has(j) || face === "all" || (face === "nose" && j === "nose");
+export function poseSvg(pose: Pose, size: number): string {
   const pts = JOINTS.map((j) => ({
     x: pose[j].x * size,
     y: pose[j].y * size,
-    visible: pose[j].visible !== false && drawn(j),
+    visible: pose[j].visible !== false,
   }));
   const stroke = size / 64; // 8px at 512
   const r = size / 85; // 6px at 512
@@ -92,8 +83,8 @@ export function poseSvg(pose: Pose, size: number, face: Face = "all"): string {
   );
 }
 
-export async function renderPose(pose: Pose, size: number, face: Face = "all"): Promise<Buffer> {
-  return sharp(Buffer.from(poseSvg(pose, size, face)))
+export async function renderPose(pose: Pose, size: number): Promise<Buffer> {
+  return sharp(Buffer.from(poseSvg(pose, size)))
     .png()
     .toBuffer();
 }

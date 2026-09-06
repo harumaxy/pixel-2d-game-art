@@ -212,19 +212,6 @@ describe("buildSd15 batch", () => {
     expect(byType(wf, "ImageBatch")).toHaveLength(0);
   });
 
-  test("styleAligned patches the model after the ref, before the sampler", () => {
-    const wf = buildSd15({ ...batch, ref: { image: "r.png", weight: 0.7 }, styleAligned: true });
-    const p = prompt(wf);
-    const [ipaId] = Object.entries(p).find(([, n]) => n.class_type === "IPAdapterAdvanced")!;
-    const [saId, sa] = Object.entries(p).find(
-      ([, n]) => n.class_type === "StyleAlignedBatchAlign",
-    )!;
-    expect(sa.inputs.share_norm).toBe("both");
-    expect(sa.inputs.share_attn).toBe("q+k+v");
-    expect((sa.inputs.model as [string, number])[0]).toBe(ipaId);
-    expect((byType(wf, "KSampler")[0]!.inputs.model as [string, number])[0]).toBe(saId);
-  });
-
   test("animateDiff wraps the model in evolved sampling with the motion module", () => {
     const wf = buildSd15({ ...batch, animateDiff: SD15_ANIMATEDIFF });
     const p = prompt(wf);

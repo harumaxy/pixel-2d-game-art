@@ -1,13 +1,13 @@
 // src/stages/pixelate.ts
 /**
  * `px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb]
- *                     [--render NNNNN] [--only walk,run] [--no-contrast] [--box] [--outline]`
+ *                     [--render NNNNN] [--only walk,run] [--outline]`
  *
  * out/gen/sprites -> out/px: remove the grey backdrop (unless the render is
  * already matted RGBA from `px sprites`, whose alpha is trusted), pin feet, scale every frame
  * of the character by the same factor (measured across all motions and
- * directions), downscale contrast-aware (--box: plain box mean), stretch the
- * levels, snap to the palette in Oklab, despeckle, and mirror the side-ish
+ * directions), downscale contrast-aware, stretch the levels, snap to the
+ * palette in Oklab, despeckle, and mirror the side-ish
  * directions into their left-facing twins. --outline draws the palette's
  * darkest colour around the sprite. Always processes every motion, so
  * a single scale factor — and, with `--palette auto`, a single palette — stay
@@ -21,7 +21,6 @@ import { loadChar } from "../lib/chars";
 import { GEN_DIR, OUT_DIR } from "../lib/paths";
 import {
   bbox,
-  boxDownscale,
   contrastDownscale,
   cornerKey,
   despeckle,
@@ -53,7 +52,7 @@ const VALUE_FLAGS = new Set([
   "--render",
   "--only",
 ]);
-/** Levels: the 2nd..98th luminance percentiles of the character land here (fractions of 255); 0.85 keeps a pale hood off white. --no-contrast skips it. */
+/** Levels: the 2nd..98th luminance percentiles of the character land here (fractions of 255); 0.85 keeps a pale hood off white. */
 const STRETCH = { lo: 0.02, hi: 0.98, outLo: 0.08, outHi: 0.85 };
 
 export const pxPath = (char: string, motion: string, dir: Dir8, frame: number): string =>
@@ -75,7 +74,7 @@ export async function run(argv: string[]): Promise<void> {
   const name = positional(argv, VALUE_FLAGS);
   if (!name) {
     console.error(
-      `usage: bun run px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb] [--render 00013] [--only walk,run] [--no-contrast] [--box] [--outline]`,
+      `usage: bun run px pixelate <char> [--size 64] [--palette apoc|auto] [--bg-tolerance 40] [--bg #rrggbb] [--render 00013] [--only walk,run] [--outline]`,
     );
     process.exit(1);
   }
@@ -180,7 +179,6 @@ export async function run(argv: string[]): Promise<void> {
   const withOutline = argv.includes("--outline");
   const bottom = withOutline ? work / size : 0;
   const scale = Math.min((work * 0.96 - bottom) / tallest, (work * 0.96) / widest);
-  const downscale = argv.includes("--box") ? boxDownscale : contrastDownscale;
 
   // Pass 2: place + downscale every frame first, so `--palette auto` builds
   // ONE palette for the whole character before any frame is quantized.
@@ -188,22 +186,20 @@ export async function run(argv: string[]): Promise<void> {
     .filter((c) => c.box !== undefined)
     .map((c) => ({
       ...c,
-      small: downscale(placeOnSquare(c.img, crop, work, scale, bottom), size),
+      small: contrastDownscale(placeOnSquare(c.img, crop, work, scale, bottom), size),
     }));
 
   // A smooth render is dark and low-contrast at 64px; without this most of
   // it quantizes onto the palette's darkest entries. One range for all frames.
-  if (!argv.includes("--no-contrast")) {
-    const { lo, hi } = luminanceRange(
-      placed.map((p) => p.small),
-      STRETCH.lo,
-      STRETCH.hi,
-    );
-    placed = placed.map((p) => ({
-      ...p,
-      small: stretchLevels(p.small, lo, hi, STRETCH.outLo, STRETCH.outHi),
-    }));
-  }
+  const { lo, hi } = luminanceRange(
+    placed.map((p) => p.small),
+    STRETCH.lo,
+    STRETCH.hi,
+  );
+  placed = placed.map((p) => ({
+    ...p,
+    small: stretchLevels(p.small, lo, hi, STRETCH.outLo, STRETCH.outHi),
+  }));
 
   let pal: Rgb[];
   if (fixed) {

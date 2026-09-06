@@ -193,46 +193,6 @@ export function placeOnSquare(
   return out;
 }
 
-/**
- * Box-filter downscale of a square image to `size`. Colour is the alpha-
- * weighted mean of the covered cell; alpha becomes 255 when at least half the
- * cell was opaque, else 0 — no soft edges on a sprite.
- */
-export function boxDownscale(img: Rgba, size: number): Rgba {
-  const out = blank(size, size);
-  const fx = img.width / size,
-    fy = img.height / size;
-  for (let y = 0; y < size; y++)
-    for (let x = 0; x < size; x++) {
-      const x0 = Math.floor(x * fx),
-        x1 = Math.max(x0 + 1, Math.floor((x + 1) * fx));
-      const y0 = Math.floor(y * fy),
-        y1 = Math.max(y0 + 1, Math.floor((y + 1) * fy));
-      let r = 0,
-        g = 0,
-        b = 0,
-        a = 0,
-        n = 0;
-      for (let sy = y0; sy < y1; sy++)
-        for (let sx = x0; sx < x1; sx++) {
-          const o = (sy * img.width + sx) * 4;
-          const al = img.data[o + 3]!;
-          r += img.data[o]! * al;
-          g += img.data[o + 1]! * al;
-          b += img.data[o + 2]! * al;
-          a += al;
-          n++;
-        }
-      const d = (y * size + x) * 4;
-      if (a === 0 || a < n * 127.5) continue;
-      out.data[d] = Math.round(r / a);
-      out.data[d + 1] = Math.round(g / a);
-      out.data[d + 2] = Math.round(b / a);
-      out.data[d + 3] = 255;
-    }
-  return out;
-}
-
 const luma = (r: number, g: number, b: number) => 0.299 * r + 0.587 * g + 0.114 * b;
 
 /** Quantiles of a cell's luminance that stand in for its min / max (an outlier-safe extremum). */
@@ -245,9 +205,10 @@ const EDGE_BIAS = 2.5;
  * not the mean of what it covers but the side of its luminance spread that
  * sticks out — a belt or a strap that is a thin dark line on a lighter coat
  * keeps the cell dark, where a box mean melts it into the coat. A cell with
- * no strong tail takes its median band. Alpha is the same half-cover rule as
- * boxDownscale. ponytail: PixelOE does this with an outline-expansion pass
- * first; add one if thin bright highlights still vanish.
+ * no strong tail takes its median band. Alpha becomes 255 when at least half
+ * the cell was opaque, else 0 — no soft edges on a sprite. ponytail: PixelOE
+ * does this with an outline-expansion pass first; add one if thin bright
+ * highlights still vanish.
  */
 export function contrastDownscale(img: Rgba, size: number): Rgba {
   const out = blank(size, size);

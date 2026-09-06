@@ -21,7 +21,15 @@ export const SD15_CONTROLNET_OPENPOSE = "control_v11p_sd15_openpose_fp16.safeten
 export const SD15_CONTROLNET_DEPTH = "control_v11f1p_sd15_depth_fp16.safetensors";
 export const SD15_IPADAPTER = "ip-adapter-plus_sd15.safetensors";
 export const SD15_CLIP_VISION = "CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors";
-export const SD15_ANIMATEDIFF = "mm_sd_v15_v2.ckpt";
+/** AnimateDiff v3: less green cast than v2 and legs that stay whole. */
+export const SD15_ANIMATEDIFF = "v3_sd15_mm.ckpt";
+/**
+ * v3's domain adapter, as a LoRA query for resolveLoras. 0.5: at 1.0 it
+ * brightens the clip but hallucinates planks under a running figure; at 0.3
+ * the colour sinks back.
+ */
+export const SD15_ANIMATEDIFF_ADAPTER = "v3_sd15_adapter";
+export const SD15_ANIMATEDIFF_ADAPTER_STRENGTH = 0.5;
 
 export interface Ref {
   /** Reference image already in ComfyUI's input/ dir: what the character looks like. */
@@ -75,12 +83,6 @@ export interface Sd15Opts {
    * sees backdrop. toonout is BiRefNet tuned on anime; rmbg2 is Bria's.
    */
   matte?: Matte;
-  /**
-   * Share attention across the batch so every frame is rendered in the same
-   * style: the batch is one motion, and the IP-Adapter alone lets shading and
-   * palette drift from frame to frame.
-   */
-  styleAligned?: boolean;
   /** AnimateDiff motion module filename; the batch becomes a clip. */
   animateDiff?: string;
 }
@@ -130,14 +132,6 @@ export function buildSd15(o: Sd15Opts): ReturnType<WorkflowBuilder["build"]> {
       embeds_scaling: "V only",
     }).MODEL;
   }
-
-  if (o.styleAligned)
-    model = w.StyleAlignedBatchAlign({
-      model,
-      share_norm: "both",
-      share_attn: "q+k+v",
-      scale: 1,
-    }).MODEL;
 
   if (o.animateDiff) {
     // No context options: the longest motion is under the module's 16-frame window.

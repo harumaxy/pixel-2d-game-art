@@ -1,7 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import {
   bbox,
-  boxDownscale,
   contrastDownscale,
   cornerKey,
   despeckle,
@@ -168,16 +167,6 @@ test("placeOnSquare anchors the box's bottom-centre", () => {
   expect(px(out, 5, 11)[3]).toBe(0);
 });
 
-test("boxDownscale averages and binarises alpha", () => {
-  const i = img(4, 4, [0, 0, 0, 0], [{ x: 0, y: 0, w: 2, h: 2, c: [200, 100, 0, 255] }]);
-  const out = boxDownscale(i, 2);
-  expect(px(out, 0, 0)).toEqual([200, 100, 0, 255]);
-  expect(px(out, 1, 1)[3]).toBe(0);
-  // half-covered cell: 2 of 4 pixels opaque -> alpha 255 (>= 50%)
-  const j = img(4, 4, [0, 0, 0, 0], [{ x: 0, y: 0, w: 2, h: 1, c: [10, 20, 30, 255] }]);
-  expect(px(boxDownscale(j, 2), 0, 0)).toEqual([10, 20, 30, 255]);
-});
-
 test("quantize snaps to nearest palette colour and leaves alpha", () => {
   const i = img(1, 2, [0, 0, 0, 0], [{ x: 0, y: 0, w: 1, h: 1, c: [250, 5, 5, 255] }]);
   const out = quantize(i, [
@@ -218,16 +207,14 @@ test("cornerKey takes the corner colour, ignoring one odd corner", () => {
 
 describe("contrastDownscale", () => {
   const KHAKI = [150, 140, 100, 255];
-  test("a thin dark line keeps its cell dark where the box mean would wash it out", () => {
+  test("a thin dark line keeps its cell dark (a box mean would wash it out to ~120)", () => {
     // 16x16 khaki with a 2px dark belt across rows 6-7: cells (y=0) cover rows 0-7
     const i = img(16, 16, KHAKI, [{ x: 0, y: 6, w: 16, h: 2, c: [30, 25, 20, 255] }]);
     const c = contrastDownscale(i, 2);
-    const b = boxDownscale(i, 2);
     expect(px(c, 0, 0)[0]).toBeLessThan(60);
-    expect(px(b, 0, 0)[0]).toBeGreaterThan(100);
     expect(px(c, 0, 1)).toEqual(KHAKI); // no line in the lower cells
   });
-  test("half-cover alpha rule matches boxDownscale", () => {
+  test("alpha is binarised at half cover", () => {
     // rows 0-5 clear: the top cells are empty, the bottom cells are exactly half covered
     const i = img(8, 8, KHAKI, [{ x: 0, y: 0, w: 8, h: 6, c: [0, 0, 0, 0] }]);
     const c = contrastDownscale(i, 2);
